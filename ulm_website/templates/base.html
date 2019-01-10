@@ -1,0 +1,82 @@
+ {% load flatchunks_tags %}
+ {% load simplefile_tags %}
+ {% load i18n %}
+
+ <!DOCTYPE html>
+ <html>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>{% block title %}ULM Blois{% endblock %}</title>
+    <style>
+
+    .content {
+      padding: 16px;
+    }
+
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    .sticky + .content {
+      padding-top: 60px;
+    }
+    </style>
+
+ <body id="myPage">
+   {% include "includes/header.html" %}
+
+   <header class="w3-container w3-blue-grey" id="page_header">
+    {% block header %}
+        <h1>{% trans 'Meeting ULM of Blois' %}</h1>
+    {% endblock %}
+  </header>
+
+
+
+<div class="content">
+   <div class="w3-padding w3-white">
+     {% block content %}
+     {% get_simplefile 'program' as program_file%}
+     <a href="{{program_file.file.url}}" class="w3-btn w3-theme-dark" target="_blank">{% trans 'Download Program' %}</a>
+     {% get_flatchunk 'ab' as chunk%}
+     {% for _ in "xxx"%}
+       <div class="w3-container">
+         <hr>
+         <div class="w3-center">
+          <h2>{{chunk.title}}</h2>
+         </div>
+         <div>
+           {{chunk.content|safe}}
+         </div>
+         <hr>
+       </div>
+     {% endfor %}
+     {% endblock %}
+   </div>
+</div>
+   {% include "includes/footer.html" %}
+
+
+
+   <script>
+   window.onscroll = function() {myFunction()};
+
+   var navbar = document.getElementById("navbar");
+   var sticky = navbar.offsetTop;
+
+   function myFunction() {
+     if (window.pageYOffset >= sticky) {
+       navbar.classList.add("sticky")
+     } else {
+       navbar.classList.remove("sticky");
+     }
+   }
+   </script>
+
+</body>
+</html>
