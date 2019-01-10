@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+<div class="w3-container">
+  <div class="w3-container w3-half">
+    <b class="w3-xlarge">Your Reservations</b>
+  </div>
+  <div class="w3-container w3-half">
+    <a href="{% url 'pilot_create_reservation' %}" class="w3-button w3-green w3-right">Add New</a>
+  </div>
+</div>
+<div class="w3-container">
+  <hr>
+</div>
+
+<div class="w3-container">
+{% for res in reservation_list %}
+<div class="w3-panel w3-card">
+<div class="w3-half">
+<p><b>Reservation Number:</b> {{res.reservation_number}}</p>
+<p><b>Arrival time slot:</b> {{res.time_slot}}</p>
+</div>
+<div class="w3-half">
+<p><b>Event:</b> {{res.time_slot.meeting}}</p>
+</div>
+{% if res.is_active %}
+<div class="w3-container w3-right">
+  <p><a href="{% url 'pilot_delete_reservation' res.pk %}" class="w3-button w3-red">Delete</a>
+  <a href="{% url 'pilot_update_reservation' res.pk %}" class="w3-button w3-green">Edit</a></p>
+</div>
+{% endif %}
+</div>
+{% endfor %}
+</div>
+
+{% include 'pagination.html' %}
+
+{% endblock %}

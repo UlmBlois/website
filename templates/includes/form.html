@@ -1,0 +1,42 @@
+{% load add_css %}
+
+{% for hidden_field in form.hidden_fields %}
+  {{ hidden_field }}
+{% endfor %}
+
+{% if form.non_field_errors %}
+  <div class="w3-panel w3-pale-red w3-border w3-container w3-card-4 w3-center">
+    {% for error in form.non_field_errors %}
+      {{ error }}
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+{% for field in form.visible_fields %}
+    <div class="w3-row">
+      <div class="w3-quarter">
+        <label for="field.id_for_label" class="w3-label">{{ field.label_tag }}</label>
+      </div>
+      <div class="w3-threequarter">
+        {% if form.is_bound %}
+          {% if field.errors %}
+            {{ field|add_attr:"class:w3-input w3-border w3-border-red" }}
+              {% for error in field.errors %}
+                <div class="w3-text-red">
+                  {{ error }}
+                </div>
+              {% endfor %}
+          {% else %}
+            {{ field|add_attr:"class:w3-input w3-border w3-border-green" }}
+          {% endif %}
+        {% else %}
+          {{ field|add_attr:"class:w3-input" }}
+        {% endif %}
+
+        {% if field.help_text %}
+          <small class="form-text w3-text-grey">{{ field.help_text }}</small>
+        {% endif %}
+      </div>
+    </div>
+{% endfor %}

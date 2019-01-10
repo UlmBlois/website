@@ -1,0 +1,25 @@
+{% if is_paginated %}
+<div class="w3-center w3-pading-32">
+  <div class="w3-bar">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}" class="w3-bar-item w3-button w3-hover-theme"><<</a>
+    {% else %}
+      <span class="w3-bar-item w3-button"><<</span>
+    {% endif %}
+
+    {% for page_num in paginator.page_range %}
+      {% if page_obj.number == page_num %}
+        <span class="w3-bar-item w3-button w3-hover-theme w3-theme">{{ page_num }}</span>
+      {% else %}
+        <a href="?page={{ page_num }}" class="w3-bar-item w3-button w3-hover-theme">{{ page_num }}</a>
+      {% endif %}
+    {% endfor%}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="w3-bar-item w3-button w3-hover-theme">>></a>
+    {% else %}
+      <span class="w3-bar-item w3-button">>></span>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

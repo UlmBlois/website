@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+<div class="w3-container">
+  <div class="w3-container w3-half">
+    <b class="w3-xlarge">Pilots Fuel Reservations</b>
+  </div>
+</div>
+<div class="w3-container">
+  <hr>
+</div>
+
+<table class="w3-table w3-striped w3-bordered w3-hoverable">
+  <tr class="w3-theme">
+    <th>ID</th>
+    <th>pilot</th>
+    <th>Imatriculation</th>
+    <th>radio id</th>
+    <th>Fuel</th>
+    <th class="w3-center">Actions</th>
+  </tr>
+  {% for res in reservation_list %}
+  <tr>
+    <td>{{res.reservation_number}}</td>
+    <td>{{res.ulm.pilot}}</td>
+    <td>{{res.ulm.imatriculation}}</td>
+    <td>{{res.ulm.radio_id}}</td>
+    <td>{{res.fuel_reservation}}</td>
+    <td class="w3-center">
+      <a href="#" class="w3-button w3-green w3-hover-white">Validate</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% include 'pagination.html' %}
+
+{% endblock %}

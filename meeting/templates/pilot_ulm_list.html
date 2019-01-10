@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+<div class="w3-container">
+  <div class="w3-container w3-half">
+    <b class="w3-xlarge">Your ULMs</b>
+  </div>
+  <div class="w3-container w3-half">
+    <a href="{% url 'pilot_create_ulm' %}" class="w3-button w3-green w3-right">Add New</a>
+  </div>
+</div>
+<div class="w3-container">
+  <hr>
+</div>
+
+<div class="w3-container">
+{% for ulm in ulm_list %}
+<div class="w3-panel w3-card">
+<div class="w3-half">
+<p><b>Constructor:</b> {{ulm.constructor}}</p>
+<p><b>Imatriculation:</b> {{ulm.imatriculation}}</p>
+<p><b>Radio:</b> {{ulm.radio_id}}</p>
+</div>
+<div class="w3-half">
+<p><b>Model:</b> {{ulm.model}}</p>
+<p><b>Imatriculation Country:</b> {{ulm.imatriculation_country}}</p>
+</div>
+<div class="w3-container w3-right">
+  <p><a href="{% url 'pilot_delete_ulm' ulm.pk %}" class="w3-button w3-red">Delete</a>
+  <a href="{% url 'pilot_update_ulm' ulm.pk %}" class="w3-button w3-green">Edit</a></p>
+</div>
+</div>
+{% endfor %}
+</div>
+
+{% include 'pagination.html' %}
+
+{% endblock %}
