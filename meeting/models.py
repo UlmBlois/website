@@ -62,7 +62,9 @@ class TimeSlot(models.Model):
 
     def __str__(self):
         """String representing an arrivals time slot."""
-        return "{}-{}".format(self.start_date.strftime("%A %I:%M"), self.end_date.strftime("%I:%M"))
+        return "{}-{}".format(
+            self.start_date.strftime("%A %I:%M"),
+            self.end_date.strftime("%I:%M"))
 
 
 class Pilot(models.Model):

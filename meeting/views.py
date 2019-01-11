@@ -46,13 +46,18 @@ class PaginatedFilterViews(View):
 ###############################################################################
 
 
-class FilteredList(UserPassesTestMixin, PaginatedFilterViews, FilterView):
+class FilteredReservationList(UserPassesTestMixin, PaginatedFilterViews, FilterView):
     model = Reservation
-    paginate_by = 10
+    paginate_by = 2
 
     def test_func(self):
         user = self.request.user
         return user.is_authenticated and user.is_staff
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(time_slot__meeting__active=True).order_by(
+            '-reservation_number')
 
 
 class StaffReservationList(UserPassesTestMixin, ListView):

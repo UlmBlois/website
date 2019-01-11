@@ -1,5 +1,7 @@
 {% load add_css %}
 
+<div class="w3-container">
+  
 {% for hidden_field in form.hidden_fields %}
   {{ hidden_field }}
 {% endfor %}
@@ -40,3 +42,5 @@
       </div>
     </div>
 {% endfor %}
+
+</div>

@@ -1,6 +1,8 @@
 from django.urls import path
 from django.conf.urls import url
+from django_filters.views import FilterView
 from . import views
+from meeting.filters import ReservationFilter
 
 
 urlpatterns = [
@@ -27,8 +29,10 @@ urlpatterns = [
     path('reservation/<int:pk>/delete/',
          views.DeletePilotReservation.as_view(),
          name='pilot_delete_reservation'),
-    path('staff/reservation/', views.StaffReservationList.as_view(),
-         name="staff_reservation_list"),
+    # path('staff/reservation/', views.StaffReservationList.as_view(),
+    #      name="staff_reservation_list"),
     path('staff/fuel/', views.StaffFuelReservationList.as_view(),
          name="staff_fuel_res_list"),
+    path('staff/reservation/', views.FilteredReservationList.as_view(filterset_class=ReservationFilter, template_name='staff_reservation_list.html')
+         , name='staff_reservation_list'),
 ]

@@ -11,6 +11,14 @@
   <hr>
 </div>
 
+<div class="w3-container">
+  <form method="get">
+    {% include 'form.html' with form=filter.form %}
+
+    <input type="submit" class="w3-button w3-green w3-right"></input>
+  </form>
+</div>
+
 <table class="w3-table w3-striped w3-bordered w3-hoverable">
   <tr class="w3-theme">
     <th>ID</th>
