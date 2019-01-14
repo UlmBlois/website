@@ -12,9 +12,9 @@ class ReservationForm(forms.ModelForm):
                  ]
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
+        pilot = kwargs.pop('pilot')
         super(ReservationForm, self).__init__(*args, **kwargs)
-        self.fields['ulm'].queryset = ULM.objects.filter(pilot=user.pilot)
+        self.fields['ulm'].queryset = ULM.objects.filter(pilot=pilot)
         aviable = TimeSlot.objects.aviables()
         if self.instance.pk is not None:
             if not aviable.filter(pk=self.instance.time_slot.pk).exists():

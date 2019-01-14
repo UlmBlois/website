@@ -252,7 +252,7 @@ class CreatePilotReservation(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(CreatePilotReservation, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
+        kwargs.update({'pilot': self.request.user.pilot})
         return kwargs
 
     def form_valid(self, form):
@@ -279,7 +279,7 @@ class UpdatePilotReservation(UpdateView):
 
     def get_form_kwargs(self):
         kwargs = super(UpdatePilotReservation, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
+        kwargs.update({'pilot': self.request.user.pilot})
         return kwargs
 
     def get_queryset(self):

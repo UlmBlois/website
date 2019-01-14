@@ -126,7 +126,8 @@ class Reservation(models.Model):
                 ulm__pilot=self.ulm.pilot,
                     time_slot__meeting=self.time_slot.meeting).count() > 0:
                 raise ValidationError(
-                    'You allready have a reservation for this meeting, please edit or delete the existing one'
+                    'You allready have a reservation for this meeting,'
+                    ' please edit or delete the existing one'
                     )
 
     def is_active(self):
