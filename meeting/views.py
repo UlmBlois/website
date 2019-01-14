@@ -46,7 +46,8 @@ class PaginatedFilterViews(View):
 ###############################################################################
 
 
-class FilteredReservationList(UserPassesTestMixin, PaginatedFilterViews, FilterView):
+class FilteredReservationList(UserPassesTestMixin, PaginatedFilterViews,
+                              FilterView):
     model = Reservation
     paginate_by = 2
 

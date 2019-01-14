@@ -19,6 +19,7 @@ class Meeting(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     active = models.BooleanField(default=False)
+    fuel_aviable = models.PositiveIntegerField(default=0)
 
     objects = MeetingManager()
 
@@ -112,6 +113,7 @@ class Reservation(models.Model):
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
     arrival = models.DateTimeField(null=True, blank=True)
     fuel_reservation = models.PositiveIntegerField(default=0)
+    fuel_served = models.BooleanField(default=False)
     flight_plan = models.BooleanField(default=False)
     passanger = models.BooleanField(default=False)
     esthetic_cup = models.BooleanField(default=False)
@@ -119,7 +121,9 @@ class Reservation(models.Model):
 
     def full_clean(self, exclude, validate_unique):
         super().full_clean(exclude, validate_unique)
-        if Reservation.objects.filter(ulm__pilot=self.ulm.pilot, time_slot__meeting=self.time_slot.meeting).count() > 0:
+        if Reservation.objects.filter(
+            ulm__pilot=self.ulm.pilot,
+                time_slot__meeting=self.time_slot.meeting).count() > 0:
             raise ValidationError(
                 'You allready have a reservation for this meeting, please edit or delete the existing one'
                 )
