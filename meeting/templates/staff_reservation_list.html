@@ -32,7 +32,11 @@
     <th class="w3-center">Actions</th>
   </tr>
   {% for res in reservation_list %}
+  {% if res.arrival is None %}
   <tr>
+  {% else %}
+  <tr class="w3-pale-green">
+  {% endif %}
     <td>{{res.reservation_number}}</td>
     <td>{{res.time_slot}}</td>
     <td>{{res.ulm.pilot}}</td>

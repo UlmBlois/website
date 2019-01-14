@@ -111,7 +111,7 @@ class Reservation(models.Model):
     ulm = models.ForeignKey(ULM, on_delete=models.CASCADE)
     reservation_number = models.CharField(max_length=32, unique=True)
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
-    arrival = models.DateTimeField(null=True, blank=True)
+    arrival = models.DateTimeField(null=True, default=None)
     fuel_reservation = models.PositiveIntegerField(default=0)
     fuel_served = models.BooleanField(default=False)
     flight_plan = models.BooleanField(default=False)
@@ -119,14 +119,15 @@ class Reservation(models.Model):
     esthetic_cup = models.BooleanField(default=False)
     to_sell = models.BooleanField(default=False)
 
-    def full_clean(self, exclude, validate_unique):
-        super().full_clean(exclude, validate_unique)
-        if Reservation.objects.filter(
-            ulm__pilot=self.ulm.pilot,
-                time_slot__meeting=self.time_slot.meeting).count() > 0:
-            raise ValidationError(
-                'You allready have a reservation for this meeting, please edit or delete the existing one'
-                )
+    def validate_unique(self, exclude):
+        super().validate_unique(exclude)
+        if self._state.adding:
+            if Reservation.objects.filter(
+                ulm__pilot=self.ulm.pilot,
+                    time_slot__meeting=self.time_slot.meeting).count() > 0:
+                raise ValidationError(
+                    'You allready have a reservation for this meeting, please edit or delete the existing one'
+                    )
 
     def is_active(self):
         return self.time_slot.meeting.active
