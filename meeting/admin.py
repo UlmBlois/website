@@ -18,7 +18,8 @@ class TimeSlotAdmin(admin.ModelAdmin):
 
 @admin.register(ULM)
 class ULMAdmin(admin.ModelAdmin):
-    list_display = ('radio_id', 'pilot', 'imatriculation', 'constructor', 'model')
+    list_display = (
+        'radio_id', 'pilot', 'imatriculation', 'constructor', 'model')
 
 
 @admin.register(Meeting)
