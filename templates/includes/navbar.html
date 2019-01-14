@@ -25,17 +25,20 @@ function show_accordion(id) {
 <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
 <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:40px">
   {% if user.is_authenticated %}
+  {% if user.is_staff %}
+  <div class="w3-accordion">
+    <button onclick="show_accordion('staffAcc')" href="#"class="w3-hover-white w3-bar-item "><i class='fas fa-user'></i> {{ user.get_username }} <i class="fa fa-caret-down w3-right"></i></button>
+    <div id="staffAcc" class="w3-accordion-content w3-white w3-card-4 w3-hide">
+        <a href="#" class="w3-bar-item w3-button">Pilotes Reservation</a>
+    </div>
+  </div>
+  {% endif %}
   <div class="w3-accordion">
     <button onclick="show_accordion('userAcc')" href="#"class="w3-green w3-hover-white w3-bar-item "><i class='fas fa-user'></i> {{ user.get_username }} <i class="fa fa-caret-down w3-right"></i></button>
     <div id="userAcc" class="w3-accordion-content w3-white w3-card-4 w3-hide">
-      {% if user.is_staff %}
-        <a href="#" class="w3-bar-item w3-button">Pilotes Reservation</a>
-        {% else %}
-          <a href="{% url 'edit_user' user.pk%}" class="w3-bar-item w3-button">edit user tmp</a>
           <a href="{% url 'pilot' user.pilot.pk%}" class="w3-bar-item w3-button">Profile</a>
           <a href="{% url 'pilot_reservation' %}" class="w3-bar-item w3-button">My Reservations</a>
           <a href="{% url 'pilot_ulm_list' %}" class="w3-bar-item w3-button">My ULMs</a>
-        {% endif %}
     </div>
   </div>
   <a href="{% url 'logout'%}?next={{request.path}}" class="w3-bar-item w3-hover-white">Logout</a>

@@ -1,5 +1,7 @@
 from django import forms
-from meeting.models import Reservation, TimeSlot, ULM
+from django.contrib.auth.models import User
+from betterforms.multiform import MultiModelForm
+from meeting.models import Reservation, TimeSlot, ULM, Pilot
 
 
 class ReservationForm(forms.ModelForm):
@@ -20,3 +22,26 @@ class ReservationForm(forms.ModelForm):
             if not aviable.filter(pk=self.instance.time_slot.pk).exists():
                 aviable |= TimeSlot.objects.get(pk=self.instance.time_slot.pk)
         self.fields['time_slot'].queryset = aviable
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+                 'username', 'first_name', 'last_name',
+                 'email']
+
+
+class PilotForm(forms.ModelForm):
+    class Meta:
+        model = Pilot
+        fields = [
+                 'insurance_number', 'insurance_file',
+                 'licence_number', 'licence_file']
+
+
+class UserEditMultiForm(MultiModelForm):
+    form_classes = {
+        'user': UserEditForm,
+        'pilot': PilotForm,
+    }

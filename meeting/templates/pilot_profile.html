@@ -19,7 +19,7 @@
 </div>
 <div class="w3-container w3-right">
   <a href= "{% url 'change_password'%}" class="w3-button w3-blue">Change Password</a>
-  <a href= "{% url 'edit_pilot' user.pilot.pk %}" class="w3-button w3-green">EDIT</a>
+  <a href= "{% url 'edit_pilot' user.pk %}" class="w3-button w3-green">EDIT</a>
 </div>
 
 {% endblock%}

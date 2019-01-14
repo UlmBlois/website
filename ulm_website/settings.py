@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_countries',
     'widget_tweaks',
     'django_filters',
+    'betterforms',
 
     # Project Apps
     'core.apps.CoreConfig',

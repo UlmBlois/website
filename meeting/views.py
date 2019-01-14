@@ -13,8 +13,9 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils import timezone
 from django_filters.views import FilterView
+from django.contrib.auth.models import User
 from meeting.models import Pilot, ULM, Reservation
-from meeting.form import ReservationForm
+from meeting.form import ReservationForm, UserEditMultiForm
 import uuid
 
 
@@ -129,24 +130,29 @@ class DetailPilot(DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
-class UpdatePilot(UpdateView):
-    model = Pilot
-    fields = [
-             'insurance_number', 'insurance_file',
-             'licence_number', 'licence_file']
-    # pk_url_kwarg = 'pk'
-    # context_object_name = 'pilot'
+class UpdateUserPilotView(UpdateView):
+    model = User
+    form_class = UserEditMultiForm
     template_name = 'base_form.html'
 
     def get_success_url(self):
         return reverse('pilot', kwargs={'pk': self.request.user.pilot.pk})
 
+    def get_form_kwargs(self):
+        kwargs = super(UpdateUserPilotView, self).get_form_kwargs()
+        kwargs.update(instance={
+            'user': self.object,
+            'profile': self.object.pilot,
+        })
+        return kwargs
+
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        return queryset.filter(pk=self.request.user.pk)
 
     def form_valid(self, form):
-        pilot = form.save(commit=False)
+        form['user'].save()
+        pilot = form['pilot'].save(commit=False)
         pilot.last_update = timezone.now()
         pilot.save()
         return redirect(self.get_success_url())

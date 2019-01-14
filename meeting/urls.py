@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^pilot/password/$', views.pilot_change_password,
         name='change_password'),
     path('pilot/<int:pk>/detail/', views.DetailPilot.as_view(), name='pilot'),
-    url(r'^pilot/(?P<pk>\d+)/edit/$', views.UpdatePilot.as_view(),
+    url(r'^pilot/(?P<pk>\d+)/edit/$', views.UpdateUserPilotView.as_view(),
         name='edit_pilot'),
     path('ulm/', views.PilotULMList.as_view(),
          name='pilot_ulm_list'),
