@@ -15,7 +15,7 @@ from django.utils import timezone
 from django_filters.views import FilterView
 from django.contrib.auth.models import User
 from meeting.models import Pilot, ULM, Reservation
-from meeting.form import ReservationForm, UserEditMultiForm
+from meeting.form import ReservationForm, UserEditMultiForm, ReservationEditMultiForm
 import uuid
 
 
@@ -94,6 +94,39 @@ class StaffFuelReservationList(UserPassesTestMixin, ListView):
                               time_slot__meeting__active=True,
                               fuel_reservation__gt=0).order_by(
                               '-time_slot__start_date')
+
+
+class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
+    model = Reservation
+    form_class = ReservationEditMultiForm
+    template_name = 'base_form.html'
+
+    def get_success_url(self):
+        return reverse(self.request.get_full_path)
+
+    def get_form_kwargs(self):
+        kwargs = super(UpdateUserPilotView, self).get_form_kwargs()
+        kwargs.update(instance={
+            'user': self.object.ulm.pilot.user,
+            'profile': self.object.ulm.pilot,
+            'Reservation': self.object,
+            'ulm': self.object.ulm,
+        })
+        return kwargs
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_authenticated and user.is_staff
+
+    def form_valid(self, form):
+        form['user'].save()
+        pilot = form['pilot'].save(commit=False)
+        pilot.last_update = timezone.now()
+        pilot.save()
+        # TODO a finir
+        return redirect(self.get_success_url())
+
+
 ###############################################################################
 # PILOT related View
 ###############################################################################

@@ -40,8 +40,26 @@ class PilotForm(forms.ModelForm):
                  'licence_number', 'licence_file']
 
 
+class ULMForm(forms.ModelForm):
+
+    class Meta:
+        model = ULM
+        fields = [
+                 'constructor', 'model', 'imatriculation_country',
+                 'imatriculation', 'radio_id']
+
+
 class UserEditMultiForm(MultiModelForm):
     form_classes = {
         'user': UserEditForm,
         'pilot': PilotForm,
+    }
+
+
+class ReservationEditMultiForm(MultiModelForm):
+    form_classes = {
+        'user': UserEditForm,
+        'pilot': PilotForm,
+        'reservation': ReservationForm,
+        'ulm': ULMForm,
     }
