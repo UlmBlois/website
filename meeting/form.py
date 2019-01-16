@@ -63,3 +63,13 @@ class ReservationEditMultiForm(MultiModelForm):
         'reservation': ReservationForm,
         'ulm': ULMForm,
     }
+
+    def get_form_args_kwargs(self, key, args, kwargs):
+        args, kwargs = super(ReservationEditMultiForm,
+                             self).get_form_args_kwargs(key, args, kwargs)
+
+        print(self.instances.get('pilot', None).pk)
+        if key == 'reservation':
+            pilot = self.instances.get('pilot', None)
+            kwargs.update({'pilot': pilot})
+        return args, kwargs

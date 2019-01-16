@@ -36,4 +36,7 @@ urlpatterns = [
         filterset_class=ReservationFilter,
         template_name='staff_reservation_list.html'),
         name='staff_reservation_list'),
+
+    path('staff/reservation/<int:pk>/edit/', views.StaffUpdateReservationView.as_view(),
+         name="staff_edit_reservation")
 ]

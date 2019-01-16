@@ -105,13 +105,14 @@ class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
         return reverse(self.request.get_full_path)
 
     def get_form_kwargs(self):
-        kwargs = super(UpdateUserPilotView, self).get_form_kwargs()
+        kwargs = super(StaffUpdateReservationView, self).get_form_kwargs()
         kwargs.update(instance={
             'user': self.object.ulm.pilot.user,
-            'profile': self.object.ulm.pilot,
-            'Reservation': self.object,
+            'pilot': self.object.ulm.pilot,
+            'reservation': self.object,
             'ulm': self.object.ulm,
         })
+        # kwargs.update({'pilot': self.object.ulm.pilot})
         return kwargs
 
     def test_func(self):
@@ -121,8 +122,11 @@ class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
     def form_valid(self, form):
         form['user'].save()
         pilot = form['pilot'].save(commit=False)
-        pilot.last_update = timezone.now()
         pilot.save()
+        ulm = form['ulm'].save(commit=False)
+        ulm.save()
+        reservation = form['reservation'].save(commit=False)
+        reservation.save()
         # TODO a finir
         return redirect(self.get_success_url())
 
@@ -175,7 +179,7 @@ class UpdateUserPilotView(UpdateView):
         kwargs = super(UpdateUserPilotView, self).get_form_kwargs()
         kwargs.update(instance={
             'user': self.object,
-            'profile': self.object.pilot,
+            'pilot': self.object.pilot,
         })
         return kwargs
 

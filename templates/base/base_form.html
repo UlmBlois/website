@@ -59,7 +59,7 @@ input[type=submit] {
     {% endfor %}
 {% endif %}
 
-<div class="w3-container w3-display-middle">
+<div class="w3-container">
   <form method="post">
     {% csrf_token %}
     {% include 'form.html' with form=form %}

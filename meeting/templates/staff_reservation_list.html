@@ -47,7 +47,7 @@
     <td>{{res.esthetic_cup}}</td>
     <td class="w3-center">
       <a href="#" class="w3-button w3-green w3-hover-white">Validate</a>
-      <a href="#" class="w3-button w3-blue w3-hover-white">Edit</a>
+      <a href="{% url 'staff_edit_reservation' res.pk %}" class="w3-button w3-blue w3-hover-white">Edit</a>
       <a href="#" class="w3-button w3-purple w3-hover-white">Print</a>
     </td>
   </tr>
