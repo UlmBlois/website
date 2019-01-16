@@ -62,7 +62,9 @@ input[type=submit] {
 <div class="w3-container">
   <form method="post">
     {% csrf_token %}
-    {% include 'form.html' with form=form %}
+    {% block form %}
+      {% include 'form.html' with form=form %}
+    {% endblock %}
 
     <input type="submit" class="w3-button w3-green">Submit</input>
   </form>

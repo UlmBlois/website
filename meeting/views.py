@@ -99,7 +99,7 @@ class StaffFuelReservationList(UserPassesTestMixin, ListView):
 class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
     model = Reservation
     form_class = ReservationEditMultiForm
-    template_name = 'base_form.html'
+    template_name = 'staff_reservation_edit.html'
 
     def get_success_url(self):
         return reverse(self.request.get_full_path)
@@ -112,7 +112,6 @@ class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
             'reservation': self.object,
             'ulm': self.object.ulm,
         })
-        # kwargs.update({'pilot': self.object.ulm.pilot})
         return kwargs
 
     def test_func(self):

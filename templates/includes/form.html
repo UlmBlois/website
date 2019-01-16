@@ -1,7 +1,7 @@
 {% load add_css %}
 
 <div class="w3-container">
-  
+
 {% for hidden_field in form.hidden_fields %}
   {{ hidden_field }}
 {% endfor %}
@@ -14,7 +14,7 @@
   </div>
 {% endif %}
 
-
+{% block fields %}
 {% for field in form.visible_fields %}
     <div class="w3-row">
       <div class="w3-quarter">
@@ -42,5 +42,5 @@
       </div>
     </div>
 {% endfor %}
-
+{% endblok %}
 </div>
