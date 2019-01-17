@@ -20,16 +20,22 @@
     <th>pilot</th>
     <th>Imatriculation</th>
     <th>radio id</th>
-    <th>Fuel</th>
+    <th>Fuel Reservation</th>
+    <th>Fuel Served</th>
     <th class="w3-center">Actions</th>
   </tr>
   {% for res in reservation_list %}
+  {% if res.fuel_served > 0 %}
+  <tr class="w3-pale-green">
+  {% else %}
   <tr>
+  {% endif %}
     <td>{{res.reservation_number}}</td>
     <td>{{res.ulm.pilot}}</td>
     <td>{{res.ulm.imatriculation}}</td>
     <td>{{res.ulm.radio_id}}</td>
     <td>{{res.fuel_reservation}}</td>
+    <td>{{res.fuel_served}}</td>
     <td class="w3-center">
       <button type="button"
               class="btn btn-warning btn-sm js-update-fuel-served"
