@@ -28,7 +28,9 @@ urlpatterns = [
     path('reservation/<int:pk>/delete/',
          views.DeletePilotReservation.as_view(),
          name='pilot_delete_reservation'),
-    path('staff/fuel/', views.StaffFuelReservationList.as_view(),
+    path('staff/fuel/', views.FilteredReservationList.as_view(
+         filterset_class=ReservationFilter,
+         template_name='staff_fuel_reservation_list.html'),
          name="staff_fuel_res_list"),
     path('staff/reservation/', views.FilteredReservationList.as_view(
         filterset_class=ReservationFilter,

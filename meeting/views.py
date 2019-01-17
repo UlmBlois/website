@@ -63,40 +63,6 @@ class FilteredReservationList(UserPassesTestMixin, PaginatedFilterViews,
             '-reservation_number')
 
 
-class StaffReservationList(UserPassesTestMixin, ListView):
-    model = Reservation  # TODO a finir
-    context_object_name = 'reservation_list'
-    template_name = 'staff_reservation_list.html'
-    paginate_by = 2
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_authenticated and user.is_staff
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(time_slot__meeting__active=True).order_by(
-            '-time_slot__start_date')
-
-
-class StaffFuelReservationList(UserPassesTestMixin, ListView):
-    model = Reservation  # TODO a finir
-    context_object_name = 'reservation_list'
-    template_name = 'staff_fuel_reservation_list.html'
-    paginate_by = 2
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_authenticated and user.is_staff
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(
-                              time_slot__meeting__active=True,
-                              fuel_reservation__gt=0).order_by(
-                              '-time_slot__start_date')
-
-
 class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
     model = Reservation
     form_class = ReservationEditMultiForm
