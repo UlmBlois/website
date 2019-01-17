@@ -40,6 +40,6 @@ urlpatterns = [
 
 
 urlpatterns += [
-    path('ajax/reservation/fuelserved/<int:pk>', views.ajax_fuel_served, name="ajax_fuel_served")
+    path('ajax/reservation/fuelserved/<int:pk>/', views.ajax_fuel_served, name="ajax_fuel_served")
 
 ]

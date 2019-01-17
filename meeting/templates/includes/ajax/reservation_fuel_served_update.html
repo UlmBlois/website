@@ -1,4 +1,4 @@
-<form method="post" action="{% url 'ajax_fuel_served' form.instance.pk %}" class="js-fuel_served-update-form">
+<form method="post" action="{% url 'ajax_fuel_served' form.instance.pk %}" class="js-fuel-served-update-form">
   {% csrf_token %}
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -7,10 +7,20 @@
     <h4 class="modal-title">Fuel Served</h4>
   </div>
   <div class="modal-body">
-    {% include 'form.html' with form=form %}
+    {% load widget_tweaks %}
+
+    {% for field in form %}
+      <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% render_field field class="form-control" %}
+        {% for error in field.errors %}
+          <p class="help-block">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endfor %}
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Update book</button>
+    <button type="submit" class="btn btn-primary">Update fuel served</button>
   </div>
 </form>

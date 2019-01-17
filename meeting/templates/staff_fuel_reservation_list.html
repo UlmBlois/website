@@ -1,5 +1,8 @@
 {% extends "base_generic.html" %}
-
+{% load static %}
+{% block javascript%}
+<script src="{% static 'js/ajax_reservation.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="w3-container">
@@ -11,7 +14,7 @@
   <hr>
 </div>
 
-<table class="w3-table w3-striped w3-bordered w3-hoverable">
+<table id="reservation_table" class="w3-table w3-striped w3-bordered w3-hoverable">
   <tr class="w3-theme">
     <th>ID</th>
     <th>pilot</th>
@@ -28,7 +31,11 @@
     <td>{{res.ulm.radio_id}}</td>
     <td>{{res.fuel_reservation}}</td>
     <td class="w3-center">
-      <a href="#" class="w3-button w3-green w3-hover-white">Validate</a>
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-fuel-served"
+              data-url="{% url 'ajax_fuel_served' res.id %}">
+        <span class="glyphicon glyphicon-pencil"></span> Validate
+</button>
     </td>
   </tr>
   {% endfor %}
@@ -36,4 +43,12 @@
 
 {% include 'pagination.html' %}
 
+
+<div class="modal fade" id="modal-fuel-served">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+</div>
 {% endblock %}

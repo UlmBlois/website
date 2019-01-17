@@ -368,9 +368,10 @@ def save_reservation_form(request, form, template_name):
 
 
 def ajax_fuel_served(request, pk):
+    print("fuel")
     reservation = get_object_or_404(Reservation, pk=pk)
     if request.method == 'POST':
         form = AjaxFuelServedForm(request.POST, instance=reservation)
     else:
         form = AjaxFuelServedForm(instance=reservation)
-    return save_reservation_form(request, form, 'books/includes/partial_book_update.html')
+    return save_reservation_form(request, form, 'reservation_fuel_served_update.html')
