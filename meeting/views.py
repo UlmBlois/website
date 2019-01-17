@@ -16,7 +16,8 @@ from django.utils import timezone
 from django_filters.views import FilterView
 from django.contrib.auth.models import User
 from meeting.models import Pilot, ULM, Reservation
-from meeting.form import ReservationForm, UserEditMultiForm, ReservationEditMultiForm, AjaxFuelServedForm
+from meeting.form import (ReservationForm, UserEditMultiForm,
+                          ReservationEditMultiForm, AjaxFuelServedForm)
 import uuid
 
 
@@ -174,7 +175,8 @@ class PilotULMList(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(pilot=self.request.user.pilot)
+        return queryset.filter(pilot=self.request.user.pilot).order_by(
+            '-imatriculation')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -247,7 +249,8 @@ class PilotReservationList(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(ulm__pilot=self.request.user.pilot)
+        return queryset.filter(ulm__pilot=self.request.user.pilot).order_by(
+            '-reservation_number')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -329,15 +332,16 @@ def save_reservation_form(request, form, template_name):
         else:
             data['form_is_valid'] = False
     context = {'form': form}
-    data['html_form'] = render_to_string(template_name, context, request=request)
+    data['html_form'] = render_to_string(template_name, context,
+                                         request=request)
     return JsonResponse(data)
 
 
 def ajax_fuel_served(request, pk):
-    print("fuel")
     reservation = get_object_or_404(Reservation, pk=pk)
     if request.method == 'POST':
         form = AjaxFuelServedForm(request.POST, instance=reservation)
     else:
         form = AjaxFuelServedForm(instance=reservation)
-    return save_reservation_form(request, form, 'reservation_fuel_served_update.html')
+    return save_reservation_form(request, form,
+                                 'reservation_fuel_served_update.html')

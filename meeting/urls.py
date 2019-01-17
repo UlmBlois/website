@@ -28,6 +28,11 @@ urlpatterns = [
     path('reservation/<int:pk>/delete/',
          views.DeletePilotReservation.as_view(),
          name='pilot_delete_reservation'),
+]
+
+
+# STAFF url
+urlpatterns += [
     path('staff/fuel/', views.FilteredReservationList.as_view(
          filterset_class=ReservationFilter,
          template_name='staff_fuel_reservation_list.html'),
@@ -36,12 +41,15 @@ urlpatterns = [
         filterset_class=ReservationFilter,
         template_name='staff_reservation_list.html'),
         name='staff_reservation_list'),
-    path('staff/reservation/<int:pk>/edit/', views.StaffUpdateReservationView.as_view(),
-         name="staff_edit_reservation")
+    path('staff/reservation/<int:pk>/edit/',
+         views.StaffUpdateReservationView.as_view(),
+         name="staff_edit_reservation"),
 ]
 
 
+# AJAX url
 urlpatterns += [
-    path('ajax/reservation/fuelserved/<int:pk>/', views.ajax_fuel_served, name="ajax_fuel_served")
+    path('ajax/reservation/fuelserved/<int:pk>/', views.ajax_fuel_served,
+         name="ajax_fuel_served"),
 
 ]

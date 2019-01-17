@@ -1,4 +1,4 @@
-{% load add_css %}
+{% load widget_tweaks %}
 
 <div class="w3-container">
 
@@ -14,33 +14,33 @@
   </div>
 {% endif %}
 
-{% block fields %}
+{%block fields %}
 {% for field in form.visible_fields %}
-    <div class="w3-row">
-      <div class="w3-quarter">
-        <label for="field.id_for_label" class="w3-label">{{ field.label_tag }}</label>
-      </div>
-      <div class="w3-threequarter">
-        {% if form.is_bound %}
-          {% if field.errors %}
-            {{ field|add_attr:"class:w3-input w3-border w3-border-red" }}
-              {% for error in field.errors %}
-                <div class="w3-text-red">
-                  {{ error }}
-                </div>
-              {% endfor %}
-          {% else %}
-            {{ field|add_attr:"class:w3-input w3-border w3-border-green" }}
-          {% endif %}
-        {% else %}
-          {{ field|add_attr:"class:w3-input" }}
-        {% endif %}
+  <div class="form-group">
+    {{ field.label_tag }}
 
-        {% if field.help_text %}
-          <small class="form-text w3-text-grey">{{ field.help_text }}</small>
-        {% endif %}
-      </div>
-    </div>
+    {% if form.is_bound %}
+      {% if field.errors %}
+        {% render_field field class="form-control is-invalid" %}
+        {% for error in field.errors %}
+          <div class="invalid-feedback">
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% else %}
+        {% render_field field class="form-control is-valid" %}
+      {% endif %}
+    {% else %}
+      {% render_field field class="form-control" %}
+    {% endif %}
+
+    {% if field.help_text %}
+      <small class="form-text text-muted">
+        {{ field.help_text }}
+      </small>
+    {% endif %}
+  </div>
 {% endfor %}
+
 {% endblock %}
 </div>

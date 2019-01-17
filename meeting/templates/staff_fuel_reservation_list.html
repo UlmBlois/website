@@ -1,41 +1,94 @@
 {% extends "base_generic.html" %}
 {% load static %}
+{% load widget_tweaks %}
+
 {% block javascript%}
 <script src="{% static 'js/ajax_reservation.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<div class="w3-container">
-  <div class="w3-container w3-half">
-    <b class="w3-xlarge">Pilots Fuel Reservations</b>
-  </div>
-</div>
-<div class="w3-container">
-  <hr>
-</div>
 
-<div class="w3-container">
+<h3>Pilots Fuel Reservations</h3>
+<hr>
+
   <form method="get">
-    {% include 'form.html' with form=filter.form %}
+    <div class="card card-body bg-light">
+    <div class="row">
+      <div class="form-group col-sm">
+          {{ filter.form.reservation_number.label_tag }}
+          {% render_field filter.form.reservation_number class="form-control" %}
+      </div>
+      <div class="form-group col-sm">
+          {{ filter.form.ulm__pilot__user__first_name.label_tag }}
+          {% render_field filter.form.ulm__pilot__user__first_name class="form-control" %}
+      </div>
+      <div class="form-group col-sm">
+          {{ filter.form.ulm__pilot__user__last_name.label_tag }}
+          {% render_field filter.form.ulm__pilot__user__last_name class="form-control" %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm">
+          {{ filter.form.ulm__imatriculation.label_tag }}
+          {% render_field filter.form.ulm__imatriculation class="form-control" %}
+      </div>
+      <div class="form-group col-sm">
+          {{ filter.form.ulm__radio_id.label_tag }}
+          {% render_field filter.form.ulm__radio_id class="form-control" %}
+      </div>
+      <div class="form-group col-sm">
+          {{ filter.form.time_slot.label_tag }}
+          {% render_field filter.form.time_slot class="form-control" %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm">
+          {{ filter.form.fuel_reservation.label_tag }}
+          {% render_field filter.form.fuel_reservation class="form-control" %}
+      </div>
+      <div class="form-group col-sm">
+          {{ filter.form.flight_plan.label_tag }}
+          {% render_field filter.form.flight_plan class="form-control" %}
+      </div>
+      <div class="form-group col-sm">
+          {{ filter.form.passanger.label_tag }}
+          {% render_field filter.form.passanger class="form-control" %}
+      </div>
+      <div class="form-group col-sm">
+          {{ filter.form.esthetic_cup.label_tag }}
+          {% render_field filter.form.esthetic_cup class="form-control" %}
+      </div>
+      <div class="form-group col-sm">
+          {{ filter.form.to_sell.label_tag }}
+          {% render_field filter.form.to_sell class="form-control" %}
+      </div>
+    </div>
 
-    <input type="submit" class="w3-button w3-green w3-right"></input>
+
+    <!-- {% include 'form.html' with form=filter.form %} -->
+
+    <button type="submit" class="btn btn-primary">Search</button>
+  </div>
+
   </form>
-</div>
 
 
-<table id="reservation_table" class="w3-table w3-striped w3-bordered w3-hoverable">
-  <tr class="w3-theme">
+<table id="reservation_table" class="table table-hover">
+  <thead class="thead-dark">
+  <tr>
     <th>ID</th>
     <th>pilot</th>
     <th>Imatriculation</th>
     <th>radio id</th>
     <th>Fuel Reservation</th>
     <th>Fuel Served</th>
-    <th class="w3-center">Actions</th>
+    <th class="center">Actions</th>
   </tr>
+  </thead>
+  <tbody>
   {% for res in reservation_list %}
   {% if res.fuel_served > 0 %}
-  <tr class="w3-pale-green">
+  <tr class="table-success">
   {% else %}
   <tr>
   {% endif %}
@@ -45,15 +98,16 @@
     <td>{{res.ulm.radio_id}}</td>
     <td>{{res.fuel_reservation}}</td>
     <td>{{res.fuel_served}}</td>
-    <td class="w3-center">
+    <td class="center">
       <button type="button"
               class="btn btn-warning btn-sm js-update-fuel-served"
               data-url="{% url 'ajax_fuel_served' res.id %}">
         <span class="glyphicon glyphicon-pencil"></span> Validate
-</button>
+      </button>
     </td>
   </tr>
   {% endfor %}
+  </tbody>
 </table>
 
 {% include 'pagination.html' %}
