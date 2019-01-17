@@ -113,7 +113,7 @@ class Reservation(models.Model):
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
     arrival = models.DateTimeField(null=True, default=None)
     fuel_reservation = models.PositiveIntegerField(default=0)
-    fuel_served = models.BooleanField(default=False)
+    fuel_served = models.PositiveIntegerField(default=0)
     flight_plan = models.BooleanField(default=False)
     passanger = models.BooleanField(default=False)
     esthetic_cup = models.BooleanField(default=False)

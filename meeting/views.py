@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, JsonResponse
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -15,7 +16,7 @@ from django.utils import timezone
 from django_filters.views import FilterView
 from django.contrib.auth.models import User
 from meeting.models import Pilot, ULM, Reservation
-from meeting.form import ReservationForm, UserEditMultiForm, ReservationEditMultiForm
+from meeting.form import ReservationForm, UserEditMultiForm, ReservationEditMultiForm, AjaxFuelServedForm
 import uuid
 
 
@@ -347,3 +348,29 @@ class DeletePilotReservation(DeleteView):
 
     def get_success_url(self):
         return reverse('pilot_reservation')
+
+
+###############################################################################
+# Ajax View
+###############################################################################
+
+def save_reservation_form(request, form, template_name):
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+        else:
+            data['form_is_valid'] = False
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+
+def ajax_fuel_served(request, pk):
+    reservation = get_object_or_404(Reservation, pk=pk)
+    if request.method == 'POST':
+        form = AjaxFuelServedForm(request.POST, instance=reservation)
+    else:
+        form = AjaxFuelServedForm(instance=reservation)
+    return save_reservation_form(request, form, 'books/includes/partial_book_update.html')

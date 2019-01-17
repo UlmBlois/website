@@ -28,15 +28,18 @@ urlpatterns = [
     path('reservation/<int:pk>/delete/',
          views.DeletePilotReservation.as_view(),
          name='pilot_delete_reservation'),
-    # path('staff/reservation/', views.StaffReservationList.as_view(),
-    #      name="staff_reservation_list"),
     path('staff/fuel/', views.StaffFuelReservationList.as_view(),
          name="staff_fuel_res_list"),
     path('staff/reservation/', views.FilteredReservationList.as_view(
         filterset_class=ReservationFilter,
         template_name='staff_reservation_list.html'),
         name='staff_reservation_list'),
-
     path('staff/reservation/<int:pk>/edit/', views.StaffUpdateReservationView.as_view(),
          name="staff_edit_reservation")
+]
+
+
+urlpatterns += [
+    path('ajax/reservation/fuelserved/<int:pk>', views.ajax_fuel_served, name="ajax_fuel_served")
+
 ]

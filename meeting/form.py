@@ -71,3 +71,14 @@ class ReservationEditMultiForm(MultiModelForm):
             pilot = self.instances.get('pilot', None)
             kwargs.update({'pilot': pilot})
         return args, kwargs
+
+
+###############################################################################
+# AJAX forms
+###############################################################################
+
+class AjaxFuelServedForm(forms.ModelForm):
+
+    class Meta:
+        model = Reservation
+        fields = ["fuel_served"]
