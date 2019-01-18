@@ -68,8 +68,9 @@
 
 </form>
 
-<table id="reservation_table" class="w3-table w3-striped w3-bordered w3-hoverable">
-  <tr class="w3-theme">
+<table id="reservation_table" class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
     <th>ID</th>
     <th>Time Slot</th>
     <th>pilot</th>
@@ -78,13 +79,15 @@
     <th>Fuel</th>
     <th>Flight plan</th>
     <th>Esthetic Cup</th>
-    <th class="w3-center">Actions</th>
-  </tr>
+    <th class="center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
   {% for res in reservation_list %}
   {% if res.arrival is None %}
   <tr>
   {% else %}
-  <tr class="w3-pale-green">
+  <tr class="table-success">
   {% endif %}
     <td>{{res.reservation_number}}</td>
     <td>{{res.time_slot}}</td>
@@ -94,13 +97,14 @@
     <td>{{res.fuel_reservation}}</td>
     <td>{{res.flight_plan}}</td>
     <td>{{res.esthetic_cup}}</td>
-    <td class="w3-center">
+    <td class="center">
       <a href="#" class="w3-button w3-green w3-hover-white">Validate</a>
       <a href="{% url 'staff_edit_reservation' res.pk %}" class="w3-button w3-blue w3-hover-white">Edit</a>
       <a href="#" class="w3-button w3-purple w3-hover-white">Print</a>
     </td>
   </tr>
   {% endfor %}
+  </tbody>
 </table>
 
 {% include 'pagination.html' %}

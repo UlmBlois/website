@@ -338,10 +338,19 @@ def save_reservation_form(request, form, template_name):
 
 
 def ajax_fuel_served(request, pk):
-    reservation = get_object_or_404(Reservation, pk=pk)
-    if request.method == 'POST':
-        form = AjaxFuelServedForm(request.POST, instance=reservation)
+    if(request.is_ajax()):
+        reservation = get_object_or_404(Reservation, pk=pk)
+        if request.method == 'POST':
+            form = AjaxFuelServedForm(request.POST, instance=reservation)
+        else:
+            form = AjaxFuelServedForm(instance=reservation)
+        return save_reservation_form(request, form,
+                                     'reservation_fuel_served_update.html')
     else:
-        form = AjaxFuelServedForm(instance=reservation)
-    return save_reservation_form(request, form,
-                                 'reservation_fuel_served_update.html')
+        redirect('index')
+
+
+def ajax_load_pilot_ulm_list(request):
+        pilot_pk = request.GET.get('pilot')
+        ulm_list = ULM.objects.filter(pilot__pk=pilot_pk).order_by('-immatriculation')
+        return render(request, 'pilot_ulm_list_dropdown.html', {'list': ulm_list})
