@@ -52,6 +52,7 @@ urlpatterns += [
     path('ajax/reservation/fuelserved/<int:pk>/', views.ajax_fuel_served,
          name="ajax_fuel_served"),
     path('ajax/load_ulm/', views.ajax_load_pilot_ulm_list,
-         name="ajax_ulm_option_list")
+         name="ajax_ulm_option_list"),
+    path('ajax/add_ulm/<int:pk>', views.ajax_add_ulm, name="ajax_add_ulm"),
 
 ]

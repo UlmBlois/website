@@ -4,16 +4,16 @@ $(function () {
 
   var loadForm = function () {
     var btn = $(this);
+    var modal = $("#"+btn.attr("data-contener-id"))
     $.ajax({
       url: btn.attr("data-url"),
       type: 'get',
       dataType: 'json',
       beforeSend: function () {
-        $("#modal-fuel-served").modal("show");
+        modal.modal("show");
       },
       success: function (data) {
-        console.log(data)
-        $("#modal-fuel-served .modal-content").html(data.html_form);
+        modal.find(".modal-content").html(data.html_form);
       }
     });
   };
@@ -27,10 +27,11 @@ $(function () {
       dataType: 'json',
       success: function (data) {
         if (data.form_is_valid) {
-          $("#modal-fuel-served").modal("hide");
+          $(this).closest(".modal").modal("hide")
+          location.reload();
         }
         else {
-          $("#modal-fuel-served .modal-content").html(data.html_form);
+          $(this).closest(".modal").find(".modal-content").html(data.html_form);
         }
       }
     });
@@ -39,7 +40,13 @@ $(function () {
 
 
   /* Binding */
+    /* Fuel Reservation*/
   $("#reservation_table").on("click", ".js-update-fuel-served", loadForm);
-  $("#modal-fuel-served").on("submit", ".js-fuel-served-update-form", saveForm);
+  $("#modal-update-fuel").on("submit", ".js-fuel-served-update-form", saveForm);
+
+
+  /* Pilot Reservation*/
+$("#add_ulm_btn").on("click", ".js-add-ulm", loadForm);
+$("#modal-add-ulm").on("submit", ".js-add-ulm-form", saveForm);
 
 });

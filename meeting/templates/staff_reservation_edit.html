@@ -1,8 +1,30 @@
 {% extends "base_form.html" %}
-
+{% load static %}
+{% block javascript%}
+<script src="{% static 'js/ajax_reservation.js' %}"></script>
+{% endblock %}
 
 {% block form %}
 
-{% include 'staff_reservation_edit_form.html' with form=form %}
+<!-- {% include 'staff_reservation_edit_form.html' with form=form pilot=pilot%} -->
+{% include 'betterforms/form_as_fieldsets.html' %}
 
+<div id="add_ulm_btn">
+<button type="button"
+  class="btn btn-default js-add-ulm"
+  data-url="{% url 'ajax_add_ulm' pilot %}"
+  data-contener-id ="modal-add-ulm">Add Ulm</button>
+</div>
+
+{% endblock %}
+
+
+{% block afterform %}
+<div class="modal fade" id="modal-add-ulm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+</div>
 {% endblock %}

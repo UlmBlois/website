@@ -17,7 +17,8 @@ from django_filters.views import FilterView
 from django.contrib.auth.models import User
 from meeting.models import Pilot, ULM, Reservation
 from meeting.form import (ReservationForm, UserEditMultiForm,
-                          ReservationEditMultiForm, AjaxFuelServedForm)
+                          ReservationEditMultiForm, AjaxFuelServedForm,
+                          ULMForm)
 import uuid
 
 
@@ -70,7 +71,7 @@ class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
     template_name = 'staff_reservation_edit.html'
 
     def get_success_url(self):
-        return reverse(self.request.get_full_path)
+        return reverse('staff_reservation_list')
 
     def get_form_kwargs(self):
         kwargs = super(StaffUpdateReservationView, self).get_form_kwargs()
@@ -78,9 +79,16 @@ class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
             'user': self.object.ulm.pilot.user,
             'pilot': self.object.ulm.pilot,
             'reservation': self.object,
-            'ulm': self.object.ulm,
+            # 'ulm': self.object.ulm,
         })
         return kwargs
+
+    def get_context_data(self, ** kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['pilot'] = self.object.ulm.pilot.pk
+        return context
 
     def test_func(self):
         user = self.request.user
@@ -90,8 +98,9 @@ class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
         form['user'].save()
         pilot = form['pilot'].save(commit=False)
         pilot.save()
-        ulm = form['ulm'].save(commit=False)
-        ulm.save()
+        # ulm = form['ulm'].save(commit=False)
+        # print(ulm.pk)
+        # ulm.save()
         reservation = form['reservation'].save(commit=False)
         reservation.save()
         # TODO a finir
@@ -323,7 +332,7 @@ class DeletePilotReservation(DeleteView):
 # Ajax View
 ###############################################################################
 
-def save_reservation_form(request, form, template_name):
+def save_reservation_form(request, form, template_name, additional_context={}):
     data = dict()
     if request.method == 'POST':
         if form.is_valid():
@@ -332,13 +341,13 @@ def save_reservation_form(request, form, template_name):
         else:
             data['form_is_valid'] = False
     context = {'form': form}
+    context.update(additional_context)
     data['html_form'] = render_to_string(template_name, context,
                                          request=request)
     return JsonResponse(data)
 
 
 def ajax_fuel_served(request, pk):
-    if(request.is_ajax()):
         reservation = get_object_or_404(Reservation, pk=pk)
         if request.method == 'POST':
             form = AjaxFuelServedForm(request.POST, instance=reservation)
@@ -346,11 +355,30 @@ def ajax_fuel_served(request, pk):
             form = AjaxFuelServedForm(instance=reservation)
         return save_reservation_form(request, form,
                                      'reservation_fuel_served_update.html')
+
+
+def ajax_add_ulm(request, pk):
+    data = {}
+    if request.method == 'POST':
+        form = ULMForm(request.POST)
+        if form.is_valid():
+            ulm = form.save(commit=False)
+            ulm.pilot = get_object_or_404(Pilot, pk=pk)
+            ulm.save()
+            data['form_is_valid'] = True
+        else:
+            data['form_is_valid'] = False
     else:
-        redirect('index')
+        form = ULMForm()
+    context = {'form': form}
+    context.update({'pilot': pk})
+    data['html_form'] = render_to_string('add_pilot_ulm.html', context, request=request)
+    return JsonResponse(data)
 
 
 def ajax_load_pilot_ulm_list(request):
         pilot_pk = request.GET.get('pilot')
-        ulm_list = ULM.objects.filter(pilot__pk=pilot_pk).order_by('-immatriculation')
-        return render(request, 'pilot_ulm_list_dropdown.html', {'list': ulm_list})
+        ulm_list = ULM.objects.filter(pilot__pk=pilot_pk).order_by(
+            '-immatriculation')
+        return render(request, 'pilot_ulm_list_dropdown.html',
+                      {'list': ulm_list})

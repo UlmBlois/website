@@ -61,7 +61,7 @@ class ReservationEditMultiForm(MultiModelForm):
         'user': UserEditForm,
         'pilot': PilotForm,
         'reservation': ReservationForm,
-        'ulm': ULMForm,
+        # 'ulm': ULMForm,
     }
 
     def get_form_args_kwargs(self, key, args, kwargs):
