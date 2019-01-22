@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_countries.fields import CountryField
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 from datetime import date
 
 from meeting.managers import MeetingManager, TimeSlotManager
@@ -64,8 +65,8 @@ class TimeSlot(models.Model):
     def __str__(self):
         """String representing an arrivals time slot."""
         return "{}-{}".format(
-            self.start_date.strftime("%A %I:%M"),
-            self.end_date.strftime("%I:%M"))
+            timezone.localtime(self.start_date).strftime("%A %I:%M"),
+            timezone.localtime(self.end_date).strftime("%I:%M"))
 
 
 class Pilot(models.Model):

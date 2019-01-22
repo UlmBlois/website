@@ -16,6 +16,11 @@ class TimeSlotAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'meeting', 'arrivals_slots')
 
 
+class TimeSlotInline(admin.TabularInline):
+    extra = 0
+    model = TimeSlot
+
+
 @admin.register(ULM)
 class ULMAdmin(admin.ModelAdmin):
     list_display = (
@@ -25,6 +30,7 @@ class ULMAdmin(admin.ModelAdmin):
 @admin.register(Meeting)
 class MeetingAdmin(admin.ModelAdmin):
     list_display = ('name', 'active', 'start_date', 'end_date')
+    inlines = [TimeSlotInline]
 
 
 class PilotInline(admin.StackedInline):
