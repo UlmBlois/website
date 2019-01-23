@@ -139,17 +139,24 @@ class DetailPilot(DetailView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        return queryset.filter(pk=self.kwargs.get('pk'))
+
+    def get_object(self, queryset=None):
+        obj = super(DetailPilot, self).get_object()
+        if not obj.user == self.request.user:
+            raise Http404
+        return obj
 
 
 @method_decorator(login_required, name='dispatch')
 class UpdateUserPilotView(UpdateView):
     model = User
+    pk_url_kwarg = 'pk'
     form_class = UserEditMultiForm
     template_name = 'base_form.html'
 
     def get_success_url(self):
-        return reverse('pilot', kwargs={'pk': self.request.user.pilot.pk})
+        return reverse('pilot', kwargs={'pk': self.kwargs.get('pk', None)})
 
     def get_form_kwargs(self):
         kwargs = super(UpdateUserPilotView, self).get_form_kwargs()
@@ -161,7 +168,13 @@ class UpdateUserPilotView(UpdateView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(pk=self.request.user.pk)
+        return queryset.filter(pk=self.kwargs.get('pk', None))
+
+    def get_object(self, queryset=None):
+        obj = super(UpdateUserPilotView, self).get_object()
+        if not obj == self.request.user:
+            raise Http404
+        return obj
 
     def form_valid(self, form):
         form['user'].save()
@@ -180,7 +193,7 @@ class PilotULMList(ListView):
     model = ULM
     context_object_name = 'ulm_list'
     template_name = 'pilot_ulm_list.html'
-    paginate_by = 2
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = super().get_queryset()

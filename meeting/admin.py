@@ -11,11 +11,6 @@ class ReservationAdmin(admin.ModelAdmin):
     list_display = ('reservation_number', "display_pilot", "time_slot", "ulm")
 
 
-@admin.register(TimeSlot)
-class TimeSlotAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'meeting', 'arrivals_slots')
-
-
 class TimeSlotInline(admin.TabularInline):
     extra = 0
     model = TimeSlot
