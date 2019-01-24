@@ -385,7 +385,8 @@ def ajax_add_ulm(request, pk):
         form = ULMForm()
     context = {'form': form}
     context.update({'pilot': pk})
-    data['html_form'] = render_to_string('add_pilot_ulm.html', context, request=request)
+    data['html_form'] = render_to_string('add_pilot_ulm.html',
+                                         context, request=request)
     return JsonResponse(data)
 
 

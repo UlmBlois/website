@@ -36,7 +36,7 @@
         <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUserMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class='fas fa-user'></i> {{ user.get_username }}
+            <span class='fas fa-user-circle'></span> {{ user.get_username }}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownUserMenuLink">
             <a href="{% url 'pilot' user.pilot.pk%}" class="dropdown-item">Profile</a>
@@ -45,13 +45,13 @@
           </div>
         </li>
         <li class="nav-item">
-                <a href="{% url 'logout'%}?next={{request.path}}" class="nav-link">Logout</a>
+                <a href="{% url 'logout'%}?next={{request.path}}" class="nav-link"><span class="fas fa-sign-out-alt"></span> Logout</a>
         </li>
         </ul>
       {% else %}
       <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <button  data-toggle="modal" data-target="#loginModal"class="btn btn-default">Login</button>
+        <button  data-toggle="modal" data-target="#loginModal"class="btn btn-default"><span class="fas fa-sign-in-alt"></span> Login</button>
       </li>
       <li class="nav-item">
         <a href="{% url 'signup'%}?next={{request.path}}" class="nav-link">Sign Up</a>
