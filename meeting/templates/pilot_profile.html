@@ -2,24 +2,32 @@
 
 
 {% block content %}
-<div class="w3-container">
-  <div class="w3-container w3-theme w3-center">
+<div class="jumbotron">
     <h2>Profile</h2>
-  </div>
-
-  <div class="w3-container W3-half">
-    <label>Licence Number:</label>
-    {{pilot.licence_number}}
-  </div>
-  <div class="w3-container W3-half">
-    <label>Insurance Number</label>
-    {{pilot.insurance_number}}
-  </div>
-
 </div>
-<div class="w3-container w3-right">
-  <a href= "{% url 'change_password'%}" class="w3-button w3-blue">Change Password</a>
-  <a href= "{% url 'edit_pilot' user.pk %}" class="w3-button w3-green">EDIT</a>
+
+
+<div class="card mx-4">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        Licence Number:
+      </div>
+      <div class="col">
+        {{pilot.licence_number}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        Insurance Number:
+      </div>
+      <div class="col">
+        {{pilot.insurance_number}}
+      </div>
+    </div>
+    <a href= "{% url 'change_password'%}" class="btn btn-primary">Change Password</a>
+    <a href= "{% url 'edit_pilot' user.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span> Edit</a>
+  </div>
 </div>
 
 {% endblock%}
