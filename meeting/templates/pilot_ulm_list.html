@@ -2,18 +2,16 @@
 
 
 {% block content %}
-<div class="page-header">
+<div class="jumbotron">
     <h2>Your ULMs</h2>
-    <a class="btn btn-success pull-right" role="button" href="{% url 'pilot_create_ulm' %}">
+    <a class="btn btn-success pull-left" role="button" href="{% url 'pilot_create_ulm' %}">
       <span class="fas fa-plus-circle"></span> Add New
     </a>
 
 </div>
-<div class="w3-container">
-  <hr>
-</div>
 
 
+<div class="mx-4">
 {% for ulm in ulm_list %}
 <div class="card mb-3">
   <div class="card-body">
@@ -25,7 +23,7 @@
   </div>
 </div>
 {% endfor %}
-
+</div>
 
 {% include 'pagination.html' %}
 
