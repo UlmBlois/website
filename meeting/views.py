@@ -5,7 +5,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import UpdateView, DeleteView, CreateView
+from django.views.generic.edit import (UpdateView, DeleteView, CreateView,
+                                       FormMixin, ProcessFormView)
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import View
@@ -18,7 +19,7 @@ from django.contrib.auth.models import User
 from meeting.models import Pilot, ULM, Reservation
 from meeting.form import (ReservationForm, UserEditMultiForm,
                           ReservationEditMultiForm, AjaxFuelServedForm,
-                          ULMForm)
+                          ULMForm, StaffReservationEditForm)
 import uuid
 
 
@@ -45,7 +46,7 @@ class PaginatedFilterViews(View):
             context['querystring'] = querystring.urlencode()
         return context
 
-###############################################################################
+###########################################################################from django.views.generic.edit import FormMixin, ProcessFormView####
 # STAFF related View
 ###############################################################################
 
@@ -86,7 +87,6 @@ class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
     def get_context_data(self, ** kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['pilot'] = self.object.ulm.pilot.pk
         return context
 
@@ -389,6 +389,19 @@ def ajax_add_ulm(request, pk):
                                          context, request=request)
     return JsonResponse(data)
 
+def ajax_staff_edit_reservation(request, pk):
+    data = {}
+    reservation = get_object_or_404(Reservation, pk=pk)
+    if request.method == 'POST':
+        form = StaffReservationEditForm(request.POST, reservation=reservation)
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+        else:
+            data['form_is_valid'] = False
+    else:
+        form = StaffReservationEditForm(reservation=reservation)
+    return save_reservation_form(request, form, 'staff_reservation_edit_partial.html', {'reservation': pk})
 
 def ajax_load_pilot_ulm_list(request):
         pilot_pk = request.GET.get('pilot')

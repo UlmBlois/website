@@ -32,6 +32,7 @@ $(function () {
         }
         else {
           $(this).closest(".modal").find(".modal-content").html(data.html_form);
+          console.log(data.html_form);
         }
       }
     });
@@ -48,5 +49,8 @@ $(function () {
   /* Pilot Reservation*/
 $("#add_ulm_btn").on("click", ".js-add-ulm", loadForm);
 $("#modal-add-ulm").on("submit", ".js-add-ulm-form", saveForm);
+
+$("#reservation_table").on('click', '.js-update-reservation', loadForm)
+$("#modal-update-reservation").on("submit", ".js-staff-update-reservation-form", saveForm)
 
 });
