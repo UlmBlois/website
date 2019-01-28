@@ -355,8 +355,7 @@ def save_reservation_form(request, form, template_name, additional_context={}):
             data['form_is_valid'] = False
     context = {'form': form}
     context.update(additional_context)
-    data['html_form'] = render_to_string(template_name, context,
-                                         request=request)
+    data['html_form'] = render_to_string(template_name, context, request)
     return JsonResponse(data)
 
 
@@ -401,7 +400,7 @@ def ajax_staff_edit_reservation(request, pk):
             data['form_is_valid'] = False
     else:
         form = StaffReservationEditForm(reservation=reservation)
-    return save_reservation_form(request, form, 'staff_reservation_edit_partial.html', {'reservation': pk})
+    return save_reservation_form(request, form, 'staff_reservation_edit_partial.html', additional_context={'reservation': pk})
 
 def ajax_load_pilot_ulm_list(request):
         pilot_pk = request.GET.get('pilot')
