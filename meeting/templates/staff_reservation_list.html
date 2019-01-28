@@ -98,9 +98,9 @@
     <td>{{res.flight_plan}}</td>
     <td>{{res.esthetic_cup}}</td>
     <td class="center">
-      <a href="#" class="w3-button w3-green w3-hover-white">Validate</a>
-      <a href="{% url 'staff_edit_reservation' res.pk %}" class="w3-button w3-blue w3-hover-white">Edit</a>
-      <a href="#" class="w3-button w3-purple w3-hover-white">Print</a>
+      <a href="#" class="btn btn-success">Validate</a>
+      <a href="{% url 'staff_edit_reservation' res.pk %}" class="btn btn-primary">Edit</a>
+      <a href="#" class="btn btn-warning">Print</a>
     </td>
   </tr>
   {% endfor %}
