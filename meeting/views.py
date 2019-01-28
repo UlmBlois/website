@@ -66,47 +66,6 @@ class FilteredReservationList(UserPassesTestMixin, PaginatedFilterViews,
             '-reservation_number')
 
 
-class StaffUpdateReservationView(UserPassesTestMixin, UpdateView):
-    model = Reservation
-    form_class = ReservationEditMultiForm
-    template_name = 'staff_reservation_edit.html'
-
-    def get_success_url(self):
-        return reverse('staff_reservation_list')
-
-    def get_form_kwargs(self):
-        kwargs = super(StaffUpdateReservationView, self).get_form_kwargs()
-        kwargs.update(instance={
-            'user': self.object.ulm.pilot.user,
-            'pilot': self.object.ulm.pilot,
-            'reservation': self.object,
-            # 'ulm': self.object.ulm,
-        })
-        return kwargs
-
-    def get_context_data(self, ** kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        context['pilot'] = self.object.ulm.pilot.pk
-        return context
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_authenticated and user.is_staff
-
-    def form_valid(self, form):
-        form['user'].save()
-        pilot = form['pilot'].save(commit=False)
-        pilot.save()
-        # ulm = form['ulm'].save(commit=False)
-        # print(ulm.pk)
-        # ulm.save()
-        reservation = form['reservation'].save(commit=False)
-        reservation.save()
-        # TODO a finir
-        return redirect(self.get_success_url())
-
-
 ###############################################################################
 # PILOT related View
 ###############################################################################

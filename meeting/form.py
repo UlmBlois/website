@@ -40,38 +40,12 @@ class PilotForm(forms.ModelForm):
                  'insurance_number', 'insurance_file',
                  'licence_number', 'licence_file']
 
-
-class ULMForm(forms.ModelForm):
-
-    class Meta:
-        model = ULM
-        fields = [
-                 'constructor', 'model', 'imatriculation_country',
-                 'imatriculation', 'radio_id']
-
-
 class UserEditMultiForm(MultiModelForm):
     form_classes = {
         'user': UserEditForm,
         'pilot': PilotForm,
     }
 
-
-class ReservationEditMultiForm(MultiModelForm):
-    form_classes = {
-        'user': UserEditForm,
-        'pilot': PilotForm,
-        'reservation': ReservationForm,
-        # 'ulm': ULMForm,
-    }
-
-    def get_form_args_kwargs(self, key, args, kwargs):
-        args, kwargs = super(ReservationEditMultiForm,
-                             self).get_form_args_kwargs(key, args, kwargs)
-        if key == 'reservation':
-            pilot = self.instances.get('pilot', None)
-            kwargs.update({'pilot': pilot})
-        return args, kwargs
 
 
 class StaffReservationEditForm(forms.Form):  # TODO a completer
