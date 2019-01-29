@@ -151,7 +151,7 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
             ulm.constructor = data['constructor']
             ulm.model = data['model']
             ulm.imatriculation_country = data['imatriculation_country']
-            ulm.immatriculation = data['imatriculation']
+            ulm.imatriculation = data['imatriculation']
             ulm.radio_id = data['radio_id']
             ulm.save()
 

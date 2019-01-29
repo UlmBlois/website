@@ -18,8 +18,7 @@ from django_filters.views import FilterView
 from django.contrib.auth.models import User
 from meeting.models import Pilot, ULM, Reservation
 from meeting.form import (ReservationForm, UserEditMultiForm,
-                          ReservationEditMultiForm, AjaxFuelServedForm,
-                          ULMForm, StaffReservationEditForm)
+                          AjaxFuelServedForm, ULMForm, StaffReservationEditForm)
 import uuid
 
 
@@ -359,7 +358,7 @@ def ajax_staff_edit_reservation(request, pk):
             data['form_is_valid'] = False
     else:
         form = StaffReservationEditForm(reservation=reservation)
-    return save_reservation_form(request, form, 'staff_reservation_edit_partial.html', additional_context={'reservation': pk})
+    return save_reservation_form(request, form, 'staff_reservation_edit_partial.html', additional_context={'reservation': reservation})
 
 def ajax_load_pilot_ulm_list(request):
         pilot_pk = request.GET.get('pilot')
