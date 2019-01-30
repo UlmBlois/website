@@ -46,7 +46,7 @@ class ULMForm(forms.ModelForm):
     class Meta:
         model = ULM
         fields = [
-                 'constructor', 'model', 'imatriculation_country',
+                 'constructor', 'model', 'type', 'imatriculation_country',
                  'imatriculation', 'radio_id']
 
 
@@ -79,6 +79,7 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
     ulm_id = forms.IntegerField(widget=forms.HiddenInput)
     constructor = forms.CharField()
     model = forms.CharField()
+    type = forms.ChoiceField(choices=ULM.ULM_TYPE_CHOICE)
     imatriculation_country = CountryField().formfield()
     imatriculation = forms.CharField()  # TODO find max lenght
     radio_id = forms.CharField()  # TODO find max lenght
@@ -112,6 +113,7 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
         self.fields['ulm_id'].initial = ulm.pk
         self.fields['constructor'].initial = ulm.constructor
         self.fields['model'].initial = ulm.model
+        self.fields['type'].initial = ulm.type
         self.fields['imatriculation_country'].initial = ulm.imatriculation_country
         self.fields['imatriculation'].initial = ulm.imatriculation
         self.fields['radio_id'].initial = ulm.radio_id
@@ -150,6 +152,7 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
         if ulm is not None:
             ulm.constructor = data['constructor']
             ulm.model = data['model']
+            ulm.type = data['type']
             ulm.imatriculation_country = data['imatriculation_country']
             ulm.imatriculation = data['imatriculation']
             ulm.radio_id = data['radio_id']

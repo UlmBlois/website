@@ -91,9 +91,29 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 
 class ULM(models.Model):
     """Model reprenseting an ULM."""
+    PARAMOTOR = 'PA'
+    PENDULAR = 'PE'
+    MULTIAXES = 'MU'
+    AUTOGYRE = 'AU'
+    HELICOPETER = 'HE'
+    AEROSTAT = 'AE'
+    ULM_TYPE_CHOICE = (
+        (PARAMOTOR, "Paramotor"),
+        (PENDULAR, "Pendular"),
+        (MULTIAXES, "Multiaxes"),
+        (AUTOGYRE, "Autogyre"),
+        (HELICOPETER, "Helicopter"),
+        (AEROSTAT, "Aerostat")
+    )
+
     pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE)
     constructor = models.CharField(max_length=32)
     model = models.CharField(max_length=32)
+    type = models.CharField(
+        max_length=2,
+        choices=ULM_TYPE_CHOICE,
+        default=MULTIAXES,
+    )
     imatriculation_country = CountryField(default='FR')
     imatriculation = models.CharField(max_length=16)
     radio_id = models.CharField(max_length=16)

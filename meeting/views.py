@@ -178,7 +178,7 @@ class DeletePilotULM(DeleteView):
 class CreatePilotULM(CreateView):
     model = ULM
     fields = [
-             'constructor', 'model', 'imatriculation_country',
+             'constructor', 'model', 'type', 'imatriculation_country',
              'imatriculation', 'radio_id']
     template_name = 'base_form.html'
 
