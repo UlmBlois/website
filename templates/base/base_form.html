@@ -48,25 +48,25 @@ input[type=submit] {
 {% if messages %}
     {% for message in messages %}
       {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-      <div class="w3-panel w3-pale-red w3-border w3-container w3-card-4 w3-center">
+      <div class="alert alert-danger" role="alert">
         {{ message }}
       </div>
       {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-      <div class="w3-panel w3-pale-green w3-border w3-container w3-card-4 w3-center">
+      <div class="alert alert-success" role="alert">
         {{ message }}
       </div>
       {% endif %}
     {% endfor %}
 {% endif %}
 
-<div class="w3-container">
+<div class="container">
   <form method="post">
     {% csrf_token %}
     {% block form %}
       {% include 'form.html' with form=form %}
     {% endblock %}
 
-    <input type="submit" class="w3-button w3-green">Submit</input>
+    <input type="submit" class="btn btn-success">Submit</input>
   </form>
 </div>
 

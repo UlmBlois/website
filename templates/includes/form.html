@@ -1,13 +1,13 @@
 {% load widget_tweaks %}
 
-<div class="w3-container">
+<div class="content">
 
 {% for hidden_field in form.hidden_fields %}
   {{ hidden_field }}
 {% endfor %}
 
 {% if form.non_field_errors %}
-  <div class="w3-panel w3-pale-red w3-border w3-container w3-card-4 w3-center">
+  <div class="alert alert-danger" role="alert">
     {% for error in form.non_field_errors %}
       {{ error }}
     {% endfor %}
