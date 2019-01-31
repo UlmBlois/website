@@ -1,14 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save,pre_save
 from django.dispatch import receiver
 from django_countries.fields import CountryField
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from datetime import date
-
+import re
 from meeting.managers import MeetingManager, TimeSlotManager
 
+
+###############################################################################
+#       MEETING
+###############################################################################
 
 class Meeting(models.Model):
     """Model reprenseting an edition of the meating."""
@@ -50,6 +54,10 @@ class Meeting(models.Model):
                 and self.registration_end > date)
 
 
+###############################################################################
+#       TIMESLOTS
+###############################################################################
+
 class TimeSlot(models.Model):
     """Model representing an arrival time slot."""
     meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)
@@ -68,6 +76,24 @@ class TimeSlot(models.Model):
             timezone.localtime(self.start_date).strftime("%A %I:%M"),
             timezone.localtime(self.end_date).strftime("%I:%M"))
 
+    def clean(self, *args, **kwargs):
+        # TODO: a completer
+        if start_date < meeting.start_date and meeting.end_date < start_date:
+            raise ValidationError(_('Time slot start date out of meeteing'))
+        if end_date < meeting.start_date and meeting.end_date < end_date:
+            raise ValidationError(_('Time slot end date out of meeteing'))
+        super(TimeSlot, self).clean(*args, **kwargs)
+
+
+###############################################################################
+#       PILOT
+###############################################################################
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Pilot.objects.create(user=instance)
+    instance.pilot.save()
 
 class Pilot(models.Model):
     """Model reprenseting a pilot."""
@@ -82,12 +108,9 @@ class Pilot(models.Model):
         return "{} {}".format(self.user.first_name, self.user.last_name)
 
 
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Pilot.objects.create(user=instance)
-    instance.pilot.save()
-
+###############################################################################
+#       ULM
+###############################################################################
 
 class ULM(models.Model):
     """Model reprenseting an ULM."""
@@ -115,8 +138,8 @@ class ULM(models.Model):
         default=MULTIAXES,
     )
     imatriculation_country = CountryField(default='FR')
-    imatriculation = models.CharField(max_length=16)
-    radio_id = models.CharField(max_length=16)
+    imatriculation = models.CharField(max_length=6)
+    radio_id = models.CharField(max_length=6)
 
     def __str__(self):
         return str(self.radio_id)
@@ -126,6 +149,16 @@ class ULM(models.Model):
 
     display_pilot.short_description = 'Pilot'
 
+
+@receiver(pre_save, sender=ULM)
+def normalize_reservation(sender, instance, **kwargs):
+    instance.radio_id = re.sub('[^A-Za-z0-9]+', '', instance.radio_id).upper()
+    instance.imatriculation = re.sub(
+        '[^A-Za-z0-9]+', '', instance.imatriculation).upper()
+
+###############################################################################
+#       RESERVATION
+###############################################################################
 
 class Reservation(models.Model):
     """Model reprenseting a reservation for an in flight arrival."""
