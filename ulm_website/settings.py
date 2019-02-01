@@ -60,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'ulm_website.urls'
@@ -82,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -122,11 +124,16 @@ LANGUAGES = [
 
 TIME_ZONE = 'Europe/Paris'
 
+USE_TZ = True
+
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
