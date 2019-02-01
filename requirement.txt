@@ -2,3 +2,4 @@ django-countries
 django-widget-tweaks
 django-filter
 django-betterfroms
+django-translated-fields

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from django.utils.translation import gettext_lazy as _
 from .secret_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -30,6 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Third parties apps
+    'django_countries',
+    'widget_tweaks',
+    'django_filters',
+    'betterforms',
+    'translated_fields',
+
+    # Core
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,15 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third parties apps
-    'django_countries',
-    'widget_tweaks',
-    'django_filters',
-    'betterforms',
-
     # Project Apps
     'core.apps.CoreConfig',
     'meeting.apps.MeetingConfig',
+    'pages.apps.PagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +76,8 @@ TEMPLATES = [
             ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [
+            'context_processors'
+            : [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -108,7 +113,12 @@ LOGIN_REDIRECT_URL = '/'
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('fr', _('French')),
+]
 
 TIME_ZONE = 'Europe/Paris'
 
@@ -117,7 +127,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
