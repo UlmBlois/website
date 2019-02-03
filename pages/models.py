@@ -18,7 +18,6 @@ def fallback_to_default(name):
     return getter
 
 
-
 class Chunk(models.Model):
     """
     A Chunk is a piece of content associated
@@ -27,7 +26,7 @@ class Chunk(models.Model):
     tag
     """
     key = models.CharField(_('Key'),
-                           help_text=_("A unique name for this chunk of content"),
+                           help_text=_("A unique id for this chunk"),
                            blank=False,
                            max_length=255,
                            unique=True)

@@ -57,7 +57,6 @@ class UserEditMultiForm(MultiModelForm):
     }
 
 
-
 class StaffReservationEditForm(forms.Form):  # TODO a completer
     # user
     first_name = forms.CharField()
@@ -99,7 +98,8 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
         self.fields['reservation_id'].initial = reservation.pk
         aviable_time_slot = TimeSlot.objects.aviables()
         if not aviable_time_slot.filter(pk=reservation.time_slot.pk).exists():
-            aviable_time_slot |= TimeSlot.objects.get(pk=reservation.time_slot.pk)
+            aviable_time_slot |= TimeSlot.objects.get(
+                                                pk=reservation.time_slot.pk)
         self.fields['time_slot'].queryset = aviable_time_slot
         self.fields['time_slot'].initial = reservation.time_slot
         self.fields['passanger'].initial = reservation.passanger
@@ -117,10 +117,6 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
         self.fields['imatriculation_country'].initial = ulm.imatriculation_country
         self.fields['imatriculation'].initial = ulm.imatriculation
         self.fields['radio_id'].initial = ulm.radio_id
-
-
-
-
 
     def save(self):
         data = self.cleaned_data
@@ -161,6 +157,7 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
 ###############################################################################
 # AJAX forms
 ###############################################################################
+
 
 class AjaxFuelServedForm(forms.ModelForm):
 
