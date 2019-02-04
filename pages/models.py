@@ -4,6 +4,8 @@ from django.conf import settings
 from translated_fields import TranslatedField, to_attribute
 from django.utils.translation import gettext_lazy as _
 
+from pages.managers import ChunkManager
+
 
 def fallback_to_default(name):
     def getter(self):
@@ -41,6 +43,8 @@ class Chunk(models.Model):
                                          help_text=_("Short Description")),
                         {settings.LANGUAGES[0][0]: {"blank": False}},
                         attrgetter=fallback_to_default,)
+
+    objects = ChunkManager()
 
     class Meta:
         verbose_name = _('chunk')

@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.simple_tag
 def get_chunk(key):
-    return Chunk.objects.get(key=key)
+    return Chunk.objects.safe_get(key=key)
 
 
 class RenderCustom(template.Node):

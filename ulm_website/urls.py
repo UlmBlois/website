@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^signup/$', core_views.signup, name='signup'),
     path('core/', include('core.urls')),
     path('meeting/', include('meeting.urls')),
+    path('pages/', include('pages.urls')),
     path('', RedirectView.as_view(url='/meeting/', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

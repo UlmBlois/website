@@ -9,8 +9,8 @@
       <li class="nav-item {% if url_name == '#' %}active{% endif %}">
         <a href="#" class="nav-link">On Site</a>
       </li>
-      <li class="nav-item {% if url_name == '#' %}active{% endif %}">
-        <a href="#" class="nav-link">Pilotes Informations</a>
+      <li class="nav-item {% if url_name == 'pilot_informations' %}active{% endif %}">
+        <a href="{% url 'pilot_informations'%}" class="nav-link">Pilotes Informations</a>
       </li>
       <li class="nav-item {% if url_name == '#' %}active{% endif %}">
         <a href="#" class="nav-link">About</a>

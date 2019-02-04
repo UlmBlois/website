@@ -74,6 +74,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates/includes'),
             os.path.join(BASE_DIR, 'templates/registration'),
             os.path.join(BASE_DIR, 'meeting/templates/includes/ajax'),
+            os.path.join(BASE_DIR, 'pages/templates')
             ],
         'APP_DIRS': True,
         'OPTIONS': {
