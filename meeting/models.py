@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django_countries.fields import CountryField
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from datetime import date
 import re
 from meeting.managers import MeetingManager, TimeSlotManager
@@ -78,9 +79,9 @@ class TimeSlot(models.Model):
 
     def clean(self, *args, **kwargs):
         # TODO: a completer
-        if start_date < meeting.start_date and meeting.end_date < start_date:
+        if self.start_date < self.meeting.start_date and self.meeting.end_date < self.start_date:
             raise ValidationError(_('Time slot start date out of meeteing'))
-        if end_date < meeting.start_date and meeting.end_date < end_date:
+        if self.end_date < self.meeting.start_date and self.meeting.end_date < self.end_date:
             raise ValidationError(_('Time slot end date out of meeteing'))
         super(TimeSlot, self).clean(*args, **kwargs)
 
@@ -94,6 +95,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         Pilot.objects.create(user=instance)
     instance.pilot.save()
+
 
 class Pilot(models.Model):
     """Model reprenseting a pilot."""
@@ -159,6 +161,7 @@ def normalize_reservation(sender, instance, **kwargs):
 ###############################################################################
 #       RESERVATION
 ###############################################################################
+
 
 class Reservation(models.Model):
     """Model reprenseting a reservation for an in flight arrival."""

@@ -55,3 +55,52 @@ class Chunk(models.Model):
 
     def __str__(self):
         return self.key
+
+
+##############################################################################
+#               FAQ
+##############################################################################
+
+class Topic(models.Model):
+    """FAQ Topics."""
+    topic_name = TranslatedField(
+                        models.CharField(max_length=200),
+                        {settings.LANGUAGES[0][0]: {"blank": False}},
+                        attrgetter=fallback_to_default,)
+    number = models.IntegerField(unique=True)
+
+    class Meta:
+        verbose_name = _("Topic")
+        verbose_name_plural = _("Topics")
+        ordering = ['number']
+
+    def __unicode__(self):
+        return u'(%s) %s' % (self.number, self.topic_name, )
+
+    def __str__(self):
+        return self.topic_name
+
+
+class Question(models.Model):
+    """FAQ Questions."""
+    question = TranslatedField(
+                            models.CharField(max_length=200),
+                            {settings.LANGUAGES[0][0]: {"blank": False}},
+                            attrgetter=fallback_to_default,)
+    answer = TranslatedField(
+                            models.CharField(max_length=512),
+                            {settings.LANGUAGES[0][0]: {"blank": False}},
+                            attrgetter=fallback_to_default,)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    number = models.IntegerField(unique=True)
+
+    class Meta:
+        verbose_name = _("Question")
+        verbose_name_plural = _("Questions")
+        ordering = ['number']
+
+    def __unicode__(self):
+        return u'(%s) %s' % (self.number, self.question, )
+
+    def __str__(self):
+        return self.question
