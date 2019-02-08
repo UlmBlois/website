@@ -6,16 +6,16 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     {% with url_name=request.resolver_match.url_name %}
     <ul class="navbar-nav">
-      <li class="nav-item {% if url_name == '#' %}active{% endif %}">
+      <li class="nav-item {% if url_name == 'on_site' %}active{% endif %}">
         <a href="#" class="nav-link">On Site</a>
       </li>
       <li class="nav-item {% if url_name == 'pilot_informations' %}active{% endif %}">
         <a href="{% url 'pilot_informations'%}" class="nav-link">Pilotes Informations</a>
       </li>
-      <li class="nav-item {% if url_name == '#' %}active{% endif %}">
-        <a href="#" class="nav-link">About</a>
+      <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
+        <a href="{% url 'about' %}" class="nav-link">About</a>
       </li>
-      <li class="nav-item {% if url_name == '#' %}active{% endif %}">
+      <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
         <a href="#" class="nav-link">Contact</a>
       </li>
       </ul>

@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+{% load chunks %}
+
+{% block content %}
+  <h1>ABOUT</h1>
+
+  {% get_chunk 'about_page' as about %}
+  {% evaluate about.content %}
+
+{% endblock %}
