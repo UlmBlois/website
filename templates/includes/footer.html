@@ -1,25 +1,161 @@
 <style>
-  html, body {
-    height: 100%;
+  #myFooter {
+      background-color: #3a3f46;
+      color: white;
   }
-  body {
-    display: flex;
-    flex-direction: column;
+
+  #myFooter .row {
+      margin-bottom: 10px; <!-- set to 60px with second bar -->
   }
-  .content {
-    flex: 1 0 auto;
+
+  #myFooter .info{
+      text-align: justify;
+      color: #afb0b1;
   }
-  .footer {
-    flex-shrink: 0;
+
+  #myFooter ul {
+      list-style-type: none;
+      padding-left: 0;
+      line-height: 1.7;
+  }
+
+  #myFooter h5 {
+      font-size: 18px;
+      color: white;
+      font-weight: bold;
+      margin-top: 30px;
+  }
+
+  #myFooter .logo{
+      margin-top: 10px;
+  }
+
+  #myFooter .second-bar .logo a{
+      color:white;
+      font-size: 28px;
+      float: left;
+      font-weight: bold;
+      line-height: 68px;
+      margin: 0;
+      padding: 0;
+  }
+
+  #myFooter a {
+      color: #d2d1d1;
+      text-decoration: none;
+  }
+
+  #myFooter a:hover,
+  #myFooter a:focus {
+      text-decoration: none;
+      color: white;
+  }
+
+  #myFooter .second-bar {
+      text-align: center;
+      background-color: #33373e;
+      text-align: center;
+  }
+
+  #myFooter .second-bar a {
+      font-size: 22px;
+      color: #9fa3a9;
+      padding: 10px;
+      transition: 0.2s;
+      line-height: 68px;
+  }
+
+  #myFooter .second-bar a:hover {
+      text-decoration: none;
+  }
+
+  #myFooter .social-icons {
+      float:right;
+  }
+
+
+  #myFooter .facebook:hover {
+      color: #0077e2;
+  }
+
+  #myFooter .google:hover {
+      color: #ef1a1a;
+  }
+
+  #myFooter .twitter:hover {
+      color: #00aced;
+  }
+
+  @media screen and (max-width: 767px) {
+      #myFooter {
+          text-align: center;
+      }
+
+      #myFooter .info{
+          text-align: center;
+      }
+  }
+
+  html{
+      height: 100%;
+  }
+
+  body{
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      height: 100%;
+  }
+
+  .content{
+     flex: 1 0 auto;
+     -webkit-flex: 1 0 auto;
+     min-height: 200px;
+  }
+
+  #myFooter{
+     flex: 0 0 auto;
+     -webkit-flex: 0 0 auto;
   }
 </style>
 
-<footer class="footer page-footer">
-  <div class="w3-container w3-padding-32">
-    <h4>Footer</h4>
-  </div>
 
-  <div class="w3-container">
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  </div>
-</footer>
+<footer id="myFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h5>Get started</h5>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'signup'%}">Sign up</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm">
+                    <h5>About us</h5>
+                    <ul>
+                        <li><a href="{% url 'about'%}">About</a></li>
+                        <li><a href="{% url 'contact'%}">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="{% url 'faq'%}">FAQ</a></li>
+                        <li><a href="{% url 'on_site'%}"> On Site</a></li>
+                        <li><a href="{% url 'pilot_informations'%}"> Pilot Informations</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="second-bar">
+           <div class="container">
+                <h2 class="logo"><a href="#"> LOGO </a></h2>
+                <div class="social-icons">
+                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                </div>
+            </div>
+        </div> -->
+    </footer>
