@@ -64,7 +64,9 @@ class Chunk(models.Model):
 class Topic(models.Model):
     """FAQ Topics."""
     topic_name = TranslatedField(
-                        models.CharField(max_length=200),
+                        models.CharField(
+                                max_length=200,
+                                verbose_name=_("topic")),
                         {settings.LANGUAGES[0][0]: {"blank": False}},
                         attrgetter=fallback_to_default,)
     number = models.IntegerField(unique=True)
@@ -84,17 +86,23 @@ class Topic(models.Model):
 class Question(models.Model):
     """FAQ Questions."""
     question = TranslatedField(
-                            models.CharField(max_length=200),
+                            models.CharField(
+                                max_length=200,
+                                verbose_name=_("question")),
                             {settings.LANGUAGES[0][0]: {"blank": False}},
                             attrgetter=fallback_to_default,)
     answer = TranslatedField(
-                            models.CharField(max_length=512),
+                            models.CharField(
+                                max_length=512,
+                                verbose_name=_("answer")),
                             {settings.LANGUAGES[0][0]: {"blank": False}},
                             attrgetter=fallback_to_default,)
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    number = models.IntegerField(unique=True)
+    topic = models.ForeignKey(Topic, related_name='question',
+                              on_delete=models.CASCADE)
+    number = models.IntegerField()
 
     class Meta:
+        unique_together = ("number", "topic")
         verbose_name = _("Question")
         verbose_name_plural = _("Questions")
         ordering = ['number']

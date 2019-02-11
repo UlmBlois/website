@@ -1,0 +1,34 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h3>FAQ</h3>
+
+{% for topic in topics %}
+<h4>{{topic.topic_name}}</h4>
+
+<div id="accordion">
+  {% for question in topic.question.all %}
+
+  <div class="card">
+    <div class="card-header" id="heading{{question.id}}">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{question.id}}" aria-expanded="false" aria-controls="collapse{{question.id}}">
+          {{question.question }}
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse{{question.id}}" class="collapse" aria-labelledby="heading{{question.id}}" data-parent="#accordion">
+      <div class="card-body">
+      {{question.answer}}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% empty %}
+
+{% endfor %}
+
+{% endblock%}

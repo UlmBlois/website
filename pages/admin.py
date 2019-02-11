@@ -64,7 +64,7 @@ class QuestionAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
 
     base_fields = ['question', 'answer']
     fieldsets = [
-        (_("Globals"), {"fields": ["number"]}),
+        (_("Globals"), {"fields": ["number", "topic"]}),
     ]
     for i, language in enumerate(settings.LANGUAGES):
         ft = []
