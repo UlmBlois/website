@@ -69,7 +69,7 @@ class Topic(models.Model):
                                 verbose_name=_("topic")),
                         {settings.LANGUAGES[0][0]: {"blank": False}},
                         attrgetter=fallback_to_default,)
-    number = models.IntegerField(unique=True)
+    number = models.PositiveIntegerField(unique=True)
 
     class Meta:
         verbose_name = _("Topic")
@@ -92,14 +92,13 @@ class Question(models.Model):
                             {settings.LANGUAGES[0][0]: {"blank": False}},
                             attrgetter=fallback_to_default,)
     answer = TranslatedField(
-                            models.CharField(
-                                max_length=512,
+                            models.TextField(
                                 verbose_name=_("answer")),
                             {settings.LANGUAGES[0][0]: {"blank": False}},
                             attrgetter=fallback_to_default,)
     topic = models.ForeignKey(Topic, related_name='question',
                               on_delete=models.CASCADE)
-    number = models.IntegerField()
+    number = models.PositiveIntegerField()
 
     class Meta:
         unique_together = ("number", "topic")
