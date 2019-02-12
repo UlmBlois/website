@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-12 19:13+0100\n"
+"POT-Creation-Date: 2019-02-12 19:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,8 +123,9 @@ msgid "Detail"
 msgstr ""
 
 #: meeting/templates/reservation_confirm_delete.html:8
+#: meeting/templates/ulm_confirm_delete.html:8
 #, python-format
-msgid "Are you sure you want to delete \"%(object)s\"? "
+msgid "Are you sure you want to delete \"%(object)s\"?"
 msgstr ""
 
 #: meeting/templates/staff_fuel_reservation_list.html:12
@@ -186,11 +187,6 @@ msgstr ""
 
 #: meeting/templates/staff_reservation_list.html:108
 msgid "Print"
-msgstr ""
-
-#: meeting/templates/ulm_confirm_delete.html:8
-#, python-format
-msgid "Are you sure you want to delete \"%(object)s\"?"
 msgstr ""
 
 #: meeting/views.py:82
