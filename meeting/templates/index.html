@@ -1,7 +1,11 @@
 {% extends "base_generic.html" %}
+{% load chunks %}
 
 {% block content%}
   <h2>Number of reservation: {{num_res}}</h2>
+
+  {% get_chunk "yolo_chunk" as chunk%}
+  {% evaluate chunk.content %}
 
   <table class="w3-table w3-striped w3-bordered">
     <tr class="w3-theme">
