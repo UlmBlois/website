@@ -1,0 +1,397 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-12 19:13+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: meeting/filters.py:7 meeting/templates/staff_fuel_reservation_list.html:82
+#: meeting/templates/staff_reservation_list.html:82
+msgid "Imatriculation"
+msgstr ""
+
+#: meeting/filters.py:8
+msgid "Radio id"
+msgstr ""
+
+#: meeting/filters.py:9
+msgid "First name"
+msgstr ""
+
+#: meeting/filters.py:11
+msgid "Last name"
+msgstr ""
+
+#: meeting/models.py:22
+msgid "Enter the meeting name (e.g Salon Ulm 2018)"
+msgstr ""
+
+#: meeting/models.py:83
+msgid "Time slot start date out of meeteing"
+msgstr ""
+
+#: meeting/models.py:85
+msgid "Time slot end date out of meeteing"
+msgstr ""
+
+#: meeting/models.py:126 pages/templates/pilot_informations.html:17
+msgid "Paramotor"
+msgstr ""
+
+#: meeting/models.py:127
+msgid "Pendular"
+msgstr ""
+
+#: meeting/models.py:128
+msgid "Multiaxes"
+msgstr ""
+
+#: meeting/models.py:129
+msgid "Autogyre"
+msgstr ""
+
+#: meeting/models.py:130
+msgid "Helicopter"
+msgstr ""
+
+#: meeting/models.py:131
+msgid "Aerostat"
+msgstr ""
+
+#: meeting/models.py:186
+msgid ""
+"You allready have a reservation for this meeting, please edit or delete the "
+"existing one"
+msgstr ""
+
+#: meeting/templates/pilot_profile.html:6 templates/includes/navbar.html:43
+msgid "Profile"
+msgstr ""
+
+#: meeting/templates/pilot_profile.html:14
+msgid "Licence Number"
+msgstr ""
+
+#: meeting/templates/pilot_profile.html:22
+msgid "Insurance Number"
+msgstr ""
+
+#: meeting/templates/pilot_profile.html:28
+msgid "Change Password"
+msgstr ""
+
+#: meeting/templates/pilot_profile.html:29
+#: meeting/templates/pilot_reservation_list.html:22
+#: meeting/templates/pilot_ulm_list.html:21
+#: meeting/templates/staff_reservation_list.html:113
+msgid "Edit"
+msgstr ""
+
+#: meeting/templates/pilot_reservation_list.html:6
+msgid "Your Reservations"
+msgstr ""
+
+#: meeting/templates/pilot_reservation_list.html:8
+#: meeting/templates/pilot_ulm_list.html:8
+msgid "Add New"
+msgstr ""
+
+#: meeting/templates/pilot_reservation_list.html:23
+#: meeting/templates/pilot_ulm_list.html:22
+msgid "Delete"
+msgstr ""
+
+#: meeting/templates/pilot_ulm_list.html:6
+msgid "Your ULMs"
+msgstr ""
+
+#: meeting/templates/pilot_ulm_list.html:20
+msgid "Detail"
+msgstr ""
+
+#: meeting/templates/reservation_confirm_delete.html:8
+#, python-format
+msgid "Are you sure you want to delete \"%(object)s\"? "
+msgstr ""
+
+#: meeting/templates/staff_fuel_reservation_list.html:12
+msgid "Pilots Fuel Reservations"
+msgstr ""
+
+#: meeting/templates/staff_fuel_reservation_list.html:80
+#: meeting/templates/staff_reservation_list.html:79
+msgid "ID"
+msgstr ""
+
+#: meeting/templates/staff_fuel_reservation_list.html:81
+#: meeting/templates/staff_reservation_list.html:81
+msgid "Pilot"
+msgstr ""
+
+#: meeting/templates/staff_fuel_reservation_list.html:83
+#: meeting/templates/staff_reservation_list.html:83
+msgid "Radio Id"
+msgstr ""
+
+#: meeting/templates/staff_fuel_reservation_list.html:84
+msgid "Fuel Reservation"
+msgstr ""
+
+#: meeting/templates/staff_fuel_reservation_list.html:85
+msgid "Fuel Served"
+msgstr ""
+
+#: meeting/templates/staff_fuel_reservation_list.html:86
+#: meeting/templates/staff_reservation_list.html:87
+msgid "Actions"
+msgstr ""
+
+#: meeting/templates/staff_fuel_reservation_list.html:107
+#: meeting/templates/staff_reservation_list.html:106
+msgid "Validate"
+msgstr ""
+
+#: meeting/templates/staff_reservation_list.html:12
+msgid "Pilots Reservations"
+msgstr ""
+
+#: meeting/templates/staff_reservation_list.html:80
+msgid "Time Slot"
+msgstr ""
+
+#: meeting/templates/staff_reservation_list.html:84
+msgid "Fuel"
+msgstr ""
+
+#: meeting/templates/staff_reservation_list.html:85
+msgid "Flight plan"
+msgstr ""
+
+#: meeting/templates/staff_reservation_list.html:86
+msgid "Esthetic Cup"
+msgstr ""
+
+#: meeting/templates/staff_reservation_list.html:108
+msgid "Print"
+msgstr ""
+
+#: meeting/templates/ulm_confirm_delete.html:8
+#, python-format
+msgid "Are you sure you want to delete \"%(object)s\"?"
+msgstr ""
+
+#: meeting/views.py:82
+msgid "Your password was successfully updated!"
+msgstr ""
+
+#: meeting/views.py:85
+msgid "Please correct the error below."
+msgstr ""
+
+#: pages/admin.py:15 pages/admin.py:41 pages/admin.py:67
+msgid "Globals"
+msgstr ""
+
+#: pages/models.py:30
+msgid "Key"
+msgstr ""
+
+#: pages/models.py:31
+msgid "A unique id for this chunk"
+msgstr ""
+
+#: pages/models.py:36
+msgid "Content"
+msgstr ""
+
+#: pages/models.py:40
+msgid "Description"
+msgstr ""
+
+#: pages/models.py:43
+msgid "Short Description"
+msgstr ""
+
+#: pages/models.py:50
+msgid "chunk"
+msgstr ""
+
+#: pages/models.py:51
+msgid "chunks"
+msgstr ""
+
+#: pages/models.py:69
+msgid "topic"
+msgstr ""
+
+#: pages/models.py:75
+msgid "Topic"
+msgstr ""
+
+#: pages/models.py:76
+msgid "Topics"
+msgstr ""
+
+#: pages/models.py:91
+msgid "question"
+msgstr ""
+
+#: pages/models.py:96
+msgid "answer"
+msgstr ""
+
+#: pages/models.py:105
+msgid "Question"
+msgstr ""
+
+#: pages/models.py:106
+msgid "Questions"
+msgstr ""
+
+#: pages/templates/about.html:6 templates/includes/footer.html:138
+#: templates/includes/navbar.html:17
+msgid "About"
+msgstr ""
+
+#: pages/templates/contact.html:6 templates/includes/navbar.html:20
+msgid "Contact"
+msgstr ""
+
+#: pages/templates/faq.html:114 templates/includes/footer.html:145
+msgid "FAQ"
+msgstr ""
+
+#: pages/templates/on_site.html:6 templates/includes/footer.html:146
+#: templates/includes/navbar.html:11
+msgid "On Site"
+msgstr ""
+
+#: pages/templates/pilot_informations.html:6
+msgid "General Organistaion"
+msgstr ""
+
+#: pages/templates/pilot_informations.html:11
+msgid "In Flight Arrival"
+msgstr ""
+
+#: pages/templates/pilot_informations.html:13
+msgid "Departure"
+msgstr ""
+
+#: pages/templates/pilot_informations.html:19
+msgid "Planes"
+msgstr ""
+
+#: templates/base/base_form.html:69
+msgid "Submit"
+msgstr ""
+
+#: templates/base/base_generic.html:3
+msgid "Salon ULM de Blois"
+msgstr ""
+
+#: templates/includes/footer.html:129
+msgid "Get Started"
+msgstr ""
+
+#: templates/includes/footer.html:131
+msgid "Home"
+msgstr ""
+
+#: templates/includes/footer.html:132 templates/includes/navbar.html:58
+msgid "Sign Up"
+msgstr ""
+
+#: templates/includes/footer.html:136
+msgid "About Us"
+msgstr ""
+
+#: templates/includes/footer.html:139
+msgid "Contact Us"
+msgstr ""
+
+#: templates/includes/footer.html:143
+msgid "Support"
+msgstr ""
+
+#: templates/includes/footer.html:147
+msgid "Pilot Informations"
+msgstr ""
+
+#: templates/includes/navbar.html:14
+msgid "Pilotes Informations"
+msgstr ""
+
+#: templates/includes/navbar.html:28
+msgid "Management"
+msgstr ""
+
+#: templates/includes/navbar.html:31
+msgid "Pilot Reservations"
+msgstr ""
+
+#: templates/includes/navbar.html:32
+msgid "Fuel Reservations"
+msgstr ""
+
+#: templates/includes/navbar.html:44
+msgid "My Reservations"
+msgstr ""
+
+#: templates/includes/navbar.html:45
+msgid "My ULMs"
+msgstr ""
+
+#: templates/includes/navbar.html:49
+msgid "Logout"
+msgstr ""
+
+#: templates/includes/navbar.html:55 templates/includes/navbar.html:77
+#: templates/includes/navbar.html:95
+msgid "Login"
+msgstr ""
+
+#: templates/includes/navbar.html:84
+msgid "Username"
+msgstr ""
+
+#: templates/includes/navbar.html:88
+msgid "Password"
+msgstr ""
+
+#: templates/includes/navbar.html:93
+msgid "Lost password?"
+msgstr ""
+
+#: templates/includes/navbar.html:94
+msgid "Close"
+msgstr ""
+
+#: templates/includes/pagination.html:10 templates/includes/pagination.html:17
+msgid "Previous"
+msgstr ""
+
+#: templates/includes/pagination.html:36 templates/includes/pagination.html:43
+msgid "Next"
+msgstr ""
+
+#: ulm_website/settings.py:121
+msgid "English"
+msgstr ""
+
+#: ulm_website/settings.py:122
+msgid "French"
+msgstr ""

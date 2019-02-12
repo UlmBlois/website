@@ -8,7 +8,7 @@ class ReservationFilter(FilterSet):
     ulm__radio_id = CharFilter(label=_('Radio id'))
     ulm__pilot__user__first_name = CharFilter(label=_('First name'),
                                               lookup_expr='icontains')
-    ulm__pilot__user__last_name = CharFilter(label=_('Last name)'),
+    ulm__pilot__user__last_name = CharFilter(label=_('Last name'),
                                              lookup_expr='icontains')
     time_slot = ModelChoiceFilter(queryset=TimeSlot.objects.actives())
 
