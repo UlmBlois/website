@@ -15,6 +15,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.utils import timezone
 from django_filters.views import FilterView
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
+
 from meeting.models import Pilot, ULM, Reservation
 from meeting.form import (ReservationForm, UserEditMultiForm,
                           AjaxFuelServedForm, ULMForm,
@@ -77,10 +79,10 @@ def pilot_change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request,
-                             'Your password was successfully updated!')
+                             _('Your password was successfully updated!'))
             return redirect('change_password')
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.error(request, _('Please correct the error below.'))
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'base_form.html', {

@@ -19,7 +19,7 @@ class Meeting(models.Model):
     """Model reprenseting an edition of the meating."""
     name = models.CharField(
         max_length=128,
-        help_text='Enter the meeting name (e.g Salon Ulm 2018)')
+        help_text=_('Enter the meeting name (e.g Salon Ulm 2018)'))
     registration_start = models.DateField()
     registration_end = models.DateField()
     start_date = models.DateField()
@@ -123,12 +123,12 @@ class ULM(models.Model):
     HELICOPETER = 'HE'
     AEROSTAT = 'AE'
     ULM_TYPE_CHOICE = (
-        (PARAMOTOR, "Paramotor"),
-        (PENDULAR, "Pendular"),
-        (MULTIAXES, "Multiaxes"),
-        (AUTOGYRE, "Autogyre"),
-        (HELICOPETER, "Helicopter"),
-        (AEROSTAT, "Aerostat")
+        (PARAMOTOR, _("Paramotor")),
+        (PENDULAR, _("Pendular")),
+        (MULTIAXES, _("Multiaxes")),
+        (AUTOGYRE, _("Autogyre")),
+        (HELICOPETER, _("Helicopter")),
+        (AEROSTAT, _("Aerostat"))
     )
 
     pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE)
@@ -183,9 +183,8 @@ class Reservation(models.Model):
                 ulm__pilot=self.ulm.pilot,
                     time_slot__meeting=self.time_slot.meeting).count() > 0:
                 raise ValidationError(
-                    'You allready have a reservation for this meeting,'
-                    ' please edit or delete the existing one'
-                    )
+                    _('You allready have a reservation for this meeting,'
+                      ' please edit or delete the existing one'))
 
     def is_active(self):
         return self.time_slot.meeting.active
