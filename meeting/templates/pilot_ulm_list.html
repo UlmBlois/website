@@ -1,11 +1,11 @@
 {% extends "base_generic.html" %}
-
+{% laod i18n %}
 
 {% block content %}
 <div class="jumbotron">
-    <h2>Your ULMs</h2>
+    <h2>{% trans "Your ULMs" %}</h2>
     <a class="btn btn-success pull-left" role="button" href="{% url 'pilot_create_ulm' %}">
-      <span class="fas fa-plus-circle"></span> Add New
+      <span class="fas fa-plus-circle"></span>{% trans "Add New" %}
     </a>
 
 </div>
@@ -17,9 +17,9 @@
   <div class="card-body">
     <h5 class="card-title">{{ulm.constructor}} - {{ulm.model}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{ulm.radio_id}}</h6>
-    <a href="#" class="btn btn-primary"><span class="fas fa-info-circle"></span> Detail</a>
-    <a href="{% url 'pilot_update_ulm' ulm.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span> Edit</a>
-    <a href="{% url 'pilot_delete_ulm' ulm.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span> Delete</a>
+    <a href="#" class="btn btn-primary"><span class="fas fa-info-circle"></span>{% trans "Detail" %}</a>
+    <a href="{% url 'pilot_update_ulm' ulm.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
+    <a href="{% url 'pilot_delete_ulm' ulm.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "Delete" %}</a>
   </div>
 </div>
 {% endfor %}

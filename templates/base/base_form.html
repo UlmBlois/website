@@ -1,5 +1,5 @@
 {% extends "base_generic.html" %}
-
+{% load i18n %}
 {% block style %}
 
 input[type=text], select, textarea {
@@ -66,7 +66,7 @@ input[type=submit] {
       {% include 'form.html' with form=form %}
     {% endblock %}
 
-    <input type="submit" class="btn btn-success">Submit</input>
+    <input type="submit" class="btn btn-success">{% trans "Submit" %}</input>
   </form>
 </div>
 

@@ -1,11 +1,11 @@
 {% extends "base_generic.html" %}
-
+{% load i18n %}
 
 {% block content %}
 <div class="jumbotron">
-    <h2>Your Reservations</h2>
+    <h2>{% trans "Your Reservations" %}</h2>
     <a class="btn btn-success pull-left" role="button" href="{% url 'pilot_create_reservation' %}">
-      <span class="fas fa-plus-circle"></span> Add New
+      <span class="fas fa-plus-circle"></span>{% trans "Add New" %}
     </a>
 
 </div>
@@ -19,8 +19,8 @@
     <h5 class="card-title">{{res.time_slot.meeting}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{res.reservation_number}}</h6>
     {% if res.is_active %}
-    <a href="{% url 'pilot_update_reservation' res.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span> Edit</a>
-    <a href="{% url 'pilot_delete_reservation' res.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span> Delete</a>
+    <a href="{% url 'pilot_update_reservation' res.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
+    <a href="{% url 'pilot_delete_reservation' res.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "Delete" %}</a>
     {% endif %}
   </div>
 </div>

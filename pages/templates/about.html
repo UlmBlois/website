@@ -1,8 +1,9 @@
 {% extends 'base_generic.html' %}
 {% load chunks %}
+{% load i18n %}
 
 {% block content %}
-  <h1>ABOUT</h1>
+  <h1>{% trans "ABOUT" %}</h1>
 
   {% get_chunk 'about_page' as about %}
   {% evaluate about.content %}

@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 {% load widget_tweaks %}
 {% load static %}
+{% load i18n %}
 
 {% block javascript%}
 <script src="{% static 'js/ajax_reservation.js' %}"></script>
@@ -8,7 +9,7 @@
 
 {% block content %}
 
-<h3>Pilots Reservations</h3>
+<h3>{% trans "Pilots Reservations" %}</h3>
 <hr>
 
 <form method="get">
@@ -75,15 +76,15 @@
 <table id="reservation_table" class="table table-hover">
   <thead class="thead-dark">
     <tr>
-    <th>ID</th>
-    <th>Time Slot</th>
-    <th>pilot</th>
-    <th>Imatriculation</th>
-    <th>radio id</th>
-    <th>Fuel</th>
-    <th>Flight plan</th>
-    <th>Esthetic Cup</th>
-    <th class="center">Actions</th>
+    <th>{% trans "ID" %}</th>
+    <th>{% trans "Time Slot" %}</th>
+    <th>{% trans "pilot" %}</th>
+    <th>{% trans "Imatriculation" %}</th>
+    <th>{% trans "radio id" %}</th>
+    <th>{% trans "Fuel" %}</th>
+    <th>{% trans "Flight plan" %}</th>
+    <th>{% trans "Esthetic Cup" %}</th>
+    <th class="center">{% trans "Actions" %}</th>
     </tr>
   </thead>
   <tbody>
@@ -102,14 +103,14 @@
     <td>{{res.flight_plan}}</td>
     <td>{{res.esthetic_cup}}</td>
     <td class="center">
-      <a href="#" class="btn btn-success">Validate</a>
+      <a href="#" class="btn btn-success">{% trans "Validate" %}</a>
       <!-- <a href="{% url 'staff_edit_reservation' res.pk %}" class="btn btn-primary">Edit</a> -->
-      <a href="#" class="btn btn-warning">Print</a>
+      <a href="#" class="btn btn-warning">{% trans "Print" %}</a>
       <button type="button"
               class="btn btn-primary btn-sm js-update-reservation"
               data-url="{% url 'staff_edit_reservation' res.pk %}"
               data-contener-id="modal-update-reservation">
-        <span class="fas fa-pen"></span> Edit
+        <span class="fas fa-pen"></span>{% trans "Edit" %}
       </button>
     </td>
   </tr>

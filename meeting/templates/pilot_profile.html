@@ -1,9 +1,9 @@
 {% extends "base_generic.html" %}
-
+{% load i18n %}
 
 {% block content %}
 <div class="jumbotron">
-    <h2>Profile</h2>
+    <h2>{% trans "Profile" %}</h2>
 </div>
 
 
@@ -11,7 +11,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col">
-        Licence Number:
+        {% trans "Licence Number" %}:
       </div>
       <div class="col">
         {{pilot.licence_number}}
@@ -19,14 +19,14 @@
     </div>
     <div class="row">
       <div class="col">
-        Insurance Number:
+        {% trans "Insurance Number" %}:
       </div>
       <div class="col">
         {{pilot.insurance_number}}
       </div>
     </div>
-    <a href= "{% url 'change_password'%}" class="btn btn-primary">Change Password</a>
-    <a href= "{% url 'edit_pilot' user.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span> Edit</a>
+    <a href= "{% url 'change_password'%}" class="btn btn-primary">{% trans "Change Password" %}</a>
+    <a href= "{% url 'edit_pilot' user.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
   </div>
 </div>
 

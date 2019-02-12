@@ -1,11 +1,11 @@
 {% extends "base_generic.html" %}
-
+{% load i18n %}
 
 
 {% block content %}
 <div class="w3-container w3-center">
 <form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <p>{% blocktrans %}Are you sure you want to delete "{{ object }}"? {% endblocktrans%}</p>
     <input type="submit" value="Confirm">
 </form>
 </div>

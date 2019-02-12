@@ -1,19 +1,20 @@
 {% extends 'base_generic.html' %}
 {% load chunks %}
+{% load i18n %}
 
 {% block content %}
-<h1>General Organistaion</h1>
+<h1>{% trans "General Organistaion" %}</h1>
 {% get_chunk 'pilot_info_general' as general_info %}
 {% if general_info %}
   {% evaluate general_info.content %}
 {% endif %}
-<h1>In Flight Arrival</h1>
+<h1>{% trans "In Flight Arrival" %}</h1>
 
-<h1>Departure</h1>
+<h1>{% trans "Departure" %}</h1>
 {% get_chunk 'pilot_info_departure' as departure %}
 {% evaluate departure.content %}
 
-<h1>Paramotor</h1>
+<h1>{% trans "Paramotor" %}</h1>
 
-<h1>Planes</h1>
+<h1>{% trans "Planes" %}</h1>
 {% endblock %}

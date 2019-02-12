@@ -1,3 +1,4 @@
+{% load i18n %}
 <style>
   #myFooter {
       background-color: #3a3f46;
@@ -125,25 +126,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <h5>Get started</h5>
+                    <h5>{% trans "Get started" %}</h5>
                     <ul>
-                        <li><a href="{% url 'index' %}">Home</a></li>
-                        <li><a href="{% url 'signup'%}">Sign up</a></li>
+                        <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                        <li><a href="{% url 'signup'%}">{% trans "Sign up" %}</a></li>
                     </ul>
                 </div>
                 <div class="col-sm">
-                    <h5>About us</h5>
+                    <h5>{% trans "About us" %}</h5>
                     <ul>
-                        <li><a href="{% url 'about'%}">About</a></li>
-                        <li><a href="{% url 'contact'%}">Contact us</a></li>
+                        <li><a href="{% url 'about'%}">{% trans "About" %}</a></li>
+                        <li><a href="{% url 'contact'%}">{% trans "Contact us" %}</a></li>
                     </ul>
                 </div>
                 <div class="col-sm">
-                    <h5>Support</h5>
+                    <h5>{% trans "Support" %}</h5>
                     <ul>
-                        <li><a href="{% url 'faq'%}">FAQ</a></li>
-                        <li><a href="{% url 'on_site'%}"> On Site</a></li>
-                        <li><a href="{% url 'pilot_informations'%}"> Pilot Informations</a></li>
+                        <li><a href="{% url 'faq'%}">{% trans "FAQ" %}</a></li>
+                        <li><a href="{% url 'on_site'%}">{% trans "On Site" %}</a></li>
+                        <li><a href="{% url 'pilot_informations'%}">{% trans "Pilot Informations" %}</a></li>
                     </ul>
                 </div>
             </div>
