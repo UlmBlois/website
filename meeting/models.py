@@ -99,7 +99,25 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 
 class Pilot(models.Model):
     """Model reprenseting a pilot."""
+    AELIA = "AELIA"
+    AEPAL = "AEPAL"
+    AIG = "AIG"
+    AIR_COURTAGE = "AIR COURTAGE"
+    AISCAIR = "AISCAIR"
+    AISCALE = "AISCALE"
+    ALBION = "ALBION"
+    # TODO a completer, allow usage of text input with choices selection
+    INSURANCE_CHOICES = (
+        (AELIA, AELIA),
+        (AEPAL, AEPAL),
+        (AIG, AIG),
+        (AISCAIR, AISCAIR),
+        (AISCALE, AISCALE),
+        (ALBION, ALBION)
+    )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    insurance_company = models.CharField(max_length=64,
+                                         choices=INSURANCE_CHOICES)
     insurance_number = models.CharField(max_length=64)
     licence_number = models.CharField(max_length=64)
     licence_file = models.FileField(null=True, blank=True)
@@ -131,7 +149,8 @@ class ULM(models.Model):
         (AEROSTAT, _("Aerostat"))
     )
 
-    pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE)
+    pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE,
+                              related_name='ulm')
     constructor = models.CharField(max_length=32)
     model = models.CharField(max_length=32)
     type = models.CharField(
@@ -167,7 +186,8 @@ class Reservation(models.Model):
     """Model reprenseting a reservation for an in flight arrival."""
     ulm = models.ForeignKey(ULM, on_delete=models.SET_NULL, null=True)
     reservation_number = models.CharField(max_length=32, unique=True)
-    time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
+    time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE,
+                                  related_name='reservation')
     arrival = models.DateTimeField(null=True, default=None)
     fuel_reservation = models.PositiveIntegerField(default=0)
     fuel_served = models.PositiveIntegerField(default=0)
