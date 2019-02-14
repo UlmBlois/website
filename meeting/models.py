@@ -106,14 +106,33 @@ class Pilot(models.Model):
     AISCAIR = "AISCAIR"
     AISCALE = "AISCALE"
     ALBION = "ALBION"
+    ALKORA = "ALKORA"
+    ALLIANZ = "ALLIANZ"
+    ALPHA = "ALPHA INSURANCE"
+    AMTI = "AMTI"
+    ASSUAERO = "ASSUAERO"
+    AXA = "AXA"
+    BENACQUISTA = "BENACQUISTA"
+    BHPA = "BHPA"
+    CATLIN = "CATLIN INSURANCE"
     # TODO a completer, allow usage of text input with choices selection
     INSURANCE_CHOICES = (
         (AELIA, AELIA),
         (AEPAL, AEPAL),
         (AIG, AIG),
+        (AIR_COURTAGE, AIR_COURTAGE),
         (AISCAIR, AISCAIR),
         (AISCALE, AISCALE),
-        (ALBION, ALBION)
+        (ALBION, ALBION),
+        (ALKORA, ALKORA),
+        (ALLIANZ, ALLIANZ),
+        (ALPHA, ALPHA),
+        (AMTI, AMTI),
+        (ASSUAERO, ASSUAERO),
+        (AXA, AXA),
+        (BENACQUISTA, BENACQUISTA),
+        (BHPA, BHPA),
+        (CATLIN, CATLIN)
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     insurance_company = models.CharField(max_length=64,

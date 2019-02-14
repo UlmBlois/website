@@ -116,7 +116,7 @@ class UpdateUserPilotView(UpdateView):
     template_name = 'base_form.html'
 
     def get_success_url(self):
-        return reverse('pilot', kwargs={'pk': self.kwargs.get('pk', None)})
+        return reverse('pilot', kwargs={'pk': self.object.pilot.pk})
 
     def get_form_kwargs(self):
         kwargs = super(UpdateUserPilotView, self).get_form_kwargs()

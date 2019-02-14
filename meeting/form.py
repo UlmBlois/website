@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from betterforms.multiform import MultiModelForm
 from django_countries.fields import CountryField
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
+from meeting.fields import ListTextWidget
 
 
 class ReservationForm(forms.ModelForm):
@@ -34,11 +35,18 @@ class UserEditForm(forms.ModelForm):
 
 
 class PilotForm(forms.ModelForm):
+
     class Meta:
         model = Pilot
         fields = [
-                 'insurance_number', 'insurance_file',
-                 'licence_number', 'licence_file']
+                 'insurance_company', 'insurance_number', 'insurance_file',
+                 'licence_number', 'licence_file'
+                 ]
+        widgets = {
+            'insurance_company': ListTextWidget(
+                            data_list=[x[1] for x in Pilot.INSURANCE_CHOICES],
+                            name='insurance_company')
+        }
 
 
 class ULMForm(forms.ModelForm):
