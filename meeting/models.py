@@ -132,11 +132,10 @@ class Pilot(models.Model):
         (AXA, AXA),
         (BENACQUISTA, BENACQUISTA),
         (BHPA, BHPA),
-        (CATLIN, CATLIN)
+        (CATLIN, CATLIN),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    insurance_company = models.CharField(max_length=64,
-                                         choices=INSURANCE_CHOICES)
+    insurance_company = models.CharField(max_length=64)
     insurance_number = models.CharField(max_length=64)
     licence_number = models.CharField(max_length=64)
     licence_file = models.FileField(null=True, blank=True)

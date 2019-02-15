@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
+from meeting.fields import ListTextWidget
 
 admin.site.register(Pilot)
 
@@ -33,6 +34,11 @@ class PilotInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'Profile'
     fk_name = 'user'
+    widgets = {
+        'insurance_company': ListTextWidget(
+                        data_list=[x[1] for x in Pilot.INSURANCE_CHOICES],
+                        name='insurance_company')
+    }
 
 
 class CustomUserAdmin(UserAdmin):
