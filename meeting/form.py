@@ -4,6 +4,7 @@ from betterforms.multiform import MultiModelForm
 from django_countries.fields import CountryField
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from meeting.fields import ListTextWidget
+from meeting.widgets import ULMRadioIdWidget
 
 
 class ReservationForm(forms.ModelForm):
@@ -56,6 +57,9 @@ class ULMForm(forms.ModelForm):
         fields = [
                  'constructor', 'model', 'type', 'imatriculation_country',
                  'imatriculation', 'radio_id']
+        widgets = {
+            'radio_id': ULMRadioIdWidget,
+        }
 
 
 class UserEditMultiForm(MultiModelForm):

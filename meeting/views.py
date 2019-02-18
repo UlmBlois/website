@@ -21,6 +21,7 @@ from meeting.models import Pilot, ULM, Reservation
 from meeting.form import (ReservationForm, UserEditMultiForm,
                           AjaxFuelServedForm, ULMForm,
                           StaffReservationEditForm)
+
 import uuid
 
 
@@ -179,9 +180,7 @@ class DeletePilotULM(DeleteView):
 @method_decorator(login_required, name='dispatch')
 class CreatePilotULM(CreateView):
     model = ULM
-    fields = [
-             'constructor', 'model', 'type', 'imatriculation_country',
-             'imatriculation', 'radio_id']
+    form_class = ULMForm
     template_name = 'base_form.html'
 
     def get_success_url(self):
@@ -197,10 +196,7 @@ class CreatePilotULM(CreateView):
 @method_decorator(login_required, name='dispatch')
 class UpdatePilotULM(UpdateView):
     model = ULM
-    fields = [
-        'constructor', 'model', 'imatriculation_country',
-        'imatriculation', 'radio_id'
-        ]
+    form_class = ULMForm
     pk_url_kwarg = 'pk'
     context_object_name = 'ulm'
     template_name = 'base_form.html'

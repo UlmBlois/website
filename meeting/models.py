@@ -191,9 +191,11 @@ class ULM(models.Model):
 
 @receiver(pre_save, sender=ULM)
 def normalize_reservation(sender, instance, **kwargs):
-    instance.radio_id = re.sub('[^A-Za-z0-9]+', '', instance.radio_id).upper()
-    instance.imatriculation = re.sub(
-        '[^A-Za-z0-9]+', '', instance.imatriculation).upper()
+    instance.radio_id = instance.radio_id.upper()
+    instance.imatriculation = instance.imatriculation.upper()
+    # instance.radio_id = re.sub('[^A-Za-z0-9]+', '', instance.radio_id).upper()
+    # instance.imatriculation = re.sub(
+    #     '[^A-Za-z0-9]+', '', instance.imatriculation).upper()
 
 ###############################################################################
 #       RESERVATION
