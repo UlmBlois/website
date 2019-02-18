@@ -1,7 +1,6 @@
 from django.forms import widgets
 
 COUTRIES_PREFIX = (
-    ('G-', 'G-'),  # Royaume Unis
     ('D-', 'D-'),  # Allemagne
     ('OE-', 'OE-'),  # Autriche
     ('OO-', 'OO-'),  # Belgique
@@ -18,6 +17,18 @@ COUTRIES_PREFIX = (
     ('EI-', 'EI-'),  # Irlande
     ('I-', 'I-'),  # Italie
     ('YL-', 'YL-'),  # Lettonie
+    ('LY-', 'LY-'),  # Lituanie
+    ('LX-X', 'LX-X'),  # Luxembourg
+    ('9H-', '9H-'),  # Malte
+    ('PH-', 'PH-'),  # Pays Bas
+    ('SP-', 'SP-'),  # Pologne
+    ('CR-', 'CR-'),  # Portugal
+    ('OK-', 'OK-'),  # Republique Tcheque
+    ('YR-', 'YR-'),  # Roumanie
+    ('G-', 'G-'),  # Royaume Unis
+    ('OM-', 'OM-'),  # Slovaquie
+    ('S5-', 'S5-'),  # Slovenie
+    ('SE-', 'SE-'),  # Suede
 )
 
 
