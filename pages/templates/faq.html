@@ -1,5 +1,6 @@
 {% extends 'base_generic.html' %}
 {% load i18n %}
+
 {% block style %}
 
 // FAQ
@@ -113,8 +114,8 @@
 {% block content %}
 <h3>{% trans "FAQ" %}</h3>
 
-    <div class="row">
-        <div class="col-sm-2">
+    <div class="row flex-grow-1">
+        <div class="col-sm-2 bg-light">
             <div class="nav flex-column nav-pills faq-nav" id="faq-tabs" role="tablist" aria-orientation="vertical">
               {% for topic in topics%}
               <a href="#tab{{topic.number}}" class="nav-link {% if forloop.first %}active{%endif%}" data-toggle="pill" role="tab" aria-controls="tab{{topic.number}}" aria-selected="{% if forloop.first %}true{%else%}false{%endif%}">
