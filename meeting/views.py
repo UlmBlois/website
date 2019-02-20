@@ -68,6 +68,17 @@ class FilteredReservationList(UserPassesTestMixin, PaginatedFilterViews,
             '-reservation_number')
 
 
+class StaffReservationValidationDetail(UserPassesTestMixin, DetailView):
+    model = Reservation
+    pk_url_kwarg = 'pk'
+    context_object_name = 'reservation'
+    template_name = 'staff_reservation_validation.html'
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_authenticated and user.is_staff
+
+
 ###############################################################################
 # PILOT related View
 ###############################################################################

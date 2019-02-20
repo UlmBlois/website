@@ -29,6 +29,7 @@ COUTRIES_PREFIX = (
     ('OM-', 'OM-'),  # Slovaquie
     ('S5-', 'S5-'),  # Slovenie
     ('SE-', 'SE-'),  # Suede
+    # TODO Fill the list, rethink choice data
 )
 
 

@@ -103,15 +103,15 @@
     <td>{{res.flight_plan}}</td>
     <td>{{res.esthetic_cup}}</td>
     <td class="center">
-      <a href="#" class="btn btn-success">{% trans "Validate" %}</a>
+      <a href="{% url 'staff_reservation_overview' res.pk %}" class="btn btn-primary">{% trans "Validate" %}</a>
       <!-- <a href="{% url 'staff_edit_reservation' res.pk %}" class="btn btn-primary">Edit</a> -->
       <a href="#" class="btn btn-warning">{% trans "Print" %}</a>
-      <button type="button"
+      <!-- <button type="button"
               class="btn btn-primary btn-sm js-update-reservation"
               data-url="{% url 'staff_edit_reservation' res.pk %}"
               data-contener-id="modal-update-reservation">
         <span class="fas fa-pen"></span>{% trans "Edit" %}
-      </button>
+      </button> -->
     </td>
   </tr>
   {% endfor %}

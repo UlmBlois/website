@@ -41,6 +41,9 @@ urlpatterns += [
         filterset_class=ReservationFilter,
         template_name='staff_reservation_list.html'),
         name='staff_reservation_list'),
+    path('staff/reservation/validation/<int:pk>/overview/',
+         views.StaffReservationValidationDetail.as_view(),
+         name='staff_reservation_overview')
 ]
 
 

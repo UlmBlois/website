@@ -1,0 +1,48 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'staff_reservation_list'%}">Arrivals</a></li>
+    <li class="breadcrumb-item active"><a href="#">Validate</a></li>
+  </ol>
+</nav>
+
+<div class="row">
+<div class="col-sm">
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Pilot</h5>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>{% trans 'First Name'%}:</strong> {{reservation.ulm.pilot.user.first_name}}</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Reservation</h5>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">ULM</h5>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+{% endblock %}
