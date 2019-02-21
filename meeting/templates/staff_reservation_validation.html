@@ -11,38 +11,118 @@
   </ol>
 </nav>
 
+<h3>{% trans 'Reservation' %}: {{reservation.reservation_number}}</h3>
+
 <div class="row">
-<div class="col-sm">
+  <div class="col-sm">
 
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Pilot</h5>
-      <ul class="list-group">
-        <li class="list-group-item"><strong>{% trans 'First Name'%}:</strong> {{reservation.ulm.pilot.user.first_name}}</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{% trans 'Pilot'%}</h5>
+        {% with pilot=reservation.ulm.pilot %}
+        <table class="table table-sm">
+          <tbody>
+            <tr>
+              <th scope="row">{% trans 'First Name'%}</th>
+              <td>{{pilot.user.first_name}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Last Name'%}</th>
+              <td>{{pilot.user.last_name}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Licence Number'%}</th>
+              <td>{{pilot.licence_number}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Insurance Company'%}</th>
+              <td>{{pilot.insurance_company}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Insurance Number'%}</th>
+              <td>{{pilot.insurance_number}}</td>
+            </tr>
+          </tbody>
+        </table>
+        {% endwith%}
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{% trans 'ULM' %}</h5>
+        {% with ulm=reservation.ulm %}
+        <table class="table table-sm">
+          <tbody>
+            <tr>
+              <th scope="row">{% trans 'constructor'%}</th>
+              <td>{{ulm.constructor}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Model'%}</th>
+              <td>{{ulm.model}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Type' %}</th>
+              <td>{{ulm.type}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Immatriculation Country'%}</th>
+              <td>{{ulm.imatriculation_country}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Immatriculation'%}</th>
+              <td>{{ulm.immatriculation}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Radion Id'%}</th>
+              <td>{{ulm.radio_id}}</td>
+            </tr>
+          </tbody>
+        </table>
+        {% endwith%}
+      </div>
+  </div>
+
+  </div>
+
+  <div class="col-sm">
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">{% trans 'Reservation'%}</h5>
+          <table class="table table-sm">
+            <tbody>
+              <tr>
+                <th scope="row">{% trans 'Time Slot'%}</th>
+                <td>{{reservation.time_slot}}</td>
+              </tr>
+              <tr>
+                <th scope="row">{% trans 'Fuel'%}</th>
+                <td>{{reservation.fuel_reservation}}</td>
+              </tr>
+              <tr>
+                <th scope="row">{% trans 'Flight Plan'%}</th>
+                <td>{{reservation.flight_plan}}</td>
+              </tr>
+              <tr>
+                <th scope="row">{% trans 'Passanger'%}</th>
+                <td>{{reservation.passanger}}</td>
+              </tr>
+              <tr>
+                <th scope="row">{% trans 'Esthetic Cup'%}</th>
+                <td>{{reservation.esthetic_cup}}</td>
+              </tr>
+              <tr>
+                <th scope="row">{% trans 'To Sell' %}</th>
+                <td>{{reservation.to_sell}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="col-sm">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Reservation</h5>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">ULM</h5>
-    </div>
-  </div>
 </div>
-</div>
-
 
 
 {% endblock %}
