@@ -13,14 +13,17 @@
 
 <h3>{% trans 'Reservation' %}: {{reservation.reservation_number}}</h3>
 
-<div class="row">
-  <div class="col-sm">
+<div class="card-deck">
+  <!-- <div class="col-sm"> -->
 
     <div class="card">
+      <h5 class="card-header">
+        {% trans 'Pilot'%}
+        <a href="{% url 'staff_reservation_edit_pilot' res=reservation.pk pk=reservation.ulm.pilot.pk%}"><span class="fas fa-pen float-right"></span></a>
+      </h5>
       <div class="card-body">
-        <h5 class="card-title">{% trans 'Pilot'%}</h5>
         {% with pilot=reservation.ulm.pilot %}
-        <table class="table table-sm">
+        <table class="table">
           <tbody>
             <tr>
               <th scope="row">{% trans 'First Name'%}</th>
@@ -47,50 +50,18 @@
         {% endwith%}
       </div>
     </div>
-    <br>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{% trans 'ULM' %}</h5>
-        {% with ulm=reservation.ulm %}
-        <table class="table table-sm">
-          <tbody>
-            <tr>
-              <th scope="row">{% trans 'constructor'%}</th>
-              <td>{{ulm.constructor}}</td>
-            </tr>
-            <tr>
-              <th scope="row">{% trans 'Model'%}</th>
-              <td>{{ulm.model}}</td>
-            </tr>
-            <tr>
-              <th scope="row">{% trans 'Type' %}</th>
-              <td>{{ulm.type}}</td>
-            </tr>
-            <tr>
-              <th scope="row">{% trans 'Immatriculation Country'%}</th>
-              <td>{{ulm.imatriculation_country}}</td>
-            </tr>
-            <tr>
-              <th scope="row">{% trans 'Immatriculation'%}</th>
-              <td>{{ulm.immatriculation}}</td>
-            </tr>
-            <tr>
-              <th scope="row">{% trans 'Radion Id'%}</th>
-              <td>{{ulm.radio_id}}</td>
-            </tr>
-          </tbody>
-        </table>
-        {% endwith%}
-      </div>
-  </div>
 
-  </div>
+  <!-- </div> -->
 
-  <div class="col-sm">
+  <!-- <div class="col-sm"> -->
+
     <div class="card">
+      <h5 class="card-header">
+        {% trans 'Reservation'%}
+        <a href="#"><span class="fas fa-pen float-right"></span></a>
+      </h5>
       <div class="card-body">
-          <h5 class="card-title">{% trans 'Reservation'%}</h5>
-          <table class="table table-sm">
+          <table class="table">
             <tbody>
               <tr>
                 <th scope="row">{% trans 'Time Slot'%}</th>
@@ -120,9 +91,52 @@
           </table>
       </div>
     </div>
+
+  <!-- </div> -->
+
+<!-- </div> -->
+
+<!-- <div class="row"> -->
+  <!-- <div class="col-sm"> -->
+    <div class="card">
+      <h5 class="card-header">
+        {% trans 'ULM'%}
+        <a href="#"><span class="fas fa-pen float-right"></span></a>
+      </h5>
+      <div class="card-body">
+        {% with ulm=reservation.ulm %}
+        <table class="table">
+          <tbody>
+            <tr>
+              <th scope="row">{% trans 'constructor'%}</th>
+              <td>{{ulm.constructor}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Model'%}</th>
+              <td>{{ulm.model}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Type' %}</th>
+              <td>{{ulm.type}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Immatriculation Country'%}</th>
+              <td>{{ulm.imatriculation_country}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Imatriculation'%}</th>
+              <td>{{ulm.imatriculation}}</td>
+            </tr>
+            <tr>
+              <th scope="row">{% trans 'Radion Id'%}</th>
+              <td>{{ulm.radio_id}}</td>
+            </tr>
+          </tbody>
+        </table>
+        {% endwith%}
+      </div>
   </div>
-
+  <!-- </div> -->
 </div>
-
 
 {% endblock %}

@@ -9,8 +9,8 @@ urlpatterns = [
     url(r'^pilot/password/$', views.pilot_change_password,
         name='change_password'),
     path('pilot/<int:pk>/detail/', views.DetailPilot.as_view(), name='pilot'),
-    url(r'^pilot/(?P<pk>\d+)/edit/$', views.UpdateUserPilotView.as_view(),
-        name='edit_pilot'),
+    # path('pilot/<int:pk>/edit/', views.UpdateUserPilotView.as_view(),
+    #      name='edit_pilot'),
     path('ulm/', views.PilotULMList.as_view(),
          name='pilot_ulm_list'),
     path('ulm/<int:pk>/delete/', views.DeletePilotULM.as_view(),
@@ -43,7 +43,10 @@ urlpatterns += [
         name='staff_reservation_list'),
     path('staff/reservation/validation/<int:pk>/overview/',
          views.StaffReservationValidationDetail.as_view(),
-         name='staff_reservation_overview')
+         name='staff_reservation_overview'),
+    path('staff/reservation/validation/<int:res>/edit/pilot/<int:pk>',
+         views.StaffReservationUpdatePilot.as_view(),
+         name='staff_reservation_edit_pilot'),
 ]
 
 

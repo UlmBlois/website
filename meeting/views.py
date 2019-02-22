@@ -74,10 +74,45 @@ class StaffReservationValidationDetail(UserPassesTestMixin, DetailView):
     context_object_name = 'reservation'
     template_name = 'staff_reservation_validation.html'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(pk=self.kwargs.get('pk'))
+
     def test_func(self):
         user = self.request.user
         return user.is_authenticated and user.is_staff
 
+
+@method_decorator(login_required, name='dispatch')
+class StaffReservationUpdatePilot(UserPassesTestMixin, UpdateView):
+    model = Pilot
+    pk_url_kwarg = 'pk'
+    form_class = UserEditMultiForm
+    template_name = 'base_form.html'
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_authenticated and user.is_staff
+
+    def get_success_url(self):
+        res_pk = self.kwargs.get('res', None)
+        return reverse('staff_reservation_overview',
+                       kwargs={'pk': res_pk})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(instance={
+            'user_form': self.object.user,
+            'pilot_form': self.object,
+        })
+        return kwargs
+
+    def form_valid(self, form):
+        form['user_form'].save()
+        pilot = form['pilot_form'].save(commit=False)
+        pilot.last_update = timezone.now()
+        pilot.save()
+        return redirect(self.get_success_url())
 
 ###############################################################################
 # PILOT related View
@@ -133,8 +168,8 @@ class UpdateUserPilotView(UpdateView):
     def get_form_kwargs(self):
         kwargs = super(UpdateUserPilotView, self).get_form_kwargs()
         kwargs.update(instance={
-            'user': self.object,
-            'pilot': self.object.pilot,
+            'user_form': self.object,
+            'pilot_form': self.object.pilot,
         })
         return kwargs
 
@@ -149,8 +184,8 @@ class UpdateUserPilotView(UpdateView):
         return obj
 
     def form_valid(self, form):
-        form['user'].save()
-        pilot = form['pilot'].save(commit=False)
+        form['user_form'].save()
+        pilot = form['pilot_form'].save(commit=False)
         pilot.last_update = timezone.now()
         pilot.save()
         return redirect(self.get_success_url())

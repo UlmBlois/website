@@ -64,8 +64,8 @@ class ULMForm(forms.ModelForm):
 
 class UserEditMultiForm(MultiModelForm):
     form_classes = {
-        'user': UserEditForm,
-        'pilot': PilotForm,
+        'user_form': UserEditForm,
+        'pilot_form': PilotForm,
     }
 
 
