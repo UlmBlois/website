@@ -14,7 +14,6 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils import timezone
 from django_filters.views import FilterView
-from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 from meeting.models import Pilot, ULM, Reservation
@@ -23,6 +22,7 @@ from meeting.form import (ReservationForm, UserEditMultiForm,
                           StaffReservationEditForm)
 
 import uuid
+from datetime import datetime
 
 
 # TODO: tmp
@@ -164,6 +164,19 @@ class StaffReservationUpdate(UserPassesTestMixin, UpdateView):
         res = form.save(commit=False)
         res.save()
         return redirect(self.get_success_url())
+
+
+@method_decorator(login_required, name='dispatch')
+class StaffReservationValidation(View):
+    pk = None
+
+    def get(self, request, *args, **kwargs):
+        self.pk = kwargs.pop('pk', None)
+        reservation = get_object_or_404(Reservation, pk=self.pk)
+        reservation.arrival = datetime.now()
+        reservation.save()
+        return redirect('staff_reservation_overview', pk=self.pk)
+
 ###############################################################################
 # PILOT related View
 ###############################################################################

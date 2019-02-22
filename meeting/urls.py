@@ -50,10 +50,12 @@ urlpatterns += [
     path('staff/reservation/validation/<int:res>/edit/ulm/<int:pk>',
          views.StaffReservationUpdatePilotULM.as_view(),
          name='staff_reservation_edit_ulm'),
-
     path('staff/reservation/validate/edit/<int:pk>',
          views.StaffReservationUpdate.as_view(),
-         name='staff_reservation_edit')
+         name='staff_reservation_edit'),
+    path('staff/reservation/validation/<int:pk>/validate/',
+         views.StaffReservationValidation.as_view(),
+         name="staff_reservation_validate"),
 ]
 
 

@@ -236,4 +236,9 @@ class Reservation(models.Model):
     def display_pilot(self):
         return f'{self.ulm.pilot}'
 
+    def is_missing_informations(self):
+        if self.ulm.pilot.insurance_file:
+            return True
+        return False
+
     display_pilot.short_description = 'Pilot'
