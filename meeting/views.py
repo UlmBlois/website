@@ -114,6 +114,56 @@ class StaffReservationUpdatePilot(UserPassesTestMixin, UpdateView):
         pilot.save()
         return redirect(self.get_success_url())
 
+
+@method_decorator(login_required, name='dispatch')
+class StaffReservationUpdatePilotULM(UserPassesTestMixin, UpdateView):
+    model = ULM
+    form_class = ULMForm
+    pk_url_kwarg = 'pk'
+    context_object_name = 'ulm'
+    template_name = 'base_form.html'
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_authenticated and user.is_staff
+
+    def get_success_url(self):
+        res_pk = self.kwargs.get('res', None)
+        return reverse('staff_reservation_overview',
+                       kwargs={'pk': res_pk})
+
+    def form_valid(self, form):
+        ulm = form.save(commit=False)
+        ulm.save()
+        return redirect(self.get_success_url())
+
+
+@method_decorator(login_required, name='dispatch')
+class StaffReservationUpdate(UserPassesTestMixin, UpdateView):
+    model = Reservation
+    form_class = ReservationForm
+    pk_url_kwarg = 'pk'
+    context_object_name = 'reservation'
+    template_name = 'base_form.html'
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_authenticated and user.is_staff
+
+    def get_success_url(self):
+        res_pk = self.kwargs.get(self.pk_url_kwarg, None)
+        return reverse('staff_reservation_overview',
+                       kwargs={'pk': res_pk})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'pilot': self.object.ulm.pilot})
+        return kwargs
+
+    def form_valid(self, form):
+        res = form.save(commit=False)
+        res.save()
+        return redirect(self.get_success_url())
 ###############################################################################
 # PILOT related View
 ###############################################################################
@@ -157,19 +207,19 @@ class DetailPilot(DetailView):
 
 @method_decorator(login_required, name='dispatch')
 class UpdateUserPilotView(UpdateView):
-    model = User
+    model = Pilot
     pk_url_kwarg = 'pk'
     form_class = UserEditMultiForm
     template_name = 'base_form.html'
 
     def get_success_url(self):
-        return reverse('pilot', kwargs={'pk': self.object.pilot.pk})
+        return reverse('pilot', kwargs={'pk': self.object.pk})
 
     def get_form_kwargs(self):
         kwargs = super(UpdateUserPilotView, self).get_form_kwargs()
         kwargs.update(instance={
-            'user_form': self.object,
-            'pilot_form': self.object.pilot,
+            'user_form': self.object.user,
+            'pilot_form': self.object,
         })
         return kwargs
 
@@ -179,7 +229,7 @@ class UpdateUserPilotView(UpdateView):
 
     def get_object(self, queryset=None):
         obj = super(UpdateUserPilotView, self).get_object()
-        if not obj == self.request.user:
+        if not obj.user == self.request.user:
             raise Http404
         return obj
 

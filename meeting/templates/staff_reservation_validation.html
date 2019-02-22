@@ -58,7 +58,7 @@
     <div class="card">
       <h5 class="card-header">
         {% trans 'Reservation'%}
-        <a href="#"><span class="fas fa-pen float-right"></span></a>
+        <a href="{% url 'staff_reservation_edit' reservation.pk%}"><span class="fas fa-pen float-right"></span></a>
       </h5>
       <div class="card-body">
           <table class="table">
@@ -101,7 +101,7 @@
     <div class="card">
       <h5 class="card-header">
         {% trans 'ULM'%}
-        <a href="#"><span class="fas fa-pen float-right"></span></a>
+        <a href="{% url 'staff_reservation_edit_ulm' res=reservation.pk pk=reservation.ulm.pk%}"><span class="fas fa-pen float-right"></span></a>
       </h5>
       <div class="card-body">
         {% with ulm=reservation.ulm %}
