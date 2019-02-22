@@ -13,7 +13,6 @@ class ListTextWidget(forms.TextInput):
                                                        attrs=attrs)
         data_list = '<datalist id="list__%s">' % self._name
         for item in self._list:
-            print(item)
             data_list += '<option value="%s">' % item
         data_list += '</datalist>'
 

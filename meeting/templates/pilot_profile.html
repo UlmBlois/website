@@ -9,22 +9,30 @@
 
 <div class="card mx-4">
   <div class="card-body">
-    <div class="row">
-      <div class="col">
-        {% trans "Licence Number" %}:
-      </div>
-      <div class="col">
-        {{pilot.licence_number}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        {% trans "Insurance Number" %}:
-      </div>
-      <div class="col">
-        {{pilot.insurance_number}}
-      </div>
-    </div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">{% trans 'First Name'%}</th>
+          <td>{{pilot.user.first_name}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans 'Last Name'%}</th>
+          <td>{{pilot.user.last_name}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans 'Licence Number'%}</th>
+          <td>{{pilot.licence_number}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans 'Insurance Company'%}</th>
+          <td>{{pilot.insurance_company}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans 'Insurance Number'%}</th>
+          <td>{{pilot.insurance_number}}</td>
+        </tr>
+      </tbody>
+    </table>
     <a href= "{% url 'change_password'%}" class="btn btn-primary">{% trans "Change Password" %}</a>
     <a href= "{% url 'edit_pilot' user.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
   </div>

@@ -7,20 +7,24 @@
   {% get_chunk "yolo_chunk" as chunk%}
   {% evaluate chunk.content %}
 
-  <table class="w3-table w3-striped w3-bordered">
-    <tr class="w3-theme">
-      <th>ID</th>
-      <th>Fuel</th>
-      <th>Flight plan</th>
-      <th>Esthetic Cup</th>
-    </tr>
-    {% for res in res_list %}
-    <tr>
-      <td>{{res.reservation_number}}</td>
-      <td>{{res.fuel_reservation}}</td>
-      <td>{{res.flight_plan}}</td>
-      <td>{{res.esthetic_cup}}</td>
-    </tr>
-    {% endfor %}
+  <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Fuel</th>
+          <th>Flight plan</th>
+          <th>Esthetic Cup</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for res in res_list %}
+        <tr>
+          <td>{{res.reservation_number}}</td>
+          <td>{{res.fuel_reservation}}</td>
+          <td>{{res.flight_plan}}</td>
+          <td>{{res.esthetic_cup}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
   </table>
 {% endblock%}
