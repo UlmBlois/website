@@ -237,7 +237,8 @@ class Reservation(models.Model):
         return f'{self.ulm.pilot}'
 
     def is_missing_informations(self):
-        if self.ulm.pilot.insurance_file:
+        # TODO: a completer
+        if not bool(self.ulm.pilot.insurance_file.name):
             return True
         return False
 

@@ -35,7 +35,7 @@ def index(request):
         'num_res': num_res,
         'res_list': res_list,
     }
-    return render(request, 'index.html', context=context)
+    return render(request, 'base_logged.html', context=context)
 
 
 class PaginatedFilterViews(View):
@@ -173,8 +173,9 @@ class StaffReservationValidation(View):
     def get(self, request, *args, **kwargs):
         self.pk = kwargs.pop('pk', None)
         reservation = get_object_or_404(Reservation, pk=self.pk)
-        reservation.arrival = datetime.now()
-        reservation.save()
+        if reservation.arrival is None:
+            reservation.arrival = datetime.now()
+            reservation.save()
         return redirect('staff_reservation_overview', pk=self.pk)
 
 ###############################################################################
