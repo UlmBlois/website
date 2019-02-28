@@ -1,16 +1,14 @@
-{% extends "base_generic.html" %}
+{% extends "base_logged.html" %}
 {% load i18n %}
 
+{% block page_title%}
+  {% trans "Your Reservations" %}
+  <a class="btn btn-success" role="button" href="{% url 'pilot_create_reservation' %}">
+    <span class="fas fa-plus-circle"></span>{% trans "Add New" %}
+  </a>
+{% endblock %}
+
 {% block content %}
-<div class="jumbotron">
-    <h2>{% trans "Your Reservations" %}</h2>
-    <a class="btn btn-success pull-left" role="button" href="{% url 'pilot_create_reservation' %}">
-      <span class="fas fa-plus-circle"></span>{% trans "Add New" %}
-    </a>
-
-</div>
-
-
 
 <div class="mx-4">
 {% for res in reservation_list %}
