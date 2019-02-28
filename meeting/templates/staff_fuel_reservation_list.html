@@ -1,4 +1,4 @@
-{% extends "base_generic.html" %}
+{% extends "base_logged.html" %}
 {% load static %}
 {% load widget_tweaks %}
 {% load i18n %}
@@ -7,10 +7,11 @@
 <script src="{% static 'js/ajax_reservation.js' %}"></script>
 {% endblock %}
 
-{% block content %}
+{% block page_title %}
+{% trans "Pilots Fuel Reservations" %}
+{% endblock %}
 
-<h3>{% trans "Pilots Fuel Reservations" %}</h3>
-<hr>
+{% block content %}
 
   <form method="get">
     <div class="card card-body bg-light">

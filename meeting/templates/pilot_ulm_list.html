@@ -1,15 +1,14 @@
-{% extends "base_generic.html" %}
+{% extends "base_logged.html" %}
 {% load i18n %}
 
+{% block page_title%}
+{% trans "Your ULMs" %}
+<a class="btn btn-success" role="button" href="{% url 'pilot_create_ulm' %}">
+  <span class="fas fa-plus-circle"></span>{% trans "Add New" %}
+</a>
+{% endblock %}
+
 {% block content %}
-<div class="jumbotron">
-    <h2>{% trans "Your ULMs" %}</h2>
-    <a class="btn btn-success pull-left" role="button" href="{% url 'pilot_create_ulm' %}">
-      <span class="fas fa-plus-circle"></span>{% trans "Add New" %}
-    </a>
-
-</div>
-
 
 <div class="mx-4">
 {% for ulm in ulm_list %}

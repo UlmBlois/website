@@ -1,4 +1,4 @@
-{% extends "base_generic.html" %}
+{% extends "base_logged.html" %}
 {% load widget_tweaks %}
 {% load static %}
 {% load i18n %}
@@ -7,10 +7,11 @@
 <script src="{% static 'js/ajax_reservation.js' %}"></script>
 {% endblock %}
 
-{% block content %}
+{% block page_title %}
+{% trans "Pilots Reservations" %}
+{% endblock %}
 
-<h3>{% trans "Pilots Reservations" %}</h3>
-<hr>
+{% block content %}
 
 <form method="get">
   <div class="card card-body bg-light">
@@ -104,14 +105,7 @@
     <td>{{res.esthetic_cup}}</td>
     <td class="center">
       <a href="{% url 'staff_reservation_overview' res.pk %}" class="btn btn-primary">{% trans "Validate" %}</a>
-      <!-- <a href="{% url 'staff_edit_reservation' res.pk %}" class="btn btn-primary">Edit</a> -->
       <a href="#" class="btn btn-warning">{% trans "Print" %}</a>
-      <!-- <button type="button"
-              class="btn btn-primary btn-sm js-update-reservation"
-              data-url="{% url 'staff_edit_reservation' res.pk %}"
-              data-contener-id="modal-update-reservation">
-        <span class="fas fa-pen"></span>{% trans "Edit" %}
-      </button> -->
     </td>
   </tr>
   {% endfor %}
