@@ -1,0 +1,36 @@
+{% extends "base_logged.html" %}
+{% load i18n %}
+
+{% block content%}
+
+{% block beforeform %}
+{% endblock %}
+
+{% if messages %}
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+      {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+      {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="container">
+  <form method="post" class="user">
+    {% csrf_token %}
+    {% block form %}
+      {% include 'form.html' with form=form %}
+    {% endblock %}
+
+    <input type="submit" class="btn btn-success">{% trans "Submit" %}</input>
+  </form>
+</div>
+
+{%  block afterform %}
+{% endblock %}
+{% endblock %}

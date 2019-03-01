@@ -20,6 +20,11 @@
 
 </head>
 
+<style>
+{% block style %}
+{% endblock %}
+</style>
+
 <body id="page-top">
 
   <!-- Page Wrapper -->
@@ -42,7 +47,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">{% block page_title %}Blank Page{% endblock %}</h1>
+          <h1 class="h3 mb-4 text-gray-800">{% block page_title %}{% endblock %}</h1>
 
           {% block content %}
 

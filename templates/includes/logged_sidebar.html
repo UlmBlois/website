@@ -1,4 +1,6 @@
 {% load i18n %}
+
+{% with url_name=request.resolver_match.url_name %}
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
@@ -32,11 +34,11 @@
 
         <div class="collapse-divider"></div>
         <h6 class="collapse-header">{% trans "Arrivals & Fuel:" %}</h6>
-        <a class="collapse-item" href="{% url 'staff_reservation_list'%}">
+        <a class="collapse-item {% if url_name == 'staff_reservation_list' %}active{% endif %}" href="{% url 'staff_reservation_list'%}">
           <i class="fas fa-fw fa-plane-arrival"></i>
           <span>{% trans "Pilot Reservations" %}</span>
         </a>
-        <a class="collapse-item active" href="{% url 'staff_fuel_res_list'%}">
+        <a class="collapse-item {% if url_name == 'staff_fuel_res_list' %}active{% endif %}" href="{% url 'staff_fuel_res_list'%}">
           <i class="fas fa-fw fa-gas-pump"></i>
           <span>{% trans "Fuel Reservations" %}</span>
         </a>
@@ -53,12 +55,12 @@
     {% trans "Your Reservation"%}
   </div>
 
-  <li class="nav-item">
+  <li class="nav-item {% if url_name == 'pilot_reservation' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot_reservation' %}">
       <i class="fas fa-fw fa-th-list"></i>
       <span>{% trans "My Reservations" %}</span></a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item {% if url_name == 'pilot_ulm_list' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot_ulm_list' %}">
       <i class="fas fa-fw fa-plane"></i>
       <span>{% trans "My ULMs" %}</span></a>
@@ -72,31 +74,31 @@
     {% trans "Other" %}
   </div>
 
-  <li class="nav-item">
+  <li class="nav-item {% if url_name == 'on_site' %}active{% endif %}">
     <a class="nav-link" href="{% url 'on_site'%}">
       <i class="fas fa-fw fa-map-marker-alt"></i>
       <span>{% trans "On Site" %}</span></a>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item {% if url_name == 'pilot_informations' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot_informations'%}">
       <i class="fas fa-fw fa-info"></i>
       <span>{% trans "Pilotes Informations" %}</span></a>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
     <a class="nav-link" href="{% url 'about'%}">
       <i class="fas fa-fw fa-info-circle"></i>
       <span>{% trans "About" %}</span></a>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
     <a class="nav-link" href="{% url 'contact'%}">
       <i class="fas fa-fw fa-comment"></i>
       <span>{% trans "Contact" %}</span></a>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item {% if url_name == 'faq' %}active{% endif %}">
     <a class="nav-link" href="{% url 'faq'%}">
       <i class="fas fa-fw fa-question-circle"></i>
       <span>{% trans "FAQ"%}</span></a>
@@ -111,3 +113,4 @@
   </div>
 
 </ul>
+{% endwith %}
