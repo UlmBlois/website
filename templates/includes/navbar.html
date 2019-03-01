@@ -1,71 +1,63 @@
 {% load i18n %}
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-  <a class="navbar-brand" href="{% url 'index' %}">ULMBLois</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    {% with url_name=request.resolver_match.url_name %}
-    <ul class="navbar-nav">
-      <li class="nav-item {% if url_name == 'on_site' %}active{% endif %}">
-        <a href="{% url 'on_site'%}" class="nav-link">{% trans "On Site" %}</a>
-      </li>
-      <li class="nav-item {% if url_name == 'pilot_informations' %}active{% endif %}">
-        <a href="{% url 'pilot_informations'%}" class="nav-link">{% trans "Pilotes Informations" %}</a>
-      </li>
-      <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
-        <a href="{% url 'about' %}" class="nav-link">{% trans "About" %}</a>
-      </li>
-      <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
-        <a href="{% url 'contact'%}" class="nav-link">{% trans "Contact" %}</a>
-      </li>
-      </ul>
-      {% if user.is_authenticated %}
-        {% if user.is_staff %}
-        <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStaffMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {% trans "Management" %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'index' %}">ULMBLois</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      {% with url_name=request.resolver_match.url_name %}
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item {% if url_name == 'on_site' %}active{% endif %}">
+          <a href="{% url 'on_site'%}" class="nav-link">{% trans "On Site" %}</a>
+        </li>
+        <li class="nav-item {% if url_name == 'pilot_informations' %}active{% endif %}">
+          <a href="{% url 'pilot_informations'%}" class="nav-link">{% trans "Pilotes Informations" %}</a>
+        </li>
+        <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
+          <a href="{% url 'about' %}" class="nav-link">{% trans "About" %}</a>
+        </li>
+        <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
+          <a href="{% url 'contact'%}" class="nav-link">{% trans "Contact" %}</a>
+        </li>
+        <!-- </ul> -->
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.get_username }}</span>
+            <i class="fas fa-user-circle lg"></i>
+            <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownStaffMenuLink">
-            <a href="{% url 'staff_reservation_list'%}" class="dropdown-item">{% trans "Pilot Reservations" %}</a>
-            <a href="{% url 'staff_fuel_res_list'%}" class="dropdown-item">{% trans "Fuel Reservations" %}</a>
+          <!-- Dropdown - User Information -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="{% url 'pilot' user.pilot.pk%}">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              {% trans "Profile" %}
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              {% trans "Logout" %}
+            </a>
           </div>
+        </li>
+        {% else %}
+        <!-- <ul class="navbar-nav ml-auto"> -->
+        <li class="nav-item">
+          <button  data-toggle="modal" data-target="#loginModal"class="btn btn-default"><span class="fas fa-sign-in-alt"></span>{% trans "Login" %}</button>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'signup'%}?next={{request.path}}" class="nav-link">{% trans "Sign Up" %}</a>
+
         </li>
         </ul>
         {% endif %}
-        <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUserMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class='fas fa-user-circle'></span> {{ user.get_username }}
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownUserMenuLink">
-            <a href="{% url 'pilot' user.pilot.pk%}" class="dropdown-item">{% trans "Profile" %}</a>
-            <a href="{% url 'pilot_reservation' %}" class="dropdown-item">{% trans "My Reservations" %}</a>
-            <a href="{% url 'pilot_ulm_list' %}" class="dropdown-item">{% trans "My ULMs" %}</a>
-          </div>
-        </li>
-        <li class="nav-item">
-                <a href="{% url 'logout'%}?next={{request.path}}" class="nav-link"><span class="fas fa-sign-out-alt"></span> {% trans "Logout" %}</a>
-        </li>
-        </ul>
-      {% else %}
-      <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <button  data-toggle="modal" data-target="#loginModal"class="btn btn-default"><span class="fas fa-sign-in-alt"></span>{% trans "Login" %}</button>
-      </li>
-      <li class="nav-item">
-        <a href="{% url 'signup'%}?next={{request.path}}" class="nav-link">{% trans "Sign Up" %}</a>
 
-      </li>
-      </ul>
-      {% endif %}
+      {% endwith %}
+    </div>
+</div>
 
-    {% endwith %}
-  </div>
 </nav>
-
-
 <!-- Login modal -->
 <div class="modal" id="loginModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

@@ -35,7 +35,7 @@ def index(request):
         'num_res': num_res,
         'res_list': res_list,
     }
-    return render(request, 'base_logged.html', context=context)
+    return render(request, 'base_generic.html', context=context)
 
 
 class PaginatedFilterViews(View):
@@ -88,7 +88,7 @@ class StaffReservationUpdatePilot(UserPassesTestMixin, UpdateView):
     model = Pilot
     pk_url_kwarg = 'pk'
     form_class = UserEditMultiForm
-    template_name = 'base_form.html'
+    template_name = 'base_logged_form.html'
 
     def test_func(self):
         user = self.request.user
@@ -121,7 +121,7 @@ class StaffReservationUpdatePilotULM(UserPassesTestMixin, UpdateView):
     form_class = ULMForm
     pk_url_kwarg = 'pk'
     context_object_name = 'ulm'
-    template_name = 'base_form.html'
+    template_name = 'base_logged_form.html'
 
     def test_func(self):
         user = self.request.user
@@ -144,7 +144,7 @@ class StaffReservationUpdate(UserPassesTestMixin, UpdateView):
     form_class = ReservationForm
     pk_url_kwarg = 'pk'
     context_object_name = 'reservation'
-    template_name = 'base_form.html'
+    template_name = 'base_logged_form.html'
 
     def test_func(self):
         user = self.request.user
@@ -224,7 +224,7 @@ class UpdateUserPilotView(UpdateView):
     model = Pilot
     pk_url_kwarg = 'pk'
     form_class = UserEditMultiForm
-    template_name = 'base_form.html'
+    template_name = 'base_logged_form.html'
 
     def get_success_url(self):
         return reverse('pilot', kwargs={'pk': self.object.pk})
@@ -291,7 +291,7 @@ class DeletePilotULM(DeleteView):
 class CreatePilotULM(CreateView):
     model = ULM
     form_class = ULMForm
-    template_name = 'base_form.html'
+    template_name = 'base_logged_form.html'
 
     def get_success_url(self):
         return reverse('pilot_ulm_list')
@@ -309,7 +309,7 @@ class UpdatePilotULM(UpdateView):
     form_class = ULMForm
     pk_url_kwarg = 'pk'
     context_object_name = 'ulm'
-    template_name = 'base_form.html'
+    template_name = 'base_logged_form.html'
 
     def get_success_url(self):
         return reverse('pilot_ulm_list')
@@ -345,7 +345,7 @@ class PilotReservationList(ListView):
 class CreatePilotReservation(CreateView):
     model = Reservation
     form_class = ReservationForm
-    template_name = 'base_form.html'
+    template_name = 'base_logged_form.html'
 
     def get_success_url(self):
         return reverse('pilot_reservation')
@@ -372,7 +372,7 @@ class UpdatePilotReservation(UpdateView):
     form_class = ReservationForm
     pk_url_kwarg = 'pk'
     context_object_name = 'reservation'
-    template_name = 'base_form.html'
+    template_name = 'base_logged_form.html'
 
     def get_success_url(self):
         return reverse('pilot_reservation')

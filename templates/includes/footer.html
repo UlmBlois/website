@@ -1,162 +1,33 @@
 {% load i18n %}
-<style>
-  #myFooter {
-      background-color: #3a3f46;
-      color: white;
-  }
 
-  #myFooter .row {
-      margin-bottom: 10px; <!-- set to 60px with second bar -->
-  }
-
-  #myFooter .info{
-      text-align: justify;
-      color: #afb0b1;
-  }
-
-  #myFooter ul {
-      list-style-type: none;
-      padding-left: 0;
-      line-height: 1.7;
-  }
-
-  #myFooter h5 {
-      font-size: 18px;
-      color: white;
-      font-weight: bold;
-      margin-top: 30px;
-  }
-
-  #myFooter .logo{
-      margin-top: 10px;
-  }
-
-  #myFooter .second-bar .logo a{
-      color:white;
-      font-size: 28px;
-      float: left;
-      font-weight: bold;
-      line-height: 68px;
-      margin: 0;
-      padding: 0;
-  }
-
-  #myFooter a {
-      color: #d2d1d1;
-      text-decoration: none;
-  }
-
-  #myFooter a:hover,
-  #myFooter a:focus {
-      text-decoration: none;
-      color: white;
-  }
-
-  #myFooter .second-bar {
-      text-align: center;
-      background-color: #33373e;
-      text-align: center;
-  }
-
-  #myFooter .second-bar a {
-      font-size: 22px;
-      color: #9fa3a9;
-      padding: 10px;
-      transition: 0.2s;
-      line-height: 68px;
-  }
-
-  #myFooter .second-bar a:hover {
-      text-decoration: none;
-  }
-
-  #myFooter .social-icons {
-      float:right;
-  }
-
-
-  #myFooter .facebook:hover {
-      color: #0077e2;
-  }
-
-  #myFooter .google:hover {
-      color: #ef1a1a;
-  }
-
-  #myFooter .twitter:hover {
-      color: #00aced;
-  }
-
-  @media screen and (max-width: 767px) {
-      #myFooter {
-          text-align: center;
-      }
-
-      #myFooter .info{
-          text-align: center;
-      }
-  }
-
-  html{
-      height: 100%;
-  }
-
-  body{
-      display: flex;
-      display: -webkit-flex;
-      flex-direction: column;
-      -webkit-flex-direction: column;
-      height: 100%;
-  }
-
-  .content{
-     flex: 1 0 auto;
-     -webkit-flex: 1 0 auto;
-     min-height: 200px;
-  }
-
-  #myFooter{
-     flex: 0 0 auto;
-     -webkit-flex: 0 0 auto;
-  }
-</style>
-
-
-<footer id="myFooter">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <h5>{% trans "Get Started" %}</h5>
-                    <ul>
-                        <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
-                        <li><a href="{% url 'signup'%}">{% trans "Sign Up" %}</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm">
-                    <h5>{% trans "About Us" %}</h5>
-                    <ul>
-                        <li><a href="{% url 'about'%}">{% trans "About" %}</a></li>
-                        <li><a href="{% url 'contact'%}">{% trans "Contact Us" %}</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm">
-                    <h5>{% trans "Support" %}</h5>
-                    <ul>
-                        <li><a href="{% url 'faq'%}">{% trans "FAQ" %}</a></li>
-                        <li><a href="{% url 'on_site'%}">{% trans "On Site" %}</a></li>
-                        <li><a href="{% url 'pilot_informations'%}">{% trans "Pilot Informations" %}</a></li>
-                    </ul>
-                </div>
-            </div>
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <div class="row text-white">
+        <div class="col-sm">
+            <h5>{% trans "Get Started" %}</h5>
+            <ul>
+                <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                <li><a href="{% url 'signup'%}">{% trans "Sign Up" %}</a></li>
+            </ul>
         </div>
-        <!-- <div class="second-bar">
-           <div class="container">
-                <h2 class="logo"><a href="#"> LOGO </a></h2>
-                <div class="social-icons">
-                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                    <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
-                </div>
-            </div>
-        </div> -->
-    </footer>
+        <div class="col-sm">
+            <h5>{% trans "About Us" %}</h5>
+            <ul>
+                <li><a href="{% url 'about'%}">{% trans "About" %}</a></li>
+                <li><a href="{% url 'contact'%}">{% trans "Contact Us" %}</a></li>
+            </ul>
+        </div>
+        <div class="col-sm">
+            <h5>{% trans "Support" %}</h5>
+            <ul>
+                <li><a href="{% url 'faq'%}">{% trans "FAQ" %}</a></li>
+                <li><a href="{% url 'on_site'%}">{% trans "On Site" %}</a></li>
+                <li><a href="{% url 'pilot_informations'%}">{% trans "Pilot Informations" %}</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="m-0 text-center text-white">Copyright &copy; Salon ULM de Blois 2019</p>
+  </div>
+  <!-- /.container -->
+</footer>
