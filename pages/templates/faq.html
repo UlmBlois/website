@@ -111,9 +111,11 @@
 }
 {% endblock %}
 
-{% block content %}
-<h3>{% trans "FAQ" %}</h3>
+{% block header %}
+<h1>{% trans "FAQ" %}</h1>
+{% endblock %}
 
+{% block content %}
     <div class="row flex-grow-1">
         <div class="col-sm-2 bg-light">
             <div class="nav flex-column nav-pills faq-nav" id="faq-tabs" role="tablist" aria-orientation="vertical">

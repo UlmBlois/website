@@ -2,6 +2,10 @@
 {% load chunks %}
 {% load i18n %}
 
+{% block header %}
+  <h1>{% trans "Pilots Informations" %}</h1>
+{% endblock %}
+
 {% block content %}
 <h1>{% trans "General Organistaion" %}</h1>
 {% get_chunk 'pilot_info_general' as general_info %}
