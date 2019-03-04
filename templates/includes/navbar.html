@@ -44,7 +44,7 @@
         {% else %}
         <!-- <ul class="navbar-nav ml-auto"> -->
         <li class="nav-item">
-          <button  data-toggle="modal" data-target="#loginModal"class="btn btn-default"><span class="fas fa-sign-in-alt"></span>{% trans "Login" %}</button>
+          <a href="{% url 'login'%}"class="nav-link"><span class="fas fa-sign-in-alt"></span>{% trans "Login" %}</a>
         </li>
         <li class="nav-item">
           <a href="{% url 'signup'%}?next={{request.path}}" class="nav-link">{% trans "Sign Up" %}</a>
@@ -59,7 +59,7 @@
 
 </nav>
 <!-- Login modal -->
-<div class="modal" id="loginModal" tabindex="-1" role="dialog">
+<!-- <div class="modal" id="loginModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form action="{% url 'login' %}" method="post">
@@ -89,4 +89,4 @@
       </form>
       </div>
     </div>
-  </div>
+  </div> -->
