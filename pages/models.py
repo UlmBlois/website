@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 
 from translated_fields import TranslatedField, to_attribute
+from tinymce import HTMLField
 from django.utils.translation import gettext_lazy as _
 
 from pages.managers import ChunkManager
@@ -33,7 +34,7 @@ class Chunk(models.Model):
                            max_length=255,
                            unique=True)
     content = TranslatedField(
-                        models.TextField(_('Content'), blank=True),
+                        HTMLField(_('Content'), blank=True),
                         {settings.LANGUAGES[0][0]: {"blank": False}},
                         attrgetter=fallback_to_default,)
     description = TranslatedField(

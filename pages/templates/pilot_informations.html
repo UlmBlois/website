@@ -10,13 +10,14 @@
 <h1>{% trans "General Organistaion" %}</h1>
 {% get_chunk 'pilot_info_general' as general_info %}
 {% if general_info %}
-  {% evaluate general_info.content %}
+  {{ general_info.content | safe }}
 {% endif %}
 <h1>{% trans "In Flight Arrival" %}</h1>
-
+{% get_chunk 'pilot_info_arrival' as arrival %}
+{{arrival.content | safe }}
 <h1>{% trans "Departure" %}</h1>
 {% get_chunk 'pilot_info_departure' as departure %}
-{% evaluate departure.content %}
+{{ departure.content | safe}}
 
 <h1>{% trans "Paramotor" %}</h1>
 

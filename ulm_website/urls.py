@@ -31,3 +31,7 @@ urlpatterns = [
     path('pages/', include('pages.urls')),
     path('', RedirectView.as_view(url='/meeting/', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += [
+    url(r'^tinymce/', include('tinymce.urls')),
+]

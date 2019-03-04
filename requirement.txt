@@ -3,3 +3,4 @@ django-widget-tweaks
 django-filter
 django-betterfroms
 django-translated-fields
+django-tinymce4-lite
