@@ -142,6 +142,12 @@ class Pilot(models.Model):
     insurance_file = models.FileField(null=True, blank=True)
     last_update = models.DateField(null=True, blank=True)  # insurance_file
 
+    class Meta:
+        permissions = (
+            ('reservation_validation', _('Can validate arrival and '
+                                         'fuel reservation')),
+        )
+
     def __str__(self):
         return "{} {}".format(self.user.first_name, self.user.last_name)
 

@@ -12,6 +12,7 @@ from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.utils import timezone
 from django_filters.views import FilterView
 from django.utils.translation import gettext_lazy as _
@@ -53,14 +54,12 @@ class PaginatedFilterViews(View):
 ###############################################################################
 
 
-class FilteredReservationList(UserPassesTestMixin, PaginatedFilterViews,
+@method_decorator(login_required, name='dispatch')
+class FilteredReservationList(PermissionRequiredMixin, PaginatedFilterViews,
                               FilterView):
     model = Reservation
     paginate_by = 2
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_authenticated and user.is_staff
+    permission_required = ('meeting.reservation_validation')
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -68,31 +67,26 @@ class FilteredReservationList(UserPassesTestMixin, PaginatedFilterViews,
             '-reservation_number')
 
 
-class StaffReservationValidationDetail(UserPassesTestMixin, DetailView):
+@method_decorator(login_required, name='dispatch')
+class StaffReservationValidationDetail(PermissionRequiredMixin, DetailView):
     model = Reservation
     pk_url_kwarg = 'pk'
     context_object_name = 'reservation'
     template_name = 'staff_reservation_validation.html'
+    permission_required = ('meeting.reservation_validation')
 
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs.get('pk'))
 
-    def test_func(self):
-        user = self.request.user
-        return user.is_authenticated and user.is_staff
-
 
 @method_decorator(login_required, name='dispatch')
-class StaffReservationUpdatePilot(UserPassesTestMixin, UpdateView):
+class StaffReservationUpdatePilot(PermissionRequiredMixin, UpdateView):
     model = Pilot
     pk_url_kwarg = 'pk'
     form_class = UserEditMultiForm
     template_name = 'base_logged_form.html'
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_authenticated and user.is_staff
+    permission_required = ('meeting.reservation_validation')
 
     def get_success_url(self):
         res_pk = self.kwargs.get('res', None)
@@ -116,16 +110,13 @@ class StaffReservationUpdatePilot(UserPassesTestMixin, UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class StaffReservationUpdatePilotULM(UserPassesTestMixin, UpdateView):
+class StaffReservationUpdatePilotULM(PermissionRequiredMixin, UpdateView):
     model = ULM
     form_class = ULMForm
     pk_url_kwarg = 'pk'
     context_object_name = 'ulm'
     template_name = 'base_logged_form.html'
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_authenticated and user.is_staff
+    permission_required = ('meeting.reservation_validation')
 
     def get_success_url(self):
         res_pk = self.kwargs.get('res', None)
@@ -139,16 +130,13 @@ class StaffReservationUpdatePilotULM(UserPassesTestMixin, UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class StaffReservationUpdate(UserPassesTestMixin, UpdateView):
+class StaffReservationUpdate(PermissionRequiredMixin, UpdateView):
     model = Reservation
     form_class = ReservationForm
     pk_url_kwarg = 'pk'
     context_object_name = 'reservation'
     template_name = 'base_logged_form.html'
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_authenticated and user.is_staff
+    permission_required = ('meeting.reservation_validation')
 
     def get_success_url(self):
         res_pk = self.kwargs.get(self.pk_url_kwarg, None)
@@ -167,8 +155,9 @@ class StaffReservationUpdate(UserPassesTestMixin, UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class StaffReservationValidation(View):
+class StaffReservationValidation(PermissionRequiredMixin, View):
     pk = None
+    permission_required = ('meeting.reservation_validation')
 
     def get(self, request, *args, **kwargs):
         self.pk = kwargs.pop('pk', None)
@@ -453,23 +442,6 @@ def ajax_add_ulm(request, pk):
     data['html_form'] = render_to_string('add_pilot_ulm.html',
                                          context, request=request)
     return JsonResponse(data)
-
-
-def ajax_staff_edit_reservation(request, pk):
-    data = {}
-    reservation = get_object_or_404(Reservation, pk=pk)
-    if request.method == 'POST':
-        form = StaffReservationEditForm(request.POST, reservation=reservation)
-        if form.is_valid():
-            form.save()
-            data['form_is_valid'] = True
-        else:
-            data['form_is_valid'] = False
-    else:
-        form = StaffReservationEditForm(reservation=reservation)
-    return save_reservation_form(
-                request, form, 'staff_reservation_edit_partial.html',
-                additional_context={'reservation': reservation})
 
 
 def ajax_load_pilot_ulm_list(request):

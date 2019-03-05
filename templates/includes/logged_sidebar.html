@@ -22,7 +22,7 @@
   </li>
 
   <hr class="sidebar-divider">
-  {% if user.is_staff %}
+{% if perms.meeting.reservation_validation %}
   <li class="nav-item active">
     <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseManagement" aria-expanded="true" aria-controls="collapseManagement">
       <i class="fas fa-fw fa-folder"></i>

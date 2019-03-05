@@ -9,17 +9,21 @@
 {% block content %}
 <h1>{% trans "General Organistaion" %}</h1>
 {% get_chunk 'pilot_info_general' as general_info %}
-{% if general_info %}
-  {{ general_info.content | safe }}
-{% endif %}
+{{ general_info.content | safe }}
+
 <h1>{% trans "In Flight Arrival" %}</h1>
 {% get_chunk 'pilot_info_arrival' as arrival %}
 {{arrival.content | safe }}
+
 <h1>{% trans "Departure" %}</h1>
 {% get_chunk 'pilot_info_departure' as departure %}
 {{ departure.content | safe}}
 
 <h1>{% trans "Paramotor" %}</h1>
+{% get_chunk 'pilot_info_paramotor' as paramotor %}
+{{ paramotor.content | safe}}
 
 <h1>{% trans "Planes" %}</h1>
+{% get_chunk 'pilot_info_plane' as plane %}
+{{ plane.content | safe}}
 {% endblock %}
