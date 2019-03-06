@@ -106,7 +106,7 @@
                       <input type="password"
                        name="{{ form.password.name }}"
                        id="{{ form.password.id_for_label }}"
-                       {% if form.name.value != None %}value="{{ form.password.value|stringformat:'s' }}"{% endif %}
+                       {% if form.password.value != None %}value="{{ form.password.value|stringformat:'s' }}"{% endif %}
                        maxlength="{{ form.password.field.max_length }}"
                        {% if form.password.field.required %}required{% endif %}
                        class="form-control form-control-user"
