@@ -240,7 +240,10 @@ class Reservation(models.Model):
         return f'{self.reservation_number}'
 
     def display_pilot(self):
-        return f'{self.ulm.pilot}'
+        if self.ulm is not None:
+            return f'{self.ulm.pilot}'
+        else:
+            return "-"
 
     def is_missing_informations(self):
         # TODO: a completer
