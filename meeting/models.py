@@ -79,9 +79,11 @@ class TimeSlot(models.Model):
 
     def clean(self, *args, **kwargs):
         # TODO: a completer
-        if self.start_date < self.meeting.start_date and self.meeting.end_date < self.start_date:
+        if (self.start_date < self.meeting.start_date
+                and self.meeting.end_date < self.start_date):
             raise ValidationError(_('Time slot start date out of meeteing'))
-        if self.end_date < self.meeting.start_date and self.meeting.end_date < self.end_date:
+        if (self.end_date < self.meeting.start_date
+                and self.meeting.end_date < self.end_date):
             raise ValidationError(_('Time slot end date out of meeteing'))
         super(TimeSlot, self).clean(*args, **kwargs)
 
@@ -243,7 +245,7 @@ class Reservation(models.Model):
         if self.ulm is not None:
             return f'{self.ulm.pilot}'
         else:
-            return "-"
+            return '-'
 
     def is_missing_informations(self):
         # TODO: a completer
@@ -251,4 +253,4 @@ class Reservation(models.Model):
             return True
         return False
 
-    display_pilot.short_description = 'Pilot'
+    display_pilot.short_description = _('Pilot')

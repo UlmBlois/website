@@ -1,7 +1,74 @@
 {% extends "base_generic.html" %}
 {% load chunks %}
+{% load i18n %}
+{% load static %}
+{% block header%}
+<h1>{{meeting}}</h1>
+<p class="lead">
+{% blocktrans with start=meeting.start_date end=meeting.end_date%}
+From the {{ start }}, to the {{ end }}.
+{% endblocktrans  %}
+</p>
+<hr class="my-4">
+<a class="btn btn-primary btn-lg" href="{% static "files/Programme.pdf" %}" role="button">{% trans "Download Program"%}</a>
+<!-- TODO Change Program file acces-->
+{% endblock %}
 
 {% block content%}
+<div class="row text-center">
+
+<div class="col-lg-3">
+  <div class="card h-100">
+    <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+    <div class="card-body">
+      <h4 class="card-title">{% trans "ULM Pilot"%}</h4>
+      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+    </div>
+    <div class="card-footer">
+      <a href="#" class="btn btn-primary">Find Out More!</a>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-3">
+  <div class="card h-100">
+    <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+    <div class="card-body">
+      <h4 class="card-title">{% trans "Paramotor Pilot"%}</h4>
+      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+    </div>
+    <div class="card-footer">
+      <a href="#" class="btn btn-primary">Find Out More!</a>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-3">
+  <div class="card h-100">
+    <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+    <div class="card-body">
+      <h4 class="card-title">{% trans "Plane Pilot"%}</h4>
+      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+    </div>
+    <div class="card-footer">
+      <a href="#" class="btn btn-primary">Find Out More!</a>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-3">
+  <div class="card h-100">
+    <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+    <div class="card-body">
+      <h4 class="card-title">{% trans "Exponent"%}</h4>
+      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+    </div>
+    <div class="card-footer">
+      <a href="#" class="btn btn-primary">Find Out More!</a>
+    </div>
+  </div>
+</div>
+</div>
   <h2>Number of reservation: {{num_res}}</h2>
 
   {% get_chunk "yolo_chunk" as chunk%}

@@ -17,7 +17,7 @@ from django.utils import timezone
 from django_filters.views import FilterView
 from django.utils.translation import gettext_lazy as _
 
-from meeting.models import Pilot, ULM, Reservation
+from meeting.models import Pilot, ULM, Reservation, Meeting
 from meeting.form import (ReservationForm, UserEditMultiForm,
                           AjaxFuelServedForm, ULMForm,
                           StaffReservationEditForm)
@@ -31,12 +31,13 @@ def index(request):
     """View function for the reservation list."""
     num_res = Reservation.objects.count()
     res_list = Reservation.objects.all()
-
+    meeting = Meeting.objects.active()
     context = {
         'num_res': num_res,
         'res_list': res_list,
+        'meeting': meeting,
     }
-    return render(request, 'base_generic.html', context=context)
+    return render(request, 'index.html', context=context)
 
 
 class PaginatedFilterViews(View):
