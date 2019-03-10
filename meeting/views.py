@@ -3,9 +3,9 @@ from django.http import Http404, JsonResponse
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import (UpdateView, DeleteView, CreateView,)
+from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import View
@@ -38,6 +38,11 @@ def index(request):
         'meeting': meeting,
     }
     return render(request, 'index.html', context=context)
+
+
+@method_decorator(login_required, name='dispatch')
+class LoggedIndexView(TemplateView):
+    template_name = 'logged_index.html'
 
 
 class PaginatedFilterViews(View):
@@ -173,6 +178,7 @@ class StaffReservationValidation(PermissionRequiredMixin, View):
 ###############################################################################
 
 
+@method_decorator(login_required, name='dispatch')
 def pilot_change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)

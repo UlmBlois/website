@@ -11,6 +11,7 @@ urlpatterns = [
     path('pilot/<int:pk>/detail/', views.DetailPilot.as_view(), name='pilot'),
     path('pilot/<int:pk>/edit/', views.UpdateUserPilotView.as_view(),
          name='edit_pilot'),
+    path('pilot/', views.LoggedIndexView.as_view(), name='logged_index'),
     path('ulm/', views.PilotULMList.as_view(),
          name='pilot_ulm_list'),
     path('ulm/<int:pk>/delete/', views.DeletePilotULM.as_view(),
