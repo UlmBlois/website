@@ -7,7 +7,6 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from datetime import date
-import re
 from meeting.managers import MeetingManager, TimeSlotManager
 
 
@@ -215,7 +214,9 @@ class Reservation(models.Model):
     ulm = models.ForeignKey(ULM, on_delete=models.SET_NULL, null=True)
     reservation_number = models.CharField(max_length=32, unique=True)
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE,
-                                  related_name='reservation')
+                                  related_name='arrivals')
+    depart_time_slot = models.ForeignKey(TimeSlot, on_delete=models.SET_NULL,
+                                         related_name='departures', null=True)
     arrival = models.DateTimeField(null=True, default=None)
     fuel_reservation = models.PositiveIntegerField(default=0)
     fuel_served = models.PositiveIntegerField(default=0)
@@ -223,6 +224,13 @@ class Reservation(models.Model):
     passanger = models.BooleanField(default=False)
     esthetic_cup = models.BooleanField(default=False)
     to_sell = models.BooleanField(default=False)
+    confirmed = models.BooleanField(default=False)
+    canceled = models.BooleanField(default=False)
+    creation_date = models.DateField(null=True, blank=True)
+    origin_city = models.CharField(max_length=64, blank=True)
+    origin_city_code = models.CharField(max_length=32, blank=True)
+    origin_field = models.CharField(max_length=32, blank=True,
+                                    help_text=_("Airfield OACI code"))
 
     def validate_unique(self, exclude):
         super().validate_unique(exclude)
@@ -250,6 +258,8 @@ class Reservation(models.Model):
     def is_missing_informations(self):
         # TODO: a completer
         if not bool(self.ulm.pilot.insurance_file.name):
+            return True
+        if not self.confirmed:
             return True
         return False
 
