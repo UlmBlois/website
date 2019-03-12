@@ -12,8 +12,9 @@ class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
         fields = [
-                 'ulm', 'time_slot', 'fuel_reservation', 'flight_plan',
-                 'passanger', 'esthetic_cup', 'to_sell'
+                 'ulm', 'time_slot', 'depart_time_slot', 'origin_city',
+                 'origin_city_code', 'origin_field', 'fuel_reservation',
+                 'flight_plan', 'passanger', 'esthetic_cup', 'to_sell'
                  ]
 
     def __init__(self, *args, **kwargs):

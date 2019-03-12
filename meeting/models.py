@@ -136,7 +136,8 @@ class Pilot(models.Model):
         (CATLIN, CATLIN),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    insurance_company = models.CharField(max_length=64)
+    insurance_company = models.CharField(max_length=64,
+                                         choices=INSURANCE_CHOICES)
     insurance_number = models.CharField(max_length=64)
     licence_number = models.CharField(max_length=64)
     licence_file = models.FileField(null=True, blank=True)
@@ -200,9 +201,7 @@ class ULM(models.Model):
 def normalize_reservation(sender, instance, **kwargs):
     instance.radio_id = instance.radio_id.upper()
     instance.imatriculation = instance.imatriculation.upper()
-    # instance.radio_id = re.sub('[^A-Za-z0-9]+', '', instance.radio_id).upper()
-    # instance.imatriculation = re.sub(
-    #     '[^A-Za-z0-9]+', '', instance.imatriculation).upper()
+
 
 ###############################################################################
 #       RESERVATION
