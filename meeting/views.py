@@ -16,11 +16,9 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.utils import timezone
 from django_filters.views import FilterView
 from django.utils.translation import gettext_lazy as _
-
 from meeting.models import Pilot, ULM, Reservation, Meeting
 from meeting.form import (ReservationForm, UserEditMultiForm,
-                          AjaxFuelServedForm, ULMForm,
-                          StaffReservationEditForm)
+                          AjaxFuelServedForm, ULMForm)
 
 import uuid
 from datetime import datetime

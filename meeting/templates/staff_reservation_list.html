@@ -104,8 +104,10 @@
     <td>{{res.flight_plan}}</td>
     <td>{{res.esthetic_cup}}</td>
     <td class="center">
-      <a href="{% url 'staff_reservation_overview' res.pk %}" class="btn btn-primary">{% trans "Validate" %}</a>
-      <a href="#" class="btn btn-warning">{% trans "Print" %}</a>
+      {% if res.ulm is not None %}
+        <a href="{% url 'staff_reservation_overview' res.pk %}" class="btn btn-primary">{% trans "Validate" %}</a>
+        <a href="#" class="btn btn-warning">{% trans "Print" %}</a>
+      {% endif %}
     </td>
   </tr>
   {% endfor %}

@@ -6,7 +6,7 @@ from django_countries.fields import CountryField
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from datetime import date
+from datetime import date, datetime
 from meeting.managers import MeetingManager, TimeSlotManager
 
 
@@ -256,10 +256,39 @@ class Reservation(models.Model):
 
     def is_missing_informations(self):
         # TODO: a completer
+        if self.ulm is None or self.ulm.pilot is None:
+            return False
         if not bool(self.ulm.pilot.insurance_file.name):
             return True
         if not self.confirmed:
             return True
         return False
+
+    def is_on_time(self):
+        """Check if the pilot is arrived during his timeslot"""
+        arrival = datetime.now()
+        if self.arrival is not None:
+            arrival = self.arrival
+        delta1 = arrival - self.time_slot.start_date
+        delta2 = arrival - self.time_slot.end_date
+        if delta1.total_hours() > 4 or delta2.total_hours() > 4:
+            return False
+        else:
+            return True
+
+    def arrival_delay(self):
+        arrival = timezone.localtime(datetime.now())
+        if self.arrival is not None:
+            arrival = timezone.localtime(self.arrival)
+        delta1 = arrival - timezone.localtime(self.time_slot.start_date)
+        delta2 = arrival - timezone.localtime(self.time_slot.end_date)
+        delay = min(delta1, delta2)
+        return _("Expected pilot arrival during the time slot %(time_slot)s "
+                 " but arrive on %(arrival_day)s %(arrival_hour)s with a gap "
+                 "of %(delta)s hours") % {
+                 'time_slot': self.time_slot,
+                 'arrival_day': arrival.strftime("%A"),
+                 'arrival_hour': arrival.strftime("%I:%M"),
+                 'delta': delay.seconds/60}
 
     display_pilot.short_description = _('Pilot')
