@@ -266,29 +266,32 @@ class Reservation(models.Model):
 
     def is_on_time(self):
         """Check if the pilot is arrived during his timeslot"""
-        arrival = datetime.now()
-        if self.arrival is not None:
-            arrival = self.arrival
-        delta1 = arrival - self.time_slot.start_date
-        delta2 = arrival - self.time_slot.end_date
-        if delta1.total_hours() > 4 or delta2.total_hours() > 4:
-            return False
-        else:
-            return True
-
-    def arrival_delay(self):
-        arrival = timezone.localtime(datetime.now())
         if self.arrival is not None:
             arrival = timezone.localtime(self.arrival)
+        else:
+            arrival = timezone.localtime(datetime.now(timezone.utc))  # TODO Check timezone
+        delta1 = arrival - self.time_slot.start_date
+        delta2 = arrival - self.time_slot.end_date
+        if (delta1.seconds/60) < 4 or (delta2.seconds/60) < 4:
+            return True
+        else:
+            return False
+
+    def arrival_delay(self):
+        if self.arrival is not None:
+            arrival = timezone.localtime(self.arrival)
+        else:
+            arrival = timezone.localtime(datetime.now(timezone.utc))  # TODO Check timezone
         delta1 = arrival - timezone.localtime(self.time_slot.start_date)
         delta2 = arrival - timezone.localtime(self.time_slot.end_date)
         delay = min(delta1, delta2)
         return _("Expected pilot arrival during the time slot %(time_slot)s "
                  " but arrive on %(arrival_day)s %(arrival_hour)s with a gap "
-                 "of %(delta)s hours") % {
+                 "of %(delta)s hours. %(d1)s : %(d2)s") % {
                  'time_slot': self.time_slot,
                  'arrival_day': arrival.strftime("%A"),
                  'arrival_hour': arrival.strftime("%I:%M"),
-                 'delta': delay.seconds/60}
+                 'delta': delay.seconds/60,
+                 }
 
     display_pilot.short_description = _('Pilot')
