@@ -21,7 +21,6 @@
 <div class="alert alert-danger" role="alert">
   {{reservation.arrival_delay }}
 </div>
-
 {% endif%}
 
 {%  if reservation.is_missing_informations %}
@@ -29,15 +28,6 @@
   {% trans 'Some informations are missing in this reservation'%}
 </div>
 {% endif%}
-{% if not reservation.is_on_time %}
-<div class="alert alert-danger" role="alert">
-  {{reservation.arrival_delay }}
-</div>
-{% else %}
-<div class="alert alert-success" role="alert">
-  {{reservation.arrival_delay }}
-</div>
-{% endif %}
 
 <div class="card-deck">
 
