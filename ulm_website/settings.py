@@ -34,7 +34,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'amf$+%4%7-vr-dfrq#x$(#ge_491e=4uoered%ujytoq@o3og0')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['salon-ulm-blois.herokuapp.com', '127.0.0.1']
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
