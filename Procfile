@@ -1,1 +1,1 @@
-web: gunicorn ulm_website.wsgi
+web: gunicorn ulm_website.wsgi --log-file -
