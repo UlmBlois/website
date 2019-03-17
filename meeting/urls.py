@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 from . import views
-from meeting.filters import ReservationFilter
+# from meeting.filters import ReservationFilter
 
 
 urlpatterns = [
@@ -34,14 +34,14 @@ urlpatterns = [
 
 # STAFF url
 urlpatterns += [
-    path('staff/fuel/', views.FilteredReservationList.as_view(
-         filterset_class=ReservationFilter,
-         template_name='staff_fuel_reservation_list.html'),
-         name="staff_fuel_res_list"),
-    path('staff/reservation/', views.FilteredReservationList.as_view(
-        filterset_class=ReservationFilter,
-        template_name='staff_reservation_list.html'),
-        name='staff_reservation_list'),
+    # path('staff/fuel/', views.FilteredReservationList.as_view(
+    #      filterset_class=ReservationFilter,
+    #      template_name='staff_fuel_reservation_list.html'),
+    #      name="staff_fuel_res_list"),
+    # path('staff/reservation/', views.FilteredReservationList.as_view(
+    #     filterset_class=ReservationFilter,
+    #     template_name='staff_reservation_list.html'),
+    #     name='staff_reservation_list'),
     path('staff/reservation/validation/<int:pk>/overview/',
          views.StaffReservationValidationDetail.as_view(),
          name='staff_reservation_overview'),
