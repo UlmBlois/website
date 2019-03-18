@@ -1,5 +1,5 @@
 ulm_website/secret_settings.py
-
+staticfiles/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
