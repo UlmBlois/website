@@ -1,5 +1,5 @@
 """
-WSGI config for ulm_website project.
+WSGI config for salon-ulm-blois project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ulm_website.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'salon-ulm-blois.settings')
 
 application = get_wsgi_application()

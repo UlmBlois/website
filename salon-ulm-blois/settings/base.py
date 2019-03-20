@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 ]
 
-ROOT_URLCONF = 'ulm_website.urls'
+ROOT_URLCONF = 'salon-ulm-blois.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ulm_website.wsgi.application'
+WSGI_APPLICATION = 'salon-ulm-blois.wsgi.application'
 
 DATABASES = {
     'default': {
