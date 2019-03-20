@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     'betterforms',
     'translated_fields',
     'tinymce',
+    'whitenoise.runserver_nostatic',
+
 
     # Core
     'django.contrib.admin',
@@ -73,6 +75,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ulm_website.wsgi.application'
 
+DATABASES = {
+    'default': {}
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
