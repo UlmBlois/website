@@ -140,9 +140,9 @@ class Pilot(models.Model):
                                          choices=INSURANCE_CHOICES)
     insurance_number = models.CharField(max_length=64)
     licence_number = models.CharField(max_length=64)
-    licence_file = models.FileField(null=True, blank=True)
-    insurance_file = models.FileField(null=True, blank=True)
-    last_update = models.DateField(null=True, blank=True)  # insurance_file
+    # licence_file = models.FileField(null=True, blank=True)
+    # insurance_file = models.FileField(null=True, blank=True)
+    # last_update = models.DateField(null=True, blank=True)  # insurance_file
 
     class Meta:
         permissions = (
@@ -258,8 +258,8 @@ class Reservation(models.Model):
         # TODO: a completer
         if self.ulm is None or self.ulm.pilot is None:
             return False
-        if not bool(self.ulm.pilot.insurance_file.name):
-            return True
+        # if not bool(self.ulm.pilot.insurance_file.name):
+        #     return True
         if not self.confirmed:
             return True
         return False

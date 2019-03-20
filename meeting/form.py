@@ -41,8 +41,8 @@ class PilotForm(forms.ModelForm):
     class Meta:
         model = Pilot
         fields = [
-                 'insurance_company', 'insurance_number', 'insurance_file',
-                 'licence_number', 'licence_file'
+                 'insurance_company', 'insurance_number',
+                 'licence_number',
                  ]
         widgets = {
             'insurance_company': ListTextWidget(
