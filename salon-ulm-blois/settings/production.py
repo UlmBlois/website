@@ -3,7 +3,7 @@ import dj_database_url
 import django_heroku
 
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
