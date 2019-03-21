@@ -46,12 +46,10 @@ class Meeting(models.Model):
 
     @property
     def registration_open(self):
-        return (date.today() >= self.registration_start
-                and self.registration_end > date.today())
+        return self.registration_start <= date.today() <= self.registration_end
 
     def registration_open_at(self, date):
-        return (date >= self.registration_start
-                and self.registration_end > date)
+        return self.registration_start <= date <= self.registration_end
 
 
 ###############################################################################
