@@ -6,7 +6,7 @@ from django_countries.fields import CountryField
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from datetime import date, datetime
+from datetime import date
 from meeting.managers import MeetingManager, TimeSlotManager
 
 
@@ -259,38 +259,35 @@ class Reservation(models.Model):
         # TODO: a completer
         if self.ulm is None or self.ulm.pilot is None:
             return False
-        if not self.confirmed:
+        if self.ulm.pilot.licence_number == "":
+            return True
+        if self.ulm.pilot.insurance_number == "":
+            return True
+        if self.ulm.pilot.insurance_company == "":
             return True
         return False
 
+    def is_confirmed(self):
+        return self.confirmed
+
     def is_on_time(self):
         """Check if the pilot is arrived during his timeslot"""
-        if self.arrival is not None:
-            arrival = timezone.localtime(self.arrival)
-        else:
-            arrival = timezone.localtime(datetime.now(timezone.utc))  # TODO Check timezone
-        delta1 = arrival - self.time_slot.start_date
-        delta2 = arrival - self.time_slot.end_date
-        if (delta1.seconds/60) < 4 or (delta2.seconds/60) < 4:
+        if self.arrival_delay().seconds/3600 < 4:
             return True
         else:
             return False
 
     def arrival_delay(self):
         if self.arrival is not None:
-            arrival = timezone.localtime(self.arrival)
+            if timezone.is_naive(self.arrival):
+                arrival = timezone.make_aware(self.arrival)
+            else:
+                arrival = self.arrival
         else:
-            arrival = timezone.localtime(datetime.now(timezone.utc))  # TODO Check timezone
+            arrival = timezone.now()
         delta1 = arrival - timezone.localtime(self.time_slot.start_date)
         delta2 = arrival - timezone.localtime(self.time_slot.end_date)
         delay = min(delta1, delta2)
-        return _("Expected pilot arrival during the time slot %(time_slot)s "
-                 " but arrive on %(arrival_day)s %(arrival_hour)s with a gap "
-                 "of %(delta)s hours.") % {
-                 'time_slot': self.time_slot,
-                 'arrival_day': arrival.strftime("%A"),
-                 'arrival_hour': arrival.strftime("%I:%M"),
-                 'delta': delay.seconds/60,
-                 }
+        return delay
 
     display_pilot.short_description = _('Pilot')

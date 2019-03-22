@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 import datetime
 from meeting.models import Meeting, TimeSlot, Pilot, Reservation, ULM
 
@@ -54,28 +55,37 @@ class TimeSlotTest(TestCase):
     def test_clean(self):
         ts = TimeSlot()
         ts.meeting = Meeting.objects.get(name="1")
-        ts.start_date = datetime.datetime(2019, 8, 31, 10, 0)
-        ts.end_date = datetime.datetime(2019, 8, 31, 10, 30)
+        ts.start_date = timezone.make_aware(
+            datetime.datetime(2019, 8, 31, 10, 0))
+        ts.end_date = timezone.make_aware(
+            datetime.datetime(2019, 8, 31, 10, 30))
         ts.arrivals_slots = 5
         try:
             ts.clean()
         except ValidationError:
             self.fail("TimeSlot.clean raised ExceptionType unexpectedly!")
-        ts.start_date = datetime.datetime(2019, 8, 29, 10, 0)
+        ts.start_date = timezone.make_aware(
+            datetime.datetime(2019, 8, 29, 10, 0))
         with self.assertRaises(ValidationError):
             ts.clean()
-        ts.start_date = datetime.datetime(2019, 9, 2, 10, 0)
+        ts.start_date = timezone.make_aware(
+            datetime.datetime(2019, 9, 2, 10, 0))
         with self.assertRaises(ValidationError):
             ts.clean()
-        ts.start_date = datetime.datetime(2019, 8, 31, 10, 0)
-        ts.end_date = datetime.datetime(2019, 8, 29, 10, 30)
+        ts.start_date = timezone.make_aware(
+            datetime.datetime(2019, 8, 31, 10, 0))
+        ts.end_date = timezone.make_aware(
+            datetime.datetime(2019, 8, 29, 10, 30))
         with self.assertRaises(ValidationError):
             ts.clean()
-        ts.end_date = datetime.datetime(2019, 9, 2, 10, 30)
+        ts.end_date = timezone.make_aware(
+            datetime.datetime(2019, 9, 2, 10, 30))
         with self.assertRaises(ValidationError):
             ts.clean()
-        ts.end_date = datetime.datetime(2019, 8, 31, 10, 30)
-        ts.start_date = datetime.datetime(2019, 8, 31, 11, 0)
+        ts.end_date = timezone.make_aware(
+            datetime.datetime(2019, 8, 31, 10, 30))
+        ts.start_date = timezone.make_aware(
+            datetime.datetime(2019, 8, 31, 11, 0))
         with self.assertRaises(ValidationError):
             ts.clean()
 
@@ -109,13 +119,15 @@ class ReservationTest(TestCase):
                                end_date=datetime.date(2019, 9, 1),
                                active=True, fuel_aviable=100)
         TimeSlot.objects.create(meeting=Meeting.objects.get(name="1"),
-                                start_date=datetime.datetime(2019, 8, 31, 10),
-                                end_date=datetime.datetime(2019, 8, 31, 10, 30),
+                                start_date=timezone.make_aware(
+                                    datetime.datetime(2019, 8, 31, 10)),
+                                end_date=timezone.make_aware(
+                                    datetime.datetime(2019, 8, 31, 10, 30)),
                                 arrivals_slots=5)
         User.objects.create_user(username='testuser', password='12345')
         user = User.objects.get(username='testuser')
         Pilot.objects.filter(user=user).update(
-            insurance_company='AISCAIR',
+            # insurance_company='AISCAIR',
             insurance_number='12345',
             licence_number='54321')
         ULM.objects.create(pilot=Pilot.objects.get(user=user),
@@ -125,11 +137,13 @@ class ReservationTest(TestCase):
                            imatriculation_country='FR',
                            imatriculation='41-SOL',
                            radio_id='F-JLOV')
-        ts = TimeSlot.objects.get(start_date=datetime.datetime(
-                                                    2019, 8, 31, 10))
+        ts = TimeSlot.objects.get(start_date=timezone.make_aware(
+            datetime.datetime(2019, 8, 31, 10)))
         Reservation.objects.create(ulm=ULM.objects.get(radio_id='F-JLOV'),
                                    reservation_number='FAE1F6',
                                    time_slot=ts,
+                                   arrival=timezone.make_aware(
+                                    datetime.datetime(2019, 8, 31, 11)),
                                    depart_time_slot=ts,
                                    origin_city='Blois',
                                    origin_city_code='41000',
@@ -141,5 +155,23 @@ class ReservationTest(TestCase):
         res = Reservation.objects.get(reservation_number='FAE1F6')
         self.assertTrue(res.is_active())
         Meeting.objects.filter(name="1").update(active=False)
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+
         self.assertFalse(res.is_active())
         Meeting.objects.filter(name="1").update(active=True)
+
+    def test_is_missing_informations(self):  # TODO a completer
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+        self.assertTrue(res.is_missing_informations())
+        res.ulm.pilot.insurance_company = 'AISCAIR'
+        self.assertFalse(res.is_missing_informations())
+
+    def test_is_on_time(self):
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+        self.assertTrue(res.is_on_time())
+        res.arrival = timezone.make_aware(datetime.datetime(2019, 8, 31, 15))
+        self.assertFalse(res.is_on_time())
+
+    def test_arrival_delay(self):
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+        self.assertEqual(res.arrival_delay().seconds/60, 30)

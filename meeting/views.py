@@ -167,7 +167,7 @@ class StaffReservationValidation(PermissionRequiredMixin, View):
         self.pk = kwargs.pop('pk', None)
         reservation = get_object_or_404(Reservation, pk=self.pk)
         if reservation.arrival is None:
-            reservation.arrival = datetime.now()
+            reservation.arrival = timezone.now()
             reservation.save()
         return redirect('staff_reservation_overview', pk=self.pk)
 
