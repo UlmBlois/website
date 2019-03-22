@@ -76,11 +76,14 @@ class TimeSlot(models.Model):
 
     def clean(self, *args, **kwargs):
         # TODO: a completer
+        if self.start_date >= self.end_date:
+            raise ValidationError(_('TimeSlot start date is superior to '
+                                    'the end date'))
         if (self.start_date.date() < self.meeting.start_date
-                and self.meeting.end_date < self.start_date.date()):
+                or self.meeting.end_date < self.start_date.date()):
             raise ValidationError(_('Time slot start date out of meeteing'))
         if (self.end_date.date() < self.meeting.start_date
-                and self.meeting.end_date < self.end_date.date()):
+                or self.meeting.end_date < self.end_date.date()):
             raise ValidationError(_('Time slot end date out of meeteing'))
         super(TimeSlot, self).clean(*args, **kwargs)
 
@@ -256,8 +259,6 @@ class Reservation(models.Model):
         # TODO: a completer
         if self.ulm is None or self.ulm.pilot is None:
             return False
-        # if not bool(self.ulm.pilot.insurance_file.name):
-        #     return True
         if not self.confirmed:
             return True
         return False
