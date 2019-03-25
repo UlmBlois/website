@@ -1,0 +1,11 @@
+<div class="input-group">
+  {% for widget in widget.subwidgets %}
+    {% if forloop.first %}
+      <div class="input-group-prepend">
+        {% include widget.template_name %}
+      </div>
+    {% else %}
+      {% include widget.template_name %}
+    {% endif %}
+  {% endfor%}
+</div>

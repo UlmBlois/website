@@ -2,6 +2,7 @@ from django import forms
 
 
 class ListTextWidget(forms.TextInput):
+
     def __init__(self, data_list, name, *args, **kwargs):
         super(ListTextWidget, self).__init__(*args, **kwargs)
         self._name = name
@@ -15,5 +16,4 @@ class ListTextWidget(forms.TextInput):
         for item in self._list:
             data_list += '<option value="%s">' % item
         data_list += '</datalist>'
-
         return (text_html + data_list)

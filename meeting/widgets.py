@@ -1,4 +1,6 @@
 from django.forms import widgets
+from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 
 COUTRIES_PREFIX = (
     ('D-', 'D-'),  # Allemagne
@@ -34,6 +36,8 @@ COUTRIES_PREFIX = (
 
 
 class ULMRadioIdWidget(widgets.MultiWidget):
+        template_name = 'widgets/ulm_radio_id_widget.html'
+
         def __init__(self, attrs=None):
             _widgets = (
                 widgets.Select(attrs=attrs, choices=COUTRIES_PREFIX),
