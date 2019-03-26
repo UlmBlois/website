@@ -1,6 +1,4 @@
 from django.forms import widgets
-from django.utils.safestring import mark_safe
-from django.template.loader import render_to_string
 
 COUTRIES_PREFIX = (
     ('D-', 'D-'),  # Allemagne

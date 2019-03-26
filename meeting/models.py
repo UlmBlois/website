@@ -229,7 +229,7 @@ class Reservation(models.Model):
     creation_date = models.DateField(null=True, blank=True)
     origin_city = models.CharField(max_length=64, blank=True)
     origin_city_code = models.CharField(max_length=32, blank=True)
-    origin_field = models.CharField(max_length=32, blank=True,
+    origin_field = models.CharField(max_length=4, blank=True,
                                     help_text=_("Airfield OACI code"))
 
     def validate_unique(self, exclude):
