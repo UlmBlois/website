@@ -21,7 +21,6 @@ from meeting.form import (ReservationForm, UserEditMultiForm,
                           AjaxFuelServedForm, ULMForm)
 
 import uuid
-from datetime import datetime
 
 
 # TODO: tmp
@@ -56,6 +55,19 @@ class PaginatedFilterViews(View):
 ###############################################################################
 # STAFF related View
 ###############################################################################
+
+
+@method_decorator(login_required, name='dispatch')
+class FilteredULMList(PermissionRequiredMixin, PaginatedFilterViews,
+                      FilterView):
+    model = ULM
+    paginate_by = 2
+    permission_required = ('meeting.reservation_validation')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(time_slot__meeting__active=True).order_by(
+            '-reservation_number')
 
 
 @method_decorator(login_required, name='dispatch')

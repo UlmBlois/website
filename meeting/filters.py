@@ -1,5 +1,5 @@
 from django_filters import FilterSet, CharFilter, ModelChoiceFilter
-from meeting.models import Reservation, TimeSlot
+from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from django.utils.translation import gettext_lazy as _
 
 
@@ -27,3 +27,22 @@ class ReservationFilter(FilterSet):
                  'esthetic_cup',
                  'to_sell',
                  ]
+
+
+class ULMFilter(FilterSet):
+    class Meta:
+        model = ULM
+        fields = {
+                'constructor': ['icontains'],
+                'model': ['icontains'],
+                'type': ['exact'],
+                'imatriculation_country': ['exact'],
+                'imatriculation': ['exact'],
+                'radio_id': ['exact'],
+                }
+
+
+class PilotFilter(FilterSet):
+    class Meta:
+        model = Pilot
+        fields = []

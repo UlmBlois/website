@@ -1,0 +1,46 @@
+{% extends "base_logged.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans "Search ULM" %}
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<table id="ulm_table" class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>{% trans "Radio Id" %}</th>
+      <th>{% trans "Imatriculation" %}</th>
+      <th>{% trans "Imatriculation Country" %}</th>
+      <th>{% trans "Constructor"%}</th>
+      <th>{% trans "Model"%}</th>
+      <th>{% trans "Type"%}</th>
+      <th>{% trans "Pilot"%}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for ulm in ulm_list %}
+  <tr>
+    <td>{{ulm.radio_id}}</td>
+    <td>{{ulm.imatriculation}}</td>
+    <td>{{ulm.imatriculation_country}}</td>
+    <td>{{ulm.constructor}}</td>
+    <td>{{ulm.model}}</td>
+    <td>{{ulm.type}}</td>
+    <td>{{ulm.pilot}}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+
+{% include 'pagination.html' %}
+
+{% endblock %}
