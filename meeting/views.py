@@ -66,8 +66,7 @@ class FilteredULMList(PermissionRequiredMixin, PaginatedFilterViews,
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(time_slot__meeting__active=True).order_by(
-            '-reservation_number')
+        return queryset.order_by('-radio_id')
 
 
 @method_decorator(login_required, name='dispatch')

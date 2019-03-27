@@ -11,6 +11,41 @@
 {% block content %}
 
 
+<form method="get">
+  <div class="card card-body bg-light">
+  <div class="row">
+    <div class="form-group col-sm">
+        {{ filter.form.radio_id.label_tag }}
+        {% render_field filter.form.radio_id class="form-control" %}
+    </div>
+    <div class="form-group col-sm">
+        {{ filter.form.imatriculation.label_tag }}
+        {% render_field filter.form.imatriculation class="form-control" %}
+    </div>
+    <div class="form-group col-sm">
+        {{ filter.form.imatriculation_country.label_tag }}
+        {% render_field filter.form.imatriculation_country class="form-control" %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm">
+        {{ filter.form.constructor.label_tag }}
+        {% render_field filter.form.constructor class="form-control" %}
+    </div>
+    <div class="form-group col-sm">
+        {{ filter.form.model.label_tag }}
+        {% render_field filter.form.model class="form-control" %}
+    </div>
+    <div class="form-group col-sm">
+        {{ filter.form.type.label_tag }}
+        {% render_field filter.form.type class="form-control" %}
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Search</button>
+</div>
+</form>
+
 
 <table id="ulm_table" class="table table-hover">
   <thead class="thead-dark">
@@ -29,10 +64,10 @@
   <tr>
     <td>{{ulm.radio_id}}</td>
     <td>{{ulm.imatriculation}}</td>
-    <td>{{ulm.imatriculation_country}}</td>
+    <td>{{ulm.imatriculation_country.name}}</td>
     <td>{{ulm.constructor}}</td>
     <td>{{ulm.model}}</td>
-    <td>{{ulm.type}}</td>
+    <td>{{ulm.get_type_display}}</td>
     <td>{{ulm.pilot}}</td>
   </tr>
   {% endfor %}

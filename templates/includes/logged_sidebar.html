@@ -31,7 +31,10 @@
     <div id="collapseManagement" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">{% trans "General:" %}</h6>
-
+        <a class="collapse-item {% if url_name == 'staff_ulm_list' %}active{% endif %}" href="{% url 'staff_ulm_list'%}">
+          <i class="fas fa-fw fa-search"></i>
+          <span>{% trans "Search ULM" %}</span>
+        </a>
         <div class="collapse-divider"></div>
         <h6 class="collapse-header">{% trans "Arrivals & Fuel:" %}</h6>
         <a class="collapse-item {% if url_name == 'staff_reservation_list' %}active{% endif %}" href="{% url 'staff_reservation_list'%}">

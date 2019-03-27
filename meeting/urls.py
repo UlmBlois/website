@@ -36,8 +36,8 @@ urlpatterns = [
 urlpatterns += [
     path('staff/ulm/', views.FilteredULMList.as_view(
         filterset_class=ULMFilter,
-        template_name='staff_ulm_list.html',
-        name='staff_pilot_list')),
+        template_name='staff_ulm_list.html'),
+        name='staff_ulm_list'),
     path('staff/fuel/', views.FilteredReservationList.as_view(
          filterset_class=ReservationFilter,
          template_name='staff_fuel_reservation_list.html'),

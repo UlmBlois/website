@@ -167,14 +167,14 @@ class ULM(models.Model):
     AUTOGYRE = 'AU'
     HELICOPETER = 'HE'
     AEROSTAT = 'AE'
-    ULM_TYPE_CHOICE = (
+    ULM_TYPE_CHOICE = [
         (PARAMOTOR, _("Paramotor")),
         (PENDULAR, _("Pendular")),
         (MULTIAXES, _("Multiaxes")),
         (AUTOGYRE, _("Autogyre")),
         (HELICOPETER, _("Helicopter")),
         (AEROSTAT, _("Aerostat"))
-    )
+    ]
 
     pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE,
                               related_name='ulm')
@@ -194,6 +194,9 @@ class ULM(models.Model):
 
     def display_pilot(self):
         return f'{self.ulm.pilot}'
+
+    def get_type_display(self):
+        return dict(self.ULM_TYPE_CHOICE).get(self.type, '')
 
     display_pilot.short_description = 'Pilot'
 

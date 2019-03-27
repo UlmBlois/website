@@ -4,8 +4,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class ReservationFilter(FilterSet):
-    ulm__imatriculation = CharFilter(label=_('Imatriculation'))
-    ulm__radio_id = CharFilter(label=_('Radio id'))
+    ulm__imatriculation = CharFilter(label=_('Imatriculation'),
+                                     lookup_expr='icontains')
+    ulm__radio_id = CharFilter(label=_('Radio id'), lookup_expr='icontains')
     ulm__pilot__user__first_name = CharFilter(label=_('First name'),
                                               lookup_expr='icontains')
     ulm__pilot__user__last_name = CharFilter(label=_('Last name'),
@@ -30,16 +31,22 @@ class ReservationFilter(FilterSet):
 
 
 class ULMFilter(FilterSet):
+    constructor = CharFilter(label=_('Constructor'), lookup_expr='icontains')
+    model = CharFilter(label=_('model'), lookup_expr='icontains')
+    radio_id = CharFilter(label=_('Radio id'), lookup_expr='icontains')
+    imatriculation = CharFilter(label=_('Imatriculation'),
+                                lookup_expr='icontains')
+
     class Meta:
         model = ULM
-        fields = {
-                'constructor': ['icontains'],
-                'model': ['icontains'],
-                'type': ['exact'],
-                'imatriculation_country': ['exact'],
-                'imatriculation': ['exact'],
-                'radio_id': ['exact'],
-                }
+        fields = [
+                'constructor',
+                'model',
+                'type',
+                'imatriculation_country',
+                'imatriculation',
+                'radio_id',
+                ]
 
 
 class PilotFilter(FilterSet):
