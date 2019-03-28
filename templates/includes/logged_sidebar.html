@@ -35,6 +35,10 @@
           <i class="fas fa-fw fa-search"></i>
           <span>{% trans "Search ULM" %}</span>
         </a>
+        <a class="collapse-item {% if url_name == 'staff_pilot_list' %}active{% endif %}" href="{% url 'staff_pilot_list'%}">
+          <i class="fas fa-fw fa-search"></i>
+          <span>{% trans "Search pilot" %}</span>
+        </a>
         <div class="collapse-divider"></div>
         <h6 class="collapse-header">{% trans "Arrivals & Fuel:" %}</h6>
         <a class="collapse-item {% if url_name == 'staff_reservation_list' %}active{% endif %}" href="{% url 'staff_reservation_list'%}">

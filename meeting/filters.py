@@ -1,6 +1,7 @@
 from django_filters import FilterSet, CharFilter, ModelChoiceFilter
-from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from django.utils.translation import gettext_lazy as _
+from meeting.models import Reservation, TimeSlot, ULM, Pilot
+from meeting.fields import ListTextWidget
 
 
 class ReservationFilter(FilterSet):
@@ -50,6 +51,23 @@ class ULMFilter(FilterSet):
 
 
 class PilotFilter(FilterSet):
+    user__first_name = CharFilter(
+        label=_('First name'), lookup_expr='icontains')
+    user__last_name = CharFilter(label=_('Last name'),
+                                 lookup_expr='icontains')
+    insurance_company = CharFilter(label=_('Insurance company'),
+                                   lookup_expr='icontains',
+                                   widget=ListTextWidget(
+                                   data_list=
+                                   [x[1] for x in Pilot.INSURANCE_CHOICES],
+                                   name='insurance_company'))
+
     class Meta:
         model = Pilot
-        fields = []
+        fields = [
+                'user__first_name',
+                'user__last_name',
+                'insurance_company',
+                'insurance_number',
+                'licence_number',
+                ]

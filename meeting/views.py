@@ -70,6 +70,18 @@ class FilteredULMList(PermissionRequiredMixin, PaginatedFilterViews,
 
 
 @method_decorator(login_required, name='dispatch')
+class FilteredPilotList(PermissionRequiredMixin, PaginatedFilterViews,
+                        FilterView):
+    model = Pilot
+    paginate_by = 2
+    permission_required = ('meeting.reservation_validation')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.order_by('-user__first_name')
+
+
+@method_decorator(login_required, name='dispatch')
 class FilteredReservationList(PermissionRequiredMixin, PaginatedFilterViews,
                               FilterView):
     model = Reservation

@@ -1,0 +1,73 @@
+{% extends "base_logged.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans "Search Pilot" %}
+{% endblock %}
+
+
+{% block content %}
+
+
+<form method="get">
+  <div class="card card-body bg-light">
+  <div class="row">
+    <div class="form-group col-sm">
+        {{ filter.form.user__first_name.label_tag }}
+        {% render_field filter.form.user__first_name class="form-control" %}
+    </div>
+    <div class="form-group col-sm">
+        {{ filter.form.user__last_name.label_tag }}
+        {% render_field filter.form.user__last_name class="form-control" %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm">
+        {{ filter.form.insurance_company.label_tag }}
+        {% render_field filter.form.insurance_company class="form-control" %}
+    </div>
+    <div class="form-group col-sm">
+        {{ filter.form.insurance_number.label_tag }}
+        {% render_field filter.form.insurance_number class="form-control" %}
+    </div>
+    <div class="form-group col-sm">
+        {{ filter.form.licence_number.label_tag }}
+        {% render_field filter.form.licence_number class="form-control" %}
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Search</button>
+</div>
+</form>
+
+
+<table id="ulm_table" class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>{% trans "First name" %}</th>
+      <th>{% trans "Last name" %}</th>
+      <th>{% trans "Insurance company" %}</th>
+      <th>{% trans "Insurance number"%}</th>
+      <th>{% trans "Licence number"%}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for pilot in pilot_list %}
+  <tr>
+    <td>{{pilot.user.first_name}}</td>
+    <td>{{pilot.user.last_name}}</td>
+    <td>{{pilot.insurance_company}}</td>
+    <td>{{pilot.insurance_number}}</td>
+    <td>{{pilot.licence_file}}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+
+{% include 'pagination.html' %}
+
+{% endblock %}
