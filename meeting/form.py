@@ -24,7 +24,8 @@ class ReservationForm(forms.ModelForm):
         aviable = TimeSlot.objects.aviables()
         if self.instance.pk is not None:
             if not aviable.filter(pk=self.instance.time_slot.pk).exists():
-                aviable |= TimeSlot.objects.get(pk=self.instance.time_slot.pk)
+                aviable = aviable | TimeSlot.objects.filter(
+                    pk=self.instance.time_slot.pk)
         self.fields['time_slot'].queryset = aviable
 
 
