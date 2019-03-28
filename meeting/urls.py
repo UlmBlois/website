@@ -34,6 +34,8 @@ urlpatterns = [
 
 # STAFF url
 urlpatterns += [
+    path('staff/pilot/<int:pk>/overview/', views.PilotOverview.as_view(),
+         name='pilot_overview'),
     path('staff/ulm/', views.FilteredULMList.as_view(
         filterset_class=ULMFilter,
         template_name='staff_ulm_list.html'),

@@ -1,0 +1,71 @@
+{% extends "base_logged.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% blocktrans %} Pilot overview: {{pilot}} {% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="card mx-4">
+  <div class="card-body">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">{% trans 'First Name'%}</th>
+          <td>{{pilot.user.first_name}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans 'Last Name'%}</th>
+          <td>{{pilot.user.last_name}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans 'Licence Number'%}</th>
+          <td>{{pilot.licence_number}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans 'Insurance Company'%}</th>
+          <td>{{pilot.insurance_company}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans 'Insurance Number'%}</th>
+          <td>{{pilot.insurance_number}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col">
+    <div class="card mx-4">
+      <div class="card-header">
+          {% trans "ULM"%}
+        </div>
+      <ul class="list-group list-group-flush">
+        {% for ulm in pilot.ulm.all %}
+          <li class="list-group-item">{{ulm}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card mr-4">
+      <div class="card-header">
+          {% trans "Reservations"%}
+        </div>
+      <ul class="list-group list-group-flush">
+        {% for ulm in pilot.ulm.all %}
+          {% for res in ulm.reservations.all %}
+            <li class="list-group-item">{{res.time_slot.meeting}}: {{res}}</li>
+          {% endfor %}
+        {% endfor %}
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{% endblock%}

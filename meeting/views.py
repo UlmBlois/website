@@ -58,6 +58,15 @@ class PaginatedFilterViews(View):
 
 
 @method_decorator(login_required, name='dispatch')
+class PilotOverview(PermissionRequiredMixin, DetailView):
+    model = Pilot
+    pk_url_kwarg = 'pk'
+    context_object_name = 'pilot'
+    template_name = 'pilot_summary.html'
+    permission_required = ('meeting.reservation_validation')
+
+
+@method_decorator(login_required, name='dispatch')
 class FilteredULMList(PermissionRequiredMixin, PaginatedFilterViews,
                       FilterView):
     model = ULM

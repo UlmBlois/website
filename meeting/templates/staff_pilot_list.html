@@ -51,6 +51,7 @@
       <th>{% trans "Insurance company" %}</th>
       <th>{% trans "Insurance number"%}</th>
       <th>{% trans "Licence number"%}</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -61,6 +62,7 @@
     <td>{{pilot.insurance_company}}</td>
     <td>{{pilot.insurance_number}}</td>
     <td>{{pilot.licence_file}}</td>
+    <td><a href="{% url 'pilot_overview' pilot.pk%}"><i class="fas fa-fw fa-search"></i></a></td>
   </tr>
   {% endfor %}
   </tbody>

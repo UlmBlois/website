@@ -213,7 +213,8 @@ def normalize_reservation(sender, instance, **kwargs):
 
 class Reservation(models.Model):
     """Model reprenseting a reservation for an in flight arrival."""
-    ulm = models.ForeignKey(ULM, on_delete=models.SET_NULL, null=True)
+    ulm = models.ForeignKey(ULM, on_delete=models.SET_NULL, null=True,
+                            related_name="reservations")
     reservation_number = models.CharField(max_length=32, unique=True)
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE,
                                   related_name='arrivals')
