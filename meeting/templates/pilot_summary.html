@@ -9,6 +9,9 @@
 {% block content %}
 
 <div class="card mx-4">
+  <div class="card-header">
+      {% trans "Profile"%}
+    </div>
   <div class="card-body">
     <table class="table">
       <tbody>
@@ -45,7 +48,7 @@
         </div>
       <ul class="list-group list-group-flush">
         {% for ulm in pilot.ulm.all %}
-          <li class="list-group-item">{{ulm}}</li>
+          <li class="list-group-item d-flex w-100 justify-content-between"><span>{{ulm.constructor}} {{ulm.model}}</span><span>{{ulm}}</span></li>
         {% endfor %}
       </ul>
     </div>
@@ -58,7 +61,7 @@
       <ul class="list-group list-group-flush">
         {% for ulm in pilot.ulm.all %}
           {% for res in ulm.reservations.all %}
-            <li class="list-group-item">{{res.time_slot.meeting}}: {{res}}</li>
+            <li class="list-group-item d-flex w-100 justify-content-between"><span>{{res.time_slot.meeting}}</span> <span>{{res}}</span></li>
           {% endfor %}
         {% endfor %}
 
