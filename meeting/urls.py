@@ -34,6 +34,12 @@ urlpatterns = [
 
 # STAFF url
 urlpatterns += [
+    path('staff/pilot/<int:pilot>/edit/ulm/<int:pk>/',
+         views.StaffUpdatePilotULM.as_view(),
+         name='staff_update_ulm'),
+    path('staff/pilot/<int:pk>/edit/profile/',
+         views.StaffUpdatePilot.as_view(),
+         name="staff_update_pilot"),
     path('staff/pilot/<int:pk>/overview/', views.PilotOverview.as_view(),
          name='pilot_overview'),
     path('staff/ulm/', views.FilteredULMList.as_view(

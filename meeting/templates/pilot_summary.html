@@ -11,6 +11,7 @@
 <div class="card mx-4">
   <div class="card-header">
       {% trans "Profile"%}
+      <a href="{% url 'staff_update_pilot' pk=pilot.pk%}"><span class="fas fa-pen float-right"></span></a>
     </div>
   <div class="card-body">
     <table class="table">
@@ -46,11 +47,15 @@
       <div class="card-header">
           {% trans "ULM"%}
         </div>
-      <ul class="list-group list-group-flush">
+      <div class="list-group list-group-flush">
         {% for ulm in pilot.ulm.all %}
-          <li class="list-group-item d-flex w-100 justify-content-between"><span>{{ulm.constructor}} {{ulm.model}}</span><span>{{ulm}}</span></li>
+          <div class="list-group-item d-flex w-100 justify-content-between">
+            <span>{{ulm.constructor}} {{ulm.model}}</span>
+            <span>{{ulm}}</span>
+            <a href="{% url 'staff_update_ulm' pilot=pilot.pk pk=ulm.pk%}"><span class="fas fa-pen float-right"></span></a>
+          </div>
         {% endfor %}
-      </ul>
+      </div>
     </div>
   </div>
   <div class="col">
@@ -58,14 +63,18 @@
       <div class="card-header">
           {% trans "Reservations"%}
         </div>
-      <ul class="list-group list-group-flush">
+      <div class="list-group list-group-flush">
         {% for ulm in pilot.ulm.all %}
           {% for res in ulm.reservations.all %}
-            <li class="list-group-item d-flex w-100 justify-content-between"><span>{{res.time_slot.meeting}}</span> <span>{{res}}</span></li>
+            <div class="list-group-item d-flex w-100 justify-content-between">
+              <span>{{res.time_slot.meeting}}</span>
+              <span>{{res}}</span>
+              <span class="fas fa-pen float-right">
+            </div>
           {% endfor %}
         {% endfor %}
 
-      </ul>
+      </div>
     </div>
   </div>
 </div>

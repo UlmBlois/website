@@ -67,6 +67,55 @@ class PilotOverview(PermissionRequiredMixin, DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
+class StaffUpdatePilot(PermissionRequiredMixin, UpdateView):
+    model = Pilot
+    pk_url_kwarg = 'pk'
+    form_class = UserEditMultiForm
+    template_name = 'base_logged_form.html'
+    permission_required = ('meeting.reservation_validation')
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk', None)
+        return reverse('pilot_overview',
+                       kwargs={'pk': pk})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(instance={
+            'user_form': self.object.user,
+            'pilot_form': self.object,
+        })
+        return kwargs
+
+    def form_valid(self, form):
+        form['user_form'].save()
+        pilot = form['pilot_form'].save(commit=False)
+        pilot.last_update = timezone.now()
+        pilot.save()
+        return redirect(self.get_success_url())
+
+
+@method_decorator(login_required, name='dispatch')
+class StaffUpdatePilotULM(PermissionRequiredMixin, UpdateView):
+    model = ULM
+    form_class = ULMForm
+    pk_url_kwarg = 'pk'
+    context_object_name = 'ulm'
+    template_name = 'base_logged_form.html'
+    permission_required = ('meeting.reservation_validation')
+
+    def get_success_url(self):
+        pilot_pk = self.kwargs.get('pilot', None)
+        return reverse('pilot_overview',
+                       kwargs={'pk': pilot_pk})
+
+    def form_valid(self, form):
+        ulm = form.save(commit=False)
+        ulm.save()
+        return redirect(self.get_success_url())
+
+
+@method_decorator(login_required, name='dispatch')
 class FilteredULMList(PermissionRequiredMixin, PaginatedFilterViews,
                       FilterView):
     model = ULM
