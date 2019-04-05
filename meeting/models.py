@@ -167,12 +167,12 @@ class ULM(models.Model):
     HELICOPETER = 'HE'
     AEROSTAT = 'AE'
     ULM_TYPE_CHOICE = [
-        (PARAMOTOR, _("Paramotor")),
-        (PENDULAR, _("Pendular")),
-        (MULTIAXES, _("Multiaxes")),
-        (AUTOGYRE, _("Autogyre")),
-        (HELICOPETER, _("Helicopter")),
-        (AEROSTAT, _("Aerostat"))
+        (PARAMOTOR, _("Powered Paraglider")),
+        (PENDULAR, _("Flex Wings")),
+        (MULTIAXES, _("Fixed Wings")),
+        (AUTOGYRE, _("Rotor Wings")),
+        (HELICOPETER, _("Helicopters")),
+        (AEROSTAT, _("Balloons and Airships"))
     ]
 
     pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE,

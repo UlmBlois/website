@@ -15,7 +15,7 @@
 
 {% if reservation.arrival is not None %}
 <div class="alert alert-success" role="alert">
-  {% trans 'This reservation as been validate on:'%} {{reservation.arrival}}
+  {% trans 'This reservation has been validated on:'%} {{reservation.arrival}}
 </div>
 {% elif not reservation.is_on_time %}
 <div class="alert alert-danger" role="alert">

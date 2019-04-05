@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 18:07+0200\n"
+"POT-Creation-Date: 2019-04-05 18:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,27 +73,27 @@ msgid "Can validate arrival and fuel reservation"
 msgstr ""
 
 #: meeting/models.py:170
-msgid "Paramotor"
+msgid "Powered Paraglider"
 msgstr ""
 
 #: meeting/models.py:171
-msgid "Pendular"
+msgid "Flex Wings"
 msgstr ""
 
 #: meeting/models.py:172
-msgid "Multiaxes"
+msgid "Fixed Wings"
 msgstr ""
 
 #: meeting/models.py:173
-msgid "Autogyre"
+msgid "Rotor Wings"
 msgstr ""
 
 #: meeting/models.py:174
-msgid "Helicopter"
+msgid "Helicopters"
 msgstr ""
 
 #: meeting/models.py:175
-msgid "Aerostat"
+msgid "Balloons and Airships"
 msgstr ""
 
 #: meeting/models.py:236
@@ -309,7 +309,7 @@ msgid "Reservation"
 msgstr ""
 
 #: meeting/templates/staff_reservation_validation.html:18
-msgid "This reservation as been validate on:"
+msgid "This reservation has been validated on:"
 msgstr ""
 
 #: meeting/templates/staff_reservation_validation.html:29
