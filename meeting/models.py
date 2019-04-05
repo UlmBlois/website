@@ -226,7 +226,7 @@ class Reservation(models.Model):
     flight_plan = models.BooleanField(default=False)
     passanger = models.BooleanField(default=False)
     esthetic_cup = models.BooleanField(default=False)
-    to_sell = models.BooleanField(default=False)
+    for_sale = models.BooleanField(default=False)
     confirmed = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
     creation_date = models.DateField(null=True, blank=True)

@@ -14,7 +14,7 @@ class ReservationForm(forms.ModelForm):
         fields = [
                  'ulm', 'time_slot', 'depart_time_slot', 'origin_city',
                  'origin_city_code', 'origin_field', 'fuel_reservation',
-                 'flight_plan', 'passanger', 'esthetic_cup', 'to_sell'
+                 'flight_plan', 'passanger', 'esthetic_cup', 'for_sale'
                  ]
 
     def __init__(self, *args, **kwargs):
@@ -87,7 +87,7 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
     passanger = forms.BooleanField(required=False)
     flight_plan = forms.BooleanField(required=False)
     esthetic_cup = forms.BooleanField(required=False)
-    to_sell = forms.BooleanField(required=False)
+    for_sale = forms.BooleanField(required=False)
     # ULM
     ulm_id = forms.IntegerField(widget=forms.HiddenInput)
     constructor = forms.CharField()
@@ -119,7 +119,7 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
         self.fields['passanger'].initial = reservation.passanger
         self.fields['flight_plan'].initial = reservation.flight_plan
         self.fields['esthetic_cup'].initial = reservation.esthetic_cup
-        self.fields['to_sell'].initial = reservation.to_sell
+        self.fields['for_sale'].initial = reservation.for_sale
         self.fields['ulm'].queryset = ULM.objects.filter(pilot=pilot)
         self.fields['ulm'].initial = reservation.ulm
         # ulm
@@ -156,7 +156,7 @@ class StaffReservationEditForm(forms.Form):  # TODO a completer
             res.passanger = data['passanger']
             res.flight_plan = data['flight_plan']
             res.esthetic_cup = data['esthetic_cup']
-            res.to_sell = data['to_sell']
+            res.for_sale = data['for_sale']
             res.save()
 
         if ulm is not None:

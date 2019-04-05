@@ -1,7 +1,7 @@
 {% load i18n %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'index' %}">ULMBLois</a>
+    <a class="navbar-brand" href="{% url 'index' %}">ULMBlois</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,7 +12,7 @@
           <a href="{% url 'on_site'%}" class="nav-link">{% trans "On Site" %}</a>
         </li>
         <li class="nav-item {% if url_name == 'pilot_informations' %}active{% endif %}">
-          <a href="{% url 'pilot_informations'%}" class="nav-link">{% trans "Pilotes Informations" %}</a>
+          <a href="{% url 'pilot_informations'%}" class="nav-link">{% trans "Pilotes Information" %}</a>
         </li>
         <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
           <a href="{% url 'about' %}" class="nav-link">{% trans "About" %}</a>

@@ -27,7 +27,7 @@ class ReservationFilter(FilterSet):
                  'flight_plan',
                  'passanger',
                  'esthetic_cup',
-                 'to_sell',
+                 'for_sale',
                  ]
 
 
