@@ -7,8 +7,9 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from datetime import date
-from meeting.managers import MeetingManager, TimeSlotManager
+from datetime import date, timedelta
+from meeting.managers import (MeetingManager, TimeSlotManager,
+                              ReservationManager)
 
 
 ###############################################################################
@@ -24,6 +25,7 @@ class Meeting(models.Model):
     registration_end = models.DateField()
     start_date = models.DateField()
     end_date = models.DateField()
+    confirmation_reminder_date = models.DateField(null=True, blank=True)
     active = models.BooleanField(default=False)
     fuel_aviable = models.PositiveIntegerField(default=0)
 
@@ -34,6 +36,9 @@ class Meeting(models.Model):
         return str(self.name)
 
     def save(self, *args, **kwargs):
+        if self.confirmation_reminder_date is None:
+            self.confirmation_reminder_date = self.start_date - timedelta(7)
+
         if self.active:
             # select all other active items
             qs = type(self).objects.filter(active=True)
@@ -240,6 +245,8 @@ class Reservation(models.Model):
     origin_city_code = models.CharField(max_length=32, blank=True)
     origin_field = models.CharField(max_length=4, blank=True,
                                     help_text=_("Airfield OACI code"))
+
+    objects = ReservationManager()
 
     def validate_unique(self, exclude):
         super().validate_unique(exclude)

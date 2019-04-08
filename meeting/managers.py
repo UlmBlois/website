@@ -24,3 +24,12 @@ class TimeSlotManager(models.Manager):
             if (arrival_count + depart_count) < s.arrivals_slots:
                 selected.append(s.pk)
         return self.filter(pk__in=selected)
+
+
+class ReservationManager(models.Manager):
+    def actives(self):
+        return self.filter(time_slot__meeting__active=True)
+
+    def unconfirmed_actives(self):
+        return self.filter(time_slot__meeting__active=True,
+                           confirmed=False)
