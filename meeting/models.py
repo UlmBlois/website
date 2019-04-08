@@ -4,6 +4,7 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django_countries.fields import CountryField
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from datetime import date
@@ -158,6 +159,11 @@ class Pilot(models.Model):
 #       ULM
 ###############################################################################
 
+radio_id_validator = RegexValidator(
+            r'^[0-9a-zA-Z]{1,2}-[0-9a-zA-Z]{3,4}$',
+            _('Invalid format, ex: F-JAZ3 or OO-F3S'))
+
+
 class ULM(models.Model):
     """Model reprenseting an ULM."""
     PARAMOTOR = 'PA'
@@ -186,7 +192,7 @@ class ULM(models.Model):
     )
     imatriculation_country = CountryField(default='FR')
     imatriculation = models.CharField(max_length=6)
-    radio_id = models.CharField(max_length=6)
+    radio_id = models.CharField(max_length=6, validators=[radio_id_validator])
 
     def __str__(self):
         return str(self.radio_id)
