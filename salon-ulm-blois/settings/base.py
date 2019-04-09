@@ -55,6 +55,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates/base'),
             os.path.join(BASE_DIR, 'templates/includes'),
+            os.path.join(BASE_DIR, 'templates/emails'),
             os.path.join(BASE_DIR, 'templates/registration'),
             os.path.join(BASE_DIR, 'meeting/templates/includes/ajax'),
             os.path.join(BASE_DIR, 'meeting/templates/widgets'),
