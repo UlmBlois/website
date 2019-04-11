@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
+
 from betterforms.multiform import MultiModelForm
 from django_countries.fields import CountryField
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
@@ -26,7 +28,20 @@ class ReservationForm(forms.ModelForm):
             if not aviable.filter(pk=self.instance.time_slot.pk).exists():
                 aviable = aviable | TimeSlot.objects.filter(
                     pk=self.instance.time_slot.pk)
+            if not aviable.filter(pk=self.instance.depart_time_slot.pk).exists():
+                aviable = aviable | TimeSlot.objects.filter(
+                    pk=self.instance.depart_time_slot.pk)
         self.fields['time_slot'].queryset = aviable
+
+    def clean(self):
+        cleaned_data = super().clean()
+        ts = cleaned_data.get("time_slot")
+        dts = cleaned_data.get("depart_time_slot")
+
+        if ts == dts:
+            msg = _('Arrival and depart time slot should be different')
+            self.add_error('time_slot', msg)
+            self.add_error('depart_time_slot', msg)
 
 
 class UserEditForm(forms.ModelForm):

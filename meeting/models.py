@@ -258,6 +258,12 @@ class Reservation(models.Model):
                     _('You allready have a reservation for this meeting,'
                       ' please edit or delete the existing one'))
 
+    def clean(self, *args, **kwargs):
+        if self.time_slot.pk == self.depart_time_slot.pk:
+            raise ValidationError(_('Arrival and depart time slot should'
+                                    ' be different'))
+        super(Reservation, self).clean(*args, **kwargs)
+
     def is_active(self):
         return self.time_slot.meeting.active
 
