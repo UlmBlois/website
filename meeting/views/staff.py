@@ -77,6 +77,15 @@ class StaffUpdatePilotULM(PermissionRequiredMixin, UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
+class StaffReservationUpdatePilotULM(StaffUpdatePilotULM):
+
+    def get_success_url(self):
+        res_pk = self.kwargs.get('res', None)
+        return reverse('staff_reservation_overview',
+                       kwargs={'pk': res_pk})
+
+
+@method_decorator(login_required, name='dispatch')
 class FilteredULMList(PermissionRequiredMixin, PaginatedFilterViews,
                       FilterView):
     model = ULM
@@ -156,26 +165,6 @@ class StaffReservationUpdatePilot(PermissionRequiredMixin, UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class StaffReservationUpdatePilotULM(PermissionRequiredMixin, UpdateView):
-    model = ULM
-    form_class = ULMForm
-    pk_url_kwarg = 'pk'
-    context_object_name = 'ulm'
-    template_name = 'base_logged_form.html'
-    permission_required = ('meeting.reservation_validation')
-
-    def get_success_url(self):
-        res_pk = self.kwargs.get('res', None)
-        return reverse('staff_reservation_overview',
-                       kwargs={'pk': res_pk})
-
-    def form_valid(self, form):
-        ulm = form.save(commit=False)
-        ulm.save()
-        return redirect(self.get_success_url())
-
-
-@method_decorator(login_required, name='dispatch')
 class StaffReservationUpdate(PermissionRequiredMixin, UpdateView):
     model = Reservation
     form_class = ReservationForm
@@ -198,6 +187,15 @@ class StaffReservationUpdate(PermissionRequiredMixin, UpdateView):
         res = form.save(commit=False)
         res.save()
         return redirect(self.get_success_url())
+
+
+@method_decorator(login_required, name='dispatch')
+class StaffUpdatePilotReservation(StaffReservationUpdate):
+
+    def get_success_url(self):
+        pilot_pk = self.kwargs.get('pilot', None)
+        return reverse('pilot_overview',
+                       kwargs={'pk': pilot_pk})
 
 
 @method_decorator(login_required, name='dispatch')
