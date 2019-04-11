@@ -16,7 +16,8 @@ class Command(BaseCommand):
         meeting = Meeting.objects.active()
         subject = _("Confirm your reservation")
         from_email = 'noreply@salon-ulm-blois.fr'
-        message = render_to_string(self.email_template)
+        context = {'meeting': meeting}
+        message = render_to_string(self.email_template, context=context)
         email_pack = []
         if meeting.confirmation_reminder_date == date.today():
             unconfirmed_res = Reservation.objects.unconfirmed_actives()
