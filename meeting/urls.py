@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 from . import views
-from meeting.filters import ReservationFilter, ULMFilter, PilotFilter
+# from meeting.filters import ReservationFilter, ULMFilter, PilotFilter
 
 
 urlpatterns = [
@@ -42,22 +42,22 @@ urlpatterns += [
          name="staff_update_pilot"),
     path('staff/pilot/<int:pk>/overview/', views.PilotOverview.as_view(),
          name='pilot_overview'),
-    path('staff/ulm/', views.FilteredULMList.as_view(
-        filterset_class=ULMFilter,
-        template_name='staff_ulm_list.html'),
-        name='staff_ulm_list'),
-    path('staff/pilot/', views.FilteredPilotList.as_view(
-        filterset_class=PilotFilter,
-        template_name='staff_pilot_list.html'),
-        name='staff_pilot_list'),
-    path('staff/fuel/', views.FilteredReservationList.as_view(
-         filterset_class=ReservationFilter,
-         template_name='staff_fuel_reservation_list.html'),
-         name="staff_fuel_res_list"),
-    path('staff/reservation/', views.FilteredReservationList.as_view(
-        filterset_class=ReservationFilter,
-        template_name='staff_reservation_list.html'),
-        name='staff_reservation_list'),
+    # path('staff/ulm/', views.FilteredULMList.as_view(
+    #     filterset_class=ULMFilter,
+    #     template_name='staff_ulm_list.html'),
+    #     name='staff_ulm_list'),
+    # path('staff/pilot/', views.FilteredPilotList.as_view(
+    #     filterset_class=PilotFilter,
+    #     template_name='staff_pilot_list.html'),
+    #     name='staff_pilot_list'),
+    # path('staff/fuel/', views.FilteredReservationList.as_view(
+    #      filterset_class=ReservationFilter,
+    #      template_name='staff_fuel_reservation_list.html'),
+    #      name="staff_fuel_res_list"),
+    # path('staff/reservation/', views.FilteredReservationList.as_view(
+    #     filterset_class=ReservationFilter,
+    #     template_name='staff_reservation_list.html'),
+    #     name='staff_reservation_list'),
     path('staff/reservation/validation/<int:pk>/overview/',
          views.StaffReservationValidationDetail.as_view(),
          name='staff_reservation_overview'),
