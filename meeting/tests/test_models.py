@@ -150,6 +150,14 @@ class ReservationTest(TestCase):
                                    origin_field='LF-41COQ')
 
 #  TODO test validate_unique
+    def test_clean(self):
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+        ts = TimeSlot.objects.get(start_date=timezone.make_aware(
+            datetime.datetime(2019, 8, 31, 10)))
+        res.time_slot = ts
+        res.depart_time_slot = ts
+        with self.assertRaises(ValidationError):
+            res.clean()
 
     def test_is_active(self):
         res = Reservation.objects.get(reservation_number='FAE1F6')

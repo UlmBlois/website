@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 18:16+0200\n"
+"POT-Creation-Date: 2019-04-12 08:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/management/commands/send_reservation_confirmation_request.py:10
+msgid ""
+"Send an email asking users to confirm their reservation (active meeting "
+"only). The email will be sent only if on the specified date in the meeting "
+"settings."
+msgstr ""
+
+#: core/management/commands/send_reservation_confirmation_request.py:17
+msgid "Confirm your reservation"
+msgstr ""
 
 #: meeting/filters.py:8 meeting/filters.py:38
 #: meeting/templates/staff_fuel_reservation_list.html:83
@@ -52,61 +63,69 @@ msgstr ""
 msgid "Insurance company"
 msgstr ""
 
-#: meeting/models.py:21
+#: meeting/form.py:42 meeting/models.py:263
+msgid "Arrival and depart time slot should be different"
+msgstr ""
+
+#: meeting/models.py:23
 msgid "Enter the meeting name (e.g Salon Ulm 2018)"
 msgstr ""
 
-#: meeting/models.py:80
+#: meeting/models.py:86
 msgid "TimeSlot start date is superior to the end date"
 msgstr ""
 
-#: meeting/models.py:84
+#: meeting/models.py:90
 msgid "Time slot start date out of meeteing"
 msgstr ""
 
-#: meeting/models.py:87
+#: meeting/models.py:93
 msgid "Time slot end date out of meeteing"
 msgstr ""
 
-#: meeting/models.py:149
+#: meeting/models.py:155
 msgid "Can validate arrival and fuel reservation"
 msgstr ""
 
-#: meeting/models.py:170
+#: meeting/models.py:169
+msgid "Invalid format, ex: F-JAZ3 or OO-F3S"
+msgstr ""
+
+#: meeting/models.py:181
 msgid "Powered Paraglider"
 msgstr ""
 
-#: meeting/models.py:171
+#: meeting/models.py:182
 msgid "Flex Wings"
 msgstr ""
 
-#: meeting/models.py:172
+#: meeting/models.py:183
 msgid "Fixed Wings"
 msgstr ""
 
-#: meeting/models.py:173
+#: meeting/models.py:184
 msgid "Rotor Wings"
 msgstr ""
 
-#: meeting/models.py:174
+#: meeting/models.py:185
 msgid "Helicopters"
 msgstr ""
 
-#: meeting/models.py:175
+#: meeting/models.py:186
 msgid "Balloons and Airships"
 msgstr ""
 
-#: meeting/models.py:236
+#: meeting/models.py:247
 msgid "Airfield OACI code"
 msgstr ""
 
-#: meeting/models.py:245
+#: meeting/models.py:258
 msgid ""
 "You allready have a reservation for this meeting, please edit or delete the "
 "existing one"
 msgstr ""
 
-#: meeting/models.py:296 meeting/templates/staff_fuel_reservation_list.html:82
+#: meeting/models.py:315 meeting/templates/staff_fuel_reservation_list.html:82
 #: meeting/templates/staff_reservation_list.html:82
 #: meeting/templates/staff_reservation_validation.html:37
 #: meeting/templates/staff_ulm_list.html:59
@@ -359,11 +378,11 @@ msgstr ""
 msgid "Imatriculation Country"
 msgstr ""
 
-#: meeting/views.py:268
+#: meeting/views/pilot.py:31
 msgid "Your password was successfully updated!"
 msgstr ""
 
-#: meeting/views.py:271
+#: meeting/views/pilot.py:34
 msgid "Please correct the error below."
 msgstr ""
 
@@ -471,11 +490,11 @@ msgstr ""
 msgid "Plane procedures"
 msgstr ""
 
-#: salon-ulm-blois/settings/base.py:112
+#: salon-ulm-blois/settings/base.py:113
 msgid "English"
 msgstr ""
 
-#: salon-ulm-blois/settings/base.py:113
+#: salon-ulm-blois/settings/base.py:114
 msgid "French"
 msgstr ""
 
@@ -503,6 +522,14 @@ msgstr ""
 #: templates/base/base_logged.html:90 templates/includes/logged_navbar.html:31
 #: templates/includes/navbar.html:40
 msgid "Logout"
+msgstr ""
+
+#: templates/emails/base_email.html:75
+msgid "This message is not display correctly?"
+msgstr ""
+
+#: templates/emails/base_email.html:75
+msgid "View it in your browser"
 msgstr ""
 
 #: templates/includes/footer.html:8
