@@ -28,7 +28,7 @@
   						-->
   						<table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="500" id="emailHeader">
 
-  							<!-- HEADER ROW // -->
+  							<!-- HEADER ROW // view in browser-->
   							<tr>
   								<td align="center" valign="top">
   									<!-- CENTERING TABLE // -->
@@ -90,10 +90,131 @@
   									<!-- // CENTERING TABLE -->
   								</td>
   							</tr>
-  							<!-- // END -->
+  							<!-- // END HEADER ROW // view in browser -->
 
   						</table>
-  						<!-- // END -->
+  						<!-- // END EMAIL HEADER-->
+
+              <!-- EMAIL BODY // -->
+  						<!--
+  							The table "emailBody" is the email's container.
+  							Its width can be set to 100% for a color band
+  							that spans the width of the page.
+  						-->
+  						<table bgcolor="#FFFFFF"  border="0" cellpadding="0" cellspacing="0" width="500" id="emailBody">
+                <!-- HEADER ZONE //-->
+                <tr>
+  								<td align="center" valign="top">
+  									<!-- CENTERING TABLE // -->
+  									<!--
+  										The centering table keeps the content
+  										tables centered in the emailBody table,
+  										in case its width is set to 100%.
+  									-->
+  									<table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" bgcolor="#3498ab">
+  										<tr>
+  											<td align="center" valign="top">
+  												<!-- FLEXIBLE CONTAINER // -->
+  												<!--
+  													The flexible container has a set width
+  													that gets overridden by the media query.
+  													Most content tables within can then be
+  													given 100% widths.
+  												-->
+  												<table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
+  													<tr>
+  														<td align="center" valign="top" width="500" class="flexibleContainerCell">
+
+  															<!-- CONTENT TABLE // -->
+  															<!--
+  															The content table is the first element
+  																that's entirely separate from the structural
+  																framework of the email.
+  															-->
+  															<table border="0" cellpadding="30" cellspacing="0" width="100%">
+  																<tr>
+  																	<td align="center" valign="top" class="textContent">
+  																		{% block header_zone%}
+  																		<h1 style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;">{% trans 'Salon ULM Blois'%}</h1>
+  																		{% endblock %}
+  																	</td>
+  																</tr>
+  															</table>
+  															<!-- // CONTENT TABLE -->
+
+  														</td>
+  													</tr>
+  												</table>
+  												<!-- // FLEXIBLE CONTAINER -->
+  											</td>
+  										</tr>
+  									</table>
+  									<!-- // CENTERING TABLE -->
+  								</td>
+  							</tr>
+                <!-- // END HEADER ZONZ-->
+                {% block content%}
+
+                {% endblock %}
+
+                <!-- FOOTER ZONE //-->
+                <tr>
+                  <td align="center" valign="top">
+                    <!-- CENTERING TABLE // -->
+                    <!--
+                      The centering table keeps the content
+                      tables centered in the emailBody table,
+                      in case its width is set to 100%.
+                    -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" bgcolor="#3498ab">
+                      <tr>
+                        <td align="center" valign="top">
+                          <!-- FLEXIBLE CONTAINER // -->
+                          <!--
+                            The flexible container has a set width
+                            that gets overridden by the media query.
+                            Most content tables within can then be
+                            given 100% widths.
+                          -->
+                          <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
+                            <tr>
+                              <td align="center" valign="top" width="500" class="flexibleContainerCell">
+
+                                <!-- CONTENT TABLE // -->
+                                <!--
+                                The content table is the first element
+                                  that's entirely separate from the structural
+                                  framework of the email.
+                                -->
+                                <table border="0" cellpadding="30" cellspacing="0" width="100%">
+                                  <tr>
+                                    <td align="center" valign="top" class="textContent">
+                                      {% block footer_zone%}
+                                      <h1 style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;">{% trans 'Footer Zone'%}</h1>
+                                      {% endblock %}
+                                    </td>
+                                  </tr>
+                                </table>
+                                <!-- // CONTENT TABLE -->
+
+                              </td>
+                            </tr>
+                          </table>
+                          <!-- // FLEXIBLE CONTAINER -->
+                        </td>
+                      </tr>
+                    </table>
+                    <!-- // CENTERING TABLE -->
+                  </td>
+                </tr>
+                <!-- // END FOOTER ZONE -->
+
+              </table>
+              <!-- // END EMAIL BODY -->
+
+              <!-- FOOTER ROW // -->
+              {% include 'includes/base/footer_row.html'%}
+
             </td>
           </tr>
         </table>

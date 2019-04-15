@@ -1,6 +1,12 @@
 {% extends "emails/base_email.html"%}
+{% load i18n %}
 
 
 {% block content %}
-please confirm your reservation for {{ meeting }}.
+{% include 'emails/includes/base/empty_row.html' %}
+{% include 'emails/includes/base/divider_row.html'%}
+{% include 'emails/includes/base/empty_row.html' %}
+{% url 'index' as link_index%}
+{% trans "Confirmation" as link_text%}
+{% include 'emails/includes/base/button_row.html' with link=link_index text=link_text%}
 {% endblock %}

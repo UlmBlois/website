@@ -1,0 +1,45 @@
+{% with textcolor=textcolor|default:"#5F5F5F" bgcolor=bgcolor|default:"#FFFFFF"%}
+<!-- EMPTY ROW -->
+<tr>
+  <td align="center" valign="top">
+    <!-- CENTERING TABLE // -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center" valign="top">
+          <!-- FLEXIBLE CONTAINER // -->
+          <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
+            <tr>
+              <td align="center" valign="top" width="500" class="flexibleContainerCell">
+                <table border="0" cellpadding="30" cellspacing="0" width="100%">
+                  <tr>
+                    <td align="center" valign="top" bgcolor={{bgcolor}}>
+
+                      <!-- CONTENT TABLE // -->
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                          <td valign="top" class="textContent" >
+                            <div style="text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;margin-top:3px;color:{{textcolor}};line-height:135%;">
+                              {% block content %}
+
+                              {% endblock%}
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                      <!-- // CONTENT TABLE -->
+
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <!-- // FLEXIBLE CONTAINER -->
+        </td>
+      </tr>
+    </table>
+    <!-- // CENTERING TABLE -->
+  </td>
+</tr>
+
+{% endwith %}
