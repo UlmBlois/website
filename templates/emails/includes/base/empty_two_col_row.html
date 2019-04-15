@@ -1,0 +1,54 @@
+{% with textcolor=textcolor|default:"#5F5F5F" bgcolor=bgcolor|default:"#FFFFFF" %}
+{% with leftbgcolor=leftbgcolor|default:bgcolor rightbgcolor=rightbgcolor|default:bgcolor %}
+<tr>
+  <td align="center" valign="top">
+    <!-- CENTERING TABLE // -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center" valign="top">
+          <!-- FLEXIBLE CONTAINER // -->
+          <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
+            <tr>
+              <td valign="top" width="500" class="flexibleContainerCell">
+
+                <!-- CONTENT TABLE // -->
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td align="left" valign="top" class="flexibleContainerBox" style="background-color:{{leftbgcolor}};">
+                      <table border="0" cellpadding="30" cellspacing="0" width="100%" style="max-width:100%;">
+                        <tr>
+                          <td align="left" class="textContent">
+                            {% block leftCol%}
+dfsdgdsgsdgsdg <br> gzgerdsgqgdsqv <br> rgergeg
+                            {% endblock %}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td align="right" valign="top" class="flexibleContainerBox" style="background-color:{{rightbgcolor}};">
+                      <table class="flexibleContainerBoxNext" border="0" cellpadding="30" cellspacing="0" width="100%" style="max-width:100%;">
+                        <tr>
+                          <td align="left" class="textContent">
+                            {% block rightCol %}
+sgsdgsdgdsgdsgdsgs <br> qfdgdsgfdgfdsg <br> cscdsgfvzeg
+                            {% endblock %}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <!-- // CONTENT TABLE -->
+
+              </td>
+            </tr>
+          </table>
+          <!-- // FLEXIBLE CONTAINER -->
+        </td>
+      </tr>
+    </table>
+    <!-- // CENTERING TABLE -->
+  </td>
+</tr>
+{% endwith %}
+{% endwith %}
