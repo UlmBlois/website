@@ -1,0 +1,78 @@
+{% load i18n %}
+{% with bgcolor=bgcolor|default:"#E1E1E1" textcolor=textcolor|default:"#828282" text=text|default:""%}
+
+<!-- EMAIL HEADER // -->
+<!--
+  The table "emailBody" is the email's container.
+  Its width can be set to 100% for a color band
+  that spans the width of the page.
+-->
+<table bgcolor="{{bgcolor}}" border="0" cellpadding="0" cellspacing="0" width="500" id="emailHeader">
+
+  <!-- HEADER ROW // view in browser-->
+  <tr>
+    <td align="center" valign="top">
+      <!-- CENTERING TABLE // -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center" valign="top">
+            <!-- FLEXIBLE CONTAINER // -->
+            <table border="0" cellpadding="10" cellspacing="0" width="500" class="flexibleContainer">
+              <tr>
+                <td valign="top" width="500" class="flexibleContainerCell">
+
+                  <!-- CONTENT TABLE // -->
+                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <!--
+                        The "invisibleIntroduction" is the text used for short preview
+                        of the email before the user opens it (50 characters max). Sometimes,
+                        you do not want to show this message depending on your design but this
+                        text is highly recommended.
+
+                        You do not have to worry if it is hidden, the next <td> will automatically
+                        center and apply to the width 100% and also shrink to 50% if the first <td>
+                        is visible.
+                      -->
+                      <td align="left" valign="middle" id="invisibleIntroduction" class="flexibleContainerBox" style="display:none !important; mso-hide:all;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;">
+                          <tr>
+                            <td align="left" class="textContent">
+                              <div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:{{textcolor}};text-align:center;line-height:120%;">
+                                {% block hiddenDescription %}
+                                {{text}}
+                                {% endblock %}
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td align="right" valign="middle" class="flexibleContainerBox">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;">
+                          <tr>
+                            <td align="left" class="textContent">
+                              <!-- CONTENT // -->
+                              <div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:{{textcolor}};text-align:center;line-height:120%;">
+                                {% trans 'This message is not display correctly?'%} <a href="#" target="_blank" style="text-decoration:none;border-bottom:1px solid {{textcolor}};color:{{textcolor}};"><span style="color:{{textcolor}};">{% trans 'View it in your browser.' %}</span></a>
+                             </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <!-- // FLEXIBLE CONTAINER -->
+          </td>
+        </tr>
+      </table>
+      <!-- // CENTERING TABLE -->
+    </td>
+  </tr>
+  <!-- // END HEADER ROW // view in browser -->
+
+</table>
+<!-- // END EMAIL HEADER -->
+{% endwith %}

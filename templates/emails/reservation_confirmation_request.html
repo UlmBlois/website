@@ -3,10 +3,14 @@
 
 
 {% block content %}
-{% include 'emails/includes/base/empty_row.html' %}
-{% include 'emails/includes/base/divider_row.html'%}
-{% include 'emails/includes/base/empty_row.html' %}
+{% include 'emails/includes/base/text_row_with_title.html' with text="text text text"%}
+
 {% url 'index' as link_index%}
 {% trans "Confirmation" as link_text%}
 {% include 'emails/includes/base/button_row.html' with link=link_index text=link_text%}
+
+{% include 'emails/includes/base/divider_row.html'%}
+
+{% include 'emails/includes/base/text_row_with_title.html' with text="text text text"%}
+
 {% endblock %}
