@@ -1,13 +1,18 @@
+# Python
+from datetime import date, timedelta
+# Django
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from django_countries.fields import CountryField
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from datetime import date, timedelta
+# Third party
+from django_countries.fields import CountryField
+from phonenumber_field.modelfields import PhoneNumberField
+# Owned
 from meeting.managers import (MeetingManager, TimeSlotManager,
                               ReservationManager)
 
@@ -146,6 +151,7 @@ class Pilot(models.Model):
     insurance_company = models.CharField(max_length=64)
     insurance_number = models.CharField(max_length=64)
     licence_number = models.CharField(max_length=64)
+    phone_number = PhoneNumberField(null=True)  # TODO: remove null=True in production 
     # licence_file = models.FileField(null=True, blank=True)
     # insurance_file = models.FileField(null=True, blank=True)
     # last_update = models.DateField(null=True, blank=True)  # insurance_file

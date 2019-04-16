@@ -1,9 +1,12 @@
+# Django
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-
+# Third Party
 from betterforms.multiform import MultiModelForm
 from django_countries.fields import CountryField
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
+# Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from meeting.fields import ListTextWidget
 from meeting.widgets import ULMRadioIdWidget
@@ -58,12 +61,13 @@ class PilotForm(forms.ModelForm):
         model = Pilot
         fields = [
                  'insurance_company', 'insurance_number',
-                 'licence_number',
+                 'licence_number', 'phone_number'
                  ]
         widgets = {
             'insurance_company': ListTextWidget(
                             data_list=[x[1] for x in Pilot.INSURANCE_CHOICES],
-                            name='insurance_company')
+                            name='insurance_company'),
+            'phone_number': PhoneNumberPrefixWidget()
         }
 
 
