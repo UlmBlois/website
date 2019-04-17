@@ -13,66 +13,7 @@
 
 {% block content %}
 
-<form method="get">
-  <div class="card card-body bg-light">
-  <div class="row">
-    <div class="form-group col-sm">
-        {{ filter.form.reservation_number.label_tag }}
-        {% render_field filter.form.reservation_number class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
-        {{ filter.form.ulm__pilot__user__first_name.label_tag }}
-        {% render_field filter.form.ulm__pilot__user__first_name class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
-        {{ filter.form.ulm__pilot__user__last_name.label_tag }}
-        {% render_field filter.form.ulm__pilot__user__last_name class="form-control" %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-sm">
-        {{ filter.form.ulm__imatriculation.label_tag }}
-        {% render_field filter.form.ulm__imatriculation class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
-        {{ filter.form.ulm__radio_id.label_tag }}
-        {% render_field filter.form.ulm__radio_id class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
-        {{ filter.form.time_slot.label_tag }}
-        {% render_field filter.form.time_slot class="form-control" %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-sm">
-        {{ filter.form.fuel_reservation.label_tag }}
-        {% render_field filter.form.fuel_reservation class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
-        {{ filter.form.flight_plan.label_tag }}
-        {% render_field filter.form.flight_plan class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
-        {{ filter.form.passanger.label_tag }}
-        {% render_field filter.form.passanger class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
-        {{ filter.form.esthetic_cup.label_tag }}
-        {% render_field filter.form.esthetic_cup class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
-        {{ filter.form.for_sale.label_tag }}
-        {% render_field filter.form.for_sale class="form-control" %}
-    </div>
-  </div>
-
-
-  <!-- {% include 'form.html' with form=filter.form %} -->
-
-  <button type="submit" class="btn btn-primary">Search</button>
-</div>
-
-</form>
+{% include 'includes/filters/reservations_filter.html' with filter=filter%}
 
 <table id="reservation_table" class="table table-hover">
   <thead class="thead-dark">

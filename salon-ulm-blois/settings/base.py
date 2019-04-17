@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     'tinymce',
     'whitenoise.runserver_nostatic',
     'phonenumber_field',
-
+    'crispy_forms',
 
     # Core
     'django.contrib.admin',
@@ -176,3 +176,5 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 PHONENUMBER_DB_FORMAT = 'E164'
 PHONENUMBER_DEFAULT_REGION = 'FR'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
