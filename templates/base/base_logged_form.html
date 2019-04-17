@@ -1,5 +1,6 @@
 {% extends "base_logged.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block content%}
 
@@ -21,14 +22,8 @@
 {% endif %}
 
 <div class="container">
-  <form method="post" class="user">
-    {% csrf_token %}
-    {% block form %}
-      {% include 'form.html' with form=form %}
-    {% endblock %}
+  {% crispy form %}
 
-    <input type="submit" class="btn btn-success" value="{% trans "Submit" %}"></input>
-  </form>
 </div>
 
 {%  block afterform %}
