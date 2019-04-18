@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 # Third Party
 from betterforms.multiform import MultiModelForm
-from django_countries.fields import CountryField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Field
@@ -176,103 +175,12 @@ class UserEditMultiForm(MultiModelForm):
         'pilot_form': PilotForm,
     }
 
-
-class StaffReservationEditForm(forms.Form):  # TODO a completer
-    # user
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    email = forms.EmailField()
-    # Pilot
-    insurance_number = forms.CharField()
-    licence_number = forms.CharField()
-    pilot_id = forms.IntegerField(widget=forms.HiddenInput)
-    # Reservation
-    reservation_id = forms.IntegerField(widget=forms.HiddenInput)
-    ulm = forms.ModelChoiceField(queryset=ULM.objects.none())
-    time_slot = forms.ModelChoiceField(queryset=TimeSlot.objects.none())
-    passanger = forms.BooleanField(required=False)
-    flight_plan = forms.BooleanField(required=False)
-    esthetic_cup = forms.BooleanField(required=False)
-    for_sale = forms.BooleanField(required=False)
-    # ULM
-    ulm_id = forms.IntegerField(widget=forms.HiddenInput)
-    constructor = forms.CharField()
-    model = forms.CharField()
-    type = forms.ChoiceField(choices=ULM.ULM_TYPE_CHOICE)
-    imatriculation_country = CountryField().formfield()
-    imatriculation = forms.CharField()  # TODO find max lenght
-    radio_id = forms.CharField()  # TODO find max lenght
-
     def __init__(self, *args, **kwargs):
-        reservation = kwargs.pop('reservation')
-        super(StaffReservationEditForm, self).__init__(*args, **kwargs)
-        # Pilot and User
-        pilot = reservation.ulm.pilot
-        self.fields['insurance_number'].initial = pilot.insurance_number
-        self.fields['licence_number'].initial = pilot.licence_number
-        self.fields['pilot_id'].initial = pilot.pk
-        self.fields['first_name'].initial = pilot.user.first_name
-        self.fields['last_name'].initial = pilot.user.last_name
-        self.fields['email'].initial = pilot.user.email
-        # Reservation
-        self.fields['reservation_id'].initial = reservation.pk
-        aviable_time_slot = TimeSlot.objects.aviables()
-        if not aviable_time_slot.filter(pk=reservation.time_slot.pk).exists():
-            aviable_time_slot |= TimeSlot.objects.get(
-                                                pk=reservation.time_slot.pk)
-        self.fields['time_slot'].queryset = aviable_time_slot
-        self.fields['time_slot'].initial = reservation.time_slot
-        self.fields['passanger'].initial = reservation.passanger
-        self.fields['flight_plan'].initial = reservation.flight_plan
-        self.fields['esthetic_cup'].initial = reservation.esthetic_cup
-        self.fields['for_sale'].initial = reservation.for_sale
-        self.fields['ulm'].queryset = ULM.objects.filter(pilot=pilot)
-        self.fields['ulm'].initial = reservation.ulm
-        # ulm
-        ulm = reservation.ulm
-        self.fields['ulm_id'].initial = ulm.pk
-        self.fields['constructor'].initial = ulm.constructor
-        self.fields['model'].initial = ulm.model
-        self.fields['type'].initial = ulm.type
-        self.fields['imatriculation_country'].initial = ulm.imatriculation_country
-        self.fields['imatriculation'].initial = ulm.imatriculation
-        self.fields['radio_id'].initial = ulm.radio_id
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Submit'))
 
-    def save(self):
-        data = self.cleaned_data
-        pilot = Pilot.objects.get(pk=data['pilot_id'])
-        if pilot is not None:
-            pilot.insurance_number = data['insurance_number']
-            pilot.licence_number = data['licence_number']
-            pilot.save()
-
-        user = User.objects.get(pk=pilot.user.pk)
-        if user is not None:
-            user.first_name = data['first_name']
-            user.last_name = data['last_name']
-            user.email = data['email']
-            user.save()
-
-        res = Reservation.objects.get(pk=data['reservation_id'])
-        ulm = ULM.objects.get(pk=data['ulm_id'])
-        if res is not None:
-            res.ulm = ulm
-            ts = TimeSlot.objects.get(pk=data['time_slot'].pk)
-            res.time_slot = ts
-            res.passanger = data['passanger']
-            res.flight_plan = data['flight_plan']
-            res.esthetic_cup = data['esthetic_cup']
-            res.for_sale = data['for_sale']
-            res.save()
-
-        if ulm is not None:
-            ulm.constructor = data['constructor']
-            ulm.model = data['model']
-            ulm.type = data['type']
-            ulm.imatriculation_country = data['imatriculation_country']
-            ulm.imatriculation = data['imatriculation']
-            ulm.radio_id = data['radio_id']
-            ulm.save()
 
 ###############################################################################
 # AJAX forms
