@@ -10,34 +10,7 @@
 
 <div class="card mx-4">
   <div class="card-body">
-    <table class="table">
-      <tbody>
-        <tr>
-          <th scope="row">{% trans 'First Name'%}</th>
-          <td>{{pilot.user.first_name}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Last Name'%}</th>
-          <td>{{pilot.user.last_name}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Licence Number'%}</th>
-          <td>{{pilot.licence_number}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Insurance Company'%}</th>
-          <td>{{pilot.insurance_company}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Insurance Number'%}</th>
-          <td>{{pilot.insurance_number}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Phone Number'%}</th>
-          <td>{{pilot.phone_number}}</td>
-        </tr>
-      </tbody>
-    </table>
+    {% include 'includes/elements/pilot_info.html' with pilot=pilot%}
     <a href= "{% url 'change_password'%}" class="btn btn-primary">{% trans "Change Password" %}</a>
     <a href= "{% url 'edit_pilot' pilot.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
   </div>

@@ -12,32 +12,9 @@
   <div class="card-header">
       {% trans "Profile"%}
       <a href="{% url 'staff_update_pilot' pk=pilot.pk%}"><span class="fas fa-pen float-right"></span></a>
-    </div>
+  </div>
   <div class="card-body">
-    <table class="table">
-      <tbody>
-        <tr>
-          <th scope="row">{% trans 'First Name'%}</th>
-          <td>{{pilot.user.first_name}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Last Name'%}</th>
-          <td>{{pilot.user.last_name}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Licence Number'%}</th>
-          <td>{{pilot.licence_number}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Insurance Company'%}</th>
-          <td>{{pilot.insurance_company}}</td>
-        </tr>
-        <tr>
-          <th scope="row">{% trans 'Insurance Number'%}</th>
-          <td>{{pilot.insurance_number}}</td>
-        </tr>
-      </tbody>
-    </table>
+    {% include 'includes/elements/pilot_info.html' with pilot=pilot%}
   </div>
 </div>
 <br>
