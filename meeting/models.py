@@ -128,7 +128,7 @@ class Pilot(models.Model):
     BENACQUISTA = "BENACQUISTA"
     BHPA = "BHPA"
     CATLIN = "CATLIN INSURANCE"
-    # TODO a completer, allow usage of text input with choices selection
+
     INSURANCE_CHOICES = (
         (AELIA, AELIA),
         (AEPAL, AEPAL),
@@ -151,7 +151,7 @@ class Pilot(models.Model):
     insurance_company = models.CharField(max_length=64)
     insurance_number = models.CharField(max_length=64)
     licence_number = models.CharField(max_length=64)
-    phone_number = PhoneNumberField(null=True)  # TODO: remove null=True in production 
+    phone_number = PhoneNumberField(null=True)  # TODO: remove null=True in production
     # licence_file = models.FileField(null=True, blank=True)
     # insurance_file = models.FileField(null=True, blank=True)
     # last_update = models.DateField(null=True, blank=True)  # insurance_file

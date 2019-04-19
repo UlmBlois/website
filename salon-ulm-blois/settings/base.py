@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'meeting.apps.MeetingConfig',
     'pages.apps.PagesConfig',
+    'radio_call_sign_field.apps.RadioCallSignFieldConfig'
 ]
 
 MIDDLEWARE = [

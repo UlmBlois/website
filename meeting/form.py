@@ -11,7 +11,7 @@ from crispy_forms.layout import Layout, Submit, Row, Column, Field
 # Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from meeting.fields import ListTextWidget
-from meeting.widgets import ULMRadioIdWidget
+from radio_call_sign_field.widgets import CallSingPrefixWidget
 
 
 class ReservationForm(forms.ModelForm):
@@ -144,7 +144,7 @@ class ULMForm(forms.ModelForm):
                  'constructor', 'model', 'type', 'imatriculation_country',
                  'imatriculation', 'radio_id']
         widgets = {
-            'radio_id': ULMRadioIdWidget,
+            'radio_id': CallSingPrefixWidget,
         }
 
     def __init__(self, *args, **kwargs):
