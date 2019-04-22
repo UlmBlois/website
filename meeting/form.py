@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from betterforms.multiform import MultiModelForm
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column, Field
+from crispy_forms.layout import Layout, Submit, Row, Column, Field, MultiWidgetField
 
 # Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
@@ -164,7 +164,11 @@ class ULMForm(forms.ModelForm):
                 Column('imatriculation', css_class='from-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            Field('radio_id', css_class='form-group'),
+            Row(
+                MultiWidgetField('radio_id', css_class='form-group',
+                                 attrs=({'class': 'form-control'}, {'class': 'form-control'})),
+                css_class='form-row'
+            ),
             Submit('submit', _('Submit')),
         )
 

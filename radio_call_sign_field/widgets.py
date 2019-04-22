@@ -65,7 +65,7 @@ class CallSingPrefixWidget(MultiWidget):
             start = [x[1] for x in COUTRIES_PREFIX
                      if value.startswith(x[1])]
             if len(start) == 0:
-                return [None, value]
+                return [None, ""]
             id = value.replace(start[0], '')
             return [start[0], id]
         return [None, ""]

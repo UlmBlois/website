@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
-from django.core.validators import RegexValidator
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 # Third party
@@ -15,6 +14,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Owned
 from meeting.managers import (MeetingManager, TimeSlotManager,
                               ReservationManager)
+from radio_call_sign_field.modelfields import RadioCallSignField
 
 
 ###############################################################################
@@ -170,10 +170,6 @@ class Pilot(models.Model):
 #       ULM
 ###############################################################################
 
-radio_id_validator = RegexValidator(
-            r'^[0-9a-zA-Z]{1,2}-[0-9a-zA-Z]{3,4}$',
-            _('Invalid format, ex: F-JAZ3 or OO-F3S'))
-
 
 class ULM(models.Model):
     """Model reprenseting an ULM."""
@@ -203,7 +199,7 @@ class ULM(models.Model):
     )
     imatriculation_country = CountryField(default='FR')
     imatriculation = models.CharField(max_length=6)
-    radio_id = models.CharField(max_length=6, validators=[radio_id_validator])
+    radio_id = RadioCallSignField()
 
     def __str__(self):
         return str(self.radio_id)
