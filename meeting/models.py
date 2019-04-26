@@ -258,7 +258,7 @@ class Reservation(models.Model):
                     time_slot__meeting=self.time_slot.meeting).count() > 0:
                 raise ValidationError(
                     _('You allready have a reservation for this meeting,'
-                      ' please edit or delete the existing one'))
+                      ' please edit the existing one'))
 
     def clean(self, *args, **kwargs):
         if self.time_slot.pk == self.depart_time_slot.pk:

@@ -83,7 +83,18 @@ urlpatterns += [
 urlpatterns += [
     path('ajax/reservation/fuelserved/<int:pk>/', views.ajax_fuel_served,
          name="ajax_fuel_served"),
-    path('ajax/load_ulm/', views.ajax_load_pilot_ulm_list,
-         name="ajax_ulm_option_list"),
     path('ajax/add_ulm/<int:pk>/', views.ajax_add_ulm, name="ajax_add_ulm"),
+    path('ajax/reservation/cancel/<int:pk>', views.ajax_cancel_reservation,
+         name='ajax_cancel_reservation'),
+    path('ajax/reservation/confirm/<int:pk>', views.ajax_confirm_reservation,
+         name='ajax_confirm_reservation'),
+]
+
+# TODO: test to remove
+urlpatterns += [
+    path('test/email/base/', views.BaseEmailView.as_view(),
+         name='base_email'),
+    path('test/email/res_confirmation/',
+         views.ReservationConfirmationEmail.as_view(),
+         name='res_conf_email')
 ]

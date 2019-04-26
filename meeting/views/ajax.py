@@ -1,12 +1,14 @@
 # django
-from django.shortcuts import get_object_or_404, render
-from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 # owned
 from meeting.models import Reservation
 from .utils import save_reservation_form
+
 from meeting.form import AjaxFuelServedForm, ULMForm
-from meeting.models import ULM, Pilot
+from meeting.models import Pilot
 
 
 def ajax_fuel_served(request, pk):
@@ -17,14 +19,6 @@ def ajax_fuel_served(request, pk):
             form = AjaxFuelServedForm(instance=reservation)
         return save_reservation_form(request, form,
                                      'reservation_fuel_served_update.html')
-
-
-def ajax_load_pilot_ulm_list(request):
-        pilot_pk = request.GET.get('pilot')
-        ulm_list = ULM.objects.filter(pilot__pk=pilot_pk).order_by(
-            '-immatriculation')
-        return render(request, 'pilot_ulm_list_dropdown.html',
-                      {'list': ulm_list})
 
 
 def ajax_add_ulm(request, pk):
@@ -45,3 +39,22 @@ def ajax_add_ulm(request, pk):
     data['html_form'] = render_to_string('add_pilot_ulm.html',
                                          context, request=request)
     return JsonResponse(data)
+
+
+# TODO call with ajax and make the appropriate change to the view and the template
+def ajax_cancel_reservation(request, pk):
+    res = get_object_or_404(Reservation, pk=pk)
+    res.canceled = not res.canceled
+    if(res.canceled and res.confirmed):
+        res.confirmed = False
+    res.save()
+    print(res)
+    return HttpResponseRedirect(reverse('pilot_reservation'))
+
+
+# TODO call with ajax and make the appropriate change to the view and the template
+def ajax_confirm_reservation(request, pk):
+    res = get_object_or_404(Reservation, pk=pk)
+    res.confirmed = True
+    res.save()
+    return redirect(reverse('pilot_reservation'))

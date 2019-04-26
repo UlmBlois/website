@@ -21,24 +21,3 @@ class CallSignField(CharField):
         if val in validators.EMPTY_VALUES:
             return self.empty_value
         return val
-
-# class PhoneNumberField(CharField):
-#     default_error_messages = {"invalid": _("Enter a valid phone number.")}
-#     default_validators = [validate_international_phonenumber]
-#
-#     def __init__(self, *args, **kwargs):
-#         self.region = kwargs.pop("region", None)
-#         validate_region(self.region)
-#         super(PhoneNumberField, self).__init__(*args, **kwargs)
-#         self.widget.input_type = "tel"
-#
-#     def to_python(self, value):
-#         phone_number = to_python(value, region=self.region)
-#
-#         if phone_number in validators.EMPTY_VALUES:
-#             return self.empty_value
-#
-#         if phone_number and not phone_number.is_valid():
-#             raise ValidationError(self.error_messages["invalid"])
-#
-# return phone_number
