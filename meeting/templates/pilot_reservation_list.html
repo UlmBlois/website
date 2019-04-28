@@ -19,6 +19,10 @@
     {% if res.is_active %}
     <a href="{% url 'pilot_update_reservation' res.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
     <a href="{% url 'pilot_delete_reservation' res.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "Delete" %}</a>
+    <form action="{% url 'ajax_cancel_reservation' pk=res.pk %}" method=POST>
+      {% csrf_token %}
+      <button class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "Cancel" %}</button>
+    </form>
     {% endif %}
   </div>
 </div>

@@ -69,7 +69,7 @@ class ReservationForm(forms.ModelForm):
     def _init_form_fields(self, pilot):
         self.fields['ulm'].queryset = ULM.objects.filter(pilot=pilot)
         aviable = TimeSlot.objects.aviables()
-        if self.instance.pk is not None:
+        if self.instance.pk is not None and not self.instance.canceled:
             if not aviable.filter(pk=self.instance.time_slot.pk).exists():
                 aviable = aviable | TimeSlot.objects.filter(
                     pk=self.instance.time_slot.pk)
@@ -78,6 +78,7 @@ class ReservationForm(forms.ModelForm):
                 aviable = aviable | TimeSlot.objects.filter(
                     pk=self.instance.depart_time_slot.pk)
         self.fields['time_slot'].queryset = aviable
+        self.fields['depart_time_slot'].queryset = aviable
 
 
 class UserEditForm(forms.ModelForm):

@@ -18,9 +18,9 @@ class TimeSlotManager(models.Manager):
         selected = []
         for s in slots:
             arrival_count = Mod.Reservation.objects.filter(
-                time_slot=s).count()
+                time_slot=s, canceled=False, ulm__isnull=False).count()
             depart_count = Mod.Reservation.objects.filter(
-                depart_time_slot=s).count()
+                depart_time_slot=s, canceled=False, ulm__isnull=False).count()
             if (arrival_count + depart_count) < s.arrivals_slots:
                 selected.append(s.pk)
         return self.filter(pk__in=selected)

@@ -230,7 +230,7 @@ class Reservation(models.Model):
                             related_name="reservations")
     reservation_number = models.CharField(max_length=32, unique=True)
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE,
-                                  related_name='arrivals')
+                                  related_name='arrivals', null=True)
     depart_time_slot = models.ForeignKey(TimeSlot, on_delete=models.SET_NULL,
                                          related_name='departures', null=True)
     arrival = models.DateTimeField(null=True, default=None)
@@ -253,14 +253,17 @@ class Reservation(models.Model):
     def validate_unique(self, exclude):
         super().validate_unique(exclude)
         if self._state.adding:
-            if Reservation.objects.filter(
+            if self.time_slot and Reservation.objects.filter(
                 ulm__pilot=self.ulm.pilot,
                     time_slot__meeting=self.time_slot.meeting).count() > 0:
                 raise ValidationError(
                     _('You allready have a reservation for this meeting,'
                       ' please edit the existing one'))
 
-    def clean(self, *args, **kwargs):
+    def clean(self, *args, **kwargs):  # TODO: check validity
+        if self.time_slot is None or self.depart_time_slot is None:
+            raise ValidationError(_('Not enouth slot aviable for one of the '
+                                    'selected TimeSlot.'))
         if self.time_slot.pk == self.depart_time_slot.pk:
             raise ValidationError(_('Arrival and depart time slot should'
                                     ' be different'))
