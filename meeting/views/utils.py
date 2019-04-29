@@ -2,6 +2,8 @@ from django.views.generic import View
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 
+PAGINATED_BY = 2  # TODO: set appropriate value
+
 
 class PaginatedFilterViews(View):
     def get_context_data(self, **kwargs):

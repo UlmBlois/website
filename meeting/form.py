@@ -62,9 +62,16 @@ class ReservationForm(forms.ModelForm):
         dts = cleaned_data.get("depart_time_slot")
 
         if ts == dts:
-            msg = _('Arrival and depart time slot should be different')
+            msg = _('Arrival and depart time slot should be different.')
             self.add_error('time_slot', msg)
             self.add_error('depart_time_slot', msg)
+
+        if dts.start_date < ts.start_date:
+            msg = _('Arrival time slot should be anterior to depart one.')
+            self.add_error('time_slot', msg)
+            self.add_error('depart_time_slot', msg)
+
+        return self.cleaned_data
 
     def _init_form_fields(self, pilot):
         self.fields['ulm'].queryset = ULM.objects.filter(pilot=pilot)

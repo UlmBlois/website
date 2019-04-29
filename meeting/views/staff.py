@@ -11,11 +11,9 @@ from django.utils import timezone
 # third party
 from django_filters.views import FilterView
 # owned
-from .utils import PaginatedFilterViews
+from .utils import PaginatedFilterViews, PAGINATED_BY
 from meeting.models import Pilot, ULM, Reservation
 from meeting.form import (ReservationForm, UserEditMultiForm, ULMForm)
-
-PAGINATED_BY = 2  # TODO: set appropriate value
 
 
 @method_decorator(login_required, name='dispatch')

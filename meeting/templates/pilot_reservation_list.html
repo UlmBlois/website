@@ -1,6 +1,23 @@
 {% extends "base_logged.html" %}
 {% load i18n %}
 
+{% block messages %}
+{% if meeting.registration_aviable%}
+<div class="alert alert-success" role="alert">
+  {% trans 'Reservation open.'%}
+</div>
+{% elif not meeting.registration_open%}
+<div class="alert alert-danger" role="alert">
+  {% trans 'Reservation closed.'%}
+</div>
+{% else %}
+<div class="alert alert-danger" role="alert">
+  {% trans 'No more time slot aviable.'%}
+</div>
+{% endif %}
+{% endblock %}
+
+
 {% block page_title%}
   {% trans "Your Reservations" %}
   <a class="btn btn-success" role="button" href="{% url 'pilot_create_reservation' %}">

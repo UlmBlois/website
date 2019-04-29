@@ -62,6 +62,11 @@ class Meeting(models.Model):
     def registration_open_at(self, date):
         return self.registration_start <= date <= self.registration_end
 
+    @property
+    def registration_aviable(self):
+        aviables = TimeSlot.objects.aviables()
+        return self.registration_open and len(aviables) > 1
+
 
 ###############################################################################
 #       TIMESLOTS
@@ -259,15 +264,6 @@ class Reservation(models.Model):
                 raise ValidationError(
                     _('You allready have a reservation for this meeting,'
                       ' please edit the existing one'))
-
-    def clean(self, *args, **kwargs):  # TODO: check validity
-        if self.time_slot is None or self.depart_time_slot is None:
-            raise ValidationError(_('Not enouth slot aviable for one of the '
-                                    'selected TimeSlot.'))
-        if self.time_slot.pk == self.depart_time_slot.pk:
-            raise ValidationError(_('Arrival and depart time slot should'
-                                    ' be different'))
-        super(Reservation, self).clean(*args, **kwargs)
 
     def is_active(self):
         return self.time_slot.meeting.active

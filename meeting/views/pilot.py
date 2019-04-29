@@ -16,8 +16,9 @@ from django.utils.translation import gettext_lazy as _
 import uuid
 
 # owned
-from meeting.models import Pilot, ULM, Reservation
+from meeting.models import Pilot, ULM, Reservation, Meeting
 from meeting.form import (ReservationForm, UserEditMultiForm, ULMForm)
+from meeting.views.utils import PAGINATED_BY
 
 
 @method_decorator(login_required, name='dispatch')
@@ -102,7 +103,7 @@ class PilotULMList(ListView):
     model = ULM
     context_object_name = 'ulm_list'
     template_name = 'pilot_ulm_list.html'
-    paginate_by = 5
+    paginate_by = PAGINATED_BY
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -171,12 +172,16 @@ class PilotReservationList(ListView):
     model = Reservation
     context_object_name = 'reservation_list'
     template_name = 'pilot_reservation_list.html'
-    paginate_by = 2
+    paginate_by = PAGINATED_BY
 
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(ulm__pilot=self.request.user.pilot).order_by(
             '-reservation_number')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['meeting'] = Meeting.objects.active()
 
 
 @method_decorator(login_required, name='dispatch')
