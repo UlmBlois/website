@@ -171,7 +171,7 @@ class ReservationTest(TestCase):
     def test_is_missing_informations(self):  # TODO a completer
         res = Reservation.objects.get(reservation_number='FAE1F6')
         self.assertTrue(res.is_missing_informations())
-        res.ulm.pilot.insurance_company = 'AISCAIR'
+        res.pilot.insurance_company = 'AISCAIR'
         self.assertFalse(res.is_missing_informations())
 
     def test_is_on_time(self):

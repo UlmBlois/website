@@ -210,7 +210,7 @@ class ULM(models.Model):
         return str(self.radio_id)
 
     def display_pilot(self):
-        return f'{self.ulm.pilot}'
+        return f'{self.pilot}'
 
     def get_type_display(self):
         return dict(self.ULM_TYPE_CHOICE).get(self.type, '')
@@ -233,12 +233,14 @@ class Reservation(models.Model):
     """Model reprenseting a reservation for an in flight arrival."""
     ulm = models.ForeignKey(ULM, on_delete=models.SET_NULL, null=True,
                             related_name="reservations")
+    pilot = models.ForeignKey(Pilot, on_delete=models.SET_NULL, null=True)  # TODO add related name??
+    meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)  # TODO add related name??
     reservation_number = models.CharField(max_length=32, unique=True)
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE,
                                   related_name='arrivals', null=True)
     depart_time_slot = models.ForeignKey(TimeSlot, on_delete=models.SET_NULL,
                                          related_name='departures', null=True)
-    arrival = models.DateTimeField(null=True, default=None)
+    arrival = models.DateTimeField(null=True, default=None, blank=True)
     fuel_reservation = models.PositiveIntegerField(default=0)
     fuel_served = models.PositiveIntegerField(default=0)
     flight_plan = models.BooleanField(default=False)
@@ -248,10 +250,10 @@ class Reservation(models.Model):
     confirmed = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
     creation_date = models.DateField(null=True, blank=True)
-    origin_city = models.CharField(max_length=64, blank=True)
-    origin_city_code = models.CharField(max_length=32, blank=True)
+    origin_city = models.CharField(max_length=64, blank=True)  # TODO move into profile
+    origin_city_code = models.CharField(max_length=32, blank=True)  # TODO move into profile
     origin_field = models.CharField(max_length=4, blank=True,
-                                    help_text=_("Airfield OACI code"))
+                                    help_text=_("Airfield OACI code"))  # TODO move into profile
 
     objects = ReservationManager()
 
@@ -259,14 +261,14 @@ class Reservation(models.Model):
         super().validate_unique(exclude)
         if self._state.adding:
             if self.time_slot and Reservation.objects.filter(
-                ulm__pilot=self.ulm.pilot,
-                    time_slot__meeting=self.time_slot.meeting).count() > 0:
+                pilot=self.pilot,
+                    meeting=self.meeting).count() > 0:
                 raise ValidationError(
                     _('You allready have a reservation for this meeting,'
                       ' please edit the existing one'))
 
     def is_active(self):
-        return self.time_slot.meeting.active
+        return self.meeting.active
 
     def __str__(self):
         """String reprenseting a reservation."""
@@ -274,24 +276,24 @@ class Reservation(models.Model):
 
     def display_pilot(self):
         if self.ulm is not None:
-            return f'{self.ulm.pilot}'
+            return f'{self.pilot}'
         else:
             return '-'
 
     def is_missing_informations(self):
         # TODO: a completer
-        if self.ulm is None or self.ulm.pilot is None:
+        if self.ulm is None or self.pilot is None:
             return False
-        if self.ulm.pilot.licence_number == "":
+        if self.pilot.licence_number == "":
             return True
-        if self.ulm.pilot.insurance_number == "":
+        if self.pilot.insurance_number == "":
             return True
-        if self.ulm.pilot.insurance_company == "":
+        if self.pilot.insurance_company == "":
             return True
         return False
 
     def is_confirmed(self):
-        return self.confirmed
+        return not self.canceled and self.confirmed
 
     def is_on_time(self):
         """Check if the pilot is arrived during his timeslot"""

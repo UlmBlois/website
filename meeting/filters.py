@@ -8,10 +8,10 @@ class ReservationFilter(FilterSet):
     ulm__imatriculation = CharFilter(label=_('Imatriculation'),
                                      lookup_expr='icontains')
     ulm__radio_id = CharFilter(label=_('Radio id'), lookup_expr='icontains')
-    ulm__pilot__user__first_name = CharFilter(label=_('First name'),
-                                              lookup_expr='icontains')
-    ulm__pilot__user__last_name = CharFilter(label=_('Last name'),
-                                             lookup_expr='icontains')
+    pilot__user__first_name = CharFilter(label=_('First name'),
+                                         lookup_expr='icontains')
+    pilot__user__last_name = CharFilter(label=_('Last name'),
+                                        lookup_expr='icontains')
     time_slot = ModelChoiceFilter(queryset=TimeSlot.objects.actives())
 
     class Meta:
@@ -21,8 +21,8 @@ class ReservationFilter(FilterSet):
                  'time_slot',
                  'ulm__imatriculation',
                  'ulm__radio_id',
-                 'ulm__pilot__user__first_name',
-                 'ulm__pilot__user__last_name',
+                 'pilot__user__first_name',
+                 'pilot__user__last_name',
                  'fuel_reservation',
                  'flight_plan',
                  'passanger',

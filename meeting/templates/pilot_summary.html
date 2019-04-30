@@ -44,7 +44,7 @@
         {% for ulm in pilot.ulm.all %}
           {% for res in ulm.reservations.all %}
             <div class="list-group-item d-flex w-100 justify-content-between">
-              <span>{{res.time_slot.meeting}}</span>
+              <span>{{res.meeting}}</span>
               <span>{{res}}</span>
               <a href="{% url 'staff_update_reservation' pilot=pilot.pk pk=res.pk%}"><span class="fas fa-pen float-right"></span></a>
             </div>

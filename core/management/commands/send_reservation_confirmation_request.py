@@ -21,8 +21,8 @@ class Command(BaseCommand):
         email_pack = []
         if meeting.confirmation_reminder_date == date.today():
             unconfirmed_res = Reservation.objects.unconfirmed_actives()
-            email_list = [x.ulm.pilot.user.email for x in unconfirmed_res
-                          if x.ulm is not None and x.ulm.pilot is not None]
+            email_list = [x.pilot.user.email for x in unconfirmed_res
+                          if x.ulm is not None and x.pilot is not None]
             for email in email_list:
                 email_pack.append((subject, message, from_email, [email]))
                 # self.stdout.write(email)  # TODO send email

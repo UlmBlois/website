@@ -28,8 +28,8 @@ class TimeSlotManager(models.Manager):
 
 class ReservationManager(models.Manager):
     def actives(self):
-        return self.filter(time_slot__meeting__active=True)
+        return self.filter(meeting__active=True)
 
     def unconfirmed_actives(self):
-        return self.filter(time_slot__meeting__active=True,
+        return self.filter(meeting__active=True,
                            confirmed=False)

@@ -176,7 +176,7 @@ class PilotReservationList(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(ulm__pilot=self.request.user.pilot).order_by(
+        return queryset.filter(pilot=self.request.user.pilot).order_by(
             '-reservation_number')
 
     def get_context_data(self, *args, **kwargs):
@@ -206,6 +206,8 @@ class CreatePilotReservation(CreateView):
         while Reservation.objects.filter(reservation_number=key).exists():
             key = uuid.uuid4().hex[:6].upper()
         res.reservation_number = key
+        res.pilot = res.pilot
+        res.meeting = res.time_slot.meeting
         res.save()
         return redirect(self.get_success_url())
 
@@ -228,7 +230,7 @@ class UpdatePilotReservation(UpdateView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(ulm__pilot=self.request.user.pilot)
+        return queryset.filter(pilot=self.request.user.pilot)
 
     def form_valid(self, form):
         res = form.save(commit=False)
@@ -243,7 +245,7 @@ class DeletePilotReservation(DeleteView):
 
     def get_object(self, queryset=None):
         obj = super(DeletePilotReservation, self).get_object()
-        if not obj.ulm.pilot == self.request.user.pilot:
+        if not obj.pilot == self.request.user.pilot:
             raise Http404
         return obj
 

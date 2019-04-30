@@ -116,7 +116,7 @@ class FilteredReservationList(PermissionRequiredMixin, PaginatedFilterViews,
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(time_slot__meeting__active=True).order_by(
+        return queryset.filter(meeting__active=True).order_by(
             '-reservation_number')
 
 
@@ -178,7 +178,7 @@ class StaffReservationUpdate(PermissionRequiredMixin, UpdateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs.update({'pilot': self.object.ulm.pilot})
+        kwargs.update({'pilot': self.object.pilot})
         return kwargs
 
     def form_valid(self, form):

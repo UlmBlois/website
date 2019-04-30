@@ -35,10 +35,10 @@
     <div class="card">
       <h5 class="card-header">
         {% trans 'Pilot'%}
-        <a href="{% url 'staff_reservation_edit_pilot' res=reservation.pk pk=reservation.ulm.pilot.pk%}"><span class="fas fa-pen float-right"></span></a>
+        <a href="{% url 'staff_reservation_edit_pilot' res=reservation.pk pk=reservation.pilot.pk%}"><span class="fas fa-pen float-right"></span></a>
       </h5>
       <div class="card-body">
-        {% with pilot=reservation.ulm.pilot %}
+        {% with pilot=reservation.pilot %}
         <table class="table">
           <tbody>
             <tr>
