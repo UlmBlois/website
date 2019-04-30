@@ -2,7 +2,6 @@
 {% load i18n %}
 
 {% block messages %}
-{{meeting.pk}}
   {% if meeting.registration_aviable%}
     <div class="alert alert-success" role="alert">
       {% trans 'Reservation open.'%}
