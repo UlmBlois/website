@@ -182,6 +182,7 @@ class PilotReservationList(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['meeting'] = Meeting.objects.active()
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
