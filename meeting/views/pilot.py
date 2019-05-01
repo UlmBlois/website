@@ -234,6 +234,7 @@ class UpdatePilotReservation(UpdateView):
 
     def form_valid(self, form):
         res = form.save(commit=False)
+        res.canceled = False
         res.save()
         return redirect(self.get_success_url())
 
