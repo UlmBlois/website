@@ -70,7 +70,6 @@ class ReservationForm(forms.ModelForm):
             msg = _('Arrival time slot should be anterior to depart one.')
             self.add_error('time_slot', msg)
             self.add_error('depart_time_slot', msg)
-
         return self.cleaned_data
 
     def _init_form_fields(self, pilot):
