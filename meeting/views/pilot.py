@@ -206,7 +206,7 @@ class CreatePilotReservation(CreateView):
         while Reservation.objects.filter(reservation_number=key).exists():
             key = uuid.uuid4().hex[:6].upper()
         res.reservation_number = key
-        res.pilot = res.pilot
+        res.pilot = res.ulm.pilot
         res.meeting = res.time_slot.meeting
         res.save()
         return redirect(self.get_success_url())

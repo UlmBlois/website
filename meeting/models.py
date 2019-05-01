@@ -262,7 +262,7 @@ class Reservation(models.Model):
         if self._state.adding:
             if self.time_slot and Reservation.objects.filter(
                 pilot=self.pilot,
-                    meeting=self.meeting).count() > 0:
+                    meeting=self.time_slot.meeting).count() > 0:
                 raise ValidationError(
                     _('You allready have a reservation for this meeting,'
                       ' please edit the existing one'))
