@@ -29,14 +29,16 @@
 <div class="mx-4">
 {% for res in reservation_list %}
 <div class="card mb-3">
-  <div class="card-body">
+  <div class="card-body d-flex justify-content-between">
+    <div class="">
+
     <h5 class="card-title">{{res.meeting}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{res.reservation_number}}</h6>
     {% if res.is_active %}
     <a href="{% url 'pilot_update_reservation' res.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
-    <a href="{% url 'pilot_delete_reservation' res.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "Delete" %}</a>
     {% if not res.canceled %}
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelModal{{res.pk}}"><span class="fas fa-minus-circle"></span>{% trans 'Cancel Reservation'%}</button>
+      <!-- Cancel modal-->
         <div class="modal fade" id="cancelModal{{res.pk}}" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -60,6 +62,12 @@
           </div>
         </div>
       {% endif%}
+    {% endif %}
+    </div> <!-- End Right -->
+    {% if res.canceled %}
+      <div class="">
+        <h5 class="text-danger">Canceled</h5>
+      </div>
     {% endif %}
   </div>
 </div>
