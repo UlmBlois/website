@@ -2,6 +2,7 @@ from django.forms import Select
 from django.utils.translation import gettext_lazy as _
 
 
+# TODO raise ValidationError if Unknown is Select
 class BooleanWidget(Select):
     """Convert true/false values into the internal Python True/False.
     This can be used for AJAX queries that pass true/false from JavaScript's

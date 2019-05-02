@@ -47,8 +47,7 @@ def ajax_cancel_reservation(request, pk):
     res.canceled = True
     res.time_slot = None
     res.depart_time_slot = None
-    if(res.canceled and res.confirmed):
-        res.confirmed = False
+    res.confirmed = False
     res.save()
     print(res)
     return HttpResponseRedirect(reverse('pilot_reservation'))
@@ -57,6 +56,7 @@ def ajax_cancel_reservation(request, pk):
 # TODO call with ajax and make the appropriate change to the view and the template
 def ajax_confirm_reservation(request, pk):
     res = get_object_or_404(Reservation, pk=pk)
-    res.confirmed = True
+    if not res.canceled:
+        res.confirmed = True
     res.save()
     return redirect(reverse('pilot_reservation'))

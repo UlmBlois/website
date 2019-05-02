@@ -67,6 +67,11 @@ class Meeting(models.Model):
         aviables = TimeSlot.objects.aviables()
         return self.registration_open and len(aviables) > 1
 
+    @property
+    def confirmation_open(self):
+        return (self.confirmation_reminder_date <= date.today()
+                <= self.start_date)
+
 
 ###############################################################################
 #       TIMESLOTS
