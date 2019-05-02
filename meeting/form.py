@@ -11,6 +11,7 @@ from crispy_forms.layout import Layout, Submit, Row, Column, Field, MultiWidgetF
 # Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from meeting.fields import ListTextWidget
+from meeting.widgets import BooleanWidget
 from radio_call_sign_field.widgets import CallSingPrefixWidget
 
 
@@ -23,6 +24,12 @@ class ReservationForm(forms.ModelForm):
                  'origin_city_code', 'origin_field', 'fuel_reservation',
                  'flight_plan', 'passanger', 'esthetic_cup', 'for_sale'
                  ]
+        widgets = {
+            'flight_plan': BooleanWidget(),
+            'passanger': BooleanWidget(),
+            'esthetic_cup': BooleanWidget(),
+            'for_sale': BooleanWidget(),
+            }
 
     def __init__(self, *args, **kwargs):
         pilot = kwargs.pop('pilot')

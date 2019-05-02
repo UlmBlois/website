@@ -1,57 +1,41 @@
-from django.forms import widgets
-
-COUTRIES_PREFIX = (
-    ('D-', 'D-'),  # Allemagne
-    ('OE-', 'OE-'),  # Autriche
-    ('OO-', 'OO-'),  # Belgique
-    ('LZ-', 'LZ-'),  # Bulgarie
-    ('5B-', '5B-'),  # Chypre
-    ('9A-U', '9A-U'),  # Croatie
-    ('OY-', 'OY-'),  # Danemark
-    ('EC-', 'EC-'),  # Espagne
-    ('ES-', 'ES-'),  # Estonie
-    ('OH-', 'OH-'),  # Finlande
-    ('F-J', 'F-J'),  # France
-    ('SX-', 'SX-'),  # Grece
-    ('HA-', 'HA-'),  # Hongrie
-    ('EI-', 'EI-'),  # Irlande
-    ('I-', 'I-'),  # Italie
-    ('YL-', 'YL-'),  # Lettonie
-    ('LY-', 'LY-'),  # Lituanie
-    ('LX-X', 'LX-X'),  # Luxembourg
-    ('9H-', '9H-'),  # Malte
-    ('PH-', 'PH-'),  # Pays Bas
-    ('SP-', 'SP-'),  # Pologne
-    ('CR-', 'CR-'),  # Portugal
-    ('OK-', 'OK-'),  # Republique Tcheque
-    ('YR-', 'YR-'),  # Roumanie
-    ('G-', 'G-'),  # Royaume Unis
-    ('OM-', 'OM-'),  # Slovaquie
-    ('S5-', 'S5-'),  # Slovenie
-    ('SE-', 'SE-'),  # Suede
-    # TODO Fill the list, rethink choice data
-)
+from django.forms import Select
+from django.utils.translation import gettext_lazy as _
 
 
-class ULMRadioIdWidget(widgets.MultiWidget):
-        template_name = 'widgets/ulm_radio_id_widget.html'
+class BooleanWidget(Select):
+    """Convert true/false values into the internal Python True/False.
+    This can be used for AJAX queries that pass true/false from JavaScript's
+    internal types through.
+    """
 
-        def __init__(self, attrs=None):
-            _widgets = (
-                widgets.Select(attrs=attrs, choices=COUTRIES_PREFIX),
-                widgets.TextInput(attrs=attrs)
-            )
-            super().__init__(_widgets, attrs)
+    def __init__(self, attrs=None):
+        choices = (('', _('Unknown')),
+                   ('true', _('Yes')),
+                   ('false', _('No')))
+        super().__init__(attrs, choices)
 
-        def value_from_datadict(self, data, files, name):
-            parts = [widget.value_from_datadict(data, files, name + '_%s' % i)
-                     for i, widget in enumerate(self.widgets)]
-            return ''.join(parts)
+    def render(self, name, value, attrs=None, renderer=None):
+        try:
+            value = {
+                True: 'true',
+                False: 'false',
+                '1': 'true',
+                '0': 'false'
+            }[value]
+        except KeyError:
+            value = ''
+        return super().render(name, value, attrs, renderer=renderer)
 
-        def decompress(self, value):
-            if value:
-                prefix = [x[0] for x in COUTRIES_PREFIX]
-                start = [x for x in prefix if value.startswith(x)][0]
-                id = value.replace(start, '')
-                return [start, id]
-            return [None, None]
+    def value_from_datadict(self, data, files, name):
+        value = data.get(name, None)
+        if isinstance(value, str):
+            value = value.lower()
+
+        return {
+            '1': True,
+            '0': False,
+            'true': True,
+            'false': False,
+            True: True,
+            False: False,
+            }.get(value, None)
