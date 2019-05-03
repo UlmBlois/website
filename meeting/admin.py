@@ -4,11 +4,15 @@ from django.contrib.auth.models import User
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.fields import ListTextWidget
 
-admin.site.register(Pilot)
+
+@admin.register(Pilot)
+class PilotAdmin(admin.ModelAdmin):
+    readonly_fields = ('modification_date')
 
 
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
+    readonly_fields = ('creation_date', 'modification_date')
     list_display = ('reservation_number', "display_pilot", "time_slot", "ulm")
 
 

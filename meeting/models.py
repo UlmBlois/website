@@ -162,9 +162,7 @@ class Pilot(models.Model):
     insurance_number = models.CharField(max_length=64)
     licence_number = models.CharField(max_length=64)
     phone_number = PhoneNumberField(null=True)  # TODO: remove null=True in production
-    # licence_file = models.FileField(null=True, blank=True)
-    # insurance_file = models.FileField(null=True, blank=True)
-    # last_update = models.DateField(null=True, blank=True)  # insurance_file
+    modification_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         permissions = (
@@ -223,12 +221,6 @@ class ULM(models.Model):
     display_pilot.short_description = 'Pilot'
 
 
-@receiver(pre_save, sender=ULM)
-def normalize_reservation(sender, instance, **kwargs):
-    instance.radio_id = instance.radio_id.upper()
-    instance.imatriculation = instance.imatriculation.upper()
-
-
 ###############################################################################
 #       RESERVATION
 ###############################################################################
@@ -254,7 +246,8 @@ class Reservation(models.Model):
     for_sale = models.BooleanField(default=False)
     confirmed = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
-    creation_date = models.DateField(null=True, blank=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    modification_date = models.DateTimeField(auto_now=True)
     origin_city = models.CharField(max_length=64, blank=True)  # TODO move into profile
     origin_city_code = models.CharField(max_length=32, blank=True)  # TODO move into profile
     origin_field = models.CharField(max_length=4, blank=True,
@@ -321,3 +314,13 @@ class Reservation(models.Model):
         return delay
 
     display_pilot.short_description = _('Pilot')
+
+
+##############################################################################
+# RECEIVER
+##############################################################################
+
+@receiver(pre_save, sender=ULM)
+def normalize_reservation(sender, instance, **kwargs):
+    instance.radio_id = instance.radio_id.upper()
+    instance.imatriculation = instance.imatriculation.upper()
