@@ -246,6 +246,8 @@ class Reservation(models.Model):
     for_sale = models.BooleanField(default=False)
     confirmed = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
+    fuel_reservation_confirmed = models.BooleanField(default=False)
+    fuel_advance = models.PositiveIntegerField(default=0)
     creation_date = models.DateTimeField(auto_now_add=True)
     modification_date = models.DateTimeField(auto_now=True)
     origin_city = models.CharField(max_length=64, blank=True)  # TODO move into profile

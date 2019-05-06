@@ -7,7 +7,7 @@ from meeting.fields import ListTextWidget
 
 @admin.register(Pilot)
 class PilotAdmin(admin.ModelAdmin):
-    readonly_fields = ('modification_date')
+    readonly_fields = ['modification_date']
 
 
 @admin.register(Reservation)
