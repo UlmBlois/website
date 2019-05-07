@@ -1,0 +1,21 @@
+{% extends "base_logged_form.html"%}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block beforeform %}
+<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+{% endblock %}
+
+{% block form %}
+
+{{ wizard.management_form }}
+{% if wizard.form.forms %}
+    {{ wizard.form.management_form }}
+    {% for form in wizard.form.forms %}
+        {% crispy form %}
+    {% endfor %}
+{% else %}
+    {% crispy wizard.form %}
+{% endif %}
+
+{% endblock %}

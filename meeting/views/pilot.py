@@ -1,6 +1,6 @@
 # django
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -14,10 +14,12 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 # python
 import uuid
-
+# Third party
+from formtools.wizard.views import SessionWizardView
 # owned
 from meeting.models import Pilot, ULM, Reservation, Meeting
-from meeting.form import (ReservationForm, UserEditMultiForm, ULMForm)
+from meeting.form import (ReservationForm, UserEditMultiForm,
+                          ULMForm, UlmFormSet, PilotForm)
 from meeting.views.utils import PAGINATED_BY
 
 
@@ -252,3 +254,30 @@ class DeletePilotReservation(DeleteView):
 
     def get_success_url(self):
         return reverse('pilot_reservation')
+
+
+@method_decorator(login_required, name='dispatch')
+class MakeReservationWizard(SessionWizardView):
+    template_name = 'base_logged_wizard_form.html'
+    form_list = [UserEditMultiForm, UlmFormSet,]
+
+    def get_success_url(self):
+        return reverse('pilot_reservation')
+
+    def done(self, form_list, form_dict, **kwargs):
+        # pilot = form_dict['pilot'].save()
+        # ulms = form_dict['ulms'].save()
+        # res = form_dict['reservation'].save(commit=False)
+        # key = uuid.uuid4().hex[:6].upper()
+        # while Reservation.objects.filter(reservation_number=key).exists():
+        #     key = uuid.uuid4().hex[:6].upper()
+        # res.reservation_number = key
+        # res.pilot = res.ulm.pilot
+        # res.meeting = res.time_slot.meeting
+        # res.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    # def process_step(self, form):
+        # model = form.save(commit=False)
+        # model.save()
+        # return self.get_form_step_data(form)

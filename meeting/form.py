@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django.forms.models import modelformset_factory
 # Third Party
 from betterforms.multiform import MultiModelForm
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
@@ -187,7 +188,13 @@ class ULMForm(forms.ModelForm):
         )
 
 
+UlmFormSet = modelformset_factory(ULM, form=ULMForm, extra=1)
+
+
 class UserEditMultiForm(MultiModelForm):
+    # We have to set base_fields to a dictionary because the WizardView
+    # tries to introspect it.
+    base_fields = {}
     form_classes = {
         'user_form': UserEditForm,
         'pilot_form': PilotForm,

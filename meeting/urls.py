@@ -29,6 +29,8 @@ urlpatterns = [
     path('reservation/<int:pk>/delete/',
          views.DeletePilotReservation.as_view(),
          name='pilot_delete_reservation'),
+    path('reservation/wizard', views.MakeReservationWizard.as_view(),
+         name='reservation_wizard')
 ]
 
 

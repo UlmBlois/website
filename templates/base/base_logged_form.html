@@ -22,10 +22,15 @@
 {% endif %}
 
 <div class="container">
+  <form method="post">
+    {% csrf_token %}
+  {% block form %}
   {% crispy form %}
-
+  {% endblock %}
+  </form>
 </div>
 
 {%  block afterform %}
 {% endblock %}
+
 {% endblock %}
