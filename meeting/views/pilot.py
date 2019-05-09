@@ -12,6 +12,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
+import logging
 # python
 import uuid
 # Third party
@@ -19,8 +21,10 @@ from formtools.wizard.views import SessionWizardView
 # owned
 from meeting.models import Pilot, ULM, Reservation, Meeting
 from meeting.form import (ReservationForm, UserEditMultiForm,
-                          ULMForm, UlmFormSet, PilotForm)
+                          ULMForm, UlmFormSet, PilotForm, UserEditForm)
 from meeting.views.utils import PAGINATED_BY
+
+logger = logging.getLogger(__name__)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -259,7 +263,7 @@ class DeletePilotReservation(DeleteView):
 @method_decorator(login_required, name='dispatch')
 class MakeReservationWizard(SessionWizardView):
     template_name = 'base_logged_wizard_form.html'
-    form_list = [UserEditMultiForm, UlmFormSet,]
+    form_list = [('pilot', PilotForm), ('ulm', UlmFormSet)]
 
     def get_success_url(self):
         return reverse('pilot_reservation')
@@ -277,6 +281,14 @@ class MakeReservationWizard(SessionWizardView):
         # res.save()
         return HttpResponseRedirect(self.get_success_url())
 
+        def get_form_instance(self, step):
+            logger.debug('get form instance for ' + step )
+            if step == 'pilot':
+                self.instance = Pilot.objects.get(user=self.request.user.pk)
+                logger.debug(self.instance)
+            if step == 'ulm':
+                self.instance = ULM.objects.filter(pilot=self.request.user.pilot.pk)
+            return self.instance
     # def process_step(self, form):
         # model = form.save(commit=False)
         # model.save()
