@@ -25,7 +25,23 @@
   <form method="post">
     {% csrf_token %}
   {% block form %}
-  {% crispy form %}
+  {% if form%}
+    {% crispy form %}
+  {% elif formset %}
+    {{ formset.management_form|crispy }}
+    {% for form in formset %}
+    <div class="">
+      {{ form.management_form|crispy }}
+      {% if helper %}
+        {% crispy form helper %}
+      {% else %}
+        {% crispy form helper %}
+      {% endif %}
+    </div>
+
+    {% endfor %}
+  {% endif %}
+      <button type="submit" class="btn btn-primary">{% trans 'Submit'%}</button>
   {% endblock %}
   </form>
 </div>

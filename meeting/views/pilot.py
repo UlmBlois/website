@@ -17,11 +17,15 @@ import logging
 # python
 import uuid
 # Third party
-from formtools.wizard.views import SessionWizardView
+from extra_views import ModelFormSetView
+from crispy_forms.layout import Submit
+
 # owned
+from radio_call_sign_field.widgets import CallSingPrefixWidget
+
 from meeting.models import Pilot, ULM, Reservation, Meeting
 from meeting.form import (ReservationForm, UserEditMultiForm,
-                          ULMForm, UlmFormSet, PilotForm, UserEditForm)
+                          ULMForm, UserEditForm, ULMFormSetHelper)
 from meeting.views.utils import PAGINATED_BY
 
 logger = logging.getLogger(__name__)
@@ -260,36 +264,55 @@ class DeletePilotReservation(DeleteView):
         return reverse('pilot_reservation')
 
 
-@method_decorator(login_required, name='dispatch')
-class MakeReservationWizard(SessionWizardView):
-    template_name = 'base_logged_wizard_form.html'
-    form_list = [('pilot', PilotForm), ('ulm', UlmFormSet)]
+###############################################################################
+# Reservation wizard
+###############################################################################
+
+class ReservationWizardStep1(UpdateUserPilotView):
 
     def get_success_url(self):
-        return reverse('pilot_reservation')
+        return reverse('reservation_wizard_step2', kwargs={'pilot': self.object.pk})
 
-    def done(self, form_list, form_dict, **kwargs):
-        # pilot = form_dict['pilot'].save()
-        # ulms = form_dict['ulms'].save()
-        # res = form_dict['reservation'].save(commit=False)
-        # key = uuid.uuid4().hex[:6].upper()
-        # while Reservation.objects.filter(reservation_number=key).exists():
-        #     key = uuid.uuid4().hex[:6].upper()
-        # res.reservation_number = key
-        # res.pilot = res.ulm.pilot
-        # res.meeting = res.time_slot.meeting
-        # res.save()
+
+class ReservationWizardStep2(ModelFormSetView):
+    pilot = None
+    model = ULM
+    # form_class = UlmFormSet
+    template_name = 'base_logged_form.html'
+    fields = ['constructor', 'model', 'type', 'imatriculation_country', 'imatriculation', 'radio_id']
+    factory_kwargs = {'extra': 0, 'widgets':{'radio_id': CallSingPrefixWidget}}
+
+    def get_success_url(self):
+        return reverse('pilot_create_reservation')
+
+    def get_queryset(self):
+        self.pilot = self.kwargs.get('pilot', None)
+        queryset = super().get_queryset()
+        return queryset.filter(pilot=self.pilot)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        helper = ULMFormSetHelper()
+        helper.form_tag = False
+        context['helper'] = helper
+        return context
+
+    def get_initial(self):
+        # Get a list of initial values for the formset here
+        initial = [{'pilot': self.pilot}]
+        return initial
+
+    def formset_valid(self, formset):
+        """
+        If the formset is valid redirect to the supplied URL
+        """
+        messages.success(self.request, "Updated")
         return HttpResponseRedirect(self.get_success_url())
 
-        def get_form_instance(self, step):
-            logger.debug('get form instance for ' + step )
-            if step == 'pilot':
-                self.instance = Pilot.objects.get(user=self.request.user.pk)
-                logger.debug(self.instance)
-            if step == 'ulm':
-                self.instance = ULM.objects.filter(pilot=self.request.user.pilot.pk)
-            return self.instance
-    # def process_step(self, form):
-        # model = form.save(commit=False)
-        # model.save()
-        # return self.get_form_step_data(form)
+    def formset_invalid(self, formset):
+        """
+        If the formset is invalid, re-render the context data with the
+        data-filled formset and errors.
+        """
+        messages.error(self.request, "Error dummy")
+        return self.render_to_response(self.get_context_data(formset=formset))

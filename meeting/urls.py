@@ -24,13 +24,15 @@ urlpatterns = [
          name='pilot_reservation'),
     path('reservation/new', views.CreatePilotReservation.as_view(),
          name='pilot_create_reservation'),
-    path('reservation/<int:pk>/edit/', views.UpdatePilotReservation.as_view(),
+    path('reservation/<int:pk>/edit', views.UpdatePilotReservation.as_view(),
          name='pilot_update_reservation'),
-    path('reservation/<int:pk>/delete/',
+    path('reservation/<int:pk>/delete',
          views.DeletePilotReservation.as_view(),
          name='pilot_delete_reservation'),
-    path('reservation/wizard', views.MakeReservationWizard.as_view(),
-         name='reservation_wizard')
+    path('reservation/wizard/<int:pk>/user', views.ReservationWizardStep1.as_view(),
+         name='reservation_wizard_step1'),
+    path('reservation/wizard/<int:pilot>/ulm', views.ReservationWizardStep2.as_view(),
+         name='reservation_wizard_step2'),
 ]
 
 

@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'phonenumber_field',
     'crispy_forms',
-    'formtools',
+    'extra_views',
 
     # Core
     'django.contrib.admin',
