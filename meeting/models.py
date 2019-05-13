@@ -177,6 +177,20 @@ class Pilot(models.Model):
     def __str__(self):
         return "{} {}".format(self.user.first_name, self.user.last_name)
 
+    @property
+    def as_unconfirmed_reservation(self):
+        meeting = Meeting.objects.active()
+        return Reservation.objects.filter(
+                pilot=self, meeting=meeting, confirmed=False).exists()
+
+    @property
+    def as_active_reservation(self):
+        meeting = Meeting.objects.active()
+        return Reservation.objects.filter(pilot=self, meeting=meeting).exists()
+
+    @property
+    def can_make_reservation(self):
+        return not self.as_active_reservation
 
 ###############################################################################
 #       ULM
@@ -267,7 +281,7 @@ class Reservation(models.Model):
         if self._state.adding:
             ts_valid = (self.time_slot and Reservation.objects.filter(
                 pilot=self.ulm.pilot,
-                meeting=self.time_slot.meeting).count() > 0)
+                meeting=self.time_slot.meeting).exists())
             if ts_valid:
                 raise ValidationError(
                     _('You allready have a reservation for this meeting,'
