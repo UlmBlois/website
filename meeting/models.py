@@ -263,10 +263,8 @@ class Reservation(models.Model):
 
     def validate_unique(self, exclude):
         super().validate_unique(exclude)
+        # self.meeting and self.pilot are not initialized at this stage
         if self._state.adding:
-            logger.debug("Add new Reservation : " + str(Reservation.objects.filter(
-                pilot=self.ulm.pilot,
-                meeting=self.time_slot.meeting).count()))
             ts_valid = (self.time_slot and Reservation.objects.filter(
                 pilot=self.ulm.pilot,
                 meeting=self.time_slot.meeting).count() > 0)
@@ -334,3 +332,11 @@ class Reservation(models.Model):
 def normalize_reservation(sender, instance, **kwargs):
     instance.radio_id = instance.radio_id.upper()
     instance.imatriculation = instance.imatriculation.upper()
+
+
+@receiver(pre_save, sender=Reservation)
+def init_shortcut_fields(sender, instance, **kwargs):
+    instance.pilot = instance.ulm.pilot
+    instance.meeting = instance.time_slot.meeting
+    logger.debug("pilot : " + str(instance.pilot) + " " + str(instance.ulm.pilot))
+    logger.debug("meeting : " + str(instance.meeting) + " " + str(instance.time_slot.meeting))
