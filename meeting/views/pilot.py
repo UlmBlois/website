@@ -299,7 +299,6 @@ class ReservationWizardStep2(ModelFormSetView):
         """
         If the formset is valid redirect to the supplied URL
         """
-        messages.success(self.request, "Updated")
         for form in formset:
             ulm = form.save(commit=False)
             ulm.pilot = Pilot.objects.get(pk=self.pilot)
@@ -317,5 +316,4 @@ class ReservationWizardStep2(ModelFormSetView):
             logger.debug("form is valid: " + str(form.is_valid()))
             logger.debug(str(form.cleaned_data))
             logger.debug(form.errors)
-        messages.error(self.request, "Error dummy")
         return self.render_to_response(self.get_context_data(formset=formset))

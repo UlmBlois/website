@@ -2,23 +2,34 @@
 {% load i18n %}
 
 {% block messages %}
-  {% if meeting.registration_aviable%}
-    <div class="alert alert-success" role="alert">
+  {% if meeting.confirmation_open and user.pilot.as_unconfirmed_reservation %}
+    <div class="alert alert-warning  alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {% trans 'Please confirm your reservation.'%}
+    </div>
+  {% elif meeting.registration_aviable%}
+    <div class="alert alert-success  alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       {% trans 'Reservation open.'%}
     </div>
   {% elif not meeting.registration_open%}
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger  alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       {% trans 'Reservation closed.'%}
     </div>
   {% else %}
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger  alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       {% trans 'No more time slot aviable.'%}
     </div>
-  {% endif %}
-  {% if meeting.confirmation_open and user.pilot.as_unconfirmed_reservation %}
-  <div class="alert alert-warning" role="alert">
-    {% trans 'Please confirm your reservation.'%}
-  </div>
   {% endif %}
 {% endblock %}
 

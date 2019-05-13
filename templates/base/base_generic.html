@@ -20,6 +20,10 @@
 
 <!-- Page Content -->
 <div class="container">
+  {% include 'alert_messages.html'%}
+  {% block messages %}
+
+  {% endblock%}
 
   <header class="jumbotron my-4">
     {% block header%}
