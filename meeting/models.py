@@ -338,5 +338,3 @@ def normalize_reservation(sender, instance, **kwargs):
 def init_shortcut_fields(sender, instance, **kwargs):
     instance.pilot = instance.ulm.pilot
     instance.meeting = instance.time_slot.meeting
-    logger.debug("pilot : " + str(instance.pilot) + " " + str(instance.ulm.pilot))
-    logger.debug("meeting : " + str(instance.meeting) + " " + str(instance.time_slot.meeting))
