@@ -8,5 +8,5 @@
 
 
 {% block content %}
-<a href="{% url 'reservation_wizard'%}">wizard</a>
+<a href="{% url 'reservation_wizard_step1' pk=user.pilot.pk%}">wizard</a>
 {% endblock%}
