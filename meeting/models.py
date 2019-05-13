@@ -1,5 +1,7 @@
 # Python
 from datetime import date, timedelta
+import logging
+
 # Django
 from django.db import models
 from django.contrib.auth.models import User
@@ -15,6 +17,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 from meeting.managers import (MeetingManager, TimeSlotManager,
                               ReservationManager)
 from radio_call_sign_field.modelfields import RadioCallSignField
+
+logger = logging.getLogger(__name__)
 
 
 ###############################################################################
@@ -260,9 +264,13 @@ class Reservation(models.Model):
     def validate_unique(self, exclude):
         super().validate_unique(exclude)
         if self._state.adding:
-            if self.time_slot and Reservation.objects.filter(
-                pilot=self.pilot,
-                    meeting=self.time_slot.meeting).count() > 0:
+            logger.debug("Add new Reservation : " + str(Reservation.objects.filter(
+                pilot=self.ulm.pilot,
+                meeting=self.time_slot.meeting).count()))
+            ts_valid = (self.time_slot and Reservation.objects.filter(
+                pilot=self.ulm.pilot,
+                meeting=self.time_slot.meeting).count() > 0)
+            if ts_valid:
                 raise ValidationError(
                     _('You allready have a reservation for this meeting,'
                       ' please edit the existing one'))
