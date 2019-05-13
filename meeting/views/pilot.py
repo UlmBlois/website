@@ -12,10 +12,10 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import User
-import logging
 # python
 import uuid
+import logging
+
 # Third party
 from extra_views import ModelFormSetView
 from crispy_forms.layout import Submit
@@ -25,7 +25,7 @@ from radio_call_sign_field.widgets import CallSingPrefixWidget
 
 from meeting.models import Pilot, ULM, Reservation, Meeting
 from meeting.form import (ReservationForm, UserEditMultiForm,
-                          ULMForm, UserEditForm, ULMFormSetHelper)
+                          ULMForm, ULMFormSetHelper, BaseULMForm)
 from meeting.views.utils import PAGINATED_BY
 
 logger = logging.getLogger(__name__)
@@ -277,10 +277,9 @@ class ReservationWizardStep1(UpdateUserPilotView):
 class ReservationWizardStep2(ModelFormSetView):
     pilot = None
     model = ULM
-    # form_class = UlmFormSet
+    form_class = BaseULMForm
     template_name = 'base_logged_form.html'
-    fields = ['constructor', 'model', 'type', 'imatriculation_country', 'imatriculation', 'radio_id']
-    factory_kwargs = {'extra': 0, 'widgets':{'radio_id': CallSingPrefixWidget}}
+    factory_kwargs = {'extra': 1}
 
     def get_success_url(self):
         return reverse('pilot_create_reservation')
@@ -299,7 +298,7 @@ class ReservationWizardStep2(ModelFormSetView):
 
     def get_initial(self):
         # Get a list of initial values for the formset here
-        initial = [{'pilot': self.pilot}]
+        initial = [{'pilot': self.kwargs.get('pilot', None)}]
         return initial
 
     def formset_valid(self, formset):
@@ -307,6 +306,10 @@ class ReservationWizardStep2(ModelFormSetView):
         If the formset is valid redirect to the supplied URL
         """
         messages.success(self.request, "Updated")
+        for form in formset:
+            ulm = form.save(commit=False)
+            ulm.pilot = Pilot.objects.get(pk=self.pilot)
+            ulm.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def formset_invalid(self, formset):
@@ -314,5 +317,11 @@ class ReservationWizardStep2(ModelFormSetView):
         If the formset is invalid, re-render the context data with the
         data-filled formset and errors.
         """
+        logger.debug("formset " + str(len(formset)))
+
+        for form in formset:
+            logger.debug("form is valid: " + str(form.is_valid()))
+            logger.debug(str(form.cleaned_data))
+            logger.debug(form.errors)
         messages.error(self.request, "Error dummy")
         return self.render_to_response(self.get_context_data(formset=formset))
