@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 import re
 
+# TODO size can vary between state, make full verification
 
 RADIO_CALL_SIGN_REGEX = r'^[0-9a-zA-Z]{1,2}-[0-9a-zA-Z]{3,4}$'
 

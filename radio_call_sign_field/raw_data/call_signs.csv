@@ -1,0 +1,236 @@
+Country,Registration Prefix,Suffix Pattern
+Afghanistan,YA,abc
+Albania,ZA,abc
+Algeria,7T,abc
+Andorra,C3,abc
+Angola,D2,abc
+Anguilla,VP-A,ab
+Antigua and Barbuda,V2,abc
+Argentina,LQ,abc
+Argentina,LV,abc
+Armenia,EK,12345
+Aruba,P4,abc
+Australia,VH,abc
+Austria,OE,abc
+Austria,OE,1234 (gliders only)
+Azerbaijan,4K,ab1 or ab12 or 12345
+Bahamas,C6,abc
+Bahrain,A9C,ab or abc
+Bangladesh,S2,abc
+Barbados,8P,abc
+Belarus,EW,123ab or 12345
+Belgium,OO,abc
+Belize,V3,abc
+Benin,TY,abc
+Bermuda,VP-B,ab
+Bhutan,A5,abc
+Bolivia,CP,1234
+Bosnia and Herzegovina,T9,abc
+Botswana,A2,abc
+Brazil,PP,abc
+Brazil,PR,abc
+Brazil,PT,abc
+Brazil,PU,abc (reserved for ultralights)
+British Virgin Islands,VP-L,ab
+Brunei Darussalam,V8,abc or ab1 or 123
+Bulgaria,LZ,abc
+Burkina Faso,XT,abc
+Burundi,9U,abc
+Cambodia,XU,123
+Cameroon,TJ,abc
+Canada,CF-,abc
+Canada,C-F,abc
+Canada,C-G,abc
+Canada,C-I,abc (ultralight aeroplanes only)
+Cape Verde,D4,abc
+Cayman Islands,VP-C,ab
+Central African Republic,TL,abc
+Chad,TT,abc
+Chile,CC,abc
+China,B,1234
+Taiwan,B,12345
+Hong Kong,B-H,ab
+Hong Kong,B-K,ab
+Hong Kong,B-L,ab
+Macao,B-M,ab
+Colombia,HJ,1234a
+Colombia,HK,1234a
+Comoros,D6,abc
+Congo,TN,abc
+Cook Islands,E5,abc
+Democratic Republic of Congo,9Q,abc
+Costa Rica,TI,abc
+Croatia,9A,abc
+Cuba,CU-T,1234
+Cyprus,5B,abc
+Czechia,OK,"abc, abc12, 1234 or a123"
+Denmark,OY,abc
+Denmark,OY-H,ab (reserved for helicopters)
+Denmark,OY-X,ab (only gliders)
+Denmark,OY-B,ab (preferred for hot-air balloons)
+Djibouti,J2,abc
+Dominica,J7,abc
+Dominican Republic,HI,123ab
+Ecuador,HC,abc
+Egypt,SU,abc
+El Salvador,YS,abc
+Equatorial Guinea,3C,abc
+Eritrea,E3,abc
+Estonia,ES,abc
+Ethiopia,ET,abc
+Falkland Islands (Malvinas),VP-F,ab
+Faroe Islands,OY,abc
+Fiji,DQ,abc
+Finland,OH,abc
+France,F,abcd
+France,F-OG,ab
+France,F-O,abc
+Gabon,TR,abc
+Gambia,C5,abc
+Georgia,4L,12345 or abc
+Germany,D,abcd
+Ghana,9G,abc
+Gibraltar,VP-G,ab
+Greece,SX,abc
+Greenland,OY,abc
+Grenada,J3,abc
+Guatemala,TG,abc
+Guinea,3X,abc
+Guinea-Bissau,J5,abc
+Guyana,8R,abc
+Haiti,HH,abc
+Honduras,HR,abc
+Hungary,HA,abc
+Iceland,TF,abc
+India,VT,abc
+Indonesia,PK,abc
+Iran,EP,abc
+Iraq,YI,abc
+Ireland,EI,abc
+Isle of Man,M,abcd
+Israel,4X,abc
+Italy,I,abcd
+Ivory Coast,TU,abc
+Jamaica,6Y,abc
+Japan,JA,1234 or 123a or 12ab or a123
+Jordan,JY,abc
+Kazakhstan,UN,12345
+Kenya,5Y,abc
+Kiribati,T3,abc
+Democratic People's Republic of Korea,P,123
+Republic of Korea,HL,1234
+Kuwait,9K,abc
+Kyrgyzstan,EX,12345 or 123
+Laos,RDPL,12345
+Latvia,YL,abc
+Lebanon,OD,abc
+Lesotho,7P,abc
+Liberia,A8,abc
+Libya,5A,abc
+Lithuania,LY,abc
+Luxembourg,LX,abc
+Macedonia,Z3,abc
+Madagascar,5R,abc
+Malawi,7Q,abc
+Malaysia,9M,abc
+Maldives,8Q,abc
+Mali,TZ,abc
+Malta,9H,abc
+Marshall Islands,V7,1234
+Mauritania,5T,abc
+Mauritius,3B,abc
+Mexico,XA,abc
+Mexico,XB,abc
+Mexico,XC,abc and abc12
+Micronesia,V6,abc
+Moldova,ER,abc or 12345
+Monaco,3A,abc
+Mongolia,JU,1234
+Montenegro,4O,abc
+Montserrat,VP-M,ab
+Morocco,CN,abc
+Mozambique,C9,abc
+Myanmar,XY,abc
+Myanmar,XZ,abc
+Namibia,V5,abc
+Nauru,C2,abc
+Nepal,9N,abc
+Netherlands,PH,abc
+Netherlands,PJ,abc
+New Zealand,ZK,abc
+New Zealand,ZL,abc
+New Zealand,ZM,abc
+Nicaragua,YN,abc
+Niger,5U,abc
+Nigeria,5N,abc
+Norway,LN,abc
+Oman,A4O,ab
+Pakistan,AP,abc
+Panama,HP,1234abc
+Papua New Guinea,P2,abc
+Paraguay,ZP,abc
+Peru,OB,1234
+Philippines,RPC,1234
+Poland,SP,abc
+Portugal,CR,abc
+Portugal,CS,abc
+Qatar,A7,abc
+Réunion,F-OD,ab
+Romania,YR,abc
+Russian Federation,RA,12345 or 1234K
+Rwanda,9XR,ab
+Saint Helena/Ascension,VQ-H,ab
+Saint Kitts and Nevis,V4,abc
+Saint Lucia,J6,abc
+Saint Vincent and the Grenadines,J8,abc
+Samoa,5W,abc
+San Marino,T7,abc
+Sao Tome and Principe,S9,abc
+Saudi Arabia,HZ,"abc, ab1, ab12 or abc1"
+Senegal,6V,abc
+Senegal,6W,abc
+Serbia,YU,abc
+Seychelles,S7,abc
+Sierra Leone,9L,abc
+Singapore,9V,abc
+Slovakia,OM,abc
+Slovenia,S5,abc
+Solomon Islands,H4,abc
+Somalia,6O,abc
+South Africa,ZS,abc
+South Africa,ZT,abc
+South Africa,ZU,abc
+Spain,EC,abc
+Sri Lanka,4R,abc
+Sudan,ST,abc
+Suriname,PZ,abc
+Eswatini,3D,abc
+Sweden,SE,abc
+Switzerland,HB,abc
+Syria,YK,abc
+French Polynesia,F-OH,ab
+Tajikistan,EY,12345
+Tanzania,5H,abc
+Thailand,HS,abc
+Togo,5V,abc
+Tonga,A3,abc
+Trinidad and Tobago,9Y,abc
+Tunisia,TS,abc
+Turkey,TC,abc
+Turkmenistan,EZ,a123
+Turks and Caicos,VQ-T,ab
+Tuvalu,T2,abc
+Uganda,5X,abc
+Ukraine,UR,12345 or abc
+United Arab Emirates,A6,abc
+United Kingdom,G,abcd
+United Nations,4U,abc
+United States of America,N,"1, 12, 123, 1234, 12345, 1a, 12a, 123a, 1234a, 1ab, 12ab or 123ab"
+Uruguay,CX,abc
+Uzbekistan,UK,12345
+Vanuatu,YJ,ab1 or ab12
+Venezuela,YV,"123a, 1234 or O123, KW1, SATA1 (Official Use)"
+Vietnam,VN,1234 or a123
+Yemen,7O,abc
+Zambia,9J,abc
+Zimbabwe,Z,abc
