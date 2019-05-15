@@ -1,3 +1,4 @@
+# This file has been generated, all changes need to be done in the source file
 COUNTRIES_PREFIX = (
     ("AF", "YA-"),  # Afghanistan
     ("AL", "ZA-"),  # Albania
@@ -233,4 +234,3 @@ COUNTRIES_PREFIX = (
     ("ZM", "9J-"),  # Zambia
     ("ZW", "Z-"),  # Zimbabwe
 )
-# result = ['("%s", "%s"),  # %s' % (row[0], row[1]+'-' if row[1].count('-') == 0 else row[1] , row[2]) for row in df[['Alpha-2 code', 'Registration Prefix', 'Country']].values]

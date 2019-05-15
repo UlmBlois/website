@@ -1,4 +1,4 @@
-Country,Registration Prefix,Suffix Pattern,Alpha-2 code,Alpha-3 code,Numeric
+Country,Registration_Prefix,Suffix Pattern,Alpha-2,Alpha-3,Numeric
 Afghanistan,YA,abc,AF,AFG,4.0
 Albania,ZA,abc,AL,ALB,8.0
 Algeria,7T,abc,DZ,DZA,12.0
@@ -11,8 +11,7 @@ Argentina,LV,abc,AR,ARG,32.0
 Armenia,EK,12345,AM,ARM,51.0
 Aruba,P4,abc,AW,ABW,533.0
 Australia,VH,abc,AU,AUS,36.0
-Austria,OE,abc,AT,AUT,40.0
-Austria,OE,1234 (gliders only),AT,AUT,40.0
+Austria,OE,"abc, 1234 (gliders only)",AT,AUT,40.0
 Azerbaijan,4K,ab1 or ab12 or 12345,AZ,AZE,31.0
 Bahamas,C6,abc,BS,BHS,44.0
 Bahrain,A9C,ab or abc,BH,BHR,48.0
