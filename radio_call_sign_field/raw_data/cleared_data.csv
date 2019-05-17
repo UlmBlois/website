@@ -1,4 +1,4 @@
-Country,Registration_Prefix,Suffix Pattern,Alpha-2,Alpha-3,Numeric
+Country,Registration_Prefix,Pattern,Alpha-2,Alpha-3,Numeric
 Afghanistan,YA,abc,AF,AFG,4.0
 Albania,ZA,abc,AL,ALB,8.0
 Algeria,7T,abc,DZ,DZA,12.0
@@ -11,13 +11,13 @@ Argentina,LV,abc,AR,ARG,32.0
 Armenia,EK,12345,AM,ARM,51.0
 Aruba,P4,abc,AW,ABW,533.0
 Australia,VH,abc,AU,AUS,36.0
-Austria,OE,"abc, 1234 (gliders only)",AT,AUT,40.0
-Azerbaijan,4K,ab1 or ab12 or 12345,AZ,AZE,31.0
+Austria,OE,"abc,1234",AT,AUT,40.0
+Azerbaijan,4K,"ab1,ab12,12345",AZ,AZE,31.0
 Bahamas,C6,abc,BS,BHS,44.0
-Bahrain,A9C,ab or abc,BH,BHR,48.0
+Bahrain,A9C,"ab,abc",BH,BHR,48.0
 Bangladesh,S2,abc,BD,BGD,50.0
 Barbados,8P,abc,BB,BRB,52.0
-Belarus,EW,123ab or 12345,BY,BLR,112.0
+Belarus,EW,"123ab,12345",BY,BLR,112.0
 Belgium,OO,abc,BE,BEL,56.0
 Belize,V3,abc,BZ,BLZ,84.0
 Benin,TY,abc,BJ,BEN,204.0
@@ -29,9 +29,9 @@ Botswana,A2,abc,BW,BWA,72.0
 Brazil,PP,abc,BR,BRA,76.0
 Brazil,PR,abc,BR,BRA,76.0
 Brazil,PT,abc,BR,BRA,76.0
-Brazil,PU,abc (reserved for ultralights),BR,BRA,76.0
+Brazil,PU,abc,BR,BRA,76.0
 British Virgin Islands,VP-L,ab,VG,VGB,92.0
-Brunei Darussalam,V8,abc or ab1 or 123,BN,BRN,96.0
+Brunei Darussalam,V8,"abc,ab1,123",BN,BRN,96.0
 Bulgaria,LZ,abc,BG,BGR,100.0
 Burkina Faso,XT,abc,BF,BFA,854.0
 Burundi,9U,abc,BI,BDI,108.0
@@ -40,7 +40,7 @@ Cameroon,TJ,abc,CM,CMR,120.0
 Canada,CF-,abc,CA,CAN,124.0
 Canada,C-F,abc,CA,CAN,124.0
 Canada,C-G,abc,CA,CAN,124.0
-Canada,C-I,abc (ultralight aeroplanes only),CA,CAN,124.0
+Canada,C-I,abc,CA,CAN,124.0
 Cape Verde,D4,abc,CV,CPV,132.0
 Cayman Islands,VP-C,ab,KY,CYM,136.0
 Central African Republic,TL,abc,CF,CAF,140.0
@@ -62,11 +62,11 @@ Costa Rica,TI,abc,CR,CRI,188.0
 Croatia,9A,abc,HR,HRV,191.0
 Cuba,CU-T,1234,CU,CUB,192.0
 Cyprus,5B,abc,CY,CYP,196.0
-Czechia,OK,"abc, abc12, 1234 or a123",CZ,CZE,203.0
+Czechia,OK,"abc,abc12,1234,a123",CZ,CZE,203.0
 Denmark,OY,abc,DK,DNK,208.0
-Denmark,OY-H,ab (reserved for helicopters),DK,DNK,208.0
-Denmark,OY-X,ab (only gliders),DK,DNK,208.0
-Denmark,OY-B,ab (preferred for hot-air balloons),DK,DNK,208.0
+Denmark,OY-H,ab,DK,DNK,208.0
+Denmark,OY-X,ab,DK,DNK,208.0
+Denmark,OY-B,ab,DK,DNK,208.0
 Djibouti,J2,abc,DJ,DJI,262.0
 Dominica,J7,abc,DM,DMA,212.0
 Dominican Republic,HI,123ab,DO,DOM,214.0
@@ -86,7 +86,7 @@ France,F-OG,ab,FR,FRA,250.0
 France,F-O,abc,FR,FRA,250.0
 Gabon,TR,abc,GA,GAB,266.0
 Gambia,C5,abc,GM,GMB,270.0
-Georgia,4L,12345 or abc,GE,GEO,268.0
+Georgia,4L,"12345,abc",GE,GEO,268.0
 Germany,D,abcd,DE,DEU,276.0
 Ghana,9G,abc,GH,GHA,288.0
 Gibraltar,VP-G,ab,GI,GIB,292.0
@@ -111,7 +111,7 @@ Israel,4X,abc,IL,ISR,376.0
 Italy,I,abcd,IT,ITA,380.0
 Ivory Coast,TU,abc,CI,CIV,384.0
 Jamaica,6Y,abc,JM,JAM,388.0
-Japan,JA,1234 or 123a or 12ab or a123,JP,JPN,392.0
+Japan,JA,"1234,123a,12ab,a123",JP,JPN,392.0
 Jordan,JY,abc,JO,JOR,400.0
 Kazakhstan,UN,12345,KZ,KAZ,398.0
 Kenya,5Y,abc,KE,KEN,404.0
@@ -119,7 +119,7 @@ Kiribati,T3,abc,KI,KIR,296.0
 Democratic People's Republic of Korea,P,123,KP,PRK,408.0
 Republic of Korea,HL,1234,KR,KOR,410.0
 Kuwait,9K,abc,KW,KWT,414.0
-Kyrgyzstan,EX,12345 or 123,KG,KGZ,417.0
+Kyrgyzstan,EX,"12345,123",KG,KGZ,417.0
 Laos,RDPL,12345,LA,LAO,418.0
 Latvia,YL,abc,LV,LVA,428.0
 Lebanon,OD,abc,LB,LBN,422.0
@@ -140,9 +140,9 @@ Mauritania,5T,abc,MR,MRT,478.0
 Mauritius,3B,abc,MU,MUS,480.0
 Mexico,XA,abc,MX,MEX,484.0
 Mexico,XB,abc,MX,MEX,484.0
-Mexico,XC,abc and abc12,MX,MEX,484.0
+Mexico,XC,"abc,abc12",MX,MEX,484.0
 Micronesia,V6,abc,FM,FSM,583.0
-Moldova,ER,abc or 12345,MD,MDA,498.0
+Moldova,ER,"abc,12345",MD,MDA,498.0
 Monaco,3A,abc,MC,MCO,492.0
 Mongolia,JU,1234,MN,MNG,496.0
 Montenegro,4O,abc,ME,MNE,499.0
@@ -176,7 +176,7 @@ Portugal,CS,abc,PT,PRT,620.0
 Qatar,A7,abc,QA,QAT,634.0
 Réunion,F-OD,ab,RE,REU,638.0
 Romania,YR,abc,RO,ROU,642.0
-Russian Federation,RA,12345 or 1234K,RU,RUS,643.0
+Russian Federation,RA,"12345,1234K",RU,RUS,643.0
 Rwanda,9XR,ab,RW,RWA,646.0
 Saint Helena/Ascension,VQ-H,ab,SH,SHN,654.0
 Saint Kitts and Nevis,V4,abc,KN,KNA,659.0
@@ -185,7 +185,7 @@ Saint Vincent and the Grenadines,J8,abc,VC,VCT,670.0
 Samoa,5W,abc,WS,WSM,882.0
 San Marino,T7,abc,SM,SMR,674.0
 Sao Tome and Principe,S9,abc,ST,STP,678.0
-Saudi Arabia,HZ,"abc, ab1, ab12 or abc1",SA,SAU,682.0
+Saudi Arabia,HZ,"abc,ab1,ab12,abc1",SA,SAU,682.0
 Senegal,6V,abc,SN,SEN,686.0
 Senegal,6W,abc,SN,SEN,686.0
 Serbia,YU,abc,RS,SRB,688.0
@@ -220,15 +220,15 @@ Turkmenistan,EZ,a123,TM,TKM,795.0
 Turks and Caicos,VQ-T,ab,TC,TCA,796.0
 Tuvalu,T2,abc,TV,TUV,798.0
 Uganda,5X,abc,UG,UGA,800.0
-Ukraine,UR,12345 or abc,UA,UKR,804.0
+Ukraine,UR,"12345,abc",UA,UKR,804.0
 United Arab Emirates,A6,abc,AE,ARE,784.0
 United Kingdom,G,abcd,GB,GBR,826.0
-United States of America,N,"1, 12, 123, 1234, 12345, 1a, 12a, 123a, 1234a, 1ab, 12ab or 123ab",US,USA,840.0
+United States of America,N,"1,12,123,1234,12345,1a,12a,123a,1234a,1ab,12ab,123ab",US,USA,840.0
 Uruguay,CX,abc,UY,URY,858.0
 Uzbekistan,UK,12345,UZ,UZB,860.0
-Vanuatu,YJ,ab1 or ab12,VU,VUT,548.0
-Venezuela,YV,"123a, 1234 or O123, KW1, SATA1 (Official Use)",VE,VEN,862.0
-Vietnam,VN,1234 or a123,VN,VNM,704.0
+Vanuatu,YJ,"ab1,ab12",VU,VUT,548.0
+Venezuela,YV,"123a,1234,O123,KW1,SATA1",VE,VEN,862.0
+Vietnam,VN,"1234,a123",VN,VNM,704.0
 Yemen,7O,abc,YE,YEM,887.0
 Zambia,9J,abc,ZM,ZMB,894.0
 Zimbabwe,Z,abc,ZW,ZWE,716.0
