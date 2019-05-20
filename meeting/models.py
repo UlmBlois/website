@@ -221,9 +221,8 @@ class ULM(models.Model):
     type = models.CharField(
         max_length=2,
         choices=ULM_TYPE_CHOICE,
-        default=MULTIAXES,
     )
-    imatriculation_country = CountryField(default='FR')
+    imatriculation_country = CountryField()
     imatriculation = models.CharField(max_length=6)
     radio_id = RadioCallSignField()
 

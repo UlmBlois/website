@@ -175,6 +175,7 @@ class ULMFormSetHelper(FormHelper):
             ),
         )
         self.render_required_fields = True
+        self.add_input(Submit('submit', _('Submit')))
 
 
 class BaseULMForm(forms.ModelForm):
@@ -190,37 +191,16 @@ class BaseULMForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = 'post'
-        self.helper.layout = Layout(
-            Field('type', css_class='form-group'),
-            Row(
-                Column('constructor', css_class='form-group col-md-6 mb-0'),
-                Column('model', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
-                Column('imatriculation_country',
-                       css_class='form-group col-md-6 mb-0'),
-                Column('imatriculation', css_class='from-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
-                MultiWidgetField('radio_id', css_class='form-group',
-                                 attrs=({'class': 'form-control'}, {'class': 'form-control'})),
-                css_class='form-row'
-            ),
-        )
+        self.helper = ULMFormSetHelper()
 
 
 class ULMForm(BaseULMForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper.add_input(Submit('submit', _('Submit')))
 
 
 UlmFormSet = modelformset_factory(ULM, BaseULMForm,
-          widgets={'radio_id': CallSingPrefixWidget}, extra=0)
+                                  widgets={'radio_id': CallSingPrefixWidget})
 
 
 class UserEditMultiForm(MultiModelForm):

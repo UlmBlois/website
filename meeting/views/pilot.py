@@ -301,8 +301,9 @@ class ReservationWizardStep2(ModelFormSetView):
         """
         for form in formset:
             ulm = form.save(commit=False)
-            ulm.pilot = Pilot.objects.get(pk=self.pilot)
-            ulm.save()
+            if not ulm.radio_id == '':
+                ulm.pilot = Pilot.objects.get(pk=self.pilot)
+                ulm.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def formset_invalid(self, formset):
