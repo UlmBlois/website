@@ -59,9 +59,14 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    {% trans "Your Reservation"%}
+    {% trans "My Account"%}
   </div>
-
+  <li class="nav-item {% if url_name == 'pilot' %}active{% endif %}">
+    <a class="nav-link" href="{% url 'pilot' user.pilot.pk%}">
+      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+      {% trans "Profile" %}
+    </a>
+  </li>
   <li class="nav-item {% if url_name == 'pilot_reservation' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot_reservation' %}">
       <i class="fas fa-fw fa-th-list"></i>
