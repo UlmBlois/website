@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'meeting.apps.MeetingConfig',
     'pages.apps.PagesConfig',
+    'faq.apps.FaqConfig',
     'radio_call_sign_field.apps.RadioCallSignFieldConfig'
 ]
 
@@ -66,6 +67,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'meeting/templates/includes/ajax'),
             os.path.join(BASE_DIR, 'meeting/templates/widgets'),
             os.path.join(BASE_DIR, 'pages/templates'),
+            os.path.join(BASE_DIR, 'faq/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {

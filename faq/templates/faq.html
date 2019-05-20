@@ -1,0 +1,60 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block style %}
+<link href="{% static 'css/faq.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block header %}
+<h1>{% trans "FAQ" %}</h1>
+{% endblock %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="nav nav-pills flex-column faq-nav" id="faq-tabs" role="tablist" aria-orientation="vertical">
+                  {% for topic in topics%}
+
+                    <a href="#tab{{topic.number}}" class="nav-link {% if forloop.first %}active{%endif%}" data-toggle="pill" role="tab" aria-controls="tab{{topic.number}}" aria-selected="{% if forloop.first %}true{%else%}false{%endif%}">
+                        <i class="mdi mdi-help-circle"></i> {{topic.topic_name}}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="tab-content" id="faq-tab-content">
+                  {% for topic in topics %}
+
+                    <div class="tab-pane show {% if forloop.first %}show active{%endif%}" id="tab{{topic.number}}" role="tabpanel" aria-labelledby="tab{{topic.number}}">
+                        <div class="accordion" id="accordion-tab-{{topic.number}}">
+                          {% for question in topic.question.all %}
+
+                            <div class="card">
+                                <div class="card-header" id="accordion-tab-{{topic.number}}-heading-{{question.number}}">
+                                    <h5>
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-{{topic.number}}-content-{{question.number}}" aria-expanded="false" aria-controls="accordion-tab-{{topic.number}}-content-{{question.number}}">
+                                          {{question.number}} - {{question.question}}
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div class="collapse {% if forloop.first %}show{%endif%}" id="accordion-tab-{{topic.number}}-content-{{question.number}}" aria-labelledby="accordion-tab-{{topic.number}}-heading-{{question.number}}" data-parent="#accordion-tab-{{topic.number}}">
+                                    <div class="card-body">
+                                      {{question.answer | safe }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    {% endfor%}
+                </div>
+            </div>
+        </div>
+
+
+{% endblock%}

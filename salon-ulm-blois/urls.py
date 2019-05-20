@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('meeting/', include('meeting.urls')),
     path('pages/', include('pages.urls')),
+    path('faq/', include('faq.urls')),
     path('', RedirectView.as_view(url='/meeting/', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
