@@ -206,12 +206,12 @@ class CreatePilotReservation(CreateView):
         return kwargs
 
     def form_valid(self, form):
-        uuid.uuid4().hex[:6].upper()
         res = form.save(commit=False)
-        key = uuid.uuid4().hex[:6].upper()
-        while Reservation.objects.filter(reservation_number=key).exists():
+        if self.reservation_number == '':
             key = uuid.uuid4().hex[:6].upper()
-        res.reservation_number = key
+            while Reservation.objects.filter(reservation_number=key).exists():
+                key = uuid.uuid4().hex[:6].upper()
+            res.reservation_number = key
         res.save()
         return redirect(self.get_success_url())
 

@@ -249,7 +249,7 @@ class Reservation(models.Model):
                             related_name="reservations")
     pilot = models.ForeignKey(Pilot, on_delete=models.SET_NULL, null=True)  # TODO add related name??
     meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)  # TODO add related name??
-    reservation_number = models.CharField(max_length=32, unique=True)
+    reservation_number = models.UUIDField(default=uuid.uuid4, editable=False)
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE,
                                   related_name='arrivals', null=True)
     depart_time_slot = models.ForeignKey(TimeSlot, on_delete=models.SET_NULL,
