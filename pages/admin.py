@@ -3,16 +3,18 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from translated_fields import TranslatedFieldAdmin, to_attribute
 import re
-from pages.models import Chunk
+from pages.models import Chunk, Page
+
+admin.site.register(Page)
 
 
 @admin.register(Chunk)
 class ChunkAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ('key', "description")
-
+    list_display = ('key', "description", 'page')
+    list_filter = ['page']
     base_fields = ['description', 'content']
     fieldsets = [
-        (_("Globals"), {"fields": ["key"]}),
+        (_("Globals"), {"fields": ["key", "page"]}),
     ]
     for i, language in enumerate(settings.LANGUAGES):
         ft = []

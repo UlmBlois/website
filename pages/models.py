@@ -21,13 +21,30 @@ def fallback_to_default(name):
     return getter
 
 
+class Page(models.Model):
+    """A Page Can contain multiple Chunks."""
+    slug = models.SlugField(unique=True, help_text=_('Page name'))
+
+    class Meta:
+        verbose_name = _('page')
+        verbose_name_plural = _('pages')
+
+    def __unicode__(self):
+        return u"%s" % (self.slug,)
+
+    def __str__(self):
+        return self.slug
+
+
 class Chunk(models.Model):
     """
     A Chunk is a piece of content associated
     with a unique key that can be inserted into
     any template with the use of a special template
-    tag
+    tag.
     """
+    page = models.ForeignKey(Page, on_delete=models.CASCADE,
+                             related_name='chunks')
     key = models.CharField(_('Key'),
                            help_text=_("A unique id for this chunk"),
                            blank=False,
