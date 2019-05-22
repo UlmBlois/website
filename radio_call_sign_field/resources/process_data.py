@@ -28,20 +28,32 @@ def to_regex(pattern):
             else:
                 reg += "[A-Za-z]"
         elif c.isnumeric():
-            reg += "[0-1]"
+            reg += "[0-9]"
+    reg += '$'
     return reg
 
 
 def extract_regex(pattern):
     return [to_regex(x) for x in pattern.split(',')]
-# regexes = '(?:%s)' % '|'.join(regexes)
 
 
 def create_master_regex(df):
-    reg_list = [extract_regex(row[0]) for row in df[['Pattern']].values]
-    reg_set = set([item for sublist in reg_list for item in sublist])
-    # print('\n'.join(reg_set))
-    return '[A-Za-z0-1]?-(?:%s)' % '|'.join(reg_set)
+    return {(row[0]+'-' if row[0].count('-') == 0
+             else row[0]): extract_regex(row[1])
+            for row in df[['Registration_Prefix', 'Pattern']].values}
+
+
+def match(dict, call_sign):
+    found = False
+    for key, patterns in dict.items():
+        if call_sign.startswith(key):
+            for p in patterns:
+                if re.match(key+p, call_sign):
+                    # print((key, p))
+                    found = True
+            if found:
+                return True
+    return False
 
 
 parser = argparse.ArgumentParser()
@@ -56,8 +68,7 @@ args = parser.parse_args()
 
 
 df = pd.read_csv(args.input, na_filter=False)
-# print(len(df))
-# print('\n'.join(["%s : %s" % (row[0], row[1]) for row in df[['Country', 'Pattern']].values]))
+
 header_message = ("# This file has been generated,"
                   " all changes need to be done in the source file")
 
@@ -71,3 +82,5 @@ if args.output:
         out.write(enum)
 else:
     print(enum)
+
+# TODO: Use Pickle to serialize result
