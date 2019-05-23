@@ -44,16 +44,14 @@ def create_master_regex(df):
 
 
 def match(dict, call_sign):
-    found = False
+    match = []
     for key, patterns in dict.items():
         if call_sign.startswith(key):
             for p in patterns:
                 if re.match(key+p, call_sign):
-                    # print((key, p))
-                    found = True
-            if found:
-                return True
-    return False
+                    match.append(key)
+
+    return set(match)
 
 
 parser = argparse.ArgumentParser()
@@ -84,3 +82,5 @@ else:
     print(enum)
 
 # TODO: Use Pickle to serialize result
+for i in range(10000):
+    print(match(regexes, 'F-OGAA'))
