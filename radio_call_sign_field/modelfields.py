@@ -10,11 +10,10 @@ class RadioCallSignField(models.CharField):
     description = _("Aicraft radio call sign")
 
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault("max_length", 6)
+        kwargs.setdefault("max_length", 10)
         super().__init__(*args, **kwargs)
 
-
-def formfield(self, **kwargs):
+    def formfield(self, **kwargs):
         defaults = {
             "form_class": formfields.CallSignField,
             "error_messages": self.error_messages,

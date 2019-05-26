@@ -1,20 +1,20 @@
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-import re
+import logging
 
-# TODO size can vary between state, make full verification
+from .ICAO_registration_prefix.registration import RegistrationNumber
 
-RADIO_CALL_SIGN_REGEX = r'^[0-9a-zA-Z]{1,2}-[0-9a-zA-Z]{3,4}$'
+logger = logging.getLogger(__name__)
 
 
 def validate_radio_call_sign(value):
-    size = len(value)
-    if size != 6:
+    reg_num = RegistrationNumber(value)
+    if not reg_num.is_valid():
+        logger.debug("invalid value : %s does not match %s", reg_num.number, str(reg_num.validator.patterns))
         raise ValidationError(
-            _("Invalid value: %(size)s charaters, expected 6 charaters."),
-            code='invalid', params={'size': size})
-    if re.fullmatch(RADIO_CALL_SIGN_REGEX, value) is None:
-        raise ValidationError(
-            _("Invalid value: does not match the format XX-YYY or X-YYYY"),
+            _("Invalid value: does not match the format "
+              "of the registration country"),
             code='invalid')
+    else:
+        logger.debug("valid RegistrationNumber")

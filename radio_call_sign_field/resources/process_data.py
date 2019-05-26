@@ -3,6 +3,7 @@
 import argparse
 import pandas as pd
 import re
+import json
 
 """Format call signs and country code data in a list of"""
 """ (country_code, call_sign_prefix)."""
@@ -79,8 +80,6 @@ if args.output:
     with open(args.output, "w") as out:
         out.write(enum)
 else:
-    print(enum)
-
+    # print(enum)
+    print(regexes)
 # TODO: Use Pickle to serialize result
-for i in range(10000):
-    print(match(regexes, 'F-OGAA'))

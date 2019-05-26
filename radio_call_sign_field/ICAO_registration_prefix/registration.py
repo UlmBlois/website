@@ -1,11 +1,14 @@
 import re
+import logging
 
-DATA = []
-PATTERNS_DICT = {}
+from .data import PATTERNS_DICT
+
+logger = logging.getLogger(__name__)
 
 
 class RegistrationNumber:
     def __init__(self, number=''):
+        logger.debug('create RegistrationNumber')
         self.number = number
         if len(number) > 0:
             self.validator = Validator.fromNumber(number)
@@ -21,6 +24,7 @@ class Validator:
 
     @classmethod
     def fromNumber(cls, number):
+        logger.debug('create RegistrationNumber Validator')
         pattern_list = []
         key_max_size = 0
         key_best_match = ''
@@ -34,6 +38,6 @@ class Validator:
 
     def validate(self, number):
         for p in self.patterns:
-            if re.match(p, number):
+            if re.match(self.prefix+p, number):
                 return True
         return False

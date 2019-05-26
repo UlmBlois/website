@@ -227,6 +227,12 @@ logging.config.dictConfig({
             # Avoid double logging because of root logger
             'propagate': False,
         },
+        'radio_call_sign_field': {
+            'level': LOGLEVEL,
+            'handlers': ['console', ],  # 'sentry'],
+            # Avoid double logging because of root logger
+            'propagate': False,
+        },
         # Prevent noisy modules from logging to Sentry
         'noisy_module': {
             'level': 'ERROR',
