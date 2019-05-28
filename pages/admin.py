@@ -3,9 +3,13 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from translated_fields import TranslatedFieldAdmin, to_attribute
 import re
-from pages.models import Chunk
+from pages.models import Chunk, Page
 
-# admin.site.register(Page)
+
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        return {}
 
 
 @admin.register(Chunk)

@@ -68,4 +68,4 @@ class Validator:
 
     def __str__(self):
         str = [self.pattern_to_str(self.prefix + x)for x in self.patterns]
-        return ','.join(str)
+        return ', '.join(str)

@@ -1,9 +1,13 @@
 {% extends "emails/base_email.html"%}
 {% load i18n %}
+{% load chunks %}
+
 <!-- TODO: a completer  -->
 
 {% block content %}
-{% include 'emails/includes/base/text_row_with_title.html' with text="text text text"%}
+{% get_chunk 'email_res_confirm_body_1' as body_1 %}
+
+{% include 'emails/includes/base/text_row_with_title.html' with text=body_1.content%}
 
 {% url 'index' as link_index%}
 {% trans "Confirmation" as link_text%}
