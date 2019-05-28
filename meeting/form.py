@@ -170,7 +170,9 @@ class ULMFormSetHelper(FormHelper):
             ),
             Row(
                 MultiWidgetField('radio_id', css_class='form-group',
-                                 attrs=({'class': 'form-control'}, {'class': 'form-control'})),
+                                 attrs=({'class': 'form-control'},
+                                        {'class': 'form-control'}),
+                                 template="radio_call_sign_crispy_field.html"),
                 css_class='form-row'
             ),
         )

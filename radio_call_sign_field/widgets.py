@@ -30,13 +30,13 @@ class CallSingPrefixWidget(MultiWidget):
 
     def decompress(self, value):
         if value:
-            pos = [x[1] for x in COUNTRIES_PREFIX
-                   if value.startswith(x[1])]
-            if len(pos) == 0:
+            possibility = [x[1] for x in COUNTRIES_PREFIX
+                           if value.startswith(x[1])]
+            if len(possibility) == 0:
                 return [None, ""]
-            start = max(pos, key=len)
-            id = value.replace(start, '')
-            return [start, id]
+            prefix = max(possibility, key=len)
+            id = value.replace(prefix, '')
+            return [prefix, id]
         return [None, ""]
 
     def value_from_datadict(self, data, files, name):

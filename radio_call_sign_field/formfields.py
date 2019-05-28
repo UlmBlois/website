@@ -28,5 +28,4 @@ class CallSignField(CharField):
 
     def validate(self, value):
         super().validate(value)
-        logger.debug('in validate')
         validate_radio_call_sign(value)

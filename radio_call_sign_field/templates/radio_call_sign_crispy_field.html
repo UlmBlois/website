@@ -1,0 +1,47 @@
+{% load crispy_forms_field %}
+
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+
+    {% if field.label %}
+        <label for="{{ field.id_for_label }}"{% if labelclass %} class="{{ labelclass }}"{% endif %}>
+    {% endif %}
+
+    {% if field|is_checkbox %}
+        {% crispy_field field %}
+    {% endif %}
+
+    {% if field.label %}
+        {{ field.label }}
+        {% if field.field.required %}
+          <span class="asteriskField">*</span>
+        {% endif %}
+    {% endif %}
+
+    {% if field.errors %}
+
+      {% if not field|is_checkbox %}
+        {% crispy_field field 'class' 'is-invalid' %}
+      {% endif %}
+
+    {%else%}
+
+      {% if not field|is_checkbox %}
+        {% crispy_field field %}
+      {% endif %}
+
+    {% endif %}
+
+    {% if form_show_errors and field.errors %}
+      {% for error in field.errors %}
+          <span id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="invalid-feedback"><strong>{{ error }}</strong></span>
+      {% endfor %}
+    {% endif %}
+
+    {% if field.label %}
+        </label>
+    {% endif %}
+
+{% endif %}

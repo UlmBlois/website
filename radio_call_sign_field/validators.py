@@ -13,8 +13,7 @@ def validate_radio_call_sign(value):
     if not reg_num.is_valid():
         logger.debug("invalid value : %s does not match %s", reg_num.number, str(reg_num.validator.patterns))
         raise ValidationError(
-            _("Invalid value: does not match the format "
-              "of the registration country"),
+            _("Invalid value: does not match the format of the registration country"),
             code='invalid')
     else:
         logger.debug("valid RegistrationNumber")
