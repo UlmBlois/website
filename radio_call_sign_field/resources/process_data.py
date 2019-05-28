@@ -3,7 +3,6 @@
 import argparse
 import pandas as pd
 import re
-import json
 
 """Format call signs and country code data in a list of"""
 """ (country_code, call_sign_prefix)."""
