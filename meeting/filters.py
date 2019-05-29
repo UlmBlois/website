@@ -1,7 +1,10 @@
-from django_filters import FilterSet, CharFilter, ModelChoiceFilter
+from django_filters import FilterSet, CharFilter, ModelChoiceFilter, BooleanFilter
 from django.utils.translation import gettext_lazy as _
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from meeting.fields import ListTextWidget
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ReservationFilter(FilterSet):
@@ -13,6 +16,17 @@ class ReservationFilter(FilterSet):
     pilot__user__last_name = CharFilter(label=_('Last name'),
                                         lookup_expr='icontains')
     time_slot = ModelChoiceFilter(queryset=TimeSlot.objects.actives())
+    fuel_served = BooleanFilter(label=_('Fuel served'),
+                                method='filter_numeric_is_set')
+    fuel_reservation = BooleanFilter(label=_('Fuel reserved'),
+                                     method='filter_numeric_is_set')
+
+    def filter_numeric_is_set(self, queryset, name, value):
+        logger.debug('value: %s', str(value))
+        if value:
+            return queryset.filter(fuel_served__gt=0)
+        else:
+            return queryset.filter(fuel_served=0)
 
     class Meta:
         model = Reservation
@@ -24,6 +38,7 @@ class ReservationFilter(FilterSet):
                  'pilot__user__first_name',
                  'pilot__user__last_name',
                  'fuel_reservation',
+                 'fuel_served',
                  'flight_plan',
                  'passanger',
                  'esthetic_cup',

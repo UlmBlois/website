@@ -32,10 +32,6 @@
   </div>
   <div class="row">
     <div class="form-group col-sm">
-        {{ filter.form.fuel_reservation.label_tag }}
-        {% render_field filter.form.fuel_reservation class="form-control" %}
-    </div>
-    <div class="form-group col-sm">
         {{ filter.form.flight_plan.label_tag }}
         {% render_field filter.form.flight_plan class="form-control" %}
     </div>
@@ -50,6 +46,16 @@
     <div class="form-group col-sm">
         {{ filter.form.for_sale.label_tag }}
         {% render_field filter.form.for_sale class="form-control" %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm">
+        {{ filter.form.fuel_reservation.label_tag }}
+        {% render_field filter.form.fuel_reservation class="form-control" %}
+    </div>
+    <div class="form-group col-sm">
+        {{ filter.form.fuel_served.label_tag }}
+        {% render_field filter.form.fuel_served class="form-control" %}
     </div>
   </div>
 
