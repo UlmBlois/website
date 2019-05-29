@@ -1,4 +1,4 @@
-{% with textcolor=textcolor|default:"#5F5F5F" bgcolor=bgcolor|default:"#FFFFFF" %}
+{% with textcolor=textcolor|default:"#5F5F5F" bgcolor=bgcolor|default:"#FFFFFF" width=width|default:"800"%}
 {% with leftbgcolor=leftbgcolor|default:bgcolor rightbgcolor=rightbgcolor|default:bgcolor %}
 <tr>
   <td align="center" valign="top">
@@ -7,9 +7,9 @@
       <tr>
         <td align="center" valign="top">
           <!-- FLEXIBLE CONTAINER // -->
-          <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
+          <table border="0" cellpadding="0" cellspacing="0" width={{width}} class="flexibleContainer">
             <tr>
-              <td valign="top" width="500" class="flexibleContainerCell">
+              <td valign="top" width={{width}} class="flexibleContainerCell">
 
                 <!-- CONTENT TABLE // -->
                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">

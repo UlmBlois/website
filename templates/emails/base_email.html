@@ -1,4 +1,7 @@
 {% load i18n %}
+{% with width=width|default:"800"%}
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <!-- <head></head> containing template style -->
@@ -27,7 +30,7 @@
   							that spans the width of the page.
   						-->
               {% block header%}
-              {% include 'emails/includes/base/header_row.html'%}
+              {% include 'emails/includes/base/header_row.html' with width=width%}
               {% endblock %}
   						<!-- // END EMAIL HEADER-->
 
@@ -37,9 +40,9 @@
   							Its width can be set to 100% for a color band
   							that spans the width of the page.
   						-->
-  						<table bgcolor="#FFFFFF"  border="0" cellpadding="0" cellspacing="0" width="500" id="emailBody">
+  						<table bgcolor="#FFFFFF"  border="0" cellpadding="0" cellspacing="0" width={{width}} id="emailBody">
                 <!-- HEADER ZONE //-->
-                {% include 'emails/includes/specialised/email_header_bar.html'  with bgcolor="#3498ab" textcolor="#FFFFFF"%}
+                {% include 'emails/includes/specialised/email_header_bar.html'  with bgcolor="#3498ab" textcolor="#FFFFFF" width=width%}
                 <!-- // END HEADER ZONZ-->
                 {% block content%}
 
@@ -50,7 +53,7 @@
 
               <!-- FOOTER ROW // -->
               {% block footer%}
-              {% include 'includes/base/footer_row.html'%}
+              {% include 'includes/base/footer_row.html' with width=width%}
               {% endblock %}
             </td>
           </tr>
@@ -58,3 +61,5 @@
     </center>
   </body>
 </html>
+
+{% endwith %}
