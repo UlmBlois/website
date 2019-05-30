@@ -69,6 +69,7 @@
     <td>{{ulm.model}}</td>
     <td>{{ulm.get_type_display}}</td>
     <td>{{ulm.pilot}}</td>
+    <td><a href="{% url 'pilot_overview' ulm.pilot.pk%}"><i class="fas fa-fw fa-search"></i></a></td>
   </tr>
   {% endfor %}
   </tbody>

@@ -1,31 +1,32 @@
 {% load i18n %}
 
-
-<table class="table">
-  <tbody>
-    <tr>
-      <th scope="row">{% trans 'First Name'%}</th>
+<div class="table-responsive">
+  <table class="table">
+    <tbody>
+      <tr role="row">
+        <th scope="row">{% trans 'First Name'%}</th>
         <td>{{pilot.user.first_name}}</td>
       </tr>
-      <tr>
+      <tr role="row">
         <th scope="row">{% trans 'Last Name'%}</th>
         <td>{{pilot.user.last_name}}</td>
       </tr>
-      <tr>
+      <tr role="row">
         <th scope="row">{% trans 'Licence Number'%}</th>
         <td>{{pilot.licence_number}}</td>
       </tr>
-      <tr>
+      <tr role="row">
         <th scope="row">{% trans 'Insurance Company'%}</th>
         <td>{{pilot.insurance_company}}</td>
       </tr>
-      <tr>
+      <tr role="row">
         <th scope="row">{% trans 'Insurance Number'%}</th>
         <td>{{pilot.insurance_number}}</td>
       </tr>
-      <tr>
+      <tr role="row">
         <th scope="row">{% trans 'Phone Number'%}</th>
         <td>{{pilot.phone_number}}</td>
       </tr>
     </tbody>
-</table>
+  </table>
+</div>

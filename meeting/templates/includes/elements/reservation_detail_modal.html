@@ -1,0 +1,11 @@
+{% extends 'includes/elements/empty_modal.html'%}
+{% load i18n %}
+
+
+{% block title%}
+{% trans 'Reservation Details'%}
+{% endblock %}
+
+{% block body%}
+{%include 'includes/elements/reservation_detail.html' with res=res%}
+{% endblock %}

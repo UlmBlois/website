@@ -1,0 +1,74 @@
+{% load i18n %}
+
+<div class="table-responsive">
+  <table class="table">
+    <tbody>
+      <tr role="row">
+        <th scope="row">{% trans 'Meeting'%}</th>
+        <td>{{res.meeting}}</td>
+        <th scope="row">{% trans 'Reservation number'%}</th>
+        <td>{{res.reservation_number}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Pilot'%}</th>
+        <td>{{res.pilot}}</td>
+        <th scope="row">{% trans 'Ulm'%}</th>
+        <td>{{res.ulm}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Arrival slot'%}</th>
+        <td>{{res.time_slot}}</td>
+        <th scope="row">{% trans 'Departure slot'%}</th>
+        <td>{{res.depart_time_slot}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Flight plan'%}</th>
+        <td>{{res.flight_plan}}</td>
+        <th scope="row">{% trans 'Passanger'%}</th>
+        <td>{{res.passanger}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Esthetic cup'%}</th>
+        <td>{{res.esthetic_cup}}</td>
+        <th scope="row">{% trans 'For sale'%}</th>
+        <td>{{res.for_sale}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Origin city'%}</th>
+        <td>{{res.origin_city}}</td>
+        <th scope="row">{% trans 'Origin field'%}</th>
+        <td>{{res.origin_field}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Fuel reservation'%}</th>
+        <td>{{res.fuel_reservation}}</td>
+        <th scope="row">{% trans 'Fuel reservation confirmed'%}</th>
+        <td>{{res.fuel_reservation_confirmed}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Fuel advance'%}</th>
+        <td>{{res.fuel_advance}}</td>
+        <th scope="row">{% trans 'Fuel served'%}</th>
+        <td>{{res.fuel_served}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Reservation confirmed'%}</th>
+        <td>{{res.confirmed}}</td>
+        <th scope="row">{% trans 'Reservation canceled'%}</th>
+        <td>{{res.canceled}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Arrival'%}</th>
+        <td>{{res.arrival}}</td>
+        <th role="row"></th>
+        <td></td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'Creation date'%}</th>
+        <td>{{res.creation_date}}</td>
+        <th scope="row">{% trans 'Modification date'%}</th>
+        <td>{{res.modification_date}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
