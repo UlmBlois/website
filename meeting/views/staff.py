@@ -15,6 +15,10 @@ from .utils import PaginatedFilterViews, PAGINATED_BY
 from meeting.models import Pilot, ULM, Reservation
 from meeting.form import (ReservationForm, UserEditMultiForm, ULMForm)
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 @method_decorator(login_required, name='dispatch')
 class PilotOverview(PermissionRequiredMixin, DetailView):
@@ -207,4 +211,18 @@ class StaffReservationValidation(PermissionRequiredMixin, View):
         if reservation.arrival is None:
             reservation.arrival = timezone.now()
             reservation.save()
+        return redirect('staff_reservation_overview', pk=self.pk)
+
+
+@method_decorator(login_required, name='dispatch')
+class StaffReservationInvalidation(PermissionRequiredMixin, View):
+    pk = None
+    permission_required = ('meeting.reservation_validation')
+
+    def get(self, request, *args, **kwargs):
+        self.pk = kwargs.pop('pk', None)
+        logger.debug("in Invalidate")
+        reservation = get_object_or_404(Reservation, pk=self.pk)
+        reservation.arrival = None
+        reservation.save()
         return redirect('staff_reservation_overview', pk=self.pk)

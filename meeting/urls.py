@@ -80,6 +80,9 @@ urlpatterns += [
     path('staff/reservation/validation/<int:pk>/validate/',
          views.StaffReservationValidation.as_view(),
          name="staff_reservation_validate"),
+    path('staff/reservation/validation/<int:pk>/invalidate/',
+         views.StaffReservationInvalidation.as_view(),
+         name="staff_reservation_invalidate"),
 ]
 
 

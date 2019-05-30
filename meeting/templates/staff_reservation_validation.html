@@ -68,9 +68,15 @@
     </div>
 
     <div class="card">
+      {% with modalid="ReservationModal"%}
       <h5 class="card-header">
+        <div class="d-flex w-100 justify-content-between">
         {% trans 'Reservation'%}
-        <a href="{% url 'staff_reservation_edit' reservation.pk%}"><span class="fas fa-pen float-right"></span></a>
+        <div class="">
+          <a href="#{{modalid}}"  data-toggle="modal" data-target="#{{modalid}}" ><i class="fas fa-search"></i></a>
+          <a href="{% url 'staff_reservation_edit' reservation.pk%}" ><i class="fas fa-pen"></i></a>
+        </div>
+        </div>
       </h5>
       <div class="card-body">
           <table class="table">
@@ -102,6 +108,9 @@
             </tbody>
           </table>
       </div>
+
+      {% include 'includes/elements/reservation_detail_modal.html' with res=reservation id=modalid%}
+      {% endwith %}
     </div>
 
     <div class="card">
@@ -147,8 +156,9 @@
 
 <div class="row mt-3">
 <div class="col">
-  <a href="{% url 'staff_reservation_validate' reservation.pk %}" class="btn btn-success">Validate</a>
-  <button type="button" name="print_btn" class="btn btn-warning">Print</button>
+  <a href="{% url 'staff_reservation_validate' reservation.pk %}" class="btn btn-success">{% trans 'Validate'%}</a>
+  <a href="{% url 'staff_reservation_invalidate' reservation.pk %}" class="btn btn-danger">{% trans 'Invalidate'%}</a>
+  <button type="button" name="print_btn" class="btn btn-warning">{% trans 'Print'%}</button>
 </div>
 </div>
 
