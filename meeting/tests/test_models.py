@@ -146,7 +146,6 @@ class ReservationTest(TestCase):
                                     datetime.datetime(2019, 8, 31, 11)),
                                    depart_time_slot=ts,
                                    origin_city='Blois',
-                                   origin_city_code='41000',
                                    origin_field='LF-41COQ')
 
 #  TODO test validate_unique

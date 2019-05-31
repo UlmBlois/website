@@ -268,7 +268,6 @@ class Reservation(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     modification_date = models.DateTimeField(auto_now=True)
     origin_city = models.CharField(max_length=64, blank=True)  # TODO move into profile
-    origin_city_code = models.CharField(max_length=32, blank=True)  # TODO move into profile
     origin_field = models.CharField(max_length=4, blank=True,
                                     help_text=_("Airfield OACI code"))  # TODO move into profile
 

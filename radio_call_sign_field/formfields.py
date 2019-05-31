@@ -11,7 +11,6 @@ from radio_call_sign_field.widgets import CallSingPrefixWidget
 logger = logging.getLogger(__name__)
 
 
-# TODO: does not display validation errors
 class CallSignField(CharField):
     default_error_messages = {"invalid": _("Enter a valid radio call sign.")}
     default_validators = [validate_radio_call_sign]

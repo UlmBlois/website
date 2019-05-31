@@ -22,7 +22,7 @@ class ReservationForm(forms.ModelForm):
         model = Reservation
         fields = [
                  'ulm', 'time_slot', 'depart_time_slot', 'origin_city',
-                 'origin_city_code', 'origin_field', 'fuel_reservation',
+                 'origin_field', 'fuel_reservation',
                  'flight_plan', 'passanger', 'esthetic_cup', 'for_sale'
                  ]
         widgets = {
@@ -47,8 +47,6 @@ class ReservationForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Row(
-                Column('origin_city_code',
-                       css_class='form-group col-md-4 mb-0'),
                 Column('origin_city', css_class='from-group col-md-4 mb-0'),
                 Column('origin_field', css_class='from-group col-md-4 mb-0'),
                 css_class='form-row'
