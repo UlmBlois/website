@@ -7,5 +7,6 @@
 {% endblock %}
 
 {% block content %}
-
+{% get_chunk 'on_site_page' as on_site_page %}
+{{ on_site_page.content | safe }}
 {% endblock %}

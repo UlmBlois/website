@@ -1,6 +1,7 @@
 {% extends "base_logged.html" %}
 {% load static %}
 {% load i18n %}
+{% load chunks %}
 
 {% block page_title %}
 {% trans "Welcome!" %}
@@ -8,5 +9,16 @@
 
 
 {% block content %}
+
+{% get_chunk 'registration_procedure_1' as registration_1 %}
+{{ registration_1.content | safe }}
+
 <a href="{% url 'reservation_wizard_step1' pk=user.pilot.pk%}">wizard</a>
+
+{% get_chunk 'registration_procedure_2' as registration_2 %}
+{{ registration_2.content | safe }}
+
+{% get_chunk 'registration_procedure_3' as registration_3 %}
+{{ registration_3.content | safe }}
+
 {% endblock%}
