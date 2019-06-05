@@ -1,5 +1,16 @@
 # Chunk Detail
 
+## Page index
+
+Template : meeting/index.html
+
+|chunk                 |evaluation|
+|----------------------|----------|
+|ulm_pilot_short       |   safe   |
+|ppl_pilot_short       |   safe   |
+|paramotor_pilot_short |   safe   |
+|exhibitor_short       |   safe   |
+
 ## Page about
 
 Template : pages/about.html

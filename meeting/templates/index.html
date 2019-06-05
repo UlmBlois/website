@@ -11,9 +11,11 @@ From the {{ start }}, to the {{ end }}.
 </p>
 <hr class="my-4">
 <!-- TODO Change Program file access-->
+<!-- TODO Add images -->
 {% endblock %}
 
 {% block content%}
+
 <div class="row text-center">
 
 <div class="col-lg-3">
@@ -21,10 +23,12 @@ From the {{ start }}, to the {{ end }}.
     <img class="card-img-top" src="http://placehold.it/500x325" alt="">
     <div class="card-body">
       <h4 class="card-title">{% trans "Microlight pilot"%}</h4>
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+      {% get_chunk 'ulm_pilot_short' as ulm_pilot %}
+
+      <p class="card-text">{{ulm_pilot | safe}}</p>
     </div>
     <div class="card-footer">
-      <a href="#" class="btn btn-primary">Find Out More!</a>
+      <a href="{% url 'login' %}" class="btn btn-primary">{% trans 'Sign In'%}</a>
     </div>
   </div>
 </div>
@@ -34,10 +38,13 @@ From the {{ start }}, to the {{ end }}.
     <img class="card-img-top" src="http://placehold.it/500x325" alt="">
     <div class="card-body">
       <h4 class="card-title">{% trans "Paramotor Pilot"%}</h4>
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+      {% get_chunk 'paramotor_pilot_short' as paramotor_pilot %}
+
+      <p class="card-text">{{ paramotor_pilot | safe}}</p>
     </div>
     <div class="card-footer">
-      <a href="#" class="btn btn-primary">Find Out More!</a>
+      <!-- TODO add link -->
+      <a href="#" class="btn btn-primary">{% trans 'Download form'%}</a>
     </div>
   </div>
 </div>
@@ -47,10 +54,13 @@ From the {{ start }}, to the {{ end }}.
     <img class="card-img-top" src="http://placehold.it/500x325" alt="">
     <div class="card-body">
       <h4 class="card-title">{% trans "PPL Pilot"%}</h4>
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+      {% get_chunk 'ppl_pilot_short' as ppl_pilot %}
+
+      <p class="card-text">{{ppl_pilot | safe}}</p>
     </div>
     <div class="card-footer">
-      <a href="#" class="btn btn-primary">Find Out More!</a>
+      <!-- TODO add link -->
+      <a href="#" class="btn btn-primary">{% trans 'Register'%}</a>
     </div>
   </div>
 </div>
@@ -60,37 +70,16 @@ From the {{ start }}, to the {{ end }}.
     <img class="card-img-top" src="http://placehold.it/500x325" alt="">
     <div class="card-body">
       <h4 class="card-title">{% trans "Exhibitor"%}</h4>
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+      {% get_chunk 'exhibitor_short' as exhibitor %}
+
+      <p class="card-text">{{ exhibitor | safe}}</p>
     </div>
     <div class="card-footer">
+      <!-- TODO add link -->
       <a href="#" class="btn btn-primary">Find Out More!</a>
     </div>
   </div>
 </div>
 </div>
-  <h2>Number of reservation: {{num_res}}</h2>
 
-  {% get_chunk "yolo_chunk" as chunk%}
-  {% evaluate chunk.content %}
-
-  <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th>ID</th>
-          <th>Fuel</th>
-          <th>Flight plan</th>
-          <th>Esthetic Cup</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for res in res_list %}
-        <tr>
-          <td>{{res.reservation_number}}</td>
-          <td>{{res.fuel_reservation}}</td>
-          <td>{{res.flight_plan}}</td>
-          <td>{{res.esthetic_cup}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-  </table>
 {% endblock%}
