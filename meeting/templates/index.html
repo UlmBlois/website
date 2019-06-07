@@ -16,8 +16,16 @@ From the {{ start }}, to the {{ end }}.
 
 {% block content%}
 
-<div class="row text-center">
+<!-- TODO remove this span -->
+<span>
+  <a href="{% url 'base_email'%}">base email</a>
+  <br>
+  <a href="{% url 'res_conf_email'%}"> reservation confirmation email</a>
+</span>
 
+<div class="row text-center">
+{% get_chunk 'presentation_short' as presentation %}
+{{presentation | safe}}
 <div class="col-lg-3">
   <div class="card h-100">
     <img class="card-img-top" src="http://placehold.it/500x325" alt="">
@@ -81,5 +89,8 @@ From the {{ start }}, to the {{ end }}.
   </div>
 </div>
 </div>
+
+{% get_chunk 'presentation_short_2' as presentation_2 %}
+{{presentation_2 | safe}}
 
 {% endblock%}

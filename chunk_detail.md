@@ -10,6 +10,8 @@ Template : meeting/index.html
 |ppl_pilot_short       |   safe   |
 |paramotor_pilot_short |   safe   |
 |exhibitor_short       |   safe   |
+|presentation_short    |   safe   |
+|presentation_short_2  |   safe   |
 
 ## Page about
 
