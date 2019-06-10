@@ -23,6 +23,10 @@ from core.form import PasswordResetForm
 from django.conf.urls.static import static
 from django.conf import settings
 
+handler404 = 'core.views.handler_404'
+handler500 = 'core.views.handler_500'
+handler403 = 'core.views.handler_403'
+handler400 = 'core.views.handler_400'
 
 urlpatterns = [
     path('accounts/password_reset/',

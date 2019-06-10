@@ -29,9 +29,11 @@ urlpatterns = [
     path('reservation/<int:pk>/delete',
          views.DeletePilotReservation.as_view(),
          name='pilot_delete_reservation'),
-    path('reservation/wizard/<int:pk>/user', views.ReservationWizardStep1.as_view(),
+    path('reservation/wizard/<int:pk>/user',
+         views.ReservationWizardStep1.as_view(),
          name='reservation_wizard_step1'),
-    path('reservation/wizard/<int:pilot>/ulm', views.ReservationWizardStep2.as_view(),
+    path('reservation/wizard/<int:pilot>/ulm',
+         views.ReservationWizardStep2.as_view(),
          name='reservation_wizard_step2'),
 ]
 

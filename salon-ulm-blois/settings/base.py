@@ -61,6 +61,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates/base'),
+            os.path.join(BASE_DIR, 'templates/errors'),
             os.path.join(BASE_DIR, 'templates/includes'),
             os.path.join(BASE_DIR, 'templates/emails'),
             os.path.join(BASE_DIR, 'templates/registration'),
