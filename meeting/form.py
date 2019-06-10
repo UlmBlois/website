@@ -3,6 +3,9 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.forms.models import modelformset_factory
+# Python
+import logging
+
 # Third Party
 from betterforms.multiform import MultiModelForm
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
@@ -12,8 +15,9 @@ from crispy_forms.layout import Layout, Submit, Row, Column, Field, MultiWidgetF
 # Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from meeting.fields import ListTextWidget
-from meeting.widgets import BooleanWidget
 from radio_call_sign_field.widgets import CallSingPrefixWidget
+
+logger = logging.getLogger(__name__)
 
 
 class ReservationForm(forms.ModelForm):
@@ -25,12 +29,6 @@ class ReservationForm(forms.ModelForm):
                  'origin_field', 'fuel_reservation',
                  'flight_plan', 'passanger', 'esthetic_cup', 'for_sale'
                  ]
-        widgets = {
-            'flight_plan': BooleanWidget(),
-            'passanger': BooleanWidget(),
-            'esthetic_cup': BooleanWidget(),
-            'for_sale': BooleanWidget(),
-            }
 
     def __init__(self, *args, **kwargs):
         pilot = kwargs.pop('pilot')

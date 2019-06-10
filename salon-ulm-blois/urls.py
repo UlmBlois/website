@@ -17,12 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 from django.conf.urls import url
+from django.contrib.auth import views as auth_views
+from core.form import PasswordResetForm
 # TODO: DEBUG ONLY
 from django.conf.urls.static import static
 from django.conf import settings
 
 
 urlpatterns = [
+    path('accounts/password_reset/',
+         auth_views.PasswordResetView.as_view(form_class=PasswordResetForm),
+         name="password_reset"),
     path('admin/', admin.site.urls),
     path('core/', include('core.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
