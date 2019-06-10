@@ -1,6 +1,14 @@
 {% extends "base_logged.html" %}
 {% load i18n %}
 
+{% block javascript%}
+<script src="{% static 'js/print.min.js' %}"></script>
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/print.min.css' %}">
+{% endblock %}
+
 
 {% block content %}
 
@@ -162,7 +170,16 @@
 <div class="col">
   <a href="{% url 'staff_reservation_validate' reservation.pk %}" class="btn btn-success">{% trans 'Validate'%}</a>
   <a href="{% url 'staff_reservation_invalidate' reservation.pk %}" class="btn btn-danger">{% trans 'Invalidate'%}</a>
-  <button type="button" name="print_btn" class="btn btn-warning">{% trans 'Print'%}</button>
+  {% with label="label"|add:reservation.reservation_number%}
+    <div style="display:none" >
+      <div class="" id="{{label}}" style="text-align:center;padding-top:10%">
+          {{reservation.pilot}}
+          <br>
+          {{reservation.ulm}}
+      </div>
+    </div>
+    <button type="button" onclick="printJS('{{label}}', 'html')" class="btn btn-warning">{% trans "Print" %}</button>
+  {% endwith %}
 </div>
 </div>
 
