@@ -71,3 +71,30 @@ Template : emails/reservation_confirmation_request.html
 |-------------------------|------------|
 | email_res_confirm_body_1 | safe       |
 | email_res_confirm_body_2 | safe       |
+
+
+## Page Terms and Conditions
+
+Template : pages/terms.html
+
+| chunk     | evaluation |
+|-----------|------------|
+|terms_page |   safe     |
+
+
+## Page Copyright
+
+Template : pages/copyright.html
+
+| chunk         | evaluation |
+|---------------|------------|
+|copyright_page |   safe     |
+
+
+## Page Privacy
+
+Template : pages/privacy.html
+
+| chunk       | evaluation |
+|-------------|------------|
+|privacy_page |   safe     |

@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+{% load chunks %}
+{% load i18n %}
+
+{% block header %}
+<h1>{% trans "Privacy Policies" %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% get_chunk 'privacy_page' as privacy %}
+  {{ privacy.content | safe }}
+
+{% endblock %}

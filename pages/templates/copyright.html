@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+{% load chunks %}
+{% load i18n %}
+
+{% block header %}
+<h1>{% trans "Copyright Notices" %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% get_chunk 'copyright_page' as copyright %}
+  {{ copyright.content | safe }}
+
+{% endblock %}
