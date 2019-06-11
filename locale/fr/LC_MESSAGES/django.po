@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-07 07:19+0200\n"
+"POT-Creation-Date: 2019-06-11 08:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: core/form.py:41 meeting/templates/index.html:70
+#: core/form.py:41 meeting/templates/index.html:73
 msgid "Register"
 msgstr ""
 
-#: core/form.py:55 meeting/form.py:62 meeting/form.py:115 meeting/form.py:148
-#: meeting/form.py:178 meeting/form.py:219 templates/base/base_form.html:31
+#: core/form.py:55 meeting/form.py:60 meeting/form.py:113 meeting/form.py:146
+#: meeting/form.py:176 meeting/form.py:217 templates/base/base_form.html:31
 #: templates/base/base_logged_form.html:33
 msgid "Submit"
 msgstr ""
@@ -78,8 +78,8 @@ msgstr ""
 
 #: meeting/filters.py:11 meeting/filters.py:53
 #: meeting/templates/staff_fuel_reservation_list.html:24
-#: meeting/templates/staff_reservation_list.html:24
-#: meeting/templates/staff_reservation_validation.html:146
+#: meeting/templates/staff_reservation_list.html:28
+#: meeting/templates/staff_reservation_validation.html:156
 #: meeting/templates/staff_ulm_list.html:54
 msgid "Imatriculation"
 msgstr ""
@@ -119,11 +119,11 @@ msgstr ""
 msgid "Insurance company"
 msgstr ""
 
-#: meeting/form.py:71
+#: meeting/form.py:69
 msgid "Arrival and depart time slot should be different."
 msgstr ""
 
-#: meeting/form.py:76
+#: meeting/form.py:74
 msgid "Arrival time slot should be anterior to depart one."
 msgstr ""
 
@@ -184,8 +184,8 @@ msgstr ""
 #: meeting/models.py:336
 #: meeting/templates/includes/elements/reservation_detail.html:13
 #: meeting/templates/staff_fuel_reservation_list.html:23
-#: meeting/templates/staff_reservation_list.html:23
-#: meeting/templates/staff_reservation_validation.html:37
+#: meeting/templates/staff_reservation_list.html:27
+#: meeting/templates/staff_reservation_validation.html:47
 #: meeting/templates/staff_ulm_list.html:59
 msgid "Pilot"
 msgstr ""
@@ -196,32 +196,32 @@ msgid "Close"
 msgstr ""
 
 #: meeting/templates/includes/elements/pilot_info.html:7
-#: meeting/templates/staff_reservation_validation.html:45
+#: meeting/templates/staff_reservation_validation.html:55
 msgid "First Name"
 msgstr ""
 
 #: meeting/templates/includes/elements/pilot_info.html:11
-#: meeting/templates/staff_reservation_validation.html:49
+#: meeting/templates/staff_reservation_validation.html:59
 msgid "Last Name"
 msgstr ""
 
 #: meeting/templates/includes/elements/pilot_info.html:15
-#: meeting/templates/staff_reservation_validation.html:53
+#: meeting/templates/staff_reservation_validation.html:63
 msgid "Licence Number"
 msgstr ""
 
 #: meeting/templates/includes/elements/pilot_info.html:19
-#: meeting/templates/staff_reservation_validation.html:57
+#: meeting/templates/staff_reservation_validation.html:67
 msgid "Insurance Company"
 msgstr ""
 
 #: meeting/templates/includes/elements/pilot_info.html:23
-#: meeting/templates/staff_reservation_validation.html:61
+#: meeting/templates/staff_reservation_validation.html:71
 msgid "Insurance Number"
 msgstr ""
 
 #: meeting/templates/includes/elements/pilot_info.html:27
-#: meeting/templates/staff_reservation_validation.html:65
+#: meeting/templates/staff_reservation_validation.html:75
 msgid "Phone Number"
 msgstr ""
 
@@ -246,12 +246,12 @@ msgid "Departure slot"
 msgstr ""
 
 #: meeting/templates/includes/elements/reservation_detail.html:25
-#: meeting/templates/staff_reservation_list.html:27
+#: meeting/templates/staff_reservation_list.html:31
 msgid "Flight plan"
 msgstr ""
 
 #: meeting/templates/includes/elements/reservation_detail.html:27
-#: meeting/templates/staff_reservation_validation.html:101
+#: meeting/templates/staff_reservation_validation.html:111
 msgid "Passanger"
 msgstr ""
 
@@ -314,27 +314,27 @@ msgid ""
 "From the %(start)s, to the %(end)s.\n"
 msgstr ""
 
-#: meeting/templates/index.html:32
+#: meeting/templates/index.html:35
 msgid "Microlight pilot"
 msgstr ""
 
-#: meeting/templates/index.html:38
+#: meeting/templates/index.html:41
 msgid "Sign In"
 msgstr ""
 
-#: meeting/templates/index.html:47
+#: meeting/templates/index.html:50
 msgid "Paramotor Pilot"
 msgstr ""
 
-#: meeting/templates/index.html:54
+#: meeting/templates/index.html:57
 msgid "Download form"
 msgstr ""
 
-#: meeting/templates/index.html:63
+#: meeting/templates/index.html:66
 msgid "PPL Pilot"
 msgstr ""
 
-#: meeting/templates/index.html:79
+#: meeting/templates/index.html:82
 msgid "Exhibitor"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgid " Pilot overview: %(pilot)s "
 msgstr ""
 
 #: meeting/templates/pilot_summary.html:25
-#: meeting/templates/staff_reservation_validation.html:122
+#: meeting/templates/staff_reservation_validation.html:132
 msgid "ULM"
 msgstr ""
 
@@ -458,13 +458,13 @@ msgid "Pilots Fuel Reservations"
 msgstr ""
 
 #: meeting/templates/staff_fuel_reservation_list.html:22
-#: meeting/templates/staff_reservation_list.html:21
+#: meeting/templates/staff_reservation_list.html:25
 msgid "ID"
 msgstr ""
 
 #: meeting/templates/staff_fuel_reservation_list.html:25
-#: meeting/templates/staff_reservation_list.html:25
-#: meeting/templates/staff_reservation_validation.html:150
+#: meeting/templates/staff_reservation_list.html:29
+#: meeting/templates/staff_reservation_validation.html:160
 #: meeting/templates/staff_ulm_list.html:53
 msgid "Radio Id"
 msgstr ""
@@ -478,13 +478,13 @@ msgid "Fuel Served"
 msgstr ""
 
 #: meeting/templates/staff_fuel_reservation_list.html:28
-#: meeting/templates/staff_reservation_list.html:29
+#: meeting/templates/staff_reservation_list.html:33
 msgid "Actions"
 msgstr ""
 
 #: meeting/templates/staff_fuel_reservation_list.html:49
-#: meeting/templates/staff_reservation_list.html:49
-#: meeting/templates/staff_reservation_validation.html:163
+#: meeting/templates/staff_reservation_list.html:53
+#: meeting/templates/staff_reservation_validation.html:173
 msgid "Validate"
 msgstr ""
 
@@ -501,70 +501,70 @@ msgstr ""
 msgid "Licence number"
 msgstr ""
 
-#: meeting/templates/staff_reservation_list.html:11
+#: meeting/templates/staff_reservation_list.html:15
 msgid "Pilots Reservations"
 msgstr ""
 
-#: meeting/templates/staff_reservation_list.html:22
-#: meeting/templates/staff_reservation_validation.html:89
+#: meeting/templates/staff_reservation_list.html:26
+#: meeting/templates/staff_reservation_validation.html:99
 msgid "Time Slot"
 msgstr ""
 
-#: meeting/templates/staff_reservation_list.html:26
-#: meeting/templates/staff_reservation_validation.html:93
+#: meeting/templates/staff_reservation_list.html:30
+#: meeting/templates/staff_reservation_validation.html:103
 msgid "Fuel"
 msgstr ""
 
-#: meeting/templates/staff_reservation_list.html:28
-#: meeting/templates/staff_reservation_validation.html:105
+#: meeting/templates/staff_reservation_list.html:32
+#: meeting/templates/staff_reservation_validation.html:115
 msgid "Esthetic Cup"
 msgstr ""
 
-#: meeting/templates/staff_reservation_list.html:50
-#: meeting/templates/staff_reservation_validation.html:165
+#: meeting/templates/staff_reservation_list.html:62
+#: meeting/templates/staff_reservation_validation.html:183
 msgid "Print"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:14
-#: meeting/templates/staff_reservation_validation.html:78
+#: meeting/templates/staff_reservation_validation.html:24
+#: meeting/templates/staff_reservation_validation.html:88
 msgid "Reservation"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:18
+#: meeting/templates/staff_reservation_validation.html:28
 msgid "This reservation has been validated on:"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:29
+#: meeting/templates/staff_reservation_validation.html:39
 msgid "Some informations are missing in this reservation"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:97
+#: meeting/templates/staff_reservation_validation.html:107
 msgid "Flight Plan"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:109
+#: meeting/templates/staff_reservation_validation.html:119
 msgid "For Sale"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:130
+#: meeting/templates/staff_reservation_validation.html:140
 msgid "constructor"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:134
+#: meeting/templates/staff_reservation_validation.html:144
 #: meeting/templates/staff_ulm_list.html:57
 msgid "Model"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:138
+#: meeting/templates/staff_reservation_validation.html:148
 #: meeting/templates/staff_ulm_list.html:58
 msgid "Type"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:142
+#: meeting/templates/staff_reservation_validation.html:152
 msgid "Immatriculation Country"
 msgstr ""
 
-#: meeting/templates/staff_reservation_validation.html:164
+#: meeting/templates/staff_reservation_validation.html:174
 msgid "Invalidate"
 msgstr ""
 
@@ -647,6 +647,10 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
+#: pages/templates/copyright.html:6 templates/includes/footer.html:33
+msgid "Copyright Notices"
+msgstr ""
+
 #: pages/templates/on_site.html:6 templates/includes/footer.html:25
 #: templates/includes/logged_sidebar.html:92 templates/includes/navbar.html:12
 msgid "On Site"
@@ -676,6 +680,14 @@ msgstr ""
 msgid "Plane procedures"
 msgstr ""
 
+#: pages/templates/privacy.html:6 templates/includes/footer.html:32
+msgid "Privacy Policies"
+msgstr ""
+
+#: pages/templates/terms.html:6 templates/includes/footer.html:34
+msgid "Terms and Conditions of Use"
+msgstr ""
+
 #: radio_call_sign_field/formfields.py:15
 msgid "Enter a valid radio call sign."
 msgstr ""
@@ -689,32 +701,34 @@ msgstr ""
 msgid "{val} does not match one of the folowing format : {patterns}"
 msgstr ""
 
-#: salon-ulm-blois/settings/base.py:121
+#: salon-ulm-blois/settings/base.py:122
 msgid "English"
 msgstr ""
 
-#: salon-ulm-blois/settings/base.py:122
+#: salon-ulm-blois/settings/base.py:123
 msgid "French"
 msgstr ""
 
 #: templates/base/base_generic.html:3 templates/base/base_logged.html:12
-#: templates/registration/login.html:13 templates/registration/register.html:13
+#: templates/registration/login.html:13
+#: templates/registration/password_reset_form.html:13
+#: templates/registration/register.html:13
 msgid "Salon ULM de Blois"
 msgstr ""
 
-#: templates/base/base_logged.html:85
+#: templates/base/base_logged.html:87
 msgid "Ready to Leave?"
 msgstr ""
 
-#: templates/base/base_logged.html:90
+#: templates/base/base_logged.html:92
 msgid "Select \"Logout\" below if you are ready to end your current session."
 msgstr ""
 
-#: templates/base/base_logged.html:92
+#: templates/base/base_logged.html:94
 msgid "Cancel"
 msgstr ""
 
-#: templates/base/base_logged.html:93 templates/includes/logged_navbar.html:26
+#: templates/base/base_logged.html:95 templates/includes/logged_navbar.html:26
 #: templates/includes/navbar.html:40
 msgid "Logout"
 msgstr ""
@@ -733,6 +747,46 @@ msgstr ""
 
 #: templates/emails/reservation_confirmation_request.html:13
 msgid "Confirmation"
+msgstr ""
+
+#: templates/errors/400.html:7 templates/errors/logged_400.html:9
+msgid "Bad request..."
+msgstr ""
+
+#: templates/errors/400.html:8 templates/errors/logged_400.html:10
+msgid "Your request resulted in an error"
+msgstr ""
+
+#: templates/errors/400.html:9 templates/errors/403.html:9
+#: templates/errors/404.html:9 templates/errors/logged_400.html:11
+#: templates/errors/logged_403.html:11 templates/errors/logged_404.html:11
+#: templates/errors/logged_500.html:11
+msgid "Back to home"
+msgstr ""
+
+#: templates/errors/403.html:7 templates/errors/logged_403.html:9
+msgid "Access denied..."
+msgstr ""
+
+#: templates/errors/403.html:8 templates/errors/logged_403.html:10
+msgid "You don"
+msgstr ""
+
+#: templates/errors/404.html:7 templates/errors/logged_404.html:9
+msgid "Page Not Found"
+msgstr ""
+
+#: templates/errors/404.html:8 templates/errors/500.html:10
+#: templates/errors/logged_404.html:10 templates/errors/logged_500.html:10
+msgid "It looks like you found a glitch in the matrix..."
+msgstr ""
+
+#: templates/errors/500.html:9 templates/errors/logged_500.html:9
+msgid "Internal Error"
+msgstr ""
+
+#: templates/errors/500.html:11
+msgid "Back to Home"
 msgstr ""
 
 #: templates/includes/footer.html:8
@@ -761,6 +815,10 @@ msgstr ""
 
 #: templates/includes/footer.html:26
 msgid "Pilot Informations"
+msgstr ""
+
+#: templates/includes/footer.html:30
+msgid "legal"
 msgstr ""
 
 #: templates/includes/logged_sidebar.html:29
@@ -808,15 +866,15 @@ msgid "Pilotes Information"
 msgstr ""
 
 #: templates/includes/navbar.html:47 templates/includes/navbar.html:69
-#: templates/includes/navbar.html:87 templates/registration/login.html:87
+#: templates/includes/navbar.html:87 templates/registration/login.html:89
 msgid "Login"
 msgstr ""
 
-#: templates/includes/navbar.html:76 templates/registration/login.html:74
+#: templates/includes/navbar.html:76 templates/registration/login.html:76
 msgid "Username"
 msgstr ""
 
-#: templates/includes/navbar.html:80 templates/registration/login.html:85
+#: templates/includes/navbar.html:80 templates/registration/login.html:87
 msgid "Password"
 msgstr ""
 
@@ -844,29 +902,37 @@ msgstr ""
 msgid "Click here to login again."
 msgstr ""
 
-#: templates/registration/login.html:41
+#: templates/registration/login.html:39
+#: templates/registration/password_reset_form.html:34
+#: templates/registration/register.html:34
+msgid "Back"
+msgstr ""
+
+#: templates/registration/login.html:43
 msgid "Welcome Back!"
 msgstr ""
 
-#: templates/registration/login.html:48
+#: templates/registration/login.html:50
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
-#: templates/registration/login.html:55
+#: templates/registration/login.html:57
 msgid ""
 "Your account doesn't have access to this page. To proceed, please login with "
 "an account that has access."
 msgstr ""
 
-#: templates/registration/login.html:57
+#: templates/registration/login.html:59
 msgid "Please login to see this page."
 msgstr ""
 
-#: templates/registration/login.html:91 templates/registration/register.html:42
+#: templates/registration/login.html:93 templates/registration/register.html:43
 msgid "Forgot Password?"
 msgstr ""
 
-#: templates/registration/login.html:94 templates/registration/register.html:36
+#: templates/registration/login.html:96
+#: templates/registration/password_reset_form.html:43
+#: templates/registration/register.html:37
 msgid "Create an Account!"
 msgstr ""
 
@@ -906,14 +972,11 @@ msgid ""
 "arrived in a few minutes, check your spam folder."
 msgstr ""
 
-#: templates/registration/password_reset_form.html:5
-msgid "Password Reset"
+#: templates/registration/password_reset_form.html:37
+msgid "Forgot Your Password?"
 msgstr ""
 
-#: templates/registration/password_reset_form.html:15
-msgid "Reset password"
-msgstr ""
-
-#: templates/registration/register.html:45
+#: templates/registration/password_reset_form.html:46
+#: templates/registration/register.html:46
 msgid "Already have an account? Login!"
 msgstr ""
