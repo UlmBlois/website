@@ -7,6 +7,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+DEFAULT_DOMAIN = 'https://salon-ulm-blois.herokuapp.com'
+
 DATABASES['default'].update(
     dj_database_url.config(conn_max_age=500, ssl_require=True))
 

@@ -234,6 +234,18 @@ logging.config.dictConfig({
             # Avoid double logging because of root logger
             'propagate': False,
         },
+        'core': {
+            'level': LOGLEVEL,
+            'handlers': ['console', ],  # 'sentry'],
+            # Avoid double logging because of root logger
+            'propagate': False,
+        },
+        'pages': {
+            'level': LOGLEVEL,
+            'handlers': ['console', ],  # 'sentry'],
+            # Avoid double logging because of root logger
+            'propagate': False,
+        },
         # Prevent noisy modules from logging to Sentry
         'noisy_module': {
             'level': 'ERROR',
@@ -253,3 +265,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+DEFAULT_DOMAIN = ''
