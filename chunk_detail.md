@@ -63,16 +63,6 @@ Template : meeting/logged_index.html
 | registration_procedure_3 | safe       |
 
 
-## Email Reservation confirmation request
-
-Template : emails/reservation_confirmation_request.html
-
-| chunk                   | evaluation |
-|-------------------------|------------|
-| email_res_confirm_body_1 | safe       |
-| email_res_confirm_body_2 | safe       |
-
-
 ## Page Terms and Conditions
 
 Template : pages/terms.html
@@ -98,3 +88,24 @@ Template : pages/privacy.html
 | chunk       | evaluation |
 |-------------|------------|
 |privacy_page |   safe     |
+
+
+## Email Reservation confirmation request
+
+Template : emails/reservation_confirmation_request.html
+
+| chunk                   | evaluation |
+|-------------------------|------------|
+| email_res_confirm_body_1 | safe       |
+| email_res_confirm_body_2 | safe       |
+
+
+## Email Password reset
+
+Template : emails/password_reset_email.html
+
+| chunk                   | evaluation | Variables |
+|-------------------------|------------|-----------|
+| email_password_reset    | render     | email, protocol, domain, uid, token|
+
+/!\ Ne pas modifier les variables

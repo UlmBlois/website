@@ -30,7 +30,9 @@ handler400 = 'core.views.handler_400'
 
 urlpatterns = [
     path('accounts/password_reset/',
-         auth_views.PasswordResetView.as_view(form_class=PasswordResetForm),
+         auth_views.PasswordResetView.as_view(
+            form_class=PasswordResetForm,
+            html_email_template_name='password_reset_email.html'),
          name="password_reset"),
     path('admin/', admin.site.urls),
     path('core/', include('core.urls')),
