@@ -8,6 +8,6 @@
 
 {% block content %}
   {% get_chunk 'about_page' as about %}
-  {% evaluate about.content %}
+  {{evaluate about.content|safe}}
 
 {% endblock %}

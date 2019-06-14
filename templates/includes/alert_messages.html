@@ -1,3 +1,18 @@
+{% load chunks%}
+<div class="pt-2">
+
+<!-- info messages -->
+{% get_chunk 'global_info_messsage' as message %}
+{% if message.cotent.strip %}
+<div class="alert alert-info alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{ message|safe}}
+</div>
+{% endif %}
+
+<!-- System messages -->
 {% for message in messages %}
   <div class="alert {{ message.tags }} alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -6,3 +21,5 @@
     {{ message }}
   </div>
 {% endfor %}
+
+</div>

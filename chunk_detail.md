@@ -1,5 +1,13 @@
 # Chunk Detail
 
+## Global Message
+
+Template : includes/alert_messages.html
+
+|chunk                |evaluation|
+|---------------------|----------|
+|global_info_messsage |   safe   |
+
 ## Page index
 
 Template : meeting/index.html

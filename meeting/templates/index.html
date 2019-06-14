@@ -21,11 +21,13 @@ From the {{ start }}, to the {{ end }}.
   <a href="{% url 'base_email'%}">base email</a>
   <br>
   <a href="{% url 'res_conf_email'%}"> reservation confirmation email</a>
+  <br>
 </span>
 
-<div class="row text-center">
 {% get_chunk 'presentation_short' as presentation %}
 {{presentation | safe}}
+
+<div class="row text-center">
 <div class="col-lg-3">
   <div class="card h-100">
     <img class="card-img-top" src="http://placehold.it/500x325" alt="">
