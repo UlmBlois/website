@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 import logging
 
-from .ICAO_registration_prefix.registration import RegistrationNumber
+from aircraft_registration.registration import RegistrationNumber
 
 logger = logging.getLogger(__name__)
 
