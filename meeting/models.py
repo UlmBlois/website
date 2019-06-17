@@ -348,5 +348,7 @@ def normalize_reservation(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=Reservation)
 def init_shortcut_fields(sender, instance, **kwargs):
-    instance.pilot = instance.ulm.pilot
-    instance.meeting = instance.time_slot.meeting
+    if not instance.pilot and instance.ulm:
+        instance.pilot = instance.ulm.pilot
+    if not instance.meeting and instance.time_slot:
+        instance.meeting = instance.time_slot.meeting
