@@ -12,8 +12,9 @@
 
 {% get_chunk 'registration_procedure_1' as registration_1 %}
 {{ registration_1.content | safe }}
-
-<a href="{% url 'reservation_wizard_step1' pk=user.pilot.pk%}">wizard</a>
+<div class="text-center">
+  <a href="{% url 'reservation_wizard_step1' pk=user.pilot.pk%}" class="btn btn-primary">{% trans "Reserve your arrival slot"%}</a>
+</div>
 
 {% get_chunk 'registration_procedure_2' as registration_2 %}
 {{ registration_2.content | safe }}

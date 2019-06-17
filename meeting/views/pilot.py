@@ -121,6 +121,7 @@ class PilotULMList(ListView):
 class DeletePilotULM(DeleteView):
     model = ULM
     template_name = 'logged_delete_form.html'
+    success_message = _("The microlight %(ulm)s as been successfully deleted.")
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -135,6 +136,12 @@ class DeletePilotULM(DeleteView):
 
     def get_success_url(self):
         return reverse('pilot_ulm_list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(
+            self.request,
+            self.success_message % {'ulm': self.get_object().radio_id})
+        return super().delete(request, *args, **kwargs)
 
 
 @method_decorator(login_required, name='dispatch')

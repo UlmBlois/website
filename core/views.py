@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
 
 def signup(request):
@@ -28,6 +30,7 @@ def signup(request):
 class DeleteUser(DeleteView):
     model = User
     template_name = 'logged_delete_form.html'
+    success_message = _("The user %(user)s as been successfully deleted.")
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -42,6 +45,12 @@ class DeleteUser(DeleteView):
 
     def get_success_url(self):
         return reverse('index')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(
+            self.request,
+            self.success_message % {'user': self.get_object()})
+        return super().delete(request, *args, **kwargs)
 
 
 def handler_404(request, exception=None):
