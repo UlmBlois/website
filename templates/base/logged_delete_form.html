@@ -1,0 +1,16 @@
+{% extends "base_logged.html" %}
+{% load i18n %}
+
+
+{% block content %}
+<div class="d-flex justify-content-center text-center">
+<form method="post">
+    {% csrf_token %}
+    <p>{% blocktrans %}Are you sure you want to delete "{{ object }}"?{% endblocktrans%}</p>
+    <p>{% trans 'This action can not be canceled.'%}</p>
+    <input type="submit" value="Confirm" class="btn btn-danger">
+    <a class="btn btn-primary" href="{{cancel_url}}">{%trans 'Cancel'%}</a>
+</form>
+</div>
+
+{% endblock %}

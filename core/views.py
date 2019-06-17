@@ -1,6 +1,12 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from core.form import SignUpForm
+from django.views.generic.edit import DeleteView
+from django.contrib.auth.models import User
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 def signup(request):
@@ -16,6 +22,26 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'register.html', {'form': form})
+
+
+@method_decorator(login_required, name='dispatch')
+class DeleteUser(DeleteView):
+    model = User
+    template_name = 'logged_delete_form.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['cancel_url'] = reverse('pilot',  kwargs={'pk': self.get_object().pk})
+        return context
+
+    def get_object(self, queryset=None):
+        obj = super(DeleteUser, self).get_object()
+        if not obj == self.request.user:
+            raise Http404
+        return obj
+
+    def get_success_url(self):
+        return reverse('index')
 
 
 def handler_404(request, exception=None):

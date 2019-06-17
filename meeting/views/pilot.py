@@ -120,7 +120,12 @@ class PilotULMList(ListView):
 @method_decorator(login_required, name='dispatch')
 class DeletePilotULM(DeleteView):
     model = ULM
-    template_name = 'ulm_confirm_delete.html'
+    template_name = 'logged_delete_form.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['cancel_url'] = reverse('pilot_ulm_list')
+        return context
 
     def get_object(self, queryset=None):
         obj = super(DeletePilotULM, self).get_object()
@@ -240,21 +245,6 @@ class UpdatePilotReservation(UpdateView):
         res.canceled = False
         res.save()
         return redirect(self.get_success_url())
-
-
-@method_decorator(login_required, name='dispatch')
-class DeletePilotReservation(DeleteView):
-    model = Reservation
-    template_name = 'reservation_confirm_delete.html'
-
-    def get_object(self, queryset=None):
-        obj = super(DeletePilotReservation, self).get_object()
-        if not obj.pilot == self.request.user.pilot:
-            raise Http404
-        return obj
-
-    def get_success_url(self):
-        return reverse('pilot_reservation')
 
 
 ###############################################################################
