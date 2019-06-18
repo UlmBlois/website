@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-11 08:22+0200\n"
+"POT-Creation-Date: 2019-06-18 08:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,15 +28,20 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: core/management/commands/send_reservation_confirmation_request.py:10
+#: core/management/commands/send_reservation_confirmation_request.py:37
 msgid ""
 "Send an email asking users to confirm their reservation (active meeting "
 "only). The email will be sent only if on the specified date in the meeting "
 "settings."
 msgstr ""
 
-#: core/management/commands/send_reservation_confirmation_request.py:17
+#: core/management/commands/send_reservation_confirmation_request.py:44
 msgid "Confirm your reservation"
+msgstr ""
+
+#: core/views.py:33
+#, python-format
+msgid "The user %(user)s as been successfully deleted."
 msgstr ""
 
 #: faq/admin.py:19 faq/admin.py:45 pages/admin.py:21
@@ -342,6 +347,10 @@ msgstr ""
 msgid "Welcome!"
 msgstr ""
 
+#: meeting/templates/logged_index.html:16
+msgid "Reserve your arrival slot"
+msgstr ""
+
 #: meeting/templates/pilot_profile.html:5
 #: meeting/templates/pilot_summary.html:13
 #: templates/includes/logged_sidebar.html:67
@@ -356,6 +365,10 @@ msgstr ""
 #: meeting/templates/pilot_reservation_list.html:58
 #: meeting/templates/pilot_ulm_list.html:32
 msgid "Edit"
+msgstr ""
+
+#: meeting/templates/pilot_profile.html:16
+msgid "Delete account"
 msgstr ""
 
 #: meeting/templates/pilot_reservation_list.html:10
@@ -445,12 +458,6 @@ msgstr ""
 
 #: meeting/templates/pilot_ulm_list.html:33
 msgid "Delete"
-msgstr ""
-
-#: meeting/templates/reservation_confirm_delete.html:8
-#: meeting/templates/ulm_confirm_delete.html:8
-#, python-format
-msgid "Are you sure you want to delete \"%(object)s\"?"
 msgstr ""
 
 #: meeting/templates/staff_fuel_reservation_list.html:11
@@ -583,6 +590,18 @@ msgstr ""
 
 #: meeting/views/pilot.py:41
 msgid "Please correct the error below."
+msgstr ""
+
+#: meeting/views/pilot.py:124
+#, python-format
+msgid "The microlight %(ulm)s as been successfully deleted."
+msgstr ""
+
+#: meeting/views/pilot.py:125
+#, python-format
+msgid ""
+"The microlight %(ulm)s you are trying to delete is link to an active "
+"reservation and cannot be deleted."
 msgstr ""
 
 #: meeting/widgets.py:13
@@ -724,13 +743,22 @@ msgstr ""
 msgid "Select \"Logout\" below if you are ready to end your current session."
 msgstr ""
 
-#: templates/base/base_logged.html:94
+#: templates/base/base_logged.html:94 templates/base/logged_delete_form.html:12
 msgid "Cancel"
 msgstr ""
 
 #: templates/base/base_logged.html:95 templates/includes/logged_navbar.html:26
 #: templates/includes/navbar.html:40
 msgid "Logout"
+msgstr ""
+
+#: templates/base/logged_delete_form.html:9
+#, python-format
+msgid "Are you sure you want to delete \"%(object)s\"?"
+msgstr ""
+
+#: templates/base/logged_delete_form.html:10
+msgid "This action can not be canceled."
 msgstr ""
 
 #: templates/emails/includes/base/header_row.html:56
@@ -944,23 +972,31 @@ msgstr ""
 msgid "log in again?"
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:6
+#: templates/registration/password_reset_confirm.html:5
+msgid "Password reset confirmation"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:10
 msgid "Please enter (and confirm) your new password."
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:12
+#: templates/registration/password_reset_confirm.html:16
 msgid "New password:"
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:17
+#: templates/registration/password_reset_confirm.html:21
 msgid "Confirm password:"
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:27
+#: templates/registration/password_reset_confirm.html:26
+msgid "Change my password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:31
 msgid "Password reset failed"
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:28
+#: templates/registration/password_reset_confirm.html:32
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
