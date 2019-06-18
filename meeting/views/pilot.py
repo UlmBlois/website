@@ -122,6 +122,8 @@ class DeletePilotULM(DeleteView):
     model = ULM
     template_name = 'logged_delete_form.html'
     success_message = _("The microlight %(ulm)s as been successfully deleted.")
+    error_message = _("The microlight %(ulm)s you are trying to delete is"
+                      " link to an active reservation and cannot be deleted.")
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -138,10 +140,17 @@ class DeletePilotULM(DeleteView):
         return reverse('pilot_ulm_list')
 
     def delete(self, request, *args, **kwargs):
-        messages.success(
-            self.request,
-            self.success_message % {'ulm': self.get_object().radio_id})
-        return super().delete(request, *args, **kwargs)
+        obj = self.get_object()
+        if obj.reservations.actives().filter(canceled=False):
+            messages.error(
+                self.request,
+                self.error_message % {'ulm': obj.radio_id})
+            return redirect(reverse('pilot_ulm_list'))
+        else:
+            messages.success(
+                self.request,
+                self.success_message % {'ulm': obj.radio_id})
+            return super().delete(request, *args, **kwargs)
 
 
 @method_decorator(login_required, name='dispatch')
