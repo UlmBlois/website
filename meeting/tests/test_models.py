@@ -2,35 +2,26 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-import datetime
+from datetime import date, datetime
 from meeting.models import Meeting, TimeSlot, Pilot, Reservation, ULM
+from meeting.tests.utils import create_meeting, create_time_slot
 
 
 class MeetingTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Meeting.objects.create(name="1",
-                               registration_start=datetime.date(2019, 3, 15),
-                               registration_end=datetime.date(2019, 4, 15),
-                               start_date=datetime.date(2019, 8, 30),
-                               end_date=datetime.date(2019, 9, 1),
-                               active=True, fuel_aviable=100)
-        Meeting.objects.create(name="2",
-                               registration_start=datetime.date(2018, 3, 15),
-                               registration_end=datetime.date(2018, 4, 15),
-                               start_date=datetime.date(2018, 8, 30),
-                               end_date=datetime.date(2018, 9, 1),
-                               active=False, fuel_aviable=100)
+        create_meeting("1", date(2019, 8, 30), True)
+        create_meeting("2", date(2018, 8, 30), False)
 
     def test_registration_open_at(self):  # same test as registration_open
         meeting = Meeting.objects.get(name="1")
         self.assertTrue(meeting.registration_open_at(
-            datetime.date(2019, 3, 15)))
+            date(2019, 7, 15)))
         self.assertFalse(meeting.registration_open_at(
-            datetime.date(2019, 3, 1)))
+            date(2019, 3, 1)))
         self.assertFalse(meeting.registration_open_at(
-            datetime.date(2019, 5, 1)))
+            date(2019, 5, 1)))
 
     def test_save(self):
         meeting2 = Meeting.objects.get(name="2")
@@ -45,47 +36,42 @@ class TimeSlotTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Meeting.objects.create(name="1",
-                               registration_start=datetime.date(2019, 3, 15),
-                               registration_end=datetime.date(2019, 4, 15),
-                               start_date=datetime.date(2019, 8, 30),
-                               end_date=datetime.date(2019, 9, 1),
-                               active=True, fuel_aviable=100)
+        create_meeting("1", date(2019, 8, 30), True)
 
     def test_clean(self):
         ts = TimeSlot()
         ts.meeting = Meeting.objects.get(name="1")
         ts.start_date = timezone.make_aware(
-            datetime.datetime(2019, 8, 31, 10, 0))
+            datetime(2019, 8, 31, 10, 0))
         ts.end_date = timezone.make_aware(
-            datetime.datetime(2019, 8, 31, 10, 30))
+            datetime(2019, 8, 31, 10, 30))
         ts.arrivals_slots = 5
         try:
             ts.clean()
         except ValidationError:
             self.fail("TimeSlot.clean raised ExceptionType unexpectedly!")
         ts.start_date = timezone.make_aware(
-            datetime.datetime(2019, 8, 29, 10, 0))
+            datetime(2019, 8, 29, 10, 0))
         with self.assertRaises(ValidationError):
             ts.clean()
         ts.start_date = timezone.make_aware(
-            datetime.datetime(2019, 9, 2, 10, 0))
+            datetime(2019, 9, 2, 10, 0))
         with self.assertRaises(ValidationError):
             ts.clean()
         ts.start_date = timezone.make_aware(
-            datetime.datetime(2019, 8, 31, 10, 0))
+            datetime(2019, 8, 31, 10, 0))
         ts.end_date = timezone.make_aware(
-            datetime.datetime(2019, 8, 29, 10, 30))
+            datetime(2019, 8, 29, 10, 30))
         with self.assertRaises(ValidationError):
             ts.clean()
         ts.end_date = timezone.make_aware(
-            datetime.datetime(2019, 9, 2, 10, 30))
+            datetime(2019, 9, 2, 10, 30))
         with self.assertRaises(ValidationError):
             ts.clean()
         ts.end_date = timezone.make_aware(
-            datetime.datetime(2019, 8, 31, 10, 30))
+            datetime(2019, 8, 31, 10, 30))
         ts.start_date = timezone.make_aware(
-            datetime.datetime(2019, 8, 31, 11, 0))
+            datetime(2019, 8, 31, 11, 0))
         with self.assertRaises(ValidationError):
             ts.clean()
 
@@ -112,52 +98,37 @@ class ReservationTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Meeting.objects.create(name="1",
-                               registration_start=datetime.date(2019, 3, 15),
-                               registration_end=datetime.date(2019, 4, 15),
-                               start_date=datetime.date(2019, 8, 30),
-                               end_date=datetime.date(2019, 9, 1),
-                               active=True, fuel_aviable=100)
-        TimeSlot.objects.create(meeting=Meeting.objects.get(name="1"),
-                                start_date=timezone.make_aware(
-                                    datetime.datetime(2019, 8, 31, 10)),
-                                end_date=timezone.make_aware(
-                                    datetime.datetime(2019, 8, 31, 10, 30)),
-                                arrivals_slots=5)
-        User.objects.create_user(username='testuser', password='12345')
-        user = User.objects.get(username='testuser')
+        meeting = create_meeting("1", date(2019, 8, 30), True)
+        ts1 = create_time_slot(meeting,
+                               timezone.make_aware(datetime(2019, 8, 31, 10)),
+                               5)
+        ts2 = create_time_slot(meeting,
+                               timezone.make_aware(datetime(2019, 8, 31, 11)),
+                               5)
+        user = User.objects.create_user(username='testuser', password='12345')
         Pilot.objects.filter(user=user).update(
             # insurance_company='AISCAIR',
             insurance_number='12345',
             licence_number='54321')
-        ULM.objects.create(pilot=Pilot.objects.get(user=user),
-                           constructor='G1',
-                           model='Explorer',
-                           type='MU',
-                           imatriculation_country='FR',
-                           imatriculation='41-SOL',
-                           radio_id='F-JLOV')
-        ts = TimeSlot.objects.get(start_date=timezone.make_aware(
-            datetime.datetime(2019, 8, 31, 10)))
-        Reservation.objects.create(ulm=ULM.objects.get(radio_id='F-JLOV'),
+        ulm = ULM.objects.create(pilot=user.pilot,
+                                 constructor='G1',
+                                 model='Explorer',
+                                 type='MU',
+                                 imatriculation_country='FR',
+                                 imatriculation='41-SOL',
+                                 radio_id='F-JLOV')
+
+        Reservation.objects.create(ulm=ulm,
                                    reservation_number='FAE1F6',
-                                   time_slot=ts,
+                                   time_slot=ts1,
                                    arrival=timezone.make_aware(
-                                    datetime.datetime(2019, 8, 31, 11)),
-                                   depart_time_slot=ts,
+                                    datetime(2019, 8, 31, 11)),
+                                   depart_time_slot=ts2,
                                    origin_city='Blois',
-                                   origin_field='LF-41COQ')
+                                   origin_field='LFAZ',
+                                   meeting=meeting)
 
 #  TODO test validate_unique
-    def test_clean(self):
-        res = Reservation.objects.get(reservation_number='FAE1F6')
-        ts = TimeSlot.objects.get(start_date=timezone.make_aware(
-            datetime.datetime(2019, 8, 31, 10)))
-        res.time_slot = ts
-        res.depart_time_slot = ts
-        with self.assertRaises(ValidationError):
-            res.clean()
-
     def test_is_active(self):
         res = Reservation.objects.get(reservation_number='FAE1F6')
         self.assertTrue(res.is_active())
@@ -176,7 +147,7 @@ class ReservationTest(TestCase):
     def test_is_on_time(self):
         res = Reservation.objects.get(reservation_number='FAE1F6')
         self.assertTrue(res.is_on_time())
-        res.arrival = timezone.make_aware(datetime.datetime(2019, 8, 31, 15))
+        res.arrival = timezone.make_aware(datetime(2019, 8, 31, 15))
         self.assertFalse(res.is_on_time())
 
     def test_arrival_delay(self):
