@@ -18,7 +18,7 @@ class ChunkAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     list_filter = ['page']
     base_fields = ['description', 'content']
     fieldsets = [
-        (_("Globals"), {"fields": ["key", "page"]}),
+        (_("str_Globals"), {"fields": ["key", "page"]}),
     ]
     for i, language in enumerate(settings.LANGUAGES):
         ft = []

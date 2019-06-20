@@ -24,14 +24,14 @@ class Topic(models.Model):
     topic_name = TranslatedField(
                         models.CharField(
                                 max_length=200,
-                                verbose_name=_("topic")),
+                                verbose_name=_("str_Topic")),
                         {settings.LANGUAGES[0][0]: {"blank": False}},
                         attrgetter=fallback_to_default,)
     number = models.PositiveIntegerField(unique=True)
 
     class Meta:
-        verbose_name = _("Topic")
-        verbose_name_plural = _("Topics")
+        verbose_name = _("str_Topic")
+        verbose_name_plural = _("str_Topics")
         ordering = ['number']
 
     def __unicode__(self):
@@ -46,12 +46,12 @@ class Question(models.Model):
     question = TranslatedField(
                             models.CharField(
                                 max_length=200,
-                                verbose_name=_("question")),
+                                verbose_name=_("str_question")),
                             {settings.LANGUAGES[0][0]: {"blank": False}},
                             attrgetter=fallback_to_default,)
     answer = TranslatedField(
                             HTMLField(
-                                verbose_name=_("answer")),
+                                verbose_name=_("str_answer")),
                             {settings.LANGUAGES[0][0]: {"blank": False}},
                             attrgetter=fallback_to_default,)
     topic = models.ForeignKey(Topic, related_name='question',
@@ -60,8 +60,8 @@ class Question(models.Model):
 
     class Meta:
         unique_together = ("number", "topic")
-        verbose_name = _("Question")
-        verbose_name_plural = _("Questions")
+        verbose_name = _("str_Question")
+        verbose_name_plural = _("str_Questions")
         ordering = ['number']
 
     def __unicode__(self):

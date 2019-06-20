@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone as tz
-import datetime
-from meeting.models import Meeting, TimeSlot, Reservation, ULM
+from datetime import datetime, date
+from meeting.models import Meeting, TimeSlot, ULM
 
 from meeting.tests.utils import create_meeting, create_time_slot, create_ulm, create_user, create_reservation
 
@@ -10,8 +10,8 @@ class MeetingManagerTest(TestCase):
 
     @classmethod
     def setUpTestData(self):
-        create_meeting("1", datetime.date(2019, 8, 30), True)
-        create_meeting("2", datetime.date(2018, 8, 30), False)
+        create_meeting("1", date(2019, 8, 30), True)
+        create_meeting("2", date(2018, 8, 30), False)
 
     def test_active(self):
         meeting = Meeting.objects.active()
@@ -23,19 +23,19 @@ class TimeSlotManagerTest(TestCase):
 
     @classmethod
     def setUpTestData(self):
-        meeting1 = create_meeting("1", datetime.date(2019, 8, 30), True)
-        meeting2 = create_meeting("2", datetime.date(2018, 8, 30), False)
+        meeting1 = create_meeting("1", date(2019, 8, 30), True)
+        meeting2 = create_meeting("2", date(2018, 8, 30), False)
         ts = create_time_slot(meeting1,
                               tz.make_aware(
-                                  datetime.datetime(2019, 8, 31, 10)),
+                                  datetime(2019, 8, 31, 10)),
                               3)
         create_time_slot(meeting1,
                          tz.make_aware(
-                            datetime.datetime(2019, 8, 31, 11)),
+                            datetime(2019, 8, 31, 11)),
                          0)
         create_time_slot(meeting2,
                          tz.make_aware(
-                            datetime.datetime(2018, 8, 31, 11)),
+                            datetime(2018, 8, 31, 11)),
                          5)
 
         user = create_user('testuser', '12345')

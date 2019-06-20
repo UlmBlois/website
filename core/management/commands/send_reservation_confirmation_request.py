@@ -41,7 +41,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         meeting = Meeting.objects.active()
-        subject = _("Confirm your reservation")
+        subject = _("str_Confirmation_Reminder_Email_Subject")
         from_email = 'noreply@salon-ulm-blois.fr'
         context = {'meeting': meeting}
         message = render_to_string(self.email_template, context=context)

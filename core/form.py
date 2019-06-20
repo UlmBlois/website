@@ -38,7 +38,7 @@ class SignUpForm(UserCreationForm):
                 Column('password2', css_class='from-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', _('Register')),
+            Submit('submit', _('str_Register')),
         )
 
 
@@ -52,7 +52,7 @@ class LoginForm(AuthenticationForm):
         self.helper.layout = Layout(
             Field('username', css_class='form-group'),
             Field('password', css_class='form-group'),
-            Submit('submit', _('Submit')),
+            Submit('submit', _('str_Submit')),
         )
 
 
@@ -62,4 +62,4 @@ class PasswordResetForm(PasswordResetForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+        self.helper.add_input(Submit('submit', _('str_Submit'), css_class='btn-primary'))

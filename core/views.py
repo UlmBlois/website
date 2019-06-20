@@ -30,7 +30,7 @@ def signup(request):
 class DeleteUser(DeleteView):
     model = User
     template_name = 'logged_delete_form.html'
-    success_message = _("The user %(user)s as been successfully deleted.")
+    success_message = _("str_User_Successfully_Deleted_Message_%(user)s")
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

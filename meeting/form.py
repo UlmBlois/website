@@ -57,7 +57,7 @@ class ReservationForm(forms.ModelForm):
                 Column('for_sale', css_class='from-group col-md-3 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', _('Submit')),
+            Submit('submit', _('str_Submit')),
         )
 
     def clean(self):
@@ -66,12 +66,12 @@ class ReservationForm(forms.ModelForm):
         dts = cleaned_data.get("depart_time_slot")
 
         if ts == dts:
-            msg = _('Arrival and depart time slot should be different.')
+            msg = _('str_Error_Arrival_Depart_Timeslot_Equals')
             self.add_error('time_slot', msg)
             self.add_error('depart_time_slot', msg)
 
         if dts.start_date < ts.start_date:
-            msg = _('Arrival time slot should be anterior to depart one.')
+            msg = _('str_Error_Depart_Timeslot_Anterior_To_Arrival')
             self.add_error('time_slot', msg)
             self.add_error('depart_time_slot', msg)
         return self.cleaned_data
@@ -110,7 +110,7 @@ class UserEditForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Field('email', css_class='form-group'),
-            Submit('submit', _('Submit')),
+            Submit('submit', _('str_Submit')),
         )
 
 
@@ -143,7 +143,7 @@ class PilotForm(forms.ModelForm):
             ),
             Field('licence_number', css_class='form-group'),
             Field('phone_number', css_class='form-group'),
-            Submit('submit', _('Submit')),
+            Submit('submit', _('str_Submit')),
         )
 
 
@@ -173,7 +173,7 @@ class ULMFormSetHelper(FormHelper):
             ),
         )
         self.render_required_fields = True
-        self.add_input(Submit('submit', _('Submit')))
+        self.add_input(Submit('submit', _('str_Submit')))
 
 
 class BaseULMForm(forms.ModelForm):
@@ -214,7 +214,7 @@ class UserEditMultiForm(MultiModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', _('Submit')))
+        self.helper.add_input(Submit('submit', _('str_Submit')))
 
 
 ###############################################################################

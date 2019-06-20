@@ -16,7 +16,7 @@ class TopicAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
 
     base_fields = ['topic_name']
     fieldsets = [
-        (_("Globals"), {"fields": ["number"]}),
+        (_("str_Globals"), {"fields": ["number"]}),
     ]
     for i, language in enumerate(settings.LANGUAGES):
         ft = []
@@ -42,7 +42,7 @@ class QuestionAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
 
     base_fields = ['question', 'answer']
     fieldsets = [
-        (_("Globals"), {"fields": ["number", "topic"]}),
+        (_("str_Globals"), {"fields": ["number", "topic"]}),
     ]
     for i, language in enumerate(settings.LANGUAGES):
         ft = []

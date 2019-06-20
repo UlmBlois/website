@@ -27,9 +27,7 @@ logger = logging.getLogger(__name__)
 
 class Meeting(models.Model):
     """Model reprenseting an edition of the meating."""
-    name = models.CharField(
-        max_length=128,
-        help_text=_('Enter the meeting name (e.g Salon Ulm 2018)'))
+    name = models.CharField(max_length=128)
     registration_start = models.DateField()
     registration_end = models.DateField()
     start_date = models.DateField()
@@ -102,14 +100,13 @@ class TimeSlot(models.Model):
     def clean(self, *args, **kwargs):
         # TODO: a completer
         if self.start_date >= self.end_date:
-            raise ValidationError(_('TimeSlot start date is superior to '
-                                    'the end date'))
+            raise ValidationError(_('str_Error_Timeslot_Start_Superior_End'))
         if (self.start_date.date() < self.meeting.start_date
                 or self.meeting.end_date < self.start_date.date()):
-            raise ValidationError(_('Time slot start date out of meeteing'))
+            raise ValidationError(_('str_Error_Timeslot_Start_Out_Of_Meeting'))
         if (self.end_date.date() < self.meeting.start_date
                 or self.meeting.end_date < self.end_date.date()):
-            raise ValidationError(_('Time slot end date out of meeteing'))
+            raise ValidationError(_('str_Error_Timeslot_End_Out_Of_Meeting'))
         super(TimeSlot, self).clean(*args, **kwargs)
 
 
@@ -170,8 +167,10 @@ class Pilot(models.Model):
 
     class Meta:
         permissions = (
-            ('reservation_validation', _('Can validate arrival and '
-                                         'fuel reservation')),
+            (
+             'reservation_validation',
+             _('str_Reservation_Validation_Permission')
+            ),
         )
 
     def __str__(self):
@@ -206,12 +205,12 @@ class ULM(models.Model):
     HELICOPETER = 'HE'
     AEROSTAT = 'AE'
     ULM_TYPE_CHOICE = [
-        (PARAMOTOR, _("Powered Paraglider")),
-        (PENDULAR, _("Flex Wings")),
-        (MULTIAXES, _("Fixed Wings")),
-        (AUTOGYRE, _("Rotor Wings")),
-        (HELICOPETER, _("Helicopters")),
-        (AEROSTAT, _("Balloons and Airships"))
+        (PARAMOTOR, _("str_Powered_Paraglider")),
+        (PENDULAR, _("str_Flex_Wing")),
+        (MULTIAXES, _("str_Fixed_Wings")),
+        (AUTOGYRE, _("str_Rotor_Wings")),
+        (HELICOPETER, _("str_Helicopters")),
+        (AEROSTAT, _("str_Balloons_and_Airships"))
     ]
 
     pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE,
@@ -269,7 +268,7 @@ class Reservation(models.Model):
     modification_date = models.DateTimeField(auto_now=True)
     origin_city = models.CharField(max_length=64, blank=True)  # TODO move into profile
     origin_field = models.CharField(max_length=4, blank=True,
-                                    help_text=_("Airfield OACI code"))  # TODO move into profile
+                                    help_text=_("str_Airfield_OACI_code"))  # TODO move into profile
 
     objects = ReservationManager()
 
@@ -282,8 +281,7 @@ class Reservation(models.Model):
                 meeting=self.time_slot.meeting).exists())
             if ts_valid:
                 raise ValidationError(
-                    _('You allready have a reservation for this meeting,'
-                      ' please edit the existing one'))
+                    _('str_Error_Reservation_Allready_Exist'))
 
     def is_active(self):
         return self.meeting.active
@@ -333,7 +331,7 @@ class Reservation(models.Model):
         delay = min(delta1, delta2)
         return delay
 
-    display_pilot.short_description = _('Pilot')
+    display_pilot.short_description = _('str_Pilot')
 
 
 ##############################################################################

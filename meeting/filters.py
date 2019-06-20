@@ -8,17 +8,17 @@ logger = logging.getLogger(__name__)
 
 
 class ReservationFilter(FilterSet):
-    ulm__imatriculation = CharFilter(label=_('Imatriculation'),
+    ulm__imatriculation = CharFilter(label=_('str_Imatriculation'),
                                      lookup_expr='icontains')
-    ulm__radio_id = CharFilter(label=_('Radio id'), lookup_expr='icontains')
-    pilot__user__first_name = CharFilter(label=_('First name'),
+    ulm__radio_id = CharFilter(label=_('str_Radio_id'), lookup_expr='icontains')
+    pilot__user__first_name = CharFilter(label=_('str_First_name'),
                                          lookup_expr='icontains')
-    pilot__user__last_name = CharFilter(label=_('Last name'),
+    pilot__user__last_name = CharFilter(label=_('str_Last_name'),
                                         lookup_expr='icontains')
     time_slot = ModelChoiceFilter(queryset=TimeSlot.objects.actives())
-    fuel_served = BooleanFilter(label=_('Fuel served'),
+    fuel_served = BooleanFilter(label=_('str_Fuel_served'),
                                 method='filter_numeric_is_set')
-    fuel_reservation = BooleanFilter(label=_('Fuel reserved'),
+    fuel_reservation = BooleanFilter(label=_('str_Fuel_reserved'),
                                      method='filter_numeric_is_set')
 
     def filter_numeric_is_set(self, queryset, name, value):
@@ -47,10 +47,11 @@ class ReservationFilter(FilterSet):
 
 
 class ULMFilter(FilterSet):
-    constructor = CharFilter(label=_('Constructor'), lookup_expr='icontains')
-    model = CharFilter(label=_('model'), lookup_expr='icontains')
-    radio_id = CharFilter(label=_('Radio id'), lookup_expr='icontains')
-    imatriculation = CharFilter(label=_('Imatriculation'),
+    constructor = CharFilter(label=_('str_Constructor'), lookup_expr='icontains')
+    # Translators: aircraft model
+    model = CharFilter(label=_('str_model'), lookup_expr='icontains')
+    radio_id = CharFilter(label=_('str_Radio_id'), lookup_expr='icontains')
+    imatriculation = CharFilter(label=_('str_Imatriculation'),
                                 lookup_expr='icontains')
 
     class Meta:
@@ -67,10 +68,10 @@ class ULMFilter(FilterSet):
 
 class PilotFilter(FilterSet):
     user__first_name = CharFilter(
-        label=_('First name'), lookup_expr='icontains')
-    user__last_name = CharFilter(label=_('Last name'),
+        label=_('str_First_name'), lookup_expr='icontains')
+    user__last_name = CharFilter(label=_('str_Last_name'),
                                  lookup_expr='icontains')
-    insurance_company = CharFilter(label=_('Insurance company'),
+    insurance_company = CharFilter(label=_('str_Insurance_company'),
                                    lookup_expr='icontains',
                                    widget=ListTextWidget(
                                    data_list=

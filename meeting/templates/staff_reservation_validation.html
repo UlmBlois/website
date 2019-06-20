@@ -16,8 +16,8 @@
 
 <nav aria-label="breadcrumb" class="mt-3">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'staff_reservation_list'%}">Arrivals</a></li>
-    <li class="breadcrumb-item active"><a href="#">Validate</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'staff_reservation_list'%}">{% trans 'str_Arrivals' %}</a></li>
+    <li class="breadcrumb-item active"><a href="#">{% trans 'str_Validate' %}</a></li>
   </ol>
 </nav>
 
@@ -44,7 +44,7 @@
 
     <div class="card">
       <h5 class="card-header">
-        {% trans 'Pilot'%}
+        {% trans 'str_Pilot'%}
         <a href="{% url 'staff_reservation_edit_pilot' res=reservation.pk pk=reservation.pilot.pk%}"><span class="fas fa-pen float-right"></span></a>
       </h5>
       <div class="card-body">
@@ -52,27 +52,27 @@
         <table class="table">
           <tbody>
             <tr>
-              <th scope="row">{% trans 'First Name'%}</th>
+              <th scope="row">{% trans 'str_First_name'%}</th>
               <td>{{pilot.user.first_name}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Last Name'%}</th>
+              <th scope="row">{% trans 'str_Last_name'%}</th>
               <td>{{pilot.user.last_name}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Licence Number'%}</th>
+              <th scope="row">{% trans 'str_Licence_number'%}</th>
               <td>{{pilot.licence_number}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Insurance Company'%}</th>
+              <th scope="row">{% trans 'str_Insurance_company'%}</th>
               <td>{{pilot.insurance_company}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Insurance Number'%}</th>
+              <th scope="row">{% trans 'str_Insurance_number'%}</th>
               <td>{{pilot.insurance_number}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Phone Number'%}</th>
+              <th scope="row">{% trans 'str_Phone_number'%}</th>
               <td>{{pilot.phone_number}}</td>
             </tr>
           </tbody>
@@ -108,15 +108,15 @@
                 <td>{{reservation.flight_plan}}</td>
               </tr>
               <tr>
-                <th scope="row">{% trans 'Passanger'%}</th>
+                <th scope="row">{% trans 'str_Passanger'%}</th>
                 <td>{{reservation.passanger}}</td>
               </tr>
               <tr>
-                <th scope="row">{% trans 'Esthetic Cup'%}</th>
+                <th scope="row">{% trans 'str_Esthetic_Cup'%}</th>
                 <td>{{reservation.esthetic_cup}}</td>
               </tr>
               <tr>
-                <th scope="row">{% trans 'For Sale' %}</th>
+                <th scope="row">{% trans 'str_For_sale' %}</th>
                 <td>{{reservation.for_sale}}</td>
               </tr>
             </tbody>
@@ -153,7 +153,7 @@
               <td>{{ulm.imatriculation_country}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Imatriculation'%}</th>
+              <th scope="row">{% trans 'str_Imatriculation'%}</th>
               <td>{{ulm.imatriculation}}</td>
             </tr>
             <tr>
