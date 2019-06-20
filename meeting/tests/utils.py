@@ -24,3 +24,24 @@ def create_time_slot(meeting, start_date, arrivals_slots, end_date=None):
                                    start_date=start_date,
                                    end_date=end_date,
                                    arrivals_slots=arrivals_slots)
+
+
+def create_ulm(pilot, radio_id):
+    return ULM.objects.create(pilot=pilot,
+                              radio_id=radio_id,
+                              )
+
+
+def create_user(name, password):
+    return User.objects.create_user(username=name, password=password)
+
+
+def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None):
+    return Reservation.objects.create(
+                ulm=ulm,
+                pilot=ulm.pilot,
+                reservation_number=res_num,
+                time_slot=ts1,
+                arrival=arrival,
+                depart_time_slot=ts2,
+                meeting=ts1.meeting)
