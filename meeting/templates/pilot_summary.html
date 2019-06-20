@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block page_title %}
-{% blocktrans %} Pilot overview: {{pilot}} {% endblocktrans %}
+{% blocktrans %}Pilot overview: {{pilot}}{% endblocktrans %}
 {% endblock %}
 
 
@@ -10,7 +10,7 @@
 
 <div class="card mx-4">
   <div class="card-header">
-      {% trans "Profile"%}
+      {% trans "str_Profile"%}
       <a href="{% url 'staff_update_pilot' pk=pilot.pk%}"><i class="fas fa-pen float-right"></i></a>
   </div>
   <div class="card-body">
@@ -22,7 +22,7 @@
   <div class="col">
     <div class="card mx-4">
       <div class="card-header">
-          {% trans "ULM"%}
+          {% trans "str_ULM"%}
         </div>
       <div class="list-group list-group-flush">
         {% for ulm in pilot.ulm.all %}
@@ -38,7 +38,7 @@
   <div class="col">
     <div class="card mr-4">
       <div class="card-header">
-          {% trans "Reservations"%}
+          {% trans "str_Reservations"%}
         </div>
       <div class="list-group list-group-flush">
         {% for ulm in pilot.ulm.all %}

@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block page_title%}
-  {% trans "Profile" %}
+  {% trans "str_Profile" %}
 {% endblock %}
 
 
@@ -11,9 +11,9 @@
 <div class="card mx-4">
   <div class="card-body">
     {% include 'includes/elements/pilot_info.html' with pilot=pilot%}
-    <a href= "{% url 'change_password'%}" class="btn btn-primary">{% trans "Change Password" %}</a>
-    <a href= "{% url 'edit_pilot' pilot.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
-    <a href="{% url 'delete_user' pilot.user.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "Delete account"%}</a>
+    <a href= "{% url 'change_password'%}" class="btn btn-primary">{% trans "str_Change_password" %}</a>
+    <a href= "{% url 'edit_pilot' pilot.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "str_Edit" %}</a>
+    <a href="{% url 'delete_user' pilot.user.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "str_Delete_account"%}</a>
   </div>
 </div>
 

@@ -13,19 +13,11 @@
 
 
 {% block content %}
-
-<nav aria-label="breadcrumb" class="mt-3">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'staff_reservation_list'%}">{% trans 'str_Arrivals' %}</a></li>
-    <li class="breadcrumb-item active"><a href="#">{% trans 'str_Validate' %}</a></li>
-  </ol>
-</nav>
-
-<h3>{% trans 'Reservation' %}: {{reservation.reservation_number}}</h3>
+<h3>{% trans 'str_Reservation' %}: {{reservation.reservation_number}}</h3>
 
 {% if reservation.arrival is not None %}
 <div class="alert alert-success" role="alert">
-  {% trans 'This reservation has been validated on:'%} {{reservation.arrival}}
+  {% trans 'str_alert_Reservation_validate_on'%}: {{reservation.arrival}}
 </div>
 {% elif not reservation.is_on_time %}
 <div class="alert alert-danger" role="alert">
@@ -36,7 +28,7 @@
 
 {%  if reservation.is_missing_informations %}
 <div class="alert alert-danger" role="alert">
-  {% trans 'Some informations are missing in this reservation'%}
+  {% trans 'str_alert_Reservation_missing_information'%}
 </div>
 {% endif%}
 
@@ -85,7 +77,7 @@
       {% with modalid="ReservationModal"%}
       <h5 class="card-header">
         <div class="d-flex w-100 justify-content-between">
-        {% trans 'Reservation'%}
+        {% trans 'str_Reservation'%}
         <div class="">
           <a href="#{{modalid}}"  data-toggle="modal" data-target="#{{modalid}}" ><i class="fas fa-search"></i></a>
           <a href="{% url 'staff_reservation_edit' reservation.pk%}" ><i class="fas fa-pen"></i></a>
@@ -96,15 +88,15 @@
           <table class="table">
             <tbody>
               <tr>
-                <th scope="row">{% trans 'Time Slot'%}</th>
+                <th scope="row">{% trans 'str_Time_slot'%}</th>
                 <td>{{reservation.time_slot}}</td>
               </tr>
               <tr>
-                <th scope="row">{% trans 'Fuel'%}</th>
+                <th scope="row">{% trans 'str_Fuel'%}</th>
                 <td>{{reservation.fuel_reservation}}</td>
               </tr>
               <tr>
-                <th scope="row">{% trans 'Flight Plan'%}</th>
+                <th scope="row">{% trans 'str_Flight_plan'%}</th>
                 <td>{{reservation.flight_plan}}</td>
               </tr>
               <tr>
@@ -112,7 +104,7 @@
                 <td>{{reservation.passanger}}</td>
               </tr>
               <tr>
-                <th scope="row">{% trans 'str_Esthetic_Cup'%}</th>
+                <th scope="row">{% trans 'str_Esthetic_cup'%}</th>
                 <td>{{reservation.esthetic_cup}}</td>
               </tr>
               <tr>
@@ -129,7 +121,7 @@
 
     <div class="card">
       <h5 class="card-header">
-        {% trans 'ULM'%}
+        {% trans 'str_ULM'%}
         <a href="{% url 'staff_reservation_edit_ulm' res=reservation.pk pk=reservation.ulm.pk%}"><span class="fas fa-pen float-right"></span></a>
       </h5>
       <div class="card-body">
@@ -137,19 +129,19 @@
         <table class="table">
           <tbody>
             <tr>
-              <th scope="row">{% trans 'constructor'%}</th>
+              <th scope="row">{% trans 'str_Constructor'%}</th>
               <td>{{ulm.constructor}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Model'%}</th>
+              <th scope="row">{% trans 'str_Model'%}</th>
               <td>{{ulm.model}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Type' %}</th>
+              <th scope="row">{% trans 'str_Type' %}</th>
               <td>{{ulm.type}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Immatriculation Country'%}</th>
+              <th scope="row">{% trans 'str_Imatriculation_country'%}</th>
               <td>{{ulm.imatriculation_country}}</td>
             </tr>
             <tr>
@@ -157,7 +149,7 @@
               <td>{{ulm.imatriculation}}</td>
             </tr>
             <tr>
-              <th scope="row">{% trans 'Radio Id'%}</th>
+              <th scope="row">{% trans 'str_Radio_id'%}</th>
               <td>{{ulm.radio_id}}</td>
             </tr>
           </tbody>
@@ -170,8 +162,8 @@
 
 <div class="row mt-3">
 <div class="col">
-  <a href="{% url 'staff_reservation_validate' reservation.pk %}" class="btn btn-success">{% trans 'Validate'%}</a>
-  <a href="{% url 'staff_reservation_invalidate' reservation.pk %}" class="btn btn-danger">{% trans 'Invalidate'%}</a>
+  <a href="{% url 'staff_reservation_validate' reservation.pk %}" class="btn btn-success">{% trans 'str_Validate'%}</a>
+  <a href="{% url 'staff_reservation_invalidate' reservation.pk %}" class="btn btn-danger">{% trans 'str_Invalidate'%}</a>
   {% with label="label"|add:reservation.reservation_number%}
     <div style="display:none" >
       <div class="" id="{{label}}" style="text-align:center;padding-top:10%">
@@ -180,7 +172,7 @@
           {{reservation.ulm}}
       </div>
     </div>
-    <button type="button" onclick="printJS('{{label}}', 'html')" class="btn btn-warning">{% trans "Print" %}</button>
+    <button type="button" onclick="printJS('{{label}}', 'html')" class="btn btn-warning">{% trans "str_Print" %}</button>
   {% endwith %}
 </div>
 </div>

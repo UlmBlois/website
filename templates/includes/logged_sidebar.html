@@ -33,11 +33,11 @@
         <h6 class="collapse-header">{% trans "General:" %}</h6>
         <a class="collapse-item {% if url_name == 'staff_ulm_list' %}active{% endif %}" href="{% url 'staff_ulm_list'%}">
           <i class="fas fa-fw fa-search"></i>
-          <span>{% trans "Search ULM" %}</span>
+          <span>{% trans "str_Search_ULM" %}</span>
         </a>
         <a class="collapse-item {% if url_name == 'staff_pilot_list' %}active{% endif %}" href="{% url 'staff_pilot_list'%}">
           <i class="fas fa-fw fa-search"></i>
-          <span>{% trans "Search Pilot" %}</span>
+          <span>{% trans "str_Search_pilot" %}</span>
         </a>
         <div class="collapse-divider"></div>
         <h6 class="collapse-header">{% trans "Arrivals & Fuel:" %}</h6>
@@ -64,7 +64,7 @@
   <li class="nav-item {% if url_name == 'pilot' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot' user.pilot.pk%}">
       <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-      {% trans "Profile" %}
+      {% trans "str_Profile" %}
     </a>
   </li>
   <li class="nav-item {% if url_name == 'pilot_reservation' %}active{% endif %}">

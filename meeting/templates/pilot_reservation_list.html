@@ -7,38 +7,38 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      {% trans 'Please confirm your reservation.'%}
+      {% trans 'str_alert_confirm_your_reservation'%}
     </div>
   {% elif meeting.registration_aviable%}
     <div class="alert alert-success  alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      {% trans 'Reservation open.'%}
+      {% trans 'str_alert_Reservation_open'%}
     </div>
   {% elif not meeting.registration_open%}
     <div class="alert alert-danger  alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      {% trans 'Reservation closed.'%}
+      {% trans 'str_alert_Reservation_close'%}
     </div>
   {% else %}
     <div class="alert alert-danger  alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      {% trans 'No more time slot aviable.'%}
+      {% trans 'str_alert_no_timeslot_aviable'%}
     </div>
   {% endif %}
 {% endblock %}
 
 
 {% block page_title%}
-  {% trans "Your Reservations" %}
+  {% trans "str_Your_reservations" %}
   {% if user.pilot.can_make_reservation %}
   <a class="btn btn-success" role="button" href="{% url 'pilot_create_reservation' %}">
-    <span class="fas fa-plus-circle"></span>{% trans "Add New" %}
+    <span class="fas fa-plus-circle"></span>{% trans "str_Add_new" %}
   </a>
   {% endif %}
 {% endblock %}
@@ -55,16 +55,16 @@
     <h6 class="card-subtitle mb-2 text-muted">{{res.reservation_number}}</h6>
     {% endif %}
     {% if res.is_active %}
-    <a href="{% url 'pilot_update_reservation' res.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
+    <a href="{% url 'pilot_update_reservation' res.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "str_Edit" %}</a>
     {% if not res.canceled %}
       {% if res.meeting.confirmation_open and not res.confirmed %}
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal{{res.pk}}"><span class="fas fa-check"></span>{% trans 'Confirm '%}</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal{{res.pk}}"><span class="fas fa-check"></span>{% trans 'str_Confirm'%}</button>
       <!-- Confirm modal-->
         <div class="modal fade" id="confirmModal{{res.pk}}" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel">{% trans 'Confirm Reservation'%}</h5>
+                <h5 class="modal-title" id="confirmModalLabel">{% trans 'str_Confirm_reservation'%}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -76,20 +76,20 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <form action="{% url 'ajax_confirm_reservation' pk=res.pk %}" method=POST>
                   {% csrf_token %}
-                  <button class="btn btn-primary"><span class="fas fa-check"></span>{% trans 'Confrim'%}</button>
+                  <button class="btn btn-primary"><span class="fas fa-check"></span>{% trans 'str_Confirm'%}</button>
                 </form>
               </div>
             </div>
           </div>
         </div>
       {% endif %}
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelModal{{res.pk}}"><span class="fas fa-minus-circle"></span>{% trans 'Cancel Reservation'%}</button>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelModal{{res.pk}}"><span class="fas fa-minus-circle"></span>{% trans 'str_Cancel_reservation'%}</button>
       <!-- Cancel modal-->
         <div class="modal fade" id="cancelModal{{res.pk}}" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="cancelModalLabel">{% trans 'Cancel Reservation'%}</h5>
+                <h5 class="modal-title" id="cancelModalLabel">{% trans 'str_Cancel_reservation'%}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -101,7 +101,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <form action="{% url 'ajax_cancel_reservation' pk=res.pk %}" method=POST>
                   {% csrf_token %}
-                  <button class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans 'Cancel Reservation'%}</button>
+                  <button class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans 'str_Cancel_reservation'%}</button>
                 </form>
               </div>
             </div>
@@ -112,11 +112,11 @@
     </div> <!-- End Right -->
     <div class="">
     {% if res.canceled %}
-        <h5 class="text-danger">{% trans 'Canceled'%}</h5>
+        <h5 class="text-danger">{% trans 'str_Canceled'%}</h5>
     {% elif res.confirmed %}
-        <h5 class="text-primary">{% trans 'Confirmed'%}</h5>
+        <h5 class="text-primary">{% trans 'str_Confirmed'%}</h5>
     {% else %}
-        <h5 class="text-secondary">{% trans 'Waiting for validation'%}</h5>
+        <h5 class="text-secondary">{% trans 'str_Waiting_for_validation'%}</h5>
     {%endif%}
     </div>
   </div>

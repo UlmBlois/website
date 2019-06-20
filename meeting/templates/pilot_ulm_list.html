@@ -3,9 +3,9 @@
 {% load countries %}
 
 {% block page_title%}
-{% trans "Your ULMs" %}
+{% trans "str_Your_ULMs" %}
 <a class="btn btn-success" role="button" href="{% url 'pilot_create_ulm' %}">
-  <span class="fas fa-plus-circle"></span>{% trans "Add New" %}
+  <span class="fas fa-plus-circle"></span>{% trans "str_Add_new" %}
 </a>
 {% endblock %}
 
@@ -20,17 +20,17 @@
     <h6 class="card-subtitle mb-2 text-muted">{{ulm.radio_id}}</h6>
     <div class="row mb-2">
       <div class="col-sm">
-        <span class="">{% trans 'str_Imatriculation:'%} {{ulm.imatriculation}}</span>
+        <span class="">{% trans 'str_Imatriculation'%}: {{ulm.imatriculation}}</span>
         <br>
-        <span>{% trans 'Type:' %} {{ulm.type}}</span>
+        <span>{% trans 'str_Type' %}: {{ulm.type}}</span>
       </div>
       {% get_country ulm.imatriculation_country as country %}
       <div class="col-sm">
-        <span>{% trans 'Imatriculation Country:'%} {{country.name}}</span>
+        <span>{% trans 'str_Imatriculation_country'%}: {{country.name}}</span>
       </div>
     </div>
-    <a href="{% url 'pilot_update_ulm' ulm.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "Edit" %}</a>
-    <a href="{% url 'pilot_delete_ulm' ulm.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "Delete" %}</a>
+    <a href="{% url 'pilot_update_ulm' ulm.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "str_Edit" %}</a>
+    <a href="{% url 'pilot_delete_ulm' ulm.pk %}" class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans "str_Delete" %}</a>
   </div>
 </div>
 {% endfor %}

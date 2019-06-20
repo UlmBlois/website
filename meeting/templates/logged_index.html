@@ -4,7 +4,7 @@
 {% load chunks %}
 
 {% block page_title %}
-{% trans "Welcome!" %}
+{% trans "str_Welcome" %}
 {% endblock %}
 
 
@@ -13,7 +13,7 @@
 {% get_chunk 'registration_procedure_1' as registration_1 %}
 {{ registration_1.content | safe }}
 <div class="text-center">
-  <a href="{% url 'reservation_wizard_step1' pk=user.pilot.pk%}" class="btn btn-primary">{% trans "Reserve your arrival slot"%}</a>
+  <a href="{% url 'reservation_wizard_step1' pk=user.pilot.pk%}" class="btn btn-primary">{% trans "str_Reserve_your_arrival_slot"%}</a>
 </div>
 
 {% get_chunk 'registration_procedure_2' as registration_2 %}

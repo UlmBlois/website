@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block page_title %}
-{% trans "Pilots Fuel Reservations" %}
+{% trans "str_Pilots_fuel_reservations" %}
 {% endblock %}
 
 {% block content %}
@@ -19,13 +19,13 @@
 <table id="reservation_table" class="table table-hover">
   <thead class="thead-dark">
   <tr>
-    <th>{% trans "ID" %}</th>
+    <th>{% trans "str_Reservation_number" %}</th>
     <th>{% trans "str_Pilot" %}</th>
     <th>{% trans "str_Imatriculation" %}</th>
-    <th>{% trans "Radio Id" %}</th>
-    <th>{% trans "Fuel Reservation" %}</th>
-    <th>{% trans "Fuel Served" %}</th>
-    <th class="center">{% trans "Actions" %}</th>
+    <th>{% trans "str_Radio_id" %}</th>
+    <th>{% trans "str_Fuel_reservation" %}</th>
+    <th>{% trans "str_Fuel_served" %}</th>
+    <th class="center">{% trans "str_Actions" %}</th>
   </tr>
   </thead>
   <tbody>
@@ -46,7 +46,7 @@
               class="btn btn-warning btn-sm js-update-fuel-served"
               data-url="{% url 'ajax_fuel_served' res.id %}"
               data-contener-id="modal-update-fuel">
-        <span class="fas fa-pen"></span> {% trans "Validate" %}
+        <span class="fas fa-pen"></span> {% trans "str_Validate" %}
       </button>
     </td>
   </tr>
