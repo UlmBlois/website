@@ -18,7 +18,7 @@
   <li class="nav-item">
     <a class="nav-link" href="{% url 'logged_index' %}">
       <i class="fas fa-fw fa-home"></i>
-      <span>{% trans "Home" %}</span></a>
+      <span>{% trans "str_Home" %}</span></a>
   </li>
 
 {% if perms.meeting.reservation_validation %}
@@ -89,25 +89,25 @@
   <li class="nav-item {% if url_name == 'on_site' %}active{% endif %}">
     <a class="nav-link" href="{% url 'on_site'%}">
       <i class="fas fa-fw fa-map-marker-alt"></i>
-      <span>{% trans "On Site" %}</span></a>
+      <span>{% trans "str_On_site" %}</span></a>
   </li>
 
   <li class="nav-item {% if url_name == 'pilot_informations' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot_informations'%}">
       <i class="fas fa-fw fa-info"></i>
-      <span>{% trans "Pilotes Informations" %}</span></a>
+      <span>{% trans "str_Pilots_information" %}</span></a>
   </li>
 
   <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
     <a class="nav-link" href="{% url 'about'%}">
       <i class="fas fa-fw fa-info-circle"></i>
-      <span>{% trans "About" %}</span></a>
+      <span>{% trans "str_About" %}</span></a>
   </li>
 
   <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
     <a class="nav-link" href="{% url 'contact'%}">
       <i class="fas fa-fw fa-comment"></i>
-      <span>{% trans "Contact" %}</span></a>
+      <span>{% trans "str_Contact" %}</span></a>
   </li>
 
   <li class="nav-item {% if url_name == 'faq' %}active{% endif %}">

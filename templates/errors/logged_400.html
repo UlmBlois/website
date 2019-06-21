@@ -6,8 +6,8 @@
 
 <div class="text-center">
     <div class="error mx-auto" data-text="400">400</div>
-    <p class="lead text-gray-800 mb-5">{% trans 'Bad request...' %}</p>
-    <p class="text-gray-500 mb-0">{% trans 'Your request resulted in an error' %}</p>
-    <a href="{% url 'logged_index'%}">&larr; {% trans 'Back to home' %}</a>
+    <p class="lead text-gray-800 mb-5">{% trans 'str_Bad_request' %}</p>
+    <p class="text-gray-500 mb-0">{% trans 'str_error_request_throw_error' %}</p>
+    <a href="{% url 'logged_index'%}">&larr; {% trans 'str_Back_home' %}</a>
 </div>
 {% endblock %}

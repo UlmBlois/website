@@ -10,9 +10,9 @@ class BooleanWidget(Select):
     """
 
     def __init__(self, attrs=None):
-        choices = (('', _('Unknown')),
-                   ('true', _('Yes')),
-                   ('false', _('No')))
+        choices = (('', _('str_Unknown')),
+                   ('true', _('str_Yes')),
+                   ('false', _('str_No')))
         super().__init__(attrs, choices)
 
     def render(self, name, value, attrs=None, renderer=None):

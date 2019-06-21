@@ -7,7 +7,7 @@ from radio_call_sign_field import formfields
 
 class RadioCallSignField(models.CharField):
     default_validators = [validate_radio_call_sign]
-    description = _("Aicraft radio call sign")
+    description = _("str_Aircraft_registration_number")
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("max_length", 10)

@@ -34,11 +34,10 @@ def pilot_change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request,
-                             _('Your password was successfully updated!'))
+            messages.success(request, _('str_message_password_updated'))
             return redirect('change_password')
         else:
-            messages.error(request, _('Please correct the error below.'))
+            messages.error(request, _('str_message_correct_error'))
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'base_form.html', {
@@ -121,9 +120,10 @@ class PilotULMList(ListView):
 class DeletePilotULM(DeleteView):
     model = ULM
     template_name = 'logged_delete_form.html'
-    success_message = _("The microlight %(ulm)s as been successfully deleted.")
-    error_message = _("The microlight %(ulm)s you are trying to delete is"
-                      " link to an active reservation and cannot be deleted.")
+    # Translators: This contain the ulm name acces by %(ulm)s
+    success_message = _("str_message_ulm_deleted")
+    # Translators: This contain the ulm name acces by %(ulm)s
+    error_message = _('str_message_delete_ulm_link_to_reservation')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

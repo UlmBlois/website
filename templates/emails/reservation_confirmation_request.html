@@ -10,7 +10,7 @@
 {% include 'emails/includes/base/text_row_with_title.html' with text=body_1.content%}
 
 {% absolute_url 'index' as link_index%}
-{% trans "Confirmation" as link_text%}
+{% trans "str_Confirmation" as link_text%}
 {% include 'emails/includes/base/button_row.html' with link=link_index text=link_text%}
 
 {% include 'emails/includes/base/divider_row.html'%}

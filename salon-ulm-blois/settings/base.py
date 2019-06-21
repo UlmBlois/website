@@ -119,8 +119,8 @@ LOGOUT_REDIRECT_URL = '/'
 LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
-    ('en', _('English')),
-    ('fr', _('French')),
+    ('en', _('str_English')),
+    ('fr', _('str_French')),
 ]
 
 TIME_ZONE = 'Europe/Paris'

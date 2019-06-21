@@ -12,7 +12,9 @@ logger = logging.getLogger(__name__)
 
 
 class CallSignField(CharField):
-    default_error_messages = {"invalid": _("Enter a valid radio call sign.")}
+    default_error_messages = {"invalid":
+                              _("str_invalide_aircraft_registration_number")
+                              }
     default_validators = [validate_radio_call_sign]
     widget = CallSingPrefixWidget
 

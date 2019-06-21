@@ -14,7 +14,8 @@ def validate_radio_call_sign(value):
         logger.debug("invalid value : %s does not match %s",
                      reg_num.number, str(reg_num.validator))
         raise ValidationError(
-            _("{val} does not match one of the folowing format : {patterns}"
+            # Translators: contain variable: value as {val}, patterns as {patterns}
+            _("str_Error_registration_number_does_not_match_pattern"
               ).format(val=reg_num.number, patterns=str(reg_num.validator)),
             code='invalid')
     else:

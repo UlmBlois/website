@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-20 19:44+0200\n"
+"POT-Creation-Date: 2019-06-21 08:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -523,253 +523,245 @@ msgstr ""
 msgid "str_Search_ULM"
 msgstr ""
 
-#: meeting/views/pilot.py:38
-msgid "Your password was successfully updated!"
+#: meeting/views/pilot.py:37
+msgid "str_message_password_updated"
 msgstr ""
 
-#: meeting/views/pilot.py:41
-msgid "Please correct the error below."
+#: meeting/views/pilot.py:40
+msgid "str_message_correct_error"
 msgstr ""
 
+#. Translators: This contain the ulm name acces by %(ulm)s
 #: meeting/views/pilot.py:124
-#, python-format
-msgid "The microlight %(ulm)s as been successfully deleted."
+msgid "str_message_ulm_deleted"
 msgstr ""
 
-#: meeting/views/pilot.py:125
-#, python-format
-msgid ""
-"The microlight %(ulm)s you are trying to delete is link to an active "
-"reservation and cannot be deleted."
+#. Translators: This contain the ulm name acces by %(ulm)s
+#: meeting/views/pilot.py:126
+msgid "str_message_delete_ulm_link_to_reservation"
 msgstr ""
 
 #: meeting/widgets.py:13
-msgid "Unknown"
+msgid "str_Unknown"
 msgstr ""
 
 #: meeting/widgets.py:14
-msgid "Yes"
+msgid "str_Yes"
 msgstr ""
 
 #: meeting/widgets.py:15
-msgid "No"
+msgid "str_No"
 msgstr ""
 
 #: pages/models.py:26
-msgid "Page name"
+msgid "str_Page_name"
 msgstr ""
 
 #: pages/models.py:29
-msgid "page"
+msgid "str_page"
 msgstr ""
 
 #: pages/models.py:30
-msgid "pages"
+msgid "str_pages"
 msgstr ""
 
 #: pages/models.py:48
-msgid "Key"
+msgid "str_Key"
 msgstr ""
 
 #: pages/models.py:49
-msgid "A unique id for this chunk"
+msgid "str_Chunk_Key_help_text"
 msgstr ""
 
 #: pages/models.py:54
-msgid "Content"
+msgid "str_Content"
 msgstr ""
 
 #: pages/models.py:58
-msgid "Description"
+msgid "str_Description"
 msgstr ""
 
 #: pages/models.py:61
-msgid "Short Description"
+msgid "str_Short_description"
 msgstr ""
 
 #: pages/models.py:68
-msgid "chunk"
+msgid "str_chunk"
 msgstr ""
 
 #: pages/models.py:69
-msgid "chunks"
+msgid "str_chunks"
 msgstr ""
 
 #: pages/templates/about.html:6 templates/includes/footer.html:17
 #: templates/includes/logged_sidebar.html:104 templates/includes/navbar.html:18
-msgid "About"
+msgid "str_About"
 msgstr ""
 
 #: pages/templates/contact.html:6 templates/includes/logged_sidebar.html:110
 #: templates/includes/navbar.html:21
-msgid "Contact"
+msgid "str_Contact"
 msgstr ""
 
 #: pages/templates/copyright.html:6 templates/includes/footer.html:33
-msgid "Copyright Notices"
+msgid "str_Copyright_notices"
 msgstr ""
 
 #: pages/templates/on_site.html:6 templates/includes/footer.html:25
 #: templates/includes/logged_sidebar.html:92 templates/includes/navbar.html:12
-msgid "On Site"
+msgid "str_On_site"
 msgstr ""
 
-#: pages/templates/pilot_informations.html:6
-msgid "Pilots Information"
+#: pages/templates/pilot_informations.html:6 templates/includes/footer.html:26
+#: templates/includes/logged_sidebar.html:98 templates/includes/navbar.html:15
+msgid "str_Pilots_information"
 msgstr ""
 
 #: pages/templates/pilot_informations.html:10
-msgid "General Organisation"
+msgid "str_General_organisation"
 msgstr ""
 
 #: pages/templates/pilot_informations.html:14
-msgid "Microlight in flight arrival"
+msgid "str_Microlight_in_flight_arrival"
 msgstr ""
 
 #: pages/templates/pilot_informations.html:18
-msgid "Microlight departure"
+msgid "str_Microlight_departure"
 msgstr ""
 
 #: pages/templates/pilot_informations.html:22
-msgid "Flex wings procedure"
+msgid "str_Flex_wings_procedure"
 msgstr ""
 
 #: pages/templates/pilot_informations.html:26
-msgid "Plane procedures"
+msgid "str_Plane_procedure"
 msgstr ""
 
 #: pages/templates/privacy.html:6 templates/includes/footer.html:32
-msgid "Privacy Policies"
+msgid "str_Privacy_policies"
 msgstr ""
 
 #: pages/templates/terms.html:6 templates/includes/footer.html:34
-msgid "Terms and Conditions of Use"
+msgid "str_Legal_terms"
 msgstr ""
 
-#: radio_call_sign_field/formfields.py:15
-msgid "Enter a valid radio call sign."
+#: radio_call_sign_field/formfields.py:16
+msgid "str_invalide_aircraft_registration_number"
 msgstr ""
 
 #: radio_call_sign_field/modelfields.py:10
-msgid "Aicraft radio call sign"
+msgid "str_Aircraft_registration_number"
 msgstr ""
 
-#: radio_call_sign_field/validators.py:17
-#, python-brace-format
-msgid "{val} does not match one of the folowing format : {patterns}"
+#. Translators: contain variable: value as {val}, patterns as {patterns}
+#: radio_call_sign_field/validators.py:18
+msgid "str_Error_registration_number_does_not_match_pattern"
 msgstr ""
 
 #: salon-ulm-blois/settings/base.py:122
-msgid "English"
+msgid "str_English"
 msgstr ""
 
 #: salon-ulm-blois/settings/base.py:123
-msgid "French"
+msgid "str_French"
 msgstr ""
 
 #: templates/base/base_generic.html:3 templates/base/base_logged.html:12
+#: templates/emails/includes/specialised/email_header_bar.html:6
 #: templates/registration/login.html:13
 #: templates/registration/password_reset_form.html:13
 #: templates/registration/register.html:13
-msgid "Salon ULM de Blois"
+msgid "str_Salon_Ulm_de_Blois"
 msgstr ""
 
 #: templates/base/base_logged.html:87
-msgid "Ready to Leave?"
+msgid "str_Ready_to_leave"
 msgstr ""
 
 #: templates/base/base_logged.html:92
-msgid "Select \"Logout\" below if you are ready to end your current session."
+msgid "str_confirm_logout"
 msgstr ""
 
-#: templates/base/base_logged.html:94 templates/base/logged_delete_form.html:12
-msgid "Cancel"
+#: templates/base/base_logged.html:94 templates/base/logged_delete_form.html:13
+msgid "str_Cancel"
 msgstr ""
 
 #: templates/base/base_logged.html:95 templates/includes/logged_navbar.html:26
 #: templates/includes/navbar.html:40
-msgid "Logout"
+msgid "str_Logout"
 msgstr ""
 
-#: templates/base/logged_delete_form.html:9
-#, python-format
-msgid "Are you sure you want to delete \"%(object)s\"?"
-msgstr ""
-
+#. Translators: contain variable %(object)s
 #: templates/base/logged_delete_form.html:10
-msgid "This action can not be canceled."
+msgid "str_confirm_deletion"
 msgstr ""
 
-#: templates/emails/includes/base/header_row.html:56
-msgid "This message is not display correctly?"
+#: templates/base/logged_delete_form.html:11
+msgid "str_Action_can_not_be_canceled"
 msgstr ""
 
-#: templates/emails/includes/base/header_row.html:56
-msgid "View it in your browser."
+#: templates/emails/includes/base/header_row.html:57
+msgid "str_email_message_display_issue"
 msgstr ""
 
-#: templates/emails/includes/specialised/email_header_bar.html:6
-msgid "Salon ULM Blois"
+#: templates/emails/includes/base/header_row.html:57
+msgid "str_email_view_in_browser"
 msgstr ""
 
 #: templates/emails/reservation_confirmation_request.html:13
-msgid "Confirmation"
+msgid "str_Confirmation"
 msgstr ""
 
 #: templates/errors/400.html:7 templates/errors/logged_400.html:9
-msgid "Bad request..."
+msgid "str_Bad_request"
 msgstr ""
 
 #: templates/errors/400.html:8 templates/errors/logged_400.html:10
-msgid "Your request resulted in an error"
+msgid "str_error_request_throw_error"
 msgstr ""
 
 #: templates/errors/400.html:9 templates/errors/403.html:9
-#: templates/errors/404.html:9 templates/errors/logged_400.html:11
-#: templates/errors/logged_403.html:11 templates/errors/logged_404.html:11
-#: templates/errors/logged_500.html:11
-msgid "Back to home"
+#: templates/errors/404.html:9 templates/errors/500.html:11
+#: templates/errors/logged_400.html:11 templates/errors/logged_403.html:11
+#: templates/errors/logged_404.html:11 templates/errors/logged_500.html:11
+msgid "str_Back_home"
 msgstr ""
 
 #: templates/errors/403.html:7 templates/errors/logged_403.html:9
-msgid "Access denied..."
+msgid "str_Access_denied"
 msgstr ""
 
 #: templates/errors/403.html:8 templates/errors/logged_403.html:10
-msgid "You don"
+msgid "str_Insufisant_permission"
 msgstr ""
 
 #: templates/errors/404.html:7 templates/errors/logged_404.html:9
-msgid "Page Not Found"
+msgid "str_Page_not_Found"
 msgstr ""
 
 #: templates/errors/404.html:8 templates/errors/500.html:10
 #: templates/errors/logged_404.html:10 templates/errors/logged_500.html:10
-msgid "It looks like you found a glitch in the matrix..."
+msgid "str_glitch_in_matrix"
 msgstr ""
 
 #: templates/errors/500.html:9 templates/errors/logged_500.html:9
-msgid "Internal Error"
-msgstr ""
-
-#: templates/errors/500.html:11
-msgid "Back to Home"
+msgid "str_Internal_error"
 msgstr ""
 
 #: templates/includes/footer.html:8
-msgid "Get Started"
+msgid "str_Get_started"
 msgstr ""
 
 #: templates/includes/footer.html:10 templates/includes/logged_sidebar.html:21
-msgid "Home"
+msgid "str_Home"
 msgstr ""
 
 #: templates/includes/footer.html:11 templates/includes/navbar.html:50
-msgid "Sign Up"
+msgid "str_Sign_up"
 msgstr ""
 
 #: templates/includes/footer.html:15
-msgid "About Us"
+msgid "str_About_us"
 msgstr ""
 
 #: templates/includes/footer.html:18
@@ -778,10 +770,6 @@ msgstr ""
 
 #: templates/includes/footer.html:22
 msgid "Support"
-msgstr ""
-
-#: templates/includes/footer.html:26
-msgid "Pilot Informations"
 msgstr ""
 
 #: templates/includes/footer.html:30
@@ -822,14 +810,6 @@ msgstr ""
 
 #: templates/includes/logged_sidebar.html:86
 msgid "Other"
-msgstr ""
-
-#: templates/includes/logged_sidebar.html:98
-msgid "Pilotes Informations"
-msgstr ""
-
-#: templates/includes/navbar.html:15
-msgid "Pilotes Information"
 msgstr ""
 
 #: templates/includes/navbar.html:47 templates/registration/login.html:89

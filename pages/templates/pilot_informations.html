@@ -3,27 +3,27 @@
 {% load i18n %}
 
 {% block header %}
-  <h1>{% trans "Pilots Information" %}</h1>
+  <h1>{% trans "str_Pilots_information" %}</h1>
 {% endblock %}
 
 {% block content %}
-<h1>{% trans "General Organisation" %}</h1>
+<h1>{% trans "str_General_organisation" %}</h1>
 {% get_chunk 'pilot_info_general' as general_info %}
 {{ general_info.content | safe }}
 
-<h1>{% trans "Microlight in flight arrival" %}</h1>
+<h1>{% trans "str_Microlight_in_flight_arrival" %}</h1>
 {% get_chunk 'pilot_info_arrival' as arrival %}
 {{arrival.content | safe }}
 
-<h1>{% trans "Microlight departure" %}</h1>
+<h1>{% trans "str_Microlight_departure" %}</h1>
 {% get_chunk 'pilot_info_departure' as departure %}
 {{ departure.content | safe}}
 
-<h1>{% trans "Flex wings procedure" %}</h1>
+<h1>{% trans "str_Flex_wings_procedure" %}</h1>
 {% get_chunk 'pilot_info_paramotor' as paramotor %}
 {{ paramotor.content | safe}}
 
-<h1>{% trans "Plane procedures" %}</h1>
+<h1>{% trans "str_Plane_procedure" %}</h1>
 {% get_chunk 'pilot_info_plane' as plane %}
 {{ plane.content | safe}}
 {% endblock %}

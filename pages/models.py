@@ -23,11 +23,11 @@ def fallback_to_default(name):
 
 class Page(models.Model):
     """A Page Can contain multiple Chunks."""
-    slug = models.SlugField(unique=True, help_text=_('Page name'))
+    slug = models.SlugField(unique=True, help_text=_('str_Page_name'))
 
     class Meta:
-        verbose_name = _('page')
-        verbose_name_plural = _('pages')
+        verbose_name = _('str_page')
+        verbose_name_plural = _('str_pages')
 
     def __unicode__(self):
         return u"%s" % (self.slug,)
@@ -45,28 +45,28 @@ class Chunk(models.Model):
     """
     page = models.ForeignKey(Page, on_delete=models.CASCADE,
                              related_name='chunks')
-    key = models.CharField(_('Key'),
-                           help_text=_("A unique id for this chunk"),
+    key = models.CharField(_('str_Key'),
+                           help_text=_("str_Chunk_Key_help_text"),
                            blank=False,
                            max_length=255,
                            unique=True)
     content = TranslatedField(
-                        HTMLField(_('Content'), blank=True),
+                        HTMLField(_('str_Content'), blank=True),
                         {settings.LANGUAGES[0][0]: {"blank": False}},
                         attrgetter=fallback_to_default,)
     description = TranslatedField(
-                        models.CharField(_('Description'),
+                        models.CharField(_('str_Description'),
                                          blank=True,
                                          max_length=64,
-                                         help_text=_("Short Description")),
+                                         help_text=_("str_Short_description")),
                         {settings.LANGUAGES[0][0]: {"blank": False}},
                         attrgetter=fallback_to_default,)
 
     objects = ChunkManager()
 
     class Meta:
-        verbose_name = _('chunk')
-        verbose_name_plural = _('chunks')
+        verbose_name = _('str_chunk')
+        verbose_name_plural = _('str_chunks')
 
     def __unicode__(self):
         return u"%s" % (self.key,)

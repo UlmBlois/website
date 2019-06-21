@@ -9,16 +9,16 @@
       {% with url_name=request.resolver_match.url_name %}
       <ul class="navbar-nav ml-auto">
         <li class="nav-item {% if url_name == 'on_site' %}active{% endif %}">
-          <a href="{% url 'on_site'%}" class="nav-link">{% trans "On Site" %}</a>
+          <a href="{% url 'on_site'%}" class="nav-link">{% trans "str_On_site" %}</a>
         </li>
         <li class="nav-item {% if url_name == 'pilot_informations' %}active{% endif %}">
-          <a href="{% url 'pilot_informations'%}" class="nav-link">{% trans "Pilotes Information" %}</a>
+          <a href="{% url 'pilot_informations'%}" class="nav-link">{% trans "str_Pilots_information" %}</a>
         </li>
         <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
-          <a href="{% url 'about' %}" class="nav-link">{% trans "About" %}</a>
+          <a href="{% url 'about' %}" class="nav-link">{% trans "str_About" %}</a>
         </li>
         <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
-          <a href="{% url 'contact'%}" class="nav-link">{% trans "Contact" %}</a>
+          <a href="{% url 'contact'%}" class="nav-link">{% trans "str_Contact" %}</a>
         </li>
         <!-- </ul> -->
         {% if user.is_authenticated %}
@@ -37,7 +37,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'logout'%}">
               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              {% trans "Logout" %}
+              {% trans "str_Logout" %}
             </a>
           </div>
         </li>
@@ -47,7 +47,7 @@
           <a href="{% url 'login'%}"class="nav-link"><span class="fas fa-sign-in-alt"></span>{% trans "Login" %}</a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'signup'%}" class="nav-link">{% trans "Sign Up" %}</a>
+          <a href="{% url 'signup'%}" class="nav-link">{% trans "str_Sign_up" %}</a>
 
         </li>
         </ul>
