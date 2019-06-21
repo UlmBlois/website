@@ -34,9 +34,8 @@ def send_mass_html_mail(datatuple, fail_silently=False, user=None, password=None
 
 
 class Command(BaseCommand):
-    help = _('Send an email asking users to confirm their reservation (active '
-             'meeting only). The email will be sent only if on the specified '
-             'date in the meeting settings.')
+    # Translators: optional
+    help = _('str_Helptext_send_resevation_conifirmation_request')
     email_template = 'reservation_confirmation_request.html'
 
     def handle(self, *args, **kwargs):

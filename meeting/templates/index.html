@@ -5,7 +5,8 @@
 {% block header%}
 <h1>{{meeting}}</h1>
 <p class="lead">
-{% blocktrans with start=meeting.start_date end=meeting.end_date%}From the {{ start }}, to the {{ end }}.{% endblocktrans  %}
+{# Translators: contain the meeting start date as %(start)s and end date as %(end)s#}
+{% blocktrans with start=meeting.start_date end=meeting.end_date%}From the {{start}}, to the {{end}}.{% endblocktrans  %}
 </p>
 <hr class="my-4">
 <!-- TODO Change Program file access-->

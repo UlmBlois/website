@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-21 17:41+0200\n"
+"POT-Creation-Date: 2019-06-21 19:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: core/form.py:41 meeting/templates/index.html:71
+#: core/form.py:41 meeting/templates/index.html:72
 msgid "str_Register"
 msgstr ""
 
@@ -28,20 +28,18 @@ msgstr ""
 msgid "str_Submit"
 msgstr ""
 
-#: core/management/commands/send_reservation_confirmation_request.py:37
-msgid ""
-"Send an email asking users to confirm their reservation (active meeting "
-"only). The email will be sent only if on the specified date in the meeting "
-"settings."
+#. Translators: optional
+#: core/management/commands/send_reservation_confirmation_request.py:38
+msgid "str_Helptext_send_resevation_conifirmation_request"
 msgstr ""
 
-#: core/management/commands/send_reservation_confirmation_request.py:44
+#: core/management/commands/send_reservation_confirmation_request.py:43
 msgid "str_Confirmation_Reminder_Email_Subject"
 msgstr ""
 
-#: core/views.py:33
-#, python-format
-msgid "str_User_Successfully_Deleted_Message_%(user)s"
+#. Translators: This contain the user name access by %(user)s
+#: core/views.py:34
+msgid "str_User_Successfully_Deleted_Message"
 msgstr ""
 
 #: faq/admin.py:19 faq/admin.py:45 pages/admin.py:21
@@ -310,36 +308,37 @@ msgstr ""
 msgid "str_Reservation_details"
 msgstr ""
 
-#: meeting/templates/index.html:8
+#. Translators: contain the meeting start date as %(start)s and end date as %(end)s
+#: meeting/templates/index.html:9
 #, python-format
 msgid "From the %(start)s, to the %(end)s."
 msgstr ""
 
-#: meeting/templates/index.html:33
+#: meeting/templates/index.html:34
 msgid "str_Microlight_pilot"
 msgstr ""
 
-#: meeting/templates/index.html:39
+#: meeting/templates/index.html:40
 msgid "str_Sign_In"
 msgstr ""
 
-#: meeting/templates/index.html:48
+#: meeting/templates/index.html:49
 msgid "str_Paramotor_pilot"
 msgstr ""
 
-#: meeting/templates/index.html:55
+#: meeting/templates/index.html:56
 msgid "str_Download_form"
 msgstr ""
 
-#: meeting/templates/index.html:64
+#: meeting/templates/index.html:65
 msgid "str_PPL_pilot"
 msgstr ""
 
-#: meeting/templates/index.html:80
+#: meeting/templates/index.html:81
 msgid "str_Exhibitor"
 msgstr ""
 
-#: meeting/templates/index.html:87
+#: meeting/templates/index.html:88
 msgid "str_Find_out_more"
 msgstr ""
 
@@ -426,8 +425,7 @@ msgid "str_Waiting_for_validation"
 msgstr ""
 
 #: meeting/templates/pilot_summary.html:5
-#, python-format
-msgid "Pilot overview: %(pilot)s"
+msgid "str_Pilot_overview"
 msgstr ""
 
 #: meeting/templates/pilot_summary.html:25
@@ -804,7 +802,7 @@ msgstr ""
 msgid "str_Other"
 msgstr ""
 
-#: templates/includes/navbar.html:47
+#: templates/includes/navbar.html:47 templates/registration/login.html:88
 msgid "str_Login"
 msgstr ""
 
@@ -857,10 +855,6 @@ msgstr ""
 
 #: templates/registration/login.html:86
 msgid "str_Password"
-msgstr ""
-
-#: templates/registration/login.html:88
-msgid "Login"
 msgstr ""
 
 #: templates/registration/login.html:92
