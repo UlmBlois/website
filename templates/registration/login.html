@@ -36,27 +36,27 @@
             <div class="row">
               <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
               <div class="col-lg-6">
-                <a href="{% url 'index' %}"><i class="fas fa-chevron-circle-left"></i>{%trans 'Back'%}</a>
+                <a href="{% url 'index' %}"><i class="fas fa-chevron-circle-left"></i>{%trans 'str_Back'%}</a>
 
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">{% trans "Welcome Back!" %}</h1>
+                    <h1 class="h4 text-gray-900 mb-4">{% trans "str_Welcome_back" %}</h1>
                   </div>
                   {% if form.errors or next %}
                     <div class="alert alert-danger" role="alert">
                       <ul>
                       {% if form.errors %}
                       <li>
-                        {% trans "Your username and password didn't match. Please try again." %}
+                        {% trans "str_Error_login_mismatch" %}
                       </li>
                       {% endif %}
 
                       {% if next %}
                       <li>
                         {% if user.is_authenticated %}
-                          {% trans "Your account doesn't have access to this page. To proceed, please login with an account that has access." %}
+                          {% trans "str_Error_page_permission_require" %}
                         {% else %}
-                            {% trans "Please login to see this page." %}
+                            {% trans "str_Error_login_required" %}
                         {% endif %}
                       </li>
                       {% endif %}
@@ -73,8 +73,7 @@
                        maxlength="{{ form.username.field.max_length }}"
                        {% if form.username.field.required %}required{% endif %}
                        class="form-control form-control-user"
-                       placeholder="{%trans "Username" %}"/>
-                      <!-- <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."> -->
+                       placeholder="{%trans "str_Username" %}"/>
                     </div>
                     <div class="form-group">
                       <input type="password"
@@ -84,16 +83,16 @@
                        maxlength="{{ form.password.field.max_length }}"
                        {% if form.password.field.required %}required{% endif %}
                        class="form-control form-control-user"
-                       placeholder="{%trans "Password" %}"/>
+                       placeholder="{%trans "str_Password" %}"/>
                     </div>
                     <input type="submit" class="btn btn-primary btn-user btn-block" value="{% trans 'Login' %}"></input>
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="{% url 'password_reset' %}">{% trans "Forgot Password?" %}</a>
+                    <a class="small" href="{% url 'password_reset' %}">{% trans "str_Forgot_password" %}</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="{% url 'signup' %}">{% trans "Create an Account!" %}</a>
+                    <a class="small" href="{% url 'signup' %}">{% trans "str_Create_Account" %}</a>
                   </div>
                 </div>
               </div>

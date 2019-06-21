@@ -7,14 +7,14 @@
     <li class="page-item">
       <a class="page-link" href="?{{querystring}}&page={{ page_obj.previous_page_number }}" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">{% trans "Previous" %}</span>
+        <span class="sr-only">{% trans "str_Previous" %}</span>
       </a>
     </li>
     {% else %}
     <li class="page-item disabled">
       <a class="page-link" href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">{% trans "Previous" %}</span>
+        <span class="sr-only">{% trans "str_Previous" %}</span>
       </a>
     </li>
     {% endif %}
@@ -33,14 +33,14 @@
       <li class="page-item">
         <a class="page-link" href="?{{querystring}}&page={{ page_obj.next_page_number }}" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">{% trans "Next" %}</span>
+          <span class="sr-only">{% trans "str_Next" %}</span>
         </a>
       </li>
     {% else %}
       <li class="page-item disabled">
         <a class="page-link" href="#" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">{% trans "Next" %}</span>
+          <span class="sr-only">{% trans "str_Next" %}</span>
         </a>
       </li>
     {% endif %}

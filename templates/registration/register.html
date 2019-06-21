@@ -31,19 +31,19 @@
         <div class="row">
           <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
           <div class="col-lg-7">
-            <a href="{% url 'index' %}"><i class="fas fa-chevron-circle-left"></i>{%trans 'Back'%}</a>
+            <a href="{% url 'index' %}"><i class="fas fa-chevron-circle-left"></i>{%trans 'str_Back'%}</a>
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">{% trans "Create an Account!" %}</h1>
+                <h1 class="h4 text-gray-900 mb-4">{% trans "str_Create_Account" %}</h1>
               </div>
                 {% crispy form %}
 
               <hr>
               <div class="text-center">
-                <a class="small" href="{% url 'password_reset' %}">{% trans "Forgot Password?" %}</a>
+                <a class="small" href="{% url 'password_reset' %}">{% trans "str_Forgot_password" %}</a>
               </div>
               <div class="text-center">
-                <a class="small" href="{% url 'login'%}">{% trans "Already have an account? Login!" %}</a>
+                <a class="small" href="{% url 'login'%}">{% trans "str_already_have_an_account" %}</a>
               </div>
             </div>
           </div>

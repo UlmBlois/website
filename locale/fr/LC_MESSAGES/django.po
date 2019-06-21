@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-21 08:27+0200\n"
+"POT-Creation-Date: 2019-06-21 17:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -358,6 +358,7 @@ msgid "str_Profile"
 msgstr ""
 
 #: meeting/templates/pilot_profile.html:14
+#: templates/registration/password_reset_confirm.html:26
 msgid "str_Change_password"
 msgstr ""
 
@@ -388,6 +389,7 @@ msgid "str_alert_no_timeslot_aviable"
 msgstr ""
 
 #: meeting/templates/pilot_reservation_list.html:38
+#: templates/includes/logged_sidebar.html:73
 msgid "str_Your_reservations"
 msgstr ""
 
@@ -438,6 +440,7 @@ msgid "str_Reservations"
 msgstr ""
 
 #: meeting/templates/pilot_ulm_list.html:6
+#: templates/includes/logged_sidebar.html:78
 msgid "str_Your_ULMs"
 msgstr ""
 
@@ -478,6 +481,7 @@ msgid "str_Search_pilot"
 msgstr ""
 
 #: meeting/templates/staff_reservation_list.html:15
+#: templates/includes/logged_sidebar.html:46
 msgid "str_Pilots_reservations"
 msgstr ""
 
@@ -765,168 +769,145 @@ msgid "str_About_us"
 msgstr ""
 
 #: templates/includes/footer.html:18
-msgid "Contact Us"
+msgid "str_Contact_us"
 msgstr ""
 
 #: templates/includes/footer.html:22
-msgid "Support"
+msgid "str_Support"
 msgstr ""
 
 #: templates/includes/footer.html:30
-msgid "legal"
+msgid "str_Legal"
 msgstr ""
 
 #: templates/includes/logged_sidebar.html:29
-msgid "Management"
+msgid "str_Management"
 msgstr ""
 
 #: templates/includes/logged_sidebar.html:33
-msgid "General:"
+msgid "str_General"
 msgstr ""
 
 #: templates/includes/logged_sidebar.html:43
-msgid "Arrivals & Fuel:"
-msgstr ""
-
-#: templates/includes/logged_sidebar.html:46
-msgid "Pilot Reservations"
+msgid "str_Arrivals_and_Fuel"
 msgstr ""
 
 #: templates/includes/logged_sidebar.html:50
-msgid "Fuel Reservations"
+msgid "str_Fuel_reservations"
 msgstr ""
 
 #: templates/includes/logged_sidebar.html:62 templates/includes/navbar.html:35
-msgid "My Account"
-msgstr ""
-
-#: templates/includes/logged_sidebar.html:73
-msgid "My Reservations"
-msgstr ""
-
-#: templates/includes/logged_sidebar.html:78
-msgid "My ULMs"
+msgid "str_My_account"
 msgstr ""
 
 #: templates/includes/logged_sidebar.html:86
-msgid "Other"
+msgid "str_Other"
 msgstr ""
 
-#: templates/includes/navbar.html:47 templates/registration/login.html:89
-msgid "Login"
+#: templates/includes/navbar.html:47
+msgid "str_Login"
 msgstr ""
 
 #: templates/includes/pagination.html:10 templates/includes/pagination.html:17
-msgid "Previous"
+msgid "str_Previous"
 msgstr ""
 
 #: templates/includes/pagination.html:36 templates/includes/pagination.html:43
-msgid "Next"
+msgid "str_Next"
 msgstr ""
 
 #: templates/registration/change_password.html:24
-msgid "Save changes"
+msgid "str_Save_changes"
 msgstr ""
 
 #: templates/registration/logged_out.html:4
-msgid "Logged out!"
+msgid "str_Logged_out"
 msgstr ""
 
 #: templates/registration/logged_out.html:9
-msgid "Click here to login again."
+#: templates/registration/password_reset_complete.html:10
+msgid "str_login_again"
 msgstr ""
 
 #: templates/registration/login.html:39
 #: templates/registration/password_reset_form.html:34
 #: templates/registration/register.html:34
-msgid "Back"
+msgid "str_Back"
 msgstr ""
 
 #: templates/registration/login.html:43
-msgid "Welcome Back!"
+msgid "str_Welcome_back"
 msgstr ""
 
 #: templates/registration/login.html:50
-msgid "Your username and password didn't match. Please try again."
+msgid "str_Error_login_mismatch"
 msgstr ""
 
 #: templates/registration/login.html:57
-msgid ""
-"Your account doesn't have access to this page. To proceed, please login with "
-"an account that has access."
+msgid "str_Error_page_permission_require"
 msgstr ""
 
 #: templates/registration/login.html:59
-msgid "Please login to see this page."
+msgid "str_Error_login_required"
 msgstr ""
 
 #: templates/registration/login.html:76
-msgid "Username"
+msgid "str_Username"
 msgstr ""
 
-#: templates/registration/login.html:87
-msgid "Password"
+#: templates/registration/login.html:86
+msgid "str_Password"
 msgstr ""
 
-#: templates/registration/login.html:93 templates/registration/register.html:43
-msgid "Forgot Password?"
+#: templates/registration/login.html:88
+msgid "Login"
 msgstr ""
 
-#: templates/registration/login.html:96
+#: templates/registration/login.html:92
+#: templates/registration/password_reset_form.html:37
+#: templates/registration/register.html:43
+msgid "str_Forgot_password"
+msgstr ""
+
+#: templates/registration/login.html:95
 #: templates/registration/password_reset_form.html:43
 #: templates/registration/register.html:37
-msgid "Create an Account!"
+msgid "str_Create_Account"
 msgstr ""
 
 #: templates/registration/password_reset_complete.html:5
-msgid "Your password has been changed!"
-msgstr ""
-
-#: templates/registration/password_reset_complete.html:10
-msgid "log in again?"
+msgid "str_password_changed"
 msgstr ""
 
 #: templates/registration/password_reset_confirm.html:5
-msgid "Password reset confirmation"
+msgid "str_Password_reset_confirmation"
 msgstr ""
 
 #: templates/registration/password_reset_confirm.html:10
-msgid "Please enter (and confirm) your new password."
+msgid "str_enter_and_confirm_new_password"
 msgstr ""
 
 #: templates/registration/password_reset_confirm.html:16
-msgid "New password:"
+msgid "str_New_password"
 msgstr ""
 
 #: templates/registration/password_reset_confirm.html:21
-msgid "Confirm password:"
-msgstr ""
-
-#: templates/registration/password_reset_confirm.html:26
-msgid "Change my password"
+msgid "str_Confirm_password"
 msgstr ""
 
 #: templates/registration/password_reset_confirm.html:31
-msgid "Password reset failed"
+msgid "str_Password_reset_failed"
 msgstr ""
 
 #: templates/registration/password_reset_confirm.html:32
-msgid ""
-"The password reset link was invalid, possibly because it has already been "
-"used. Please request a new password reset."
+msgid "str_password_reset_link_invalid"
 msgstr ""
 
 #: templates/registration/password_reset_done.html:5
-msgid ""
-"We've emailed you instructions for setting your password. If they haven't "
-"arrived in a few minutes, check your spam folder."
-msgstr ""
-
-#: templates/registration/password_reset_form.html:37
-msgid "Forgot Your Password?"
+msgid "str_password_reset_email_sent"
 msgstr ""
 
 #: templates/registration/password_reset_form.html:46
 #: templates/registration/register.html:46
-msgid "Already have an account? Login!"
+msgid "str_already_have_an_account"
 msgstr ""

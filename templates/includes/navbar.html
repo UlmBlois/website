@@ -32,7 +32,7 @@
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="{% url 'logged_index'%}">
               <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              {% trans "My Account" %}
+              {% trans "str_My_account" %}
             </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'logout'%}">
@@ -44,7 +44,7 @@
         {% else %}
         <!-- <ul class="navbar-nav ml-auto"> -->
         <li class="nav-item">
-          <a href="{% url 'login'%}"class="nav-link"><span class="fas fa-sign-in-alt"></span>{% trans "Login" %}</a>
+          <a href="{% url 'login'%}"class="nav-link"><span class="fas fa-sign-in-alt"></span>{% trans "str_Login" %}</a>
         </li>
         <li class="nav-item">
           <a href="{% url 'signup'%}" class="nav-link">{% trans "str_Sign_up" %}</a>

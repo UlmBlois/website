@@ -1,10 +1,10 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
 {% block header %}
-<h1>{% trans "Logged out!" %}</h1>
+<h1>{% trans "str_Logged_out" %}</h1>
 
 {% endblock %}
 
 {% block content %}
-  <a href="{% url 'login'%}">{% trans "Click here to login again." %}</a>
+  <a href="{% url 'login'%}">{% trans "str_login_again" %}</a>
 {% endblock %}

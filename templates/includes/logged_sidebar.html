@@ -26,11 +26,11 @@
   <li class="nav-item active">
     <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseManagement" aria-expanded="true" aria-controls="collapseManagement">
       <i class="fas fa-fw fa-folder"></i>
-      <span>{% trans "Management" %}</span>
+      <span>{% trans "str_Management" %}</span>
     </a>
     <div id="collapseManagement" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">{% trans "General:" %}</h6>
+        <h6 class="collapse-header">{% trans "str_General" %}</h6>
         <a class="collapse-item {% if url_name == 'staff_ulm_list' %}active{% endif %}" href="{% url 'staff_ulm_list'%}">
           <i class="fas fa-fw fa-search"></i>
           <span>{% trans "str_Search_ULM" %}</span>
@@ -40,14 +40,14 @@
           <span>{% trans "str_Search_pilot" %}</span>
         </a>
         <div class="collapse-divider"></div>
-        <h6 class="collapse-header">{% trans "Arrivals & Fuel:" %}</h6>
+        <h6 class="collapse-header">{% trans "str_Arrivals_and_Fuel" %}</h6>
         <a class="collapse-item {% if url_name == 'staff_reservation_list' %}active{% endif %}" href="{% url 'staff_reservation_list'%}">
           <i class="fas fa-fw fa-plane-arrival"></i>
-          <span>{% trans "Pilot Reservations" %}</span>
+          <span>{% trans "str_Pilots_reservations" %}</span>
         </a>
         <a class="collapse-item {% if url_name == 'staff_fuel_res_list' %}active{% endif %}" href="{% url 'staff_fuel_res_list'%}">
           <i class="fas fa-fw fa-gas-pump"></i>
-          <span>{% trans "Fuel Reservations" %}</span>
+          <span>{% trans "str_Fuel_reservations" %}</span>
         </a>
       </div>
     </div>
@@ -59,7 +59,7 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    {% trans "My Account"%}
+    {% trans "str_My_account"%}
   </div>
   <li class="nav-item {% if url_name == 'pilot' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot' user.pilot.pk%}">
@@ -70,12 +70,12 @@
   <li class="nav-item {% if url_name == 'pilot_reservation' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot_reservation' %}">
       <i class="fas fa-fw fa-th-list"></i>
-      <span>{% trans "My Reservations" %}</span></a>
+      <span>{% trans "str_Your_reservations" %}</span></a>
   </li>
   <li class="nav-item {% if url_name == 'pilot_ulm_list' %}active{% endif %}">
     <a class="nav-link" href="{% url 'pilot_ulm_list' %}">
       <i class="fas fa-fw fa-plane"></i>
-      <span>{% trans "My ULMs" %}</span></a>
+      <span>{% trans "str_Your_ULMs" %}</span></a>
   </li>
 
   <!-- Divider -->
@@ -83,7 +83,7 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    {% trans "Other" %}
+    {% trans "str_Other" %}
   </div>
 
   <li class="nav-item {% if url_name == 'on_site' %}active{% endif %}">
