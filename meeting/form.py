@@ -10,7 +10,8 @@ import logging
 from betterforms.multiform import MultiModelForm
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column, Field, MultiWidgetField
+from crispy_forms.layout import (Layout, Submit, Row, Column,
+                                 Field, MultiWidgetField)
 
 # Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot

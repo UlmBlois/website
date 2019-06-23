@@ -1,7 +1,15 @@
+from django.test import TestCase
+from django.urls import reverse
+
 from django.contrib.auth.models import User
 from django.utils import timezone
+
 from datetime import date, datetime, timedelta
+from unittest import skip
+import logging
 from meeting.models import Meeting, TimeSlot, Pilot, Reservation, ULM
+
+logger = logging.getLogger(__name__)
 
 
 def create_meeting(name, start_date, active):
@@ -45,3 +53,37 @@ def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None):
                 arrival=arrival,
                 depart_time_slot=ts2,
                 meeting=ts1.meeting)
+
+
+class ViewTestCase(object):
+    url = ''
+    url_name = ''
+
+    def get_url(self):
+        return self.url
+
+    def get_url_from_name(self, args=None, kwargs=None):
+        return reverse(self.url_name, args=args, kwargs=kwargs)
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get(self.get_url())
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_url_accessible_by_name(self):
+        response = self.client.get(self.get_url_from_name())
+        self.assertEqual(response.status_code, 200)
+
+
+class LoggedViewTestCase(ViewTestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = create_user("user", "testtest")
+
+    def test_view_url_exists_at_desired_location(self):
+        self.client.force_login(self.user)
+        super().test_view_url_exists_at_desired_location()
+
+    def test_view_url_accessible_by_name(self):
+        self.client.force_login(self.user)
+        super().test_view_url_accessible_by_name()

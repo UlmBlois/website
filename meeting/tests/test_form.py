@@ -3,7 +3,8 @@ from django.utils import timezone as tz
 from datetime import date, datetime
 
 from meeting.form import ReservationForm
-from meeting.tests.utils import create_meeting, create_time_slot, create_user, create_ulm
+from meeting.tests.utils import (create_meeting, create_time_slot,
+                                 create_user, create_ulm)
 
 
 class ReservationFormTest(TestCase):

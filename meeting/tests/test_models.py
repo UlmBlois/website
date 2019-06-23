@@ -3,7 +3,8 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone as tz
 from datetime import date, datetime
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot
-from meeting.tests.utils import create_meeting, create_time_slot, create_ulm, create_user, create_reservation
+from meeting.tests.utils import (create_meeting, create_time_slot, create_ulm,
+                                 create_user, create_reservation)
 
 
 class MeetingTest(TestCase):
