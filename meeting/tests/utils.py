@@ -58,6 +58,7 @@ def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None):
 class ViewTestCase(object):
     url = ''
     url_name = ''
+    template_name = ''
 
     def get_url(self):
         return self.url
@@ -73,6 +74,12 @@ class ViewTestCase(object):
         response = self.client.get(self.get_url_from_name())
         self.assertEqual(response.status_code, 200)
 
+    def test_template(self):
+        if self.template_name != '':
+            response = self.client.get(self.get_url())
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, self.template_name)
+
 
 class LoggedViewTestCase(ViewTestCase):
 
@@ -87,3 +94,7 @@ class LoggedViewTestCase(ViewTestCase):
     def test_view_url_accessible_by_name(self):
         self.client.force_login(self.user)
         super().test_view_url_accessible_by_name()
+
+    def test_template(self):
+        self.client.force_login(self.user)
+        super().test_template()
