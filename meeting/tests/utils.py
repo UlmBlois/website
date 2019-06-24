@@ -1,13 +1,10 @@
-from django.test import TestCase
 from django.urls import reverse
 
 from django.contrib.auth.models import User
-from django.utils import timezone
 
-from datetime import date, datetime, timedelta
-from unittest import skip
+from datetime import timedelta
 import logging
-from meeting.models import Meeting, TimeSlot, Pilot, Reservation, ULM
+from meeting.models import Meeting, TimeSlot, Reservation, ULM
 
 logger = logging.getLogger(__name__)
 
@@ -98,3 +95,8 @@ class LoggedViewTestCase(ViewTestCase):
     def test_template(self):
         self.client.force_login(self.user)
         super().test_template()
+
+    def test_login_required(self):
+        response = self.client.get(self.get_url())
+        redirect = reverse('login') + "?next=" + self.get_url()
+        self.assertRedirects(response, redirect)

@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.utils import timezone as tz
 from datetime import date, datetime
-from meeting.models import Meeting, TimeSlot, Reservation, Pilot
+from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.tests.utils import (create_meeting, create_time_slot, create_ulm,
                                  create_user, create_reservation)
 
@@ -106,7 +106,12 @@ class ULMTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        pass
+        cls.user = create_user('testuser', '12345')
+
+    def test_normalize_ulm(self):
+        create_ulm(self.user.pilot, 'f-jaer')
+        self.assertEqual(ULM.objects.get(pilot=self.user.pilot).radio_id,
+                         'F-JAER')
 
 # TODO test normalize_reservation
 

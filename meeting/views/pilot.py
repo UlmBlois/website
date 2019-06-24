@@ -190,7 +190,7 @@ class UpdatePilotULM(UpdateView):
         return redirect(self.get_success_url())
 
 ###############################################################################
-# ULM related View
+# Reservation related View
 ###############################################################################
 
 
@@ -232,6 +232,8 @@ class CreatePilotReservation(CreateView):
         while Reservation.objects.filter(reservation_number=key).exists():
             key = uuid.uuid4().hex[:6].upper()
         res.reservation_number = key
+        res.meeting = res.time_slot.meeting
+        res.pilot = res.ulm.pilot
         res.save()
         return redirect(self.get_success_url())
 
@@ -267,12 +269,15 @@ class UpdatePilotReservation(UpdateView):
 # Reservation wizard
 ###############################################################################
 
+@method_decorator(login_required, name='dispatch')
 class ReservationWizardStep1(UpdateUserPilotView):
 
     def get_success_url(self):
-        return reverse('reservation_wizard_step2', kwargs={'pilot': self.object.pk})
+        return reverse('reservation_wizard_step2',
+                       kwargs={'pilot': self.object.pk})
 
 
+@method_decorator(login_required, name='dispatch')
 class ReservationWizardStep2(ModelFormSetView):
     pilot = None
     model = ULM

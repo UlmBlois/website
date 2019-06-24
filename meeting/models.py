@@ -339,7 +339,7 @@ class Reservation(models.Model):
 ##############################################################################
 
 @receiver(pre_save, sender=ULM)
-def normalize_reservation(sender, instance, **kwargs):
+def normalize_ULM(sender, instance, **kwargs):
     instance.radio_id = instance.radio_id.upper()
     instance.imatriculation = instance.imatriculation.upper()
 
