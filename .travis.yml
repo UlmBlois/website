@@ -10,7 +10,7 @@ python:
 services: postgresql
 
 env:
-  - DJANGO=2.2
+  - DJANGO=2.2.2
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=salon-ulm-blois.settings.travis
