@@ -38,6 +38,13 @@ class UpdateUserPilotView(LoggedViewTestCase, TestCase):
     url_name = 'edit_pilot'
     template_name = 'base_logged_form.html'
 
+    def get_url(self):
+        return self.url.format(self.user.pilot.pk)
+
+    def get_url_from_name(self, args=None, kwargs=None):
+        kwargs = {'pk': self.user.pilot.pk}
+        return super().get_url_from_name(kwargs=kwargs)
+
 ###############################################################################
 # ULM related View
 ###############################################################################
