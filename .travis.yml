@@ -25,5 +25,5 @@ before_script:
 
 script:
   - python manage.py collectstatic
-  - python manage.py migrate
+  # - python manage.py migrate
   - python manage.py test
