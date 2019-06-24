@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 class DetailPilot(LoggedViewTestCase, TestCase):
     url = '/meeting/pilot/{}/detail/'
-    url_name = 'edit_pilot'
+    url_name = 'pilot'
     template_name = 'pilot_profile.html'
 
     def get_url(self):
@@ -32,6 +32,11 @@ class DetailPilot(LoggedViewTestCase, TestCase):
         kwargs = {'pk': self.user.pilot.pk}
         return super().get_url_from_name(kwargs=kwargs)
 
+
+class UpdateUserPilotView(LoggedViewTestCase, TestCase):
+    url = '/meeting/pilot/{}/edit/'
+    url_name = 'edit_pilot'
+    template_name = 'base_logged_form.html'
 
 ###############################################################################
 # ULM related View
