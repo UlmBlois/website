@@ -5,12 +5,13 @@ from datetime import date, datetime
 
 from django.contrib.messages import constants as messages
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from meeting.views.utils import PAGINATED_BY
 from meeting.tests.utils import (create_meeting, create_time_slot,
                                  create_ulm, create_reservation,
                                  LoggedViewTestCase)
-from meeting.models import ULM, Reservation
+from meeting.models import ULM, Reservation, Pilot
 
 import logging
 logger = logging.getLogger(__name__)
@@ -20,7 +21,7 @@ logger = logging.getLogger(__name__)
 # Pilot related View
 ###############################################################################
 
-class DetailPilot(LoggedViewTestCase, TestCase):
+class DetailPilotTest(LoggedViewTestCase, TestCase):
     url = '/meeting/pilot/{}/detail/'
     url_name = 'pilot'
     template_name = 'pilot_profile.html'
@@ -33,7 +34,7 @@ class DetailPilot(LoggedViewTestCase, TestCase):
         return super().get_url_from_name(kwargs=kwargs)
 
 
-class UpdateUserPilotView(LoggedViewTestCase, TestCase):
+class UpdateUserPilotViewTest(LoggedViewTestCase, TestCase):
     url = '/meeting/pilot/{}/edit/'
     url_name = 'edit_pilot'
     template_name = 'base_logged_form.html'
@@ -45,9 +46,57 @@ class UpdateUserPilotView(LoggedViewTestCase, TestCase):
         kwargs = {'pk': self.user.pilot.pk}
         return super().get_url_from_name(kwargs=kwargs)
 
+    def test_context_data(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.get_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['pilot'], self.user.pilot)
+
+    def test_form_valid(self):
+        form_data = {
+            'user_form-username': 'test',
+            'user_form-first_name': 'test',
+            'user_form-last_name': 'test',
+            'user_form-email': 'test@test.fr',
+            'pilot_form-insurance_company': 'Air COURTAGE',
+            'pilot_form-insurance_number': 'aaaaaaa',
+            'pilot_form-licence_number': 'azer',
+            'pilot_form-phone_number_0': '+33',
+            'pilot_form-phone_number_1': '645454545',
+        }
+        self.client.force_login(self.user)
+        response = self.client.post(self.get_url(), form_data)
+        self.assertRedirects(response, reverse(
+            'pilot',
+            kwargs={'pk': self.user.pilot.pk}))
+        self.assertEqual(User.objects.get(pk=self.user.pk).first_name,
+                         form_data['user_form-first_name'])
+        self.assertEqual(
+            Pilot.objects.get(pk=self.user.pilot.pk).insurance_number,
+            form_data['pilot_form-insurance_number'])
+
+    def test_form_invalid(self):
+        form_data = {
+            'user_form-username': 'test',
+            'user_form-first_name': 'test',
+            'user_form-last_name': 'test',
+            'user_form-email': 'test@test.fr',
+            'pilot_form-insurance_company': 'Air COURTAGE',
+            'pilot_form-insurance_number': 'aaaaaaa',
+            'pilot_form-licence_number': 'azer',
+            'pilot_form-phone_number_0': '+33',
+            'pilot_form-phone_number_1': '0',
+        }
+        self.client.force_login(self.user)
+        response = self.client.post(self.get_url(), form_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            Pilot.objects.get(pk=self.user.pilot.pk).licence_number, '')
+
 ###############################################################################
 # ULM related View
 ###############################################################################
+
 
 class PilotULMListTest(LoggedViewTestCase, TestCase):
     url = '/meeting/ulm/'
