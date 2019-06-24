@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/UlmBlois/website.svg?branch=master)](https://travis-ci.org/UlmBlois/website)
+
 # website
 Website for the ULM meeting of Blois
 
