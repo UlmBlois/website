@@ -46,6 +46,9 @@ class UpdateUserPilotViewTest(LoggedViewTestCase, TestCase):
         kwargs = {'pk': self.user.pilot.pk}
         return super().get_url_from_name(kwargs=kwargs)
 
+    def get_success_url(self):
+        return reverse('pilot', kwargs={'pk': self.user.pilot.pk})
+
     def test_context_data(self):
         self.client.force_login(self.user)
         response = self.client.get(self.get_url())
@@ -66,9 +69,7 @@ class UpdateUserPilotViewTest(LoggedViewTestCase, TestCase):
         }
         self.client.force_login(self.user)
         response = self.client.post(self.get_url(), form_data)
-        self.assertRedirects(response, reverse(
-            'pilot',
-            kwargs={'pk': self.user.pilot.pk}))
+        self.assertRedirects(response, self.get_success_url())
         self.assertEqual(User.objects.get(pk=self.user.pk).first_name,
                          form_data['user_form-first_name'])
         self.assertEqual(
@@ -392,3 +393,30 @@ class UpdatePilotReservationTest(LoggedViewTestCase, TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             Reservation.objects.get(pk=self.res.pk).fuel_reservation, 0)
+
+
+###############################################################################
+# Reservation related View
+###############################################################################
+
+class ReservationWizardStep1Test(UpdateUserPilotViewTest):
+    url = '/meeting/reservation/wizard/{}/user'
+    url_name = 'reservation_wizard_step1'
+
+    def get_success_url(self):
+        return reverse('reservation_wizard_step2',
+                       kwargs={'pilot': self.user.pilot.pk})
+
+
+class ReservationWizardStep2Test(LoggedViewTestCase, TestCase):
+    url = '/meeting/reservation/wizard/{}/ulm'
+    url_name = 'reservation_wizard_step2'
+    template_name = 'base_logged_form.html'
+    # TODO see if more test are needed
+
+    def get_url(self):
+        return self.url.format(self.user.pilot.pk)
+
+    def get_url_from_name(self, args=None, kwargs=None):
+        kwargs = {'pilot': self.user.pilot.pk}
+        return super().get_url_from_name(kwargs=kwargs)
