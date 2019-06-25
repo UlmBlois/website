@@ -53,9 +53,7 @@ class StaffUpdatePilot(PermissionRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form['user_form'].save()
-        pilot = form['pilot_form'].save(commit=False)
-        pilot.last_update = timezone.now()
-        pilot.save()
+        form['pilot_form'].save()
         return redirect(self.get_success_url())
 
 
@@ -161,9 +159,7 @@ class StaffReservationUpdatePilot(PermissionRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form['user_form'].save()
-        pilot = form['pilot_form'].save(commit=False)
-        pilot.last_update = timezone.now()
-        pilot.save()
+        form['pilot_form'].save()
         return redirect(self.get_success_url())
 
 

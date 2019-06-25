@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 ###############################################################################
 # Pilot related View
 ###############################################################################
-
+# TOFO change pass view test
 class DetailPilotTest(LoggedViewTestCase, TestCase):
     url = '/meeting/pilot/{}/detail/'
     url_name = 'pilot'

@@ -1,6 +1,6 @@
 from django.urls import reverse
-
-from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.models import User, Permission
 
 from datetime import timedelta
 import logging
@@ -100,3 +100,22 @@ class LoggedViewTestCase(ViewTestCase):
         response = self.client.get(self.get_url())
         redirect = reverse('login') + "?next=" + self.get_url()
         self.assertRedirects(response, redirect)
+
+
+class PermissionRequiredTestCase(LoggedViewTestCase):
+    permission_required = []
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        permissions = Permission.objects.get(
+            codename__in=cls.permission_required)
+        cls.user.user_permissions.add(permissions)
+        # create an unauthorizes user
+        cls.user2 = create_user('user2', 'testtest')
+
+    def test_unauthorized_access(self):
+        self.client.force_login(self.user2)
+        # with self.assertRaises(PermissionDenied):
+        response = self.client.get(self.get_url())
+        self.assertEqual(response.status_code, 403)
