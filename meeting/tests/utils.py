@@ -56,6 +56,10 @@ class ViewTestCase(object):
     url = ''
     url_name = ''
     template_name = ''
+    redirect_url_name = ''
+
+    def get_redirect_url(self, args=None, kwargs=None):
+        return reverse(self.redirect_url_name, args=args, kwargs=kwargs)
 
     def get_url(self):
         return self.url
@@ -65,11 +69,17 @@ class ViewTestCase(object):
 
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get(self.get_url())
-        self.assertEqual(response.status_code, 200)
+        if self.redirect_url_name != '':
+            self.assertRedirects(response, self.get_redirect_url())
+        else:
+            self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
         response = self.client.get(self.get_url_from_name())
-        self.assertEqual(response.status_code, 200)
+        if self.redirect_url_name != '':
+            self.assertRedirects(response, self.get_redirect_url())
+        else:
+            self.assertEqual(response.status_code, 200)
 
     def test_template(self):
         if self.template_name != '':
