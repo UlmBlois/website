@@ -274,7 +274,7 @@ msgstr "Fuel reservation confirmed"
 #. Pas compris...
 #: meeting/templates/includes/elements/reservation_detail.html:49
 msgid "str_Fuel_advance"
-msgstr "A c"
+msgstr "A check must be provided in advance to guarantee supply of fuel"
 
 #: meeting/templates/includes/elements/reservation_detail.html:55
 msgid "str_Reservation_confirmed"
