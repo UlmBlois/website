@@ -86,7 +86,7 @@ class UpdateUserPilotViewTest(LoggedViewTestCase, TestCase):
             'pilot_form-insurance_number': 'aaaaaaa',
             'pilot_form-licence_number': 'azer',
             'pilot_form-phone_number_0': '+33',
-            'pilot_form-phone_number_1': '0',
+            'pilot_form-phone_number_1': '0',  # invalid phone number
         }
         self.client.force_login(self.user)
         response = self.client.post(self.get_url(), form_data)

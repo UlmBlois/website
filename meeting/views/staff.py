@@ -218,7 +218,6 @@ class StaffReservationInvalidation(PermissionRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         self.pk = kwargs.pop('pk', None)
-        logger.debug("in Invalidate")
         reservation = get_object_or_404(Reservation, pk=self.pk)
         reservation.arrival = None
         reservation.save()
