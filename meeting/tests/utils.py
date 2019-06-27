@@ -1,8 +1,9 @@
 from django.urls import reverse
 # from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import User, Permission
+from django.utils import timezone as tz
 
-from datetime import timedelta
+from datetime import timedelta, date, datetime
 import logging
 from meeting.models import Meeting, TimeSlot, Reservation, ULM
 
@@ -50,6 +51,29 @@ def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None):
                 arrival=arrival,
                 depart_time_slot=ts2,
                 meeting=ts1.meeting)
+
+
+def create_full_reservation(res_num=None, user=None, ulm=None, meeting=None,
+                            ts1=None, ts2=None):
+    if meeting is None:
+        meeting = create_meeting("1", date(2019, 8, 30), True)
+    if ts1 is None:
+        ts1 = create_time_slot(meeting,
+                               tz.make_aware(datetime(2019, 8, 31, 10)),
+                               5)
+    if ts2 is None:
+        ts2 = create_time_slot(meeting,
+                               tz.make_aware(datetime(2019, 8, 31, 11)),
+                               5)
+    if user is None and ulm is None:
+        user = create_user('testuser', '12345')
+    elif user is None and ulm is not None:
+        user = ulm.pilot.user
+    if ulm is None:
+        ulm = create_ulm(user.pilot, 'F-JLOV')
+    if res_num is None:
+        res_num = 'FAE1F6'
+    return create_reservation(res_num, ulm, ts1, ts2)
 
 
 class ViewTestCase(object):

@@ -248,6 +248,7 @@ class UpdatePilotULM(LoggedViewTestCase, TestCase):
         response = self.client.post(self.get_url(), form_data)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(ULM.objects.filter(radio_id='F-JAZ').exists())
+        self.assertTrue(ULM.objects.filter(radio_id='F-JAZE').exists())
 
     def test_context_data(self):
         self.client.force_login(self.user)

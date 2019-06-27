@@ -58,6 +58,20 @@ class StaffUpdatePilot(PermissionRequiredMixin, UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
+class StaffReservationUpdatePilot(StaffUpdatePilot):
+    model = Pilot
+    pk_url_kwarg = 'pk'
+    form_class = UserEditMultiForm
+    template_name = 'base_logged_form.html'
+    permission_required = ('meeting.reservation_validation')
+
+    def get_success_url(self):
+        res_pk = self.kwargs.get('res', None)
+        return reverse('staff_reservation_overview',
+                       kwargs={'pk': res_pk})
+
+
+@method_decorator(login_required, name='dispatch')
 class StaffUpdatePilotULM(PermissionRequiredMixin, UpdateView):
     model = ULM
     form_class = ULMForm
@@ -134,33 +148,6 @@ class StaffReservationValidationDetail(PermissionRequiredMixin, DetailView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs.get('pk'))
-
-
-@method_decorator(login_required, name='dispatch')
-class StaffReservationUpdatePilot(PermissionRequiredMixin, UpdateView):
-    model = Pilot
-    pk_url_kwarg = 'pk'
-    form_class = UserEditMultiForm
-    template_name = 'base_logged_form.html'
-    permission_required = ('meeting.reservation_validation')
-
-    def get_success_url(self):
-        res_pk = self.kwargs.get('res', None)
-        return reverse('staff_reservation_overview',
-                       kwargs={'pk': res_pk})
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update(instance={
-            'user_form': self.object.user,
-            'pilot_form': self.object,
-        })
-        return kwargs
-
-    def form_valid(self, form):
-        form['user_form'].save()
-        form['pilot_form'].save()
-        return redirect(self.get_success_url())
 
 
 @method_decorator(login_required, name='dispatch')
