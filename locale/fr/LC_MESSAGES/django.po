@@ -1,18 +1,20 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: UlmBlois_website\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-27 20:03+0200\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
-"Project-Id-Version: UlmBlois_website\n"
-"Language: fr\n"
 
 #: core/form.py:41 meeting/templates/index.html:72
 msgid "str_Register"
 msgstr "S'inscrire"
 
-#: core/form.py:55 core/form.py:65 meeting/form.py:60 meeting/form.py:113
-#: meeting/form.py:146 meeting/form.py:176 meeting/form.py:217
+#: core/form.py:55 core/form.py:65 meeting/form.py:61 meeting/form.py:114
+#: meeting/form.py:147 meeting/form.py:177 meeting/form.py:218
 #: templates/base/base_form.html:31
 msgid "str_Submit"
 msgstr "Envoyer"
@@ -20,7 +22,9 @@ msgstr "Envoyer"
 #. Translators: optional
 #: core/management/commands/send_reservation_confirmation_request.py:38
 msgid "str_Helptext_send_resevation_conifirmation_request"
-msgstr "Envoi d'un courriel demandant aux utilisateurs de confirmer leur réservation x jours avant la manifestation"
+msgstr ""
+"Envoi d'un courriel demandant aux utilisateurs de confirmer leur réservation "
+"x jours avant la manifestation"
 
 #: core/management/commands/send_reservation_confirmation_request.py:43
 msgid "str_Confirmation_Reminder_Email_Subject"
@@ -31,7 +35,6 @@ msgstr "Veuillez confirmer votre réservation"
 msgid "str_User_Successfully_Deleted_Message"
 msgstr "L'utilisateur %(user)s a été supprimé"
 
-#. Dans quel contexte ? en français  Global ou globaux
 #: faq/admin.py:19 faq/admin.py:45 pages/admin.py:21
 msgid "str_Globals"
 msgstr "Globaux"
@@ -123,11 +126,11 @@ msgstr "Modèle"
 msgid "str_Insurance_company"
 msgstr "Compagnie d'assurance"
 
-#: meeting/form.py:69
+#: meeting/form.py:70
 msgid "str_Error_Arrival_Depart_Timeslot_Equals"
 msgstr "Les créneaux d'arrivée et de départ doivent être différents"
 
-#: meeting/form.py:74
+#: meeting/form.py:75
 msgid "str_Error_Depart_Timeslot_Anterior_To_Arrival"
 msgstr "Le créneau d'arrivée doit être postérieur au créneau de départ"
 
@@ -177,7 +180,8 @@ msgstr "Code OACI du terrain"
 
 #: meeting/models.py:284
 msgid "str_Error_Reservation_Allready_Exist"
-msgstr "Vous avez déjà une réservation pour cette manifestation, veuillez l'éditer"
+msgstr ""
+"Vous avez déjà une réservation pour cette manifestation, veuillez l'éditer"
 
 #: meeting/models.py:334
 #: meeting/templates/includes/elements/reservation_detail.html:13
@@ -300,6 +304,7 @@ msgstr "Détails de la réservation"
 
 #. Translators: contain the meeting start date as %(start)s and end date as %(end)s
 #: meeting/templates/index.html:9
+#, python-format
 msgid "From the %(start)s, to the %(end)s."
 msgstr "Du %(start)s, au %(end)s"
 
@@ -523,14 +528,16 @@ msgid "str_message_correct_error"
 msgstr "Merci de corriger l'erreur ci-dessous"
 
 #. Translators: This contain the ulm name acces by %(ulm)s
-#: meeting/views/pilot.py:124
+#: meeting/views/pilot.py:122
 msgid "str_message_ulm_deleted"
 msgstr "L'ULM %(ulm)s a été supprimé"
 
 #. Translators: This contain the ulm name acces by %(ulm)s
-#: meeting/views/pilot.py:126
+#: meeting/views/pilot.py:124
 msgid "str_message_delete_ulm_link_to_reservation"
-msgstr "L'ULM %(ulm)s que vous essayez d'effacer est lié à une réservation active et ne peut être effacé"
+msgstr ""
+"L'ULM %(ulm)s que vous essayez d'effacer est lié à une réservation active et "
+"ne peut être effacé"
 
 #: meeting/widgets.py:13
 msgid "str_Unknown"
@@ -620,10 +627,9 @@ msgstr "Arrivée en vol des ULM"
 msgid "str_Microlight_departure"
 msgstr "Départ des ULM"
 
-#. Attention flex wings = pendulaire. ce n'est pas plutôt  procédure pour les paramoteurs ?
 #: pages/templates/pilot_informations.html:22
-msgid "str_Flex_wings_procedure"
-msgstr "Pendulaire"
+msgid "str_Powered_paraglider_procedure"
+msgstr ""
 
 #: pages/templates/pilot_informations.html:26
 msgid "str_Plane_procedure"
@@ -885,16 +891,20 @@ msgstr "La réinitialisation de votre mot de passe a échoué"
 
 #: templates/registration/password_reset_confirm.html:32
 msgid "str_password_reset_link_invalid"
-msgstr "Le lien de réinitialisation de votre mot de passe est invalide\n"
-"Peut-être a t-il déjà été utilisé. Merci de faire une nouvelle demande de réinitialisation"
+msgstr ""
+"Le lien de réinitialisation de votre mot de passe est invalide\n"
+"Peut-être a t-il déjà été utilisé. Merci de faire une nouvelle demande de "
+"réinitialisation"
 
 #: templates/registration/password_reset_done.html:5
 msgid "str_password_reset_email_sent"
-msgstr "Nous vous avons envoyé les instructions pour réinitialiser votre mot de passe.\n"
-"Si elles ne sont pas arrivées d'ici quelques minutes, vérifier votre dossier des courriers indésirables (spam)"
+msgstr ""
+"Nous vous avons envoyé les instructions pour réinitialiser votre mot de "
+"passe.\n"
+"Si elles ne sont pas arrivées d'ici quelques minutes, vérifier votre dossier "
+"des courriers indésirables (spam)"
 
 #: templates/registration/password_reset_form.html:46
 #: templates/registration/register.html:46
 msgid "str_already_have_an_account"
 msgstr "Avez-vous déjà un compte ? Connecter vous !"
-
