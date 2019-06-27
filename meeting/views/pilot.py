@@ -10,7 +10,6 @@ from django.views.generic.detail import DetailView
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 # python
 import uuid
