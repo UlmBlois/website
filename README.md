@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/UlmBlois/website.svg?branch=master)](https://travis-ci.org/UlmBlois/website)
-
+[![Coverage Status](https://coveralls.io/repos/github/UlmBlois/website/badge.svg?branch=master)](https://coveralls.io/github/UlmBlois/website?branch=master)
 # website
 Website for the ULM meeting of Blois
 
