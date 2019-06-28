@@ -240,14 +240,14 @@ class StaffReservationUpdateTest(PermissionRequiredTestCase, TestCase):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
-        cls.reservation = create_full_reservation()
+        cls.reservation = create_full_reservation(user=cls.user)
 
     def get_url(self):
         return self.url.format(self.reservation.pk)
 
     def get_url_from_name(self, args=None, kwargs=None):
         kwargs = {'pk': self.reservation.pk}
-        return super().get_url_from_name(kwargs=kwargs)
+        return reverse(self.url_name, kwargs=kwargs)
 
     def get_success_url(self):
         return reverse('staff_reservation_overview',
@@ -279,6 +279,24 @@ class StaffReservationUpdateTest(PermissionRequiredTestCase, TestCase):
         self.assertEqual(
             Reservation.objects.get(pk=self.reservation.pk).fuel_reservation,
             0)
+
+
+class StaffUpdatePilotReservationTest(StaffReservationUpdateTest):
+    url = '/meeting/staff/pilot/{}/edit/reservation/{}'
+    url_name = 'staff_update_reservation'
+
+    def get_url(self):
+        return self.url.format(self.user.pilot.pk, self.reservation.pk)
+
+    def get_url_from_name(self, args=None, kwargs=None):
+        kwargs = {'pilot': self.reservation.pilot.pk,
+                  'pk': self.reservation.pk,
+                  }
+        return super().get_url_from_name(kwargs=kwargs)
+
+    def get_success_url(self):
+        return reverse('pilot_overview',
+                       kwargs={'pk': self.user.pilot.pk})
 
 ###############################################################################
 # Reservation validation
