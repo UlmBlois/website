@@ -11,7 +11,7 @@ from betterforms.multiform import MultiModelForm
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (Layout, Submit, Row, Column,
-                                 Field, MultiWidgetField)
+                                 Field, MultiWidgetField, HTML, Div)
 
 # Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
@@ -149,29 +149,44 @@ class PilotForm(forms.ModelForm):
 
 
 class ULMFormSetHelper(FormHelper):
+    card_header = "{%% load i18n %%}{%% if forloop.revcounter == 1 %%}%(new)s{%% else %%}%(ulm)s {{ forloop.counter }}{%% endif %%}"
+    card_data = {'new': _('str_Add_new'),
+                 'ulm': _('str_ULM')}
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.form_method = 'post'
         self.layout = Layout(
-            Field('type', css_class='form-group'),
-            Row(
-                Column('constructor', css_class='form-group col-md-6 mb-0'),
-                Column('model', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
+            Div(
+                Div(  # TODO add str_Add_new_ulm to po files
+                    HTML(self.card_header % self.card_data),
+                    css_class="card-header",
+                    ),
+                Div(
+                    Field('type', css_class='form-group'),
+                    Row(
+                        Column('constructor', css_class='form-group col-md-6 mb-0'),
+                        Column('model', css_class='form-group col-md-6 mb-0'),
+                        css_class='form-row'
+                    ),
+                    Row(
+                        Column('imatriculation_country',
+                               css_class='form-group col-md-6 mb-0'),
+                        Column('imatriculation', css_class='from-group col-md-6 mb-0'),
+                        css_class='form-row'
+                    ),
+                    Row(
+                        MultiWidgetField('radio_id', css_class='form-group',
+                                         attrs=({'class': 'form-control'},
+                                                {'class': 'form-control'}),
+                                         template="radio_call_sign_crispy_field.html"),
+                        css_class='form-row'
+                    ),
+                    css_class="card-body"
+                ),
+                css_class='card',
             ),
-            Row(
-                Column('imatriculation_country',
-                       css_class='form-group col-md-6 mb-0'),
-                Column('imatriculation', css_class='from-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
-                MultiWidgetField('radio_id', css_class='form-group',
-                                 attrs=({'class': 'form-control'},
-                                        {'class': 'form-control'}),
-                                 template="radio_call_sign_crispy_field.html"),
-                css_class='form-row'
-            ),
+
         )
         self.render_required_fields = True
         self.add_input(Submit('submit', _('str_Submit')))

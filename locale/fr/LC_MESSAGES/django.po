@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UlmBlois_website\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-27 20:03+0200\n"
+"POT-Creation-Date: 2019-06-28 19:45+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,7 +14,7 @@ msgid "str_Register"
 msgstr "S'inscrire"
 
 #: core/form.py:55 core/form.py:65 meeting/form.py:61 meeting/form.py:114
-#: meeting/form.py:147 meeting/form.py:177 meeting/form.py:218
+#: meeting/form.py:147 meeting/form.py:192 meeting/form.py:233
 #: templates/base/base_form.html:31
 msgid "str_Submit"
 msgstr "Envoyer"
@@ -133,6 +133,16 @@ msgstr "Les créneaux d'arrivée et de départ doivent être différents"
 #: meeting/form.py:75
 msgid "str_Error_Depart_Timeslot_Anterior_To_Arrival"
 msgstr "Le créneau d'arrivée doit être postérieur au créneau de départ"
+
+#: meeting/form.py:153 meeting/templates/pilot_reservation_list.html:41
+#: meeting/templates/pilot_ulm_list.html:8
+msgid "str_Add_new"
+msgstr "Nouvel ajout"
+
+#: meeting/form.py:154 meeting/templates/pilot_summary.html:25
+#: meeting/templates/staff_reservation_validation.html:124
+msgid "str_ULM"
+msgstr "ULM"
 
 #: meeting/models.py:103
 msgid "str_Error_Timeslot_Start_Superior_End"
@@ -386,11 +396,6 @@ msgstr "Aucun créneau disponible"
 msgid "str_Your_reservations"
 msgstr "Vos réservations"
 
-#: meeting/templates/pilot_reservation_list.html:41
-#: meeting/templates/pilot_ulm_list.html:8
-msgid "str_Add_new"
-msgstr "Nouvel ajout"
-
 #: meeting/templates/pilot_reservation_list.html:61
 #: meeting/templates/pilot_reservation_list.html:79
 msgid "str_Confirm"
@@ -421,11 +426,6 @@ msgstr "En attente de validation"
 #: meeting/templates/pilot_summary.html:5
 msgid "str_Pilot_overview"
 msgstr "Résumé pilote"
-
-#: meeting/templates/pilot_summary.html:25
-#: meeting/templates/staff_reservation_validation.html:124
-msgid "str_ULM"
-msgstr "ULM"
 
 #: meeting/templates/pilot_summary.html:41
 msgid "str_Reservations"
@@ -519,21 +519,21 @@ msgstr "Dévalidé"
 msgid "str_Search_ULM"
 msgstr "Recherche par ULM"
 
-#: meeting/views/pilot.py:37
+#: meeting/views/pilot.py:36
 msgid "str_message_password_updated"
 msgstr "Votre mot de passe a été mis à jour"
 
-#: meeting/views/pilot.py:40
+#: meeting/views/pilot.py:39
 msgid "str_message_correct_error"
 msgstr "Merci de corriger l'erreur ci-dessous"
 
 #. Translators: This contain the ulm name acces by %(ulm)s
-#: meeting/views/pilot.py:122
+#: meeting/views/pilot.py:121
 msgid "str_message_ulm_deleted"
 msgstr "L'ULM %(ulm)s a été supprimé"
 
 #. Translators: This contain the ulm name acces by %(ulm)s
-#: meeting/views/pilot.py:124
+#: meeting/views/pilot.py:123
 msgid "str_message_delete_ulm_link_to_reservation"
 msgstr ""
 "L'ULM %(ulm)s que vous essayez d'effacer est lié à une réservation active et "
