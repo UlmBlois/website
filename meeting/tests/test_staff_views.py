@@ -292,7 +292,7 @@ class StaffUpdatePilotReservationTest(StaffReservationUpdateTest):
         kwargs = {'pilot': self.reservation.pilot.pk,
                   'pk': self.reservation.pk,
                   }
-        return super().get_url_from_name(kwargs=kwargs)
+        return reverse(self.url_name, kwargs=kwargs)
 
     def get_success_url(self):
         return reverse('pilot_overview',
