@@ -24,7 +24,7 @@
 </span>
 
 {% get_chunk 'presentation_short' as presentation %}
-{{presentation | safe}}
+{{presentation.content | safe}}
 <br>
 <div class="row text-center">
 <div class="col-lg-3">
@@ -34,7 +34,7 @@
       <h4 class="card-title">{% trans "str_Microlight_pilot"%}</h4>
       {% get_chunk 'ulm_pilot_short' as ulm_pilot %}
 
-      <p class="card-text">{{ulm_pilot | safe}}</p>
+      <p class="card-text">{{ulm_pilot.content | safe}}</p>
     </div>
     <div class="card-footer">
       <a href="{% url 'login' %}" class="btn btn-primary">{% trans 'str_Sign_In'%}</a>
@@ -49,7 +49,7 @@
       <h4 class="card-title">{% trans "str_Paramotor_pilot"%}</h4>
       {% get_chunk 'paramotor_pilot_short' as paramotor_pilot %}
 
-      <p class="card-text">{{ paramotor_pilot | safe}}</p>
+      <p class="card-text">{{ paramotor_pilot.content | safe}}</p>
     </div>
     <div class="card-footer">
       <!-- TODO add link -->
@@ -65,7 +65,7 @@
       <h4 class="card-title">{% trans "str_PPL_pilot"%}</h4>
       {% get_chunk 'ppl_pilot_short' as ppl_pilot %}
 
-      <p class="card-text">{{ppl_pilot | safe}}</p>
+      <p class="card-text">{{ppl_pilot.content | safe}}</p>
     </div>
     <div class="card-footer">
       <!-- TODO add link -->
@@ -81,7 +81,7 @@
       <h4 class="card-title">{% trans "str_Exhibitor"%}</h4>
       {% get_chunk 'exhibitor_short' as exhibitor %}
 
-      <p class="card-text">{{ exhibitor | safe}}</p>
+      <p class="card-text">{{ exhibitor.content | safe}}</p>
     </div>
     <div class="card-footer">
       <!-- TODO add link -->
@@ -92,6 +92,6 @@
 </div>
 <br>
 {% get_chunk 'presentation_short_2' as presentation_2 %}
-{{presentation_2 | safe}}
+{{presentation_2.content | safe}}
 
 {% endblock%}
