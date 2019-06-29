@@ -26,7 +26,7 @@ from meeting.views.utils import PAGINATED_BY
 logger = logging.getLogger(__name__)
 
 
-@method_decorator(login_required, name='dispatch')
+@login_required
 def pilot_change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
