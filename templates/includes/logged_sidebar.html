@@ -20,8 +20,15 @@
       <i class="fas fa-fw fa-home"></i>
       <span>{% trans "str_Home" %}</span></a>
   </li>
-
-{% if perms.meeting.reservation_validation %}
+{% if request.user.is_staff %}
+<hr class="sidebar-divider my-0">
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'admin:index' %}">
+    <i class="fas fa-fw fa-home"></i>
+    <span>{% trans "str_administrator_zone" %}</span></a>
+</li>
+{% endif %}
+{% if perms.meeting.reservation_validation or request.user.is_staff %}
 <hr class="sidebar-divider">
   <li class="nav-item active">
     <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseManagement" aria-expanded="true" aria-controls="collapseManagement">
@@ -30,6 +37,14 @@
     </a>
     <div id="collapseManagement" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
+        {% if request.user.is_staff %}
+        <h6 class="collapse-header">{% trans "str_Administration" %}</h6>
+        <a class="collapse-item" href="{% url 'admin:index'%}">
+          <i class="fas fa-fw fa-tools"></i>
+          <span>{% trans "str_Administration_zone" %}</span>
+        </a>
+        {% endif %}
+        {% if perms.meeting.reservation_validation %}
         <h6 class="collapse-header">{% trans "str_General" %}</h6>
         <a class="collapse-item {% if url_name == 'staff_ulm_list' %}active{% endif %}" href="{% url 'staff_ulm_list'%}">
           <i class="fas fa-fw fa-search"></i>
@@ -49,6 +64,7 @@
           <i class="fas fa-fw fa-gas-pump"></i>
           <span>{% trans "str_Fuel_reservations" %}</span>
         </a>
+        {% endif %}
       </div>
     </div>
   </li>
