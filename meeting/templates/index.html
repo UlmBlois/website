@@ -15,14 +15,6 @@
 
 {% block content%}
 
-<!-- TODO remove this span -->
-<span>
-  <a href="{% url 'base_email'%}">base email</a>
-  <br>
-  <a href="{% url 'res_conf_email'%}"> reservation confirmation email</a>
-  <br>
-</span>
-
 {% get_chunk 'presentation_short' as presentation %}
 {{presentation.content | safe}}
 <br>
@@ -93,5 +85,15 @@
 <br>
 {% get_chunk 'presentation_short_2' as presentation_2 %}
 {{presentation_2.content | safe}}
+
+<!-- TODO remove this span -->
+<span>
+  exemple d'email present uniqument pour effectuer des testuser
+  <br>
+  <a href="{% url 'base_email'%}">base email</a>
+  <br>
+  <a href="{% url 'res_conf_email'%}"> reservation confirmation email</a>
+  <br>
+</span>
 
 {% endblock%}
