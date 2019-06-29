@@ -1,23 +1,18 @@
 # django
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 # owned
-from meeting.models import Reservation, Meeting
+from meeting.models import Meeting
 
 
-def index(request):
-    """View function for the reservation list."""
-    num_res = Reservation.objects.count()
-    res_list = Reservation.objects.all()
-    meeting = Meeting.objects.active()
-    context = {
-        'num_res': num_res,
-        'res_list': res_list,
-        'meeting': meeting,
-    }
-    return render(request, 'index.html', context=context)
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['meeting'] = Meeting.objects.active()
+        return context
 
 
 @method_decorator(login_required, name='dispatch')

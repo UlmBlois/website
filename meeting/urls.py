@@ -5,7 +5,7 @@ from meeting.filters import ReservationFilter, ULMFilter, PilotFilter
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     url(r'^pilot/password/$', views.pilot_change_password,
         name='change_password'),
     path('pilot/<int:pk>/detail/', views.DetailPilot.as_view(), name='pilot'),

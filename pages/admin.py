@@ -4,9 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from translated_fields import TranslatedFieldAdmin, to_attribute
 import re
 from pages.models import Chunk, Page
-import logging
-
-logger = logging.getLogger(__name__)
 
 
 @admin.register(Page)
