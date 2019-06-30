@@ -6,20 +6,7 @@ import re
 from pages.models import Chunk, Page
 
 
-@admin.register(Page)
-class PageAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}
-
-
-@admin.register(Chunk)
-class ChunkAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ('key', "description", 'page')
-    list_filter = ['page']
-    base_fields = ['description', 'content']
-    fieldsets = [
-        (_("str_Globals"), {"fields": ["key", "page"]}),
-    ]
+def order_fieldset(fieldsets, base_fields):
     for i, language in enumerate(settings.LANGUAGES):
         ft = []
         for field in base_fields:
@@ -34,6 +21,23 @@ class ChunkAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
                             _(language[1]),
                             {"fields": ft, 'classes': ['collapse']}
                             ))
+
+
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        return {}
+
+
+@admin.register(Chunk)
+class ChunkAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+    list_display = ('key', "description", 'page')
+    list_filter = ['page']
+    base_fields = ['description', 'content']
+    fieldsets = [
+        (_("str_Globals"), {"fields": ["key", "page"]}),
+    ]
+    order_fieldset(fieldsets, base_fields)
 
     def get_ordering(self, request):
         return [to_attribute("description")]

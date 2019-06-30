@@ -10,6 +10,23 @@ from translated_fields import TranslatedFieldAdmin
 from faq.models import Topic, Question
 
 
+def order_fieldset(fieldsets, base_fields):
+    for i, language in enumerate(settings.LANGUAGES):
+        ft = []
+        for field in base_fields:
+            ft.append(
+                re.sub(
+                    r"[^a-z0-9_]+", "_",
+                    ("%s_%s" % (field, language[0])).lower()))
+        if settings.LANGUAGE_CODE == language[0]:
+            fieldsets.insert(1, (_(language[1]), {"fields": ft}))
+        else:
+            fieldsets.append((
+                            _(language[1]),
+                            {"fields": ft, 'classes': ['collapse']}
+                            ))
+
+
 @admin.register(Topic)
 class TopicAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     list_display = ('topic_name', 'number')
@@ -18,19 +35,7 @@ class TopicAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     fieldsets = [
         (_("str_Globals"), {"fields": ["number"]}),
     ]
-    for i, language in enumerate(settings.LANGUAGES):
-        ft = []
-        for field in base_fields:
-            ft.append(
-                re.sub(
-                    r"[^a-z0-9_]+", "_",
-                    ("%s_%s" % (field, language[0])).lower()))
-        if i > 0:
-            fieldsets.append(
-                    (_(language[1]),
-                     {"fields": ft, 'classes': ['collapse']}))
-        else:
-            fieldsets.append((_(language[1]), {"fields": ft}))
+    order_fieldset(fieldsets, base_fields)
 
     def get_ordering(self, request):
         return ['number']
@@ -44,19 +49,7 @@ class QuestionAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     fieldsets = [
         (_("str_Globals"), {"fields": ["number", "topic"]}),
     ]
-    for i, language in enumerate(settings.LANGUAGES):
-        ft = []
-        for field in base_fields:
-            ft.append(
-                re.sub(
-                    r"[^a-z0-9_]+", "_",
-                    ("%s_%s" % (field, language[0])).lower()))
-        if i > 0:
-            fieldsets.append(
-                    (_(language[1]),
-                     {"fields": ft, 'classes': ['collapse']}))
-        else:
-            fieldsets.append((_(language[1]), {"fields": ft}))
+    order_fieldset(fieldsets, base_fields)
 
     def get_ordering(self, request):
         return ['number']
