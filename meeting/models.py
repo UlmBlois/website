@@ -10,6 +10,7 @@ from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MaxValueValidator
 # Third party
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
@@ -254,7 +255,9 @@ class Reservation(models.Model):
     depart_time_slot = models.ForeignKey(TimeSlot, on_delete=models.SET_NULL,
                                          related_name='departures', null=True)
     arrival = models.DateTimeField(null=True, default=None, blank=True)
-    fuel_reservation = models.PositiveIntegerField(default=0)
+    fuel_reservation = models.PositiveIntegerField(
+            default=0,
+            validators=[MaxValueValidator(100)])
     fuel_served = models.PositiveIntegerField(default=0)
     flight_plan = models.BooleanField(default=False)
     passanger = models.BooleanField(default=False)
