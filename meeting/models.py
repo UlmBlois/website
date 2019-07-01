@@ -230,10 +230,10 @@ class ULM(models.Model):
     def __str__(self):
         return str(self.radio_id)
 
-    def display_pilot(self):
+    def display_pilot(self):  # pragma: no cover
         return f'{self.pilot}'
 
-    def get_type_display(self):
+    def get_type_display(self):  # pragma: no cover
         return dict(self.ULM_TYPE_CHOICE).get(self.type, '')
 
     display_pilot.short_description = 'Pilot'
@@ -294,7 +294,7 @@ class Reservation(models.Model):
         """String reprenseting a reservation."""
         return f'{self.reservation_number}'
 
-    def display_pilot(self):
+    def display_pilot(self):  # pragma: no cover
         if self.ulm is not None:
             return f'{self.pilot}'
         else:
