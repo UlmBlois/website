@@ -163,7 +163,8 @@ class Pilot(models.Model):
     insurance_company = models.CharField(max_length=64)
     insurance_number = models.CharField(max_length=64)
     licence_number = models.CharField(max_length=64)
-    phone_number = PhoneNumberField(null=True)  # TODO: remove null=True in production
+    phone_number = PhoneNumberField(help_text=_('str_helptext_phonenumber'),
+                                    null=True)  # TODO: remove null=True in production
     modification_date = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -199,14 +200,14 @@ class Pilot(models.Model):
 
 class ULM(models.Model):
     """Model reprenseting an ULM."""
-    PARAMOTOR = 'PA'
+    # PARAMOTOR = 'PA'
     PENDULAR = 'PE'
     MULTIAXES = 'MU'
     AUTOGYRE = 'AU'
     HELICOPETER = 'HE'
     AEROSTAT = 'AE'
     ULM_TYPE_CHOICE = [
-        (PARAMOTOR, _("str_Powered_Paraglider")),
+        # (PARAMOTOR, _("str_Powered_Paraglider")),
         (PENDULAR, _("str_Flex_Wing")),
         (MULTIAXES, _("str_Fixed_Wings")),
         (AUTOGYRE, _("str_Rotor_Wings")),
@@ -247,8 +248,8 @@ class Reservation(models.Model):
     """Model reprenseting a reservation for an in flight arrival."""
     ulm = models.ForeignKey(ULM, on_delete=models.SET_NULL, null=True,
                             related_name="reservations")
-    pilot = models.ForeignKey(Pilot, on_delete=models.SET_NULL, null=True)  # TODO add related name??
-    meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)  # TODO add related name??
+    pilot = models.ForeignKey(Pilot, on_delete=models.SET_NULL, null=True)
+    meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)
     reservation_number = models.CharField(max_length=32, unique=True)
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE,
                                   related_name='arrivals', null=True)

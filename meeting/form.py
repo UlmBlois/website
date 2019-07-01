@@ -9,6 +9,7 @@ import logging
 # Third Party
 from betterforms.multiform import MultiModelForm
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
+from phonenumber_field.formfields import PhoneNumberField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (Layout, Submit, Row, Column,
                                  Field, MultiWidgetField, HTML, Div)
@@ -116,6 +117,11 @@ class UserEditForm(forms.ModelForm):
 
 
 class PilotForm(forms.ModelForm):
+    phone_number = PhoneNumberField(
+        widget=PhoneNumberPrefixWidget(),
+        label=_('str_phonenumber'),
+        help_text=_('str_helptext_phonenumber')
+    )
 
     class Meta:
         model = Pilot
@@ -127,7 +133,6 @@ class PilotForm(forms.ModelForm):
             'insurance_company': ListTextWidget(
                             data_list=[x[1] for x in Pilot.INSURANCE_CHOICES],
                             name='insurance_company'),
-            'phone_number': PhoneNumberPrefixWidget()
         }
 
     def __init__(self, *args, **kwargs):
