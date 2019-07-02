@@ -32,6 +32,9 @@ urlpatterns = [
     path('reservation/wizard/<int:pilot>/ulm',
          views.ReservationWizardStep2.as_view(),
          name='reservation_wizard_step2'),
+    path('slot/aviable',
+         views.TimeSlotAviableView.as_view(),
+         name='slot_aviable'),
 ]
 
 

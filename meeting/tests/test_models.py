@@ -2,6 +2,8 @@ from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.utils import timezone as tz
 from datetime import date, datetime
+from unittest.mock import patch
+
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.tests.utils import (create_meeting, create_time_slot, create_ulm,
                                  create_user, create_reservation)
@@ -11,7 +13,7 @@ class MeetingTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        create_meeting("1", date(2019, 8, 30), True)
+        cls.meeting = create_meeting("1", date(2019, 8, 30), True)
         create_meeting("2", date(2018, 8, 30), False)
 
     def test_registration_open_at(self):  # same test as registration_open
@@ -30,6 +32,10 @@ class MeetingTest(TestCase):
         self.assertTrue(Meeting.objects.get(name="2").active)
         self.assertFalse(Meeting.objects.get(name="1").active)
         Meeting.objects.filter(name="1").update(active=True)
+
+    def test_open_days(self):
+        days = [date(2019, 8, 30), date(2019, 8, 31), date(2019, 9, 1)]
+        self.assertEqual(self.meeting.open_days(), days)
 
 
 class TimeSlotTest(TestCase):

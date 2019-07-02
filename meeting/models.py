@@ -68,12 +68,21 @@ class Meeting(models.Model):
     @property
     def registration_aviable(self):
         aviables = TimeSlot.objects.aviables()
-        return self.registration_open and len(aviables) > 1
+        return self.registration_open and len(aviables) > 2
 
     @property
     def confirmation_open(self):
         return (self.confirmation_reminder_date <= date.today()
                 <= self.start_date)
+
+    def open_days(self):
+        days = []
+        delta = timedelta(days=1)
+        current_day = self.start_date
+        while current_day <= self.end_date:
+            days.append(current_day)
+            current_day += delta
+        return days
 
 
 ###############################################################################
@@ -95,8 +104,13 @@ class TimeSlot(models.Model):
     def __str__(self):
         """String representing an arrivals time slot."""
         return "{}-{}".format(
-            timezone.localtime(self.start_date).strftime("%A %I:%M"),
-            timezone.localtime(self.end_date).strftime("%I:%M"))
+            timezone.localtime(self.start_date).strftime("%A %H:%M"),
+            timezone.localtime(self.end_date).strftime("%H:%M"))
+
+    def str_range(self):  # pragma: no cover
+        return "{}-{}".format(
+            timezone.localtime(self.start_date).strftime("%H:%M"),
+            timezone.localtime(self.end_date).strftime("%H:%M"))
 
     def clean(self, *args, **kwargs):
         # TODO: a completer
