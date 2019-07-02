@@ -278,7 +278,7 @@ class Reservation(models.Model):
     modification_date = models.DateTimeField(auto_now=True)
     origin_city = models.CharField(max_length=64, blank=True)  # TODO move into profile
     origin_field = models.CharField(max_length=32, blank=True,
-                                    help_text=_("str_Airfield_OACI_code"))  # TODO move into profile
+                                    help_text=_("str_Airfield_ID"))  # TODO move into profile
 
     objects = ReservationManager()
 

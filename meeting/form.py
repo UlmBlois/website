@@ -120,7 +120,7 @@ class UserEditForm(forms.ModelForm):
 class PilotForm(forms.ModelForm):
     phone_number = PhoneNumberField(
         widget=PhoneNumberPrefixWidget(),
-        label=_('str_phonenumber'),
+        label=_('str_Phone_number'),
         help_text=_('str_helptext_phonenumber')
     )
 
@@ -151,7 +151,7 @@ class PilotForm(forms.ModelForm):
             ),
             Field('licence_number', css_class='form-group'),
             Fieldset(
-                _('str_contact_info'),
+                _('str_Contact_info'),
                 Field('phone_number', css_class='form-group'),
                 Field('street_name', css_class='form-group'),
                 Field('mail_complement', css_class='form-group'),

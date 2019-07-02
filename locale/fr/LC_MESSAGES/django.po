@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UlmBlois_website\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-29 21:40+0200\n"
+"POT-Creation-Date: 2019-07-02 15:34+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,8 +13,8 @@ msgstr ""
 msgid "str_Register"
 msgstr "S'inscrire"
 
-#: core/form.py:55 core/form.py:65 meeting/form.py:61 meeting/form.py:114
-#: meeting/form.py:147 meeting/form.py:192 meeting/form.py:233
+#: core/form.py:55 core/form.py:65 meeting/form.py:63 meeting/form.py:116
+#: meeting/form.py:165 meeting/form.py:210 meeting/form.py:251
 #: templates/base/base_form.html:31
 msgid "str_Submit"
 msgstr "Envoyer"
@@ -35,7 +35,7 @@ msgstr "Veuillez confirmer votre réservation"
 msgid "str_User_Successfully_Deleted_Message"
 msgstr "L'utilisateur %(user)s a été supprimé"
 
-#: faq/admin.py:19 faq/admin.py:45 pages/admin.py:21
+#: faq/admin.py:36 faq/admin.py:50 pages/admin.py:38
 msgid "str_Globals"
 msgstr "Globaux"
 
@@ -64,7 +64,7 @@ msgid "str_Questions"
 msgstr "Questions"
 
 #: faq/templates/faq.html:11 templates/includes/footer.html:24
-#: templates/includes/logged_sidebar.html:132
+#: templates/includes/logged_sidebar.html:124
 msgid "str_FAQ"
 msgstr "FAQ"
 
@@ -86,14 +86,14 @@ msgid "str_Radio_id"
 msgstr "Identifiant radio - LSA"
 
 #: meeting/filters.py:14 meeting/filters.py:71
-#: meeting/templates/includes/elements/pilot_info.html:7
+#: meeting/templates/includes/elements/pilot_info.html:8
 #: meeting/templates/staff_pilot_list.html:49
 #: meeting/templates/staff_reservation_validation.html:47
 msgid "str_First_name"
 msgstr "Prénom"
 
 #: meeting/filters.py:16 meeting/filters.py:72
-#: meeting/templates/includes/elements/pilot_info.html:11
+#: meeting/templates/includes/elements/pilot_info.html:12
 #: meeting/templates/staff_pilot_list.html:50
 #: meeting/templates/staff_reservation_validation.html:51
 msgid "str_Last_name"
@@ -120,80 +120,89 @@ msgstr "Constructeur"
 msgid "str_model"
 msgstr "Modèle"
 
-#: meeting/filters.py:74 meeting/templates/includes/elements/pilot_info.html:19
+#: meeting/filters.py:74 meeting/templates/includes/elements/pilot_info.html:20
 #: meeting/templates/staff_pilot_list.html:51
 #: meeting/templates/staff_reservation_validation.html:59
 msgid "str_Insurance_company"
 msgstr "Compagnie d'assurance"
 
-#: meeting/form.py:70
+#: meeting/form.py:72
 msgid "str_Error_Arrival_Depart_Timeslot_Equals"
 msgstr "Les créneaux d'arrivée et de départ doivent être différents"
 
-#: meeting/form.py:75
+#: meeting/form.py:77
 msgid "str_Error_Depart_Timeslot_Anterior_To_Arrival"
 msgstr "Le créneau d'arrivée doit être postérieur au créneau de départ"
 
-#: meeting/form.py:153 meeting/templates/pilot_reservation_list.html:41
+#: meeting/form.py:123 meeting/templates/includes/elements/pilot_info.html:28
+#: meeting/templates/staff_reservation_validation.html:67
+msgid "str_Phone_number"
+msgstr "Numéro de téléphone où l'on pourra vous joindre sur le salon"
+
+#: meeting/form.py:124 meeting/models.py:166
+msgid "str_helptext_phonenumber"
+msgstr "Numéro de téléphone où l'on pourra vous joindre sur le salon"
+
+#: meeting/form.py:154
+msgid "str_Contact_info"
+msgstr ""
+
+#: meeting/form.py:171 meeting/templates/pilot_reservation_list.html:41
 #: meeting/templates/pilot_ulm_list.html:8
 msgid "str_Add_new"
 msgstr "Nouvel ajout"
 
-#: meeting/form.py:154 meeting/templates/pilot_summary.html:25
+#: meeting/form.py:172 meeting/templates/pilot_summary.html:25
 #: meeting/templates/staff_reservation_validation.html:124
 msgid "str_ULM"
 msgstr "ULM"
 
-#: meeting/models.py:103
+#: meeting/models.py:104
 msgid "str_Error_Timeslot_Start_Superior_End"
 msgstr "Le créneau de début est postérieur à la date de fin"
 
-#: meeting/models.py:106
+#: meeting/models.py:107
 msgid "str_Error_Timeslot_Start_Out_Of_Meeting"
 msgstr "Le créneau de début est en dehors de la période de la manifestation"
 
-#: meeting/models.py:109
+#: meeting/models.py:110
 msgid "str_Error_Timeslot_End_Out_Of_Meeting"
 msgstr "Le créneau de fin est en dehors de la période de la manifestation"
 
-#: meeting/models.py:172
+#: meeting/models.py:180
 msgid "str_Reservation_Validation_Permission"
 msgstr "Valider l'arrivée et la réservation de carburant"
 
-#: meeting/models.py:208
-msgid "str_Powered_Paraglider"
-msgstr "Paramoteurs"
-
-#: meeting/models.py:209
+#: meeting/models.py:217
 msgid "str_Flex_Wing"
 msgstr "Pendulaires"
 
-#: meeting/models.py:210
+#: meeting/models.py:218
 msgid "str_Fixed_Wings"
 msgstr "Multiaxes"
 
-#: meeting/models.py:211
+#: meeting/models.py:219
 msgid "str_Rotor_Wings"
 msgstr "Autogyres"
 
-#: meeting/models.py:212
+#: meeting/models.py:220
 msgid "str_Helicopters"
 msgstr "Helicoptères"
 
-#: meeting/models.py:213
+#: meeting/models.py:221
 msgid "str_Balloons_and_Airships"
 msgstr "Ballon et aérostat"
 
-#: meeting/models.py:271
-msgid "str_Airfield_OACI_code"
-msgstr "Code OACI du terrain"
+#: meeting/models.py:281
+msgid "str_Airfield_ID"
+msgstr ""
 
-#: meeting/models.py:284
+#: meeting/models.py:294
 msgid "str_Error_Reservation_Allready_Exist"
 msgstr ""
 "Vous avez déjà une réservation pour cette manifestation, veuillez l'éditer"
 
-#: meeting/models.py:334
+#: meeting/models.py:344
 #: meeting/templates/includes/elements/reservation_detail.html:13
 #: meeting/templates/staff_fuel_reservation_list.html:23
 #: meeting/templates/staff_reservation_list.html:27
@@ -206,22 +215,21 @@ msgstr "Pilote"
 msgid "str_Close"
 msgstr "Fermé"
 
-#: meeting/templates/includes/elements/pilot_info.html:15
+#: meeting/templates/includes/elements/pilot_info.html:16
 #: meeting/templates/staff_pilot_list.html:53
 #: meeting/templates/staff_reservation_validation.html:55
 msgid "str_Licence_number"
 msgstr "Numéro de Licence"
 
-#: meeting/templates/includes/elements/pilot_info.html:23
+#: meeting/templates/includes/elements/pilot_info.html:24
 #: meeting/templates/staff_pilot_list.html:52
 #: meeting/templates/staff_reservation_validation.html:63
 msgid "str_Insurance_number"
 msgstr "Numéro de police d'assurance"
 
-#: meeting/templates/includes/elements/pilot_info.html:27
-#: meeting/templates/staff_reservation_validation.html:67
-msgid "str_Phone_number"
-msgstr "Numéro de téléphone où l'on pourra vous joindre sur le salon"
+#: meeting/templates/includes/elements/pilot_info.html:32
+msgid "str_Postal_address"
+msgstr ""
 
 #: meeting/templates/includes/elements/reservation_detail.html:7
 msgid "str_Meeting"
@@ -356,7 +364,7 @@ msgstr "Réservez votre créneau d'arrivée"
 
 #: meeting/templates/pilot_profile.html:5
 #: meeting/templates/pilot_summary.html:13
-#: templates/includes/logged_sidebar.html:83
+#: templates/includes/logged_sidebar.html:75
 msgid "str_Profile"
 msgstr "Profil"
 
@@ -392,7 +400,7 @@ msgid "str_alert_no_timeslot_aviable"
 msgstr "Aucun créneau disponible"
 
 #: meeting/templates/pilot_reservation_list.html:38
-#: templates/includes/logged_sidebar.html:89
+#: templates/includes/logged_sidebar.html:86
 msgid "str_Your_reservations"
 msgstr "Vos réservations"
 
@@ -432,7 +440,7 @@ msgid "str_Reservations"
 msgstr "Réservations"
 
 #: meeting/templates/pilot_ulm_list.html:6
-#: templates/includes/logged_sidebar.html:94
+#: templates/includes/logged_sidebar.html:81
 msgid "str_Your_ULMs"
 msgstr "Vos ULM"
 
@@ -468,12 +476,12 @@ msgid "str_Validate"
 msgstr "Validez"
 
 #: meeting/templates/staff_pilot_list.html:7
-#: templates/includes/logged_sidebar.html:55
+#: templates/includes/logged_sidebar.html:47
 msgid "str_Search_pilot"
 msgstr "Rechercher un pilote"
 
 #: meeting/templates/staff_reservation_list.html:15
-#: templates/includes/logged_sidebar.html:61
+#: templates/includes/logged_sidebar.html:53
 msgid "str_Pilots_reservations"
 msgstr "Réservations pilotes"
 
@@ -515,7 +523,7 @@ msgid "str_Invalidate"
 msgstr "Dévalidé"
 
 #: meeting/templates/staff_ulm_list.html:7
-#: templates/includes/logged_sidebar.html:51
+#: templates/includes/logged_sidebar.html:43
 msgid "str_Search_ULM"
 msgstr "Recherche par ULM"
 
@@ -592,11 +600,11 @@ msgid "str_chunks"
 msgstr "blocs"
 
 #: pages/templates/about.html:6 templates/includes/footer.html:17
-#: templates/includes/logged_sidebar.html:120 templates/includes/navbar.html:18
+#: templates/includes/logged_sidebar.html:112 templates/includes/navbar.html:18
 msgid "str_About"
 msgstr "A propos"
 
-#: pages/templates/contact.html:6 templates/includes/logged_sidebar.html:126
+#: pages/templates/contact.html:6 templates/includes/logged_sidebar.html:118
 #: templates/includes/navbar.html:21
 msgid "str_Contact"
 msgstr "Contact"
@@ -606,12 +614,12 @@ msgid "str_Copyright_notices"
 msgstr "Information de Copyright"
 
 #: pages/templates/on_site.html:6 templates/includes/footer.html:25
-#: templates/includes/logged_sidebar.html:108 templates/includes/navbar.html:12
+#: templates/includes/logged_sidebar.html:100 templates/includes/navbar.html:12
 msgid "str_On_site"
 msgstr "Sur site"
 
 #: pages/templates/pilot_informations.html:6 templates/includes/footer.html:26
-#: templates/includes/logged_sidebar.html:114 templates/includes/navbar.html:15
+#: templates/includes/logged_sidebar.html:106 templates/includes/navbar.html:15
 msgid "str_Pilots_information"
 msgstr "Information pilots"
 
@@ -672,19 +680,19 @@ msgstr "Français"
 msgid "str_Salon_Ulm_de_Blois"
 msgstr "SALON ULM DE BLOIS"
 
-#: templates/base/base_logged.html:87
+#: templates/base/base_logged.html:86
 msgid "str_Ready_to_leave"
 msgstr "Prêt à partir"
 
-#: templates/base/base_logged.html:92
+#: templates/base/base_logged.html:91
 msgid "str_confirm_logout"
 msgstr "Cliquez sur déconnexion ci-dessous pour fermer votre cession"
 
-#: templates/base/base_logged.html:94 templates/base/logged_delete_form.html:13
+#: templates/base/base_logged.html:93 templates/base/logged_delete_form.html:13
 msgid "str_Cancel"
 msgstr "Annulez"
 
-#: templates/base/base_logged.html:95 templates/includes/logged_navbar.html:26
+#: templates/base/base_logged.html:94 templates/includes/logged_navbar.html:26
 #: templates/includes/navbar.html:40
 msgid "str_Logout"
 msgstr "Déconnexion"
@@ -775,38 +783,34 @@ msgid "str_Legal"
 msgstr "Légal"
 
 #: templates/includes/logged_sidebar.html:28
-msgid "str_administrator_zone"
-msgstr ""
-
-#: templates/includes/logged_sidebar.html:36
 msgid "str_Management"
 msgstr "Direction"
 
-#: templates/includes/logged_sidebar.html:41
+#: templates/includes/logged_sidebar.html:33
 msgid "str_Administration"
 msgstr ""
 
-#: templates/includes/logged_sidebar.html:44
+#: templates/includes/logged_sidebar.html:36
 msgid "str_Administration_zone"
 msgstr ""
 
-#: templates/includes/logged_sidebar.html:48
+#: templates/includes/logged_sidebar.html:40
 msgid "str_General"
 msgstr "Général"
 
-#: templates/includes/logged_sidebar.html:58
+#: templates/includes/logged_sidebar.html:50
 msgid "str_Arrivals_and_Fuel"
 msgstr "Arrivées & carburant"
 
-#: templates/includes/logged_sidebar.html:65
+#: templates/includes/logged_sidebar.html:57
 msgid "str_Fuel_reservations"
 msgstr "Réservation de carburant"
 
-#: templates/includes/logged_sidebar.html:78 templates/includes/navbar.html:35
+#: templates/includes/logged_sidebar.html:70 templates/includes/navbar.html:35
 msgid "str_My_account"
 msgstr "Mon compte"
 
-#: templates/includes/logged_sidebar.html:102
+#: templates/includes/logged_sidebar.html:94
 msgid "str_Other"
 msgstr "Autre"
 
@@ -920,3 +924,6 @@ msgstr ""
 #: templates/registration/register.html:46
 msgid "str_already_have_an_account"
 msgstr "Avez-vous déjà un compte ? Connecter vous !"
+
+#~ msgid "str_Powered_Paraglider"
+#~ msgstr "Paramoteurs"
