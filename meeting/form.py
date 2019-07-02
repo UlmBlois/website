@@ -12,7 +12,8 @@ from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from phonenumber_field.formfields import PhoneNumberField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (Layout, Submit, Row, Column,
-                                 Field, MultiWidgetField, HTML, Div)
+                                 Field, MultiWidgetField, HTML, Div,
+                                 Fieldset)
 
 # Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
@@ -127,7 +128,8 @@ class PilotForm(forms.ModelForm):
         model = Pilot
         fields = [
                  'insurance_company', 'insurance_number',
-                 'licence_number', 'phone_number'
+                 'licence_number', 'phone_number', 'street_name',
+                 'mail_complement', 'city', 'city_code', 'country'
                  ]
         widgets = {
             'insurance_company': ListTextWidget(
@@ -148,7 +150,18 @@ class PilotForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Field('licence_number', css_class='form-group'),
-            Field('phone_number', css_class='form-group'),
+            Fieldset(
+                _('str_contact_info'),
+                Field('phone_number', css_class='form-group'),
+                Field('street_name', css_class='form-group'),
+                Field('mail_complement', css_class='form-group'),
+                Row(
+                    Column('city_code', css_class='form-group col-md-4 mb-0'),
+                    Column('city', css_class='form-group col-md-4 mb-0'),
+                    Column('country', css_class='form-group col-md-4 mb-0'),
+                    css_class='form-row'
+                ),
+            ),
             Submit('submit', _('str_Submit')),
         )
 

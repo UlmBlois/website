@@ -66,6 +66,11 @@ class UpdateUserPilotViewTest(LoggedViewTestCase, TestCase):
             'pilot_form-licence_number': 'azer',
             'pilot_form-phone_number_0': '+33',
             'pilot_form-phone_number_1': '645454545',
+            'pilot_form-street_name': 'street',
+            'pilot_form-mail_complement': 'comp',
+            'pilot_form-city_code': 'city_code',
+            'pilot_form-city': 'city',
+            'pilot_form-country': 'FR',
         }
         self.client.force_login(self.user)
         response = self.client.post(self.get_url(), form_data)

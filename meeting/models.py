@@ -165,6 +165,12 @@ class Pilot(models.Model):
     licence_number = models.CharField(max_length=64)
     phone_number = PhoneNumberField(help_text=_('str_helptext_phonenumber'),
                                     null=True)  # TODO: remove null=True in production
+    street_name = models.CharField(max_length=128, help_text='str_street_name')
+    mail_complement = models.CharField(max_length=128,
+                                       help_text='str_mail_complement')
+    city = models.CharField(max_length=64)
+    city_code = models.CharField(max_length=32)
+    country = CountryField(default='FR')
     modification_date = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -223,7 +229,7 @@ class ULM(models.Model):
         max_length=2,
         choices=ULM_TYPE_CHOICE,
     )
-    imatriculation_country = CountryField()
+    imatriculation_country = CountryField(default='FR')
     imatriculation = models.CharField(max_length=6)
     radio_id = RadioCallSignField()
 
@@ -271,7 +277,7 @@ class Reservation(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     modification_date = models.DateTimeField(auto_now=True)
     origin_city = models.CharField(max_length=64, blank=True)  # TODO move into profile
-    origin_field = models.CharField(max_length=4, blank=True,
+    origin_field = models.CharField(max_length=32, blank=True,
                                     help_text=_("str_Airfield_OACI_code"))  # TODO move into profile
 
     objects = ReservationManager()

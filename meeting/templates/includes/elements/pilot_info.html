@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load countries %}
 
 <div class="table-responsive">
   <table class="table">
@@ -26,6 +27,10 @@
       <tr role="row">
         <th scope="row">{% trans 'str_Phone_number'%}</th>
         <td>{{pilot.phone_number}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'str_Postal_address'%}</th>
+        <td>{{pilot.street_name}}<br>{{pilot.mail_complement}}<br>{{pilot.city_code}} {{pilot.city}}<br>{% get_country pilot.country as country%}{{country.name }}</td>
       </tr>
     </tbody>
   </table>
