@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.utils import timezone as tz
 from datetime import date, datetime
-from unittest.mock import patch
 
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.tests.utils import (create_meeting, create_time_slot, create_ulm,
@@ -173,3 +172,8 @@ class ReservationTest(TestCase):
         res.fuel_reservation = 31
         with self.assertRaises(ValidationError):
             res.full_clean()
+        res.fuel_reservation = 15
+        try:
+            res.full_clean()
+        except ValidationError:
+            self.fail('Raise an unexpected ValidationError')

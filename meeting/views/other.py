@@ -49,10 +49,10 @@ class TimeSlotAviableView(TemplateView):
 
 
 # TODO: Test View to remove
-class BaseEmailView(TemplateView):
+class BaseEmailView(TemplateView):  # pragma: no cover
     template_name = 'emails/base_email.html'
 
 
 # TODO: Test View to remove
-class ReservationConfirmationEmail(TemplateView):
+class ReservationConfirmationEmail(TemplateView):  # pragma: no cover
     template_name = 'emails/reservation_confirmation_request.html'
