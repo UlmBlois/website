@@ -1,13 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: UlmBlois_website\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 08:12+0200\n"
-"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
+"Project-Id-Version: UlmBlois_website\n"
+"Language: en\n"
 
 #: core/form.py:41 meeting/templates/index.html:64
 msgid "str_Register"
@@ -22,10 +20,7 @@ msgstr "Submit"
 #. Translators: optional
 #: core/management/commands/send_reservation_confirmation_request.py:38
 msgid "str_Helptext_send_resevation_conifirmation_request"
-msgstr ""
-"Send an email asking users to confirm their reservation (active meeting "
-"only). The email will be sent only if on the specified date in the meeting "
-"settings."
+msgstr "Send an email asking users to confirm their reservation (active meeting only). The email will be sent only if on the specified date in the meeting settings."
 
 #: core/management/commands/send_reservation_confirmation_request.py:43
 msgid "str_Confirmation_Reminder_Email_Subject"
@@ -136,29 +131,6 @@ msgstr "Arrival and departure time slot should be different."
 msgid "str_Error_Depart_Timeslot_Anterior_To_Arrival"
 msgstr "Arrival time slot should be prior to departing time slot."
 
-#: meeting/form.py:123 meeting/templates/includes/elements/pilot_info.html:28
-#: meeting/templates/staff_reservation_validation.html:67
-msgid "str_Phone_number"
-msgstr "Telephone number when on premises"
-
-#: meeting/form.py:124 meeting/models.py:183
-msgid "str_helptext_phonenumber"
-msgstr ""
-
-#: meeting/form.py:154
-msgid "str_Contact_info"
-msgstr ""
-
-#: meeting/form.py:171 meeting/templates/pilot_reservation_list.html:41
-#: meeting/templates/pilot_ulm_list.html:8
-msgid "str_Add_new"
-msgstr "Add new"
-
-#: meeting/form.py:172 meeting/templates/pilot_summary.html:25
-#: meeting/templates/staff_reservation_validation.html:124
-msgid "str_ULM"
-msgstr "Microlight"
-
 #: meeting/models.py:118
 msgid "str_Error_Timeslot_Start_Superior_End"
 msgstr "Time slot start date is after the end date"
@@ -171,21 +143,13 @@ msgstr "Time slot start date outside meeting period"
 msgid "str_Error_Timeslot_End_Out_Of_Meeting"
 msgstr "Time slot end date out of meeting period"
 
-#: meeting/models.py:180 meeting/templates/includes/elements/pilot_info.html:24
-#: meeting/templates/staff_pilot_list.html:52
-#: meeting/templates/staff_reservation_validation.html:63
-msgid "str_Insurance_number"
-msgstr "Insurance policy number"
-
-#: meeting/models.py:182 meeting/templates/includes/elements/pilot_info.html:16
-#: meeting/templates/staff_pilot_list.html:53
-#: meeting/templates/staff_reservation_validation.html:55
-msgid "str_Licence_number"
-msgstr "Licence number"
-
 #: meeting/models.py:198
 msgid "str_Reservation_Validation_Permission"
 msgstr "Validate arrival and fuel reservation"
+
+#: meeting/models.py:208
+msgid "str_Powered_Paraglider"
+msgstr "Powered Paraglider"
 
 #: meeting/models.py:235
 msgid "str_Flex_Wing"
@@ -207,15 +171,13 @@ msgstr "Helicopters"
 msgid "str_Balloons_and_Airships"
 msgstr "Balloons and Airships"
 
-#: meeting/models.py:299
-msgid "str_Airfield_ID"
-msgstr ""
+#: meeting/models.py:271
+msgid "str_Airfield_OACI_code"
+msgstr "Home airfield code"
 
 #: meeting/models.py:312
 msgid "str_Error_Reservation_Allready_Exist"
-msgstr ""
-"You already have a reservation for this meeting. Please edit the existing "
-"reservatoin"
+msgstr "You already have a reservation for this meeting. Please edit the existing reservatoin"
 
 #: meeting/models.py:362
 #: meeting/templates/includes/elements/reservation_detail.html:13
@@ -226,17 +188,27 @@ msgstr ""
 msgid "str_Pilot"
 msgstr "Pilot"
 
-#: meeting/templates/aviable_timeslot.html:5
-msgid "str_Timeslot_aviable"
-msgstr ""
-
 #: meeting/templates/includes/elements/empty_modal.html:19
 msgid "str_Close"
 msgstr "Close"
 
-#: meeting/templates/includes/elements/pilot_info.html:32
-msgid "str_Postal_address"
-msgstr ""
+#: meeting/models.py:182 meeting/templates/includes/elements/pilot_info.html:16
+#: meeting/templates/staff_pilot_list.html:53
+#: meeting/templates/staff_reservation_validation.html:55
+msgid "str_Licence_number"
+msgstr "Licence number"
+
+#: meeting/models.py:180 meeting/templates/includes/elements/pilot_info.html:24
+#: meeting/templates/staff_pilot_list.html:52
+#: meeting/templates/staff_reservation_validation.html:63
+msgid "str_Insurance_number"
+msgstr "Insurance policy number"
+
+#. Téléphone chez eux (maison) ou où ils peuvent être joints pendant le salon ?
+#: meeting/form.py:123 meeting/templates/includes/elements/pilot_info.html:28
+#: meeting/templates/staff_reservation_validation.html:67
+msgid "str_Phone_number"
+msgstr "Telephone number when on premises"
 
 #: meeting/templates/includes/elements/reservation_detail.html:7
 msgid "str_Meeting"
@@ -282,6 +254,7 @@ msgstr "Aesthetic cup"
 msgid "str_For_sale"
 msgstr "For sale"
 
+#. Terrain de départ (ex; Angleterre) ou dernier terrain avant Blois (ex. Dinard pour dédouaner) ?
 #: meeting/templates/includes/elements/reservation_detail.html:37
 msgid "str_Origin_city"
 msgstr "Departing city (where based)"
@@ -299,6 +272,7 @@ msgstr "Fuel reservation"
 msgid "str_Fuel_reservation_confirmed"
 msgstr "Fuel reservation confirmed"
 
+#. Pas compris...
 #: meeting/templates/includes/elements/reservation_detail.html:49
 msgid "str_Fuel_advance"
 msgstr "A check must be provided in advance to guarantee supply of fuel"
@@ -329,7 +303,6 @@ msgstr "Reservation details"
 
 #. Translators: contain the meeting start date as %(start)s and end date as %(end)s
 #: meeting/templates/index.html:9
-#, python-format
 msgid "From the %(start)s, to the %(end)s."
 msgstr "From the %(start)s, to the %(end)s."
 
@@ -411,6 +384,11 @@ msgstr "No time slots available."
 msgid "str_Your_reservations"
 msgstr "Your reservations"
 
+#: meeting/form.py:171 meeting/templates/pilot_reservation_list.html:41
+#: meeting/templates/pilot_ulm_list.html:8
+msgid "str_Add_new"
+msgstr "Add new"
+
 #: meeting/templates/pilot_reservation_list.html:61
 #: meeting/templates/pilot_reservation_list.html:79
 msgid "str_Confirm"
@@ -441,6 +419,11 @@ msgstr "Waiting for validation"
 #: meeting/templates/pilot_summary.html:5
 msgid "str_Pilot_overview"
 msgstr "Pilot overview"
+
+#: meeting/form.py:172 meeting/templates/pilot_summary.html:25
+#: meeting/templates/staff_reservation_validation.html:124
+msgid "str_ULM"
+msgstr "Microlight"
 
 #: meeting/templates/pilot_summary.html:41
 msgid "str_Reservations"
@@ -550,9 +533,7 @@ msgstr "The microlight %(ulm)s as been successfully deleted."
 #. Translators: This contain the ulm name acces by %(ulm)s
 #: meeting/views/pilot.py:123
 msgid "str_message_delete_ulm_link_to_reservation"
-msgstr ""
-"The microlight %(ulm)s you are trying to delete is linked to an active "
-"reservation and cannot be deleted."
+msgstr "The microlight %(ulm)s you are trying to delete is linked to an active reservation and cannot be deleted."
 
 #: meeting/widgets.py:13
 msgid "str_Unknown"
@@ -634,6 +615,7 @@ msgstr "Pilots information"
 msgid "str_General_organisation"
 msgstr "General organisation"
 
+#. Arrivé en vol des ULM ?
 #: pages/templates/pilot_informations.html:14
 msgid "str_Microlight_in_flight_arrival"
 msgstr "Microlight inflight arrival"
@@ -643,8 +625,8 @@ msgid "str_Microlight_departure"
 msgstr "Microlight departure"
 
 #: pages/templates/pilot_informations.html:22
-msgid "str_Powered_paraglider_procedure"
-msgstr ""
+msgid "str_Flex_wings_procedure"
+msgstr "Flex wings procedure"
 
 #: pages/templates/pilot_informations.html:26
 msgid "str_Plane_procedure"
@@ -793,14 +775,6 @@ msgstr "Legal"
 msgid "str_Management"
 msgstr "Management"
 
-#: templates/includes/logged_sidebar.html:33
-msgid "str_Administration"
-msgstr ""
-
-#: templates/includes/logged_sidebar.html:36
-msgid "str_Administration_zone"
-msgstr ""
-
 #: templates/includes/logged_sidebar.html:40
 msgid "str_General"
 msgstr "General"
@@ -862,9 +836,7 @@ msgstr "Your username and password didn't match. Please try again."
 
 #: templates/registration/login.html:57
 msgid "str_Error_page_permission_require"
-msgstr ""
-"Your account doesn't have access to this page. To proceed, please login with "
-"an account that has access."
+msgstr "Your account doesn't have access to this page. To proceed, please login with an account that has access."
 
 #: templates/registration/login.html:59
 msgid "str_Error_login_required"
@@ -916,20 +888,50 @@ msgstr "Password reset failed"
 
 #: templates/registration/password_reset_confirm.html:32
 msgid "str_password_reset_link_invalid"
-msgstr ""
-"The password reset link was invalid, possibly because it has already been "
-"used. Please request a new password reset."
+msgstr "The password reset link was invalid, possibly because it has already been used. Please request a new password reset."
 
 #: templates/registration/password_reset_done.html:5
 msgid "str_password_reset_email_sent"
-msgstr ""
-"We've emailed you instructions to reset your password. If they haven't "
-"arrived in a few minutes, check your spam folder."
+msgstr "We've emailed you instructions to reset your password. If they haven't arrived in a few minutes, check your spam folder."
 
 #: templates/registration/password_reset_form.html:46
 #: templates/registration/register.html:46
 msgid "str_already_have_an_account"
 msgstr "Already have an account? Login!"
 
-#~ msgid "str_Powered_Paraglider"
-#~ msgstr "Powered Paraglider"
+#: pages/templates/pilot_informations.html:22
+msgid "str_Powered_paraglider_procedure"
+msgstr "Powered paraglider procedure"
+
+#: templates/includes/logged_sidebar.html:28
+msgid "str_administrator_zone"
+msgstr "Administrator zone"
+
+#: templates/includes/logged_sidebar.html:33
+msgid "str_Administration"
+msgstr "Administration"
+
+#: templates/includes/logged_sidebar.html:36
+msgid "str_Administration_zone"
+msgstr "Administration"
+
+#: meeting/form.py:124 meeting/models.py:183
+msgid "str_helptext_phonenumber"
+msgstr "Telephone number where you can be reached while on premises"
+
+#: meeting/form.py:154
+msgid "str_Contact_info"
+msgstr "Contact information"
+
+#: meeting/models.py:299
+msgid "str_Airfield_ID"
+msgstr "Departure airfield identification"
+
+#: meeting/templates/includes/elements/pilot_info.html:32
+msgid "str_Postal_address"
+msgstr "Postal address"
+
+#: meeting/templates/aviable_timeslot.html:5
+msgid "str_Timeslot_aviable"
+msgstr ""
+
