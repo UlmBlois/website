@@ -278,7 +278,7 @@ class Reservation(models.Model):
     arrival = models.DateTimeField(null=True, default=None, blank=True)
     fuel_reservation = models.PositiveIntegerField(
             default=0,
-            validators=[MaxValueValidator(100)])
+            validators=[MaxValueValidator(30)])
     fuel_served = models.PositiveIntegerField(default=0)
     flight_plan = models.BooleanField(default=False)
     passanger = models.BooleanField(default=False)
