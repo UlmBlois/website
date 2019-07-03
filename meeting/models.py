@@ -184,9 +184,10 @@ class Pilot(models.Model):
     phone_number = PhoneNumberField(help_text=_('str_helptext_phonenumber'),
                                     verbose_name=_('str_Phone_number'),
                                     null=True)  # TODO: remove null=True in production
-    street_name = models.CharField(max_length=128,
-                                   verbose_name=_('str_street_name'))
-    mail_complement = models.CharField(max_length=128,
+    street_name = models.CharField(
+                    max_length=128,
+                    verbose_name=_('str_street_nnumber_and_name'))
+    mail_complement = models.CharField(max_length=64, blank=True,
                                        verbose_name=_('str_mail_complement'))
     city = models.CharField(max_length=64,
                             verbose_name=_('str_City'))

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UlmBlois_website\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 19:15+0200\n"
+"POT-Creation-Date: 2019-07-03 19:20+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +68,7 @@ msgstr "Questions"
 msgid "str_FAQ"
 msgstr "FAQ"
 
-#: meeting/filters.py:11 meeting/filters.py:57 meeting/models.py:261
+#: meeting/filters.py:11 meeting/filters.py:57 meeting/models.py:262
 #: meeting/templates/pilot_ulm_list.html:23
 #: meeting/templates/staff_fuel_reservation_list.html:24
 #: meeting/templates/staff_reservation_list.html:28
@@ -77,7 +77,7 @@ msgstr "FAQ"
 msgid "str_Imatriculation"
 msgstr "Immatriculation"
 
-#: meeting/filters.py:13 meeting/filters.py:55 meeting/models.py:263
+#: meeting/filters.py:13 meeting/filters.py:55 meeting/models.py:264
 #: radio_call_sign_field/modelfields.py:10
 msgid "str_Aircraft_registration_number"
 msgstr "Immatriculation de l'avion"
@@ -106,14 +106,14 @@ msgstr "Carburant servi"
 msgid "str_Fuel_reserved"
 msgstr "Carburant réservé"
 
-#: meeting/filters.py:51 meeting/models.py:249
+#: meeting/filters.py:51 meeting/models.py:250
 #: meeting/templates/staff_reservation_validation.html:132
 #: meeting/templates/staff_ulm_list.html:56
 msgid "str_Constructor"
 msgstr "Constructeur"
 
 #. Translators: aircraft model
-#: meeting/filters.py:54 meeting/models.py:251
+#: meeting/filters.py:54 meeting/models.py:252
 #: meeting/templates/staff_reservation_validation.html:136
 #: meeting/templates/staff_ulm_list.html:57
 msgid "str_Model"
@@ -153,7 +153,7 @@ msgstr "Information contact"
 msgid "str_Add_new"
 msgstr "Nouvel ajout"
 
-#: meeting/form.py:172 meeting/models.py:286
+#: meeting/form.py:172 meeting/models.py:287
 #: meeting/templates/pilot_summary.html:25
 #: meeting/templates/staff_reservation_validation.html:124
 msgid "str_ULM"
@@ -183,143 +183,143 @@ msgstr "Numéro de police d'assurance"
 msgid "str_Licence_number"
 msgstr "Numéro de Licence"
 
-#: meeting/models.py:188
-msgid "str_street_name"
+#: meeting/models.py:189
+msgid "str_street_nnumber_and_name"
 msgstr ""
 
-#: meeting/models.py:190
+#: meeting/models.py:191
 msgid "str_mail_complement"
 msgstr ""
 
-#: meeting/models.py:192
+#: meeting/models.py:193
 msgid "str_City"
 msgstr ""
 
-#: meeting/models.py:194
+#: meeting/models.py:195
 msgid "str_City_code"
 msgstr ""
 
-#: meeting/models.py:195
+#: meeting/models.py:196
 msgid "str_Country"
 msgstr ""
 
-#: meeting/models.py:202
+#: meeting/models.py:203
 msgid "str_Reservation_Validation_Permission"
 msgstr "Valider l'arrivée et la réservation de carburant"
 
-#: meeting/models.py:239
+#: meeting/models.py:240
 msgid "str_Flex_Wing"
 msgstr "Pendulaires"
 
-#: meeting/models.py:240
+#: meeting/models.py:241
 msgid "str_Fixed_Wings"
 msgstr "Multiaxes"
 
-#: meeting/models.py:241
+#: meeting/models.py:242
 msgid "str_Rotor_Wings"
 msgstr "Autogyres"
 
-#: meeting/models.py:242
+#: meeting/models.py:243
 msgid "str_Helicopters"
 msgstr "Helicoptères"
 
-#: meeting/models.py:243
+#: meeting/models.py:244
 msgid "str_Balloons_and_Airships"
 msgstr "Ballon et aérostat"
 
-#: meeting/models.py:255 meeting/templates/pilot_ulm_list.html:25
+#: meeting/models.py:256 meeting/templates/pilot_ulm_list.html:25
 #: meeting/templates/staff_reservation_validation.html:140
 #: meeting/templates/staff_ulm_list.html:58
 msgid "str_Type"
 msgstr "Type"
 
-#: meeting/models.py:259 meeting/templates/pilot_ulm_list.html:29
+#: meeting/models.py:260 meeting/templates/pilot_ulm_list.html:29
 #: meeting/templates/staff_reservation_validation.html:144
 #: meeting/templates/staff_ulm_list.html:55
 msgid "str_Imatriculation_country"
 msgstr "Pays d'immatriculation"
 
-#: meeting/models.py:291
+#: meeting/models.py:292
 #: meeting/templates/includes/elements/reservation_detail.html:9
 #: meeting/templates/staff_fuel_reservation_list.html:22
 #: meeting/templates/staff_reservation_list.html:25
 msgid "str_Reservation_number"
 msgstr "Numéro de réservation"
 
-#: meeting/models.py:294
+#: meeting/models.py:295
 #: meeting/templates/includes/elements/reservation_detail.html:19
 msgid "str_Arrival_slot"
 msgstr "Créneau d'arrivée"
 
-#: meeting/models.py:295
+#: meeting/models.py:296
 msgid "str_helptext_arrival_slot"
 msgstr ""
 
-#: meeting/models.py:299
+#: meeting/models.py:300
 #: meeting/templates/includes/elements/reservation_detail.html:21
 msgid "str_Departure_slot"
 msgstr "Créneau de départ"
 
-#: meeting/models.py:300
+#: meeting/models.py:301
 msgid "str_helptext_departure_slot"
 msgstr ""
 
-#: meeting/models.py:305
+#: meeting/models.py:306
 #: meeting/templates/includes/elements/reservation_detail.html:43
 #: meeting/templates/staff_fuel_reservation_list.html:26
 msgid "str_Fuel_reservation"
 msgstr "Réservation de carburant"
 
-#: meeting/models.py:306
+#: meeting/models.py:307
 msgid "str_helptext_fuel_reservation"
 msgstr ""
 
-#: meeting/models.py:310
+#: meeting/models.py:311
 #: meeting/templates/includes/elements/reservation_detail.html:25
 #: meeting/templates/staff_reservation_list.html:31
 #: meeting/templates/staff_reservation_validation.html:99
 msgid "str_Flight_plan"
 msgstr "Plan de vol"
 
-#: meeting/models.py:312
+#: meeting/models.py:313
 #: meeting/templates/includes/elements/reservation_detail.html:27
 #: meeting/templates/staff_reservation_validation.html:103
 msgid "str_Passanger"
 msgstr "Passager"
 
-#: meeting/models.py:314
+#: meeting/models.py:315
 #: meeting/templates/includes/elements/reservation_detail.html:31
 #: meeting/templates/staff_reservation_list.html:32
 #: meeting/templates/staff_reservation_validation.html:107
 msgid "str_Esthetic_cup"
 msgstr "Coupe de l'esthétique"
 
-#: meeting/models.py:316
+#: meeting/models.py:317
 #: meeting/templates/includes/elements/reservation_detail.html:33
 #: meeting/templates/staff_reservation_validation.html:111
 msgid "str_For_sale"
 msgstr "A vendre"
 
-#: meeting/models.py:324
+#: meeting/models.py:325
 #: meeting/templates/includes/elements/reservation_detail.html:37
 msgid "str_Origin_city"
 msgstr "Ville d'origine"
 
-#: meeting/models.py:328
+#: meeting/models.py:329
 #: meeting/templates/includes/elements/reservation_detail.html:39
 msgid "str_Origin_field"
 msgstr "Terrain d'origine (où l’aéronef est basé)"
 
-#: meeting/models.py:329
+#: meeting/models.py:330
 msgid "str_Airfield_ID"
 msgstr "Identifiant de l'aérodrome de départ"
 
-#: meeting/models.py:342
+#: meeting/models.py:343
 msgid "str_Error_Reservation_Allready_Exist"
 msgstr ""
 "Vous avez déjà une réservation pour cette manifestation, veuillez l'éditer"
 
-#: meeting/models.py:392
+#: meeting/models.py:393
 #: meeting/templates/includes/elements/reservation_detail.html:13
 #: meeting/templates/staff_fuel_reservation_list.html:23
 #: meeting/templates/staff_reservation_list.html:27
@@ -970,9 +970,6 @@ msgstr ""
 #: templates/registration/register.html:46
 msgid "str_already_have_an_account"
 msgstr "Avez-vous déjà un compte ? Connecter vous !"
-
-#~ msgid "str_model"
-#~ msgstr "Modèle"
 
 #~ msgid "str_Powered_Paraglider"
 #~ msgstr "Paramoteurs"
