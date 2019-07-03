@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 class ReservationFilter(FilterSet):
     ulm__imatriculation = CharFilter(label=_('str_Imatriculation'),
                                      lookup_expr='icontains')
-    ulm__radio_id = CharFilter(label=_('str_Radio_id'), lookup_expr='icontains')
+    ulm__radio_id = CharFilter(label=_('str_Aircraft_registration_number'),
+                               lookup_expr='icontains')
     pilot__user__first_name = CharFilter(label=_('str_First_name'),
                                          lookup_expr='icontains')
     pilot__user__last_name = CharFilter(label=_('str_Last_name'),
@@ -47,10 +48,12 @@ class ReservationFilter(FilterSet):
 
 
 class ULMFilter(FilterSet):
-    constructor = CharFilter(label=_('str_Constructor'), lookup_expr='icontains')
+    constructor = CharFilter(label=_('str_Constructor'),
+                             lookup_expr='icontains')
     # Translators: aircraft model
-    model = CharFilter(label=_('str_model'), lookup_expr='icontains')
-    radio_id = CharFilter(label=_('str_Radio_id'), lookup_expr='icontains')
+    model = CharFilter(label=_('str_Model'), lookup_expr='icontains')
+    radio_id = CharFilter(label=_('str_Aircraft_registration_number'),
+                          lookup_expr='icontains')
     imatriculation = CharFilter(label=_('str_Imatriculation'),
                                 lookup_expr='icontains')
 

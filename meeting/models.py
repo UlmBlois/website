@@ -174,21 +174,25 @@ class Pilot(models.Model):
         (CATLIN, CATLIN),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    insurance_company = models.CharField(max_length=64,
-                                         verbose_name=_('str_Insurance_company'))
+    insurance_company = models.CharField(
+                            max_length=64,
+                            verbose_name=_('str_Insurance_company'))
     insurance_number = models.CharField(max_length=64,
                                         verbose_name=_('str_Insurance_number'))
     licence_number = models.CharField(max_length=64,
                                       verbose_name=_('str_Licence_number'))
     phone_number = PhoneNumberField(help_text=_('str_helptext_phonenumber'),
+                                    verbose_name=_('str_Phone_number'),
                                     null=True)  # TODO: remove null=True in production
     street_name = models.CharField(max_length=128,
-                                   help_text='str_street_name')
+                                   verbose_name=_('str_street_name'))
     mail_complement = models.CharField(max_length=128,
-                                       help_text='str_mail_complement')
-    city = models.CharField(max_length=64)
-    city_code = models.CharField(max_length=32)
-    country = CountryField(default='FR')
+                                       verbose_name=_('str_mail_complement'))
+    city = models.CharField(max_length=64,
+                            verbose_name=_('str_City'))
+    city_code = models.CharField(max_length=32,
+                                 verbose_name=_('str_City_code'))
+    country = CountryField(default='FR', verbose_name=_('str_Country'))
     modification_date = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -241,15 +245,22 @@ class ULM(models.Model):
 
     pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE,
                               related_name='ulm')
-    constructor = models.CharField(max_length=32)
-    model = models.CharField(max_length=32)
+    constructor = models.CharField(max_length=32,
+                                   verbose_name=_('str_Constructor'))
+    model = models.CharField(max_length=32,
+                             verbose_name=_('str_Model'))
     type = models.CharField(
         max_length=2,
         choices=ULM_TYPE_CHOICE,
+        verbose_name=_('str_Type')
     )
-    imatriculation_country = CountryField(default='FR')
-    imatriculation = models.CharField(max_length=6)
-    radio_id = RadioCallSignField()
+    imatriculation_country = CountryField(
+                    default='FR',
+                    verbose_name=_('str_Imatriculation_country'))
+    imatriculation = models.CharField(max_length=6,
+                                      verbose_name=_('str_Imatriculation'))
+    radio_id = RadioCallSignField(
+                verbose_name=_('str_Aircraft_registration_number'))
 
     def __str__(self):
         return str(self.radio_id)
@@ -271,32 +282,51 @@ class ULM(models.Model):
 class Reservation(models.Model):
     """Model reprenseting a reservation for an in flight arrival."""
     ulm = models.ForeignKey(ULM, on_delete=models.SET_NULL, null=True,
-                            related_name="reservations")
+                            related_name="reservations",
+                            verbose_name=_('str_ULM'))
     pilot = models.ForeignKey(Pilot, on_delete=models.SET_NULL, null=True)
     meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)
-    reservation_number = models.CharField(max_length=32, unique=True)
+    reservation_number = models.CharField(
+                            max_length=32, unique=True,
+                            verbose_name=_('str_Reservation_number'))
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE,
-                                  related_name='arrivals', null=True)
-    depart_time_slot = models.ForeignKey(TimeSlot, on_delete=models.SET_NULL,
-                                         related_name='departures', null=True)
+                                  related_name='arrivals', null=True,
+                                  verbose_name=_('str_Arrival_slot'),
+                                  help_text=_('str_helptext_arrival_slot'))
+    depart_time_slot = models.ForeignKey(
+                            TimeSlot, on_delete=models.SET_NULL,
+                            related_name='departures', null=True,
+                            verbose_name=_('str_Departure_slot'),
+                            help_text=_('str_helptext_departure_slot'))
     arrival = models.DateTimeField(null=True, default=None, blank=True)
     fuel_reservation = models.PositiveIntegerField(
             default=0,
-            validators=[MaxValueValidator(30)])
+            validators=[MaxValueValidator(30)],
+            verbose_name=_('str_Fuel_reservation'),
+            help_text=_('str_helptext_fuel_reservation'))
     fuel_served = models.PositiveIntegerField(default=0)
-    flight_plan = models.BooleanField(default=False)
-    passanger = models.BooleanField(default=False)
-    esthetic_cup = models.BooleanField(default=False)
-    for_sale = models.BooleanField(default=False)
+    flight_plan = models.BooleanField(
+            default=False,
+            verbose_name=_('str_Flight_plan'))
+    passanger = models.BooleanField(default=False,
+                                    verbose_name=_('str_Passanger'))
+    esthetic_cup = models.BooleanField(default=False,
+                                       verbose_name=_('str_Esthetic_cup'))
+    for_sale = models.BooleanField(default=False,
+                                   verbose_name=_('str_For_sale'))
     confirmed = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
     fuel_reservation_confirmed = models.BooleanField(default=False)
     fuel_advance = models.PositiveIntegerField(default=0)
     creation_date = models.DateTimeField(auto_now_add=True)
     modification_date = models.DateTimeField(auto_now=True)
-    origin_city = models.CharField(max_length=64, blank=True)  # TODO move into profile
-    origin_field = models.CharField(max_length=32, blank=True,
-                                    help_text=_("str_Airfield_ID"))  # TODO move into profile
+    origin_city = models.CharField(max_length=64, blank=True,
+                                   verbose_name=_('str_Origin_city'))  # TODO move into profile
+    origin_field = models.CharField(
+            max_length=32,
+            blank=True,
+            verbose_name=_('str_Origin_field'),
+            help_text=_("str_Airfield_ID"))  # TODO move into profile
 
     objects = ReservationManager()
 

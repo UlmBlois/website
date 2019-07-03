@@ -19,7 +19,7 @@
       {% else %}
         <tr>
         {% for t in ts%}
-          <th class="table-{% if t in ts_aviables%}success{%else%}danger{%endif%}">
+          <th class="table-{% if t in ts_aviables%}success{% elif t %}danger{% else %}secondary{%endif%}">
             {% if t %}
             {{t.str_range}}
             {% else %}
