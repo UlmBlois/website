@@ -167,3 +167,9 @@ class ReservationTest(TestCase):
     def test_arrival_delay(self):
         res = Reservation.objects.get(reservation_number='FAE1F6')
         self.assertEqual(res.arrival_delay().seconds/60, 30)
+
+    def test_fuel_reservation_max(self):
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+        res.fuel_reservation = 31
+        with self.assertRaises(ValidationError):
+            res.full_clean()
