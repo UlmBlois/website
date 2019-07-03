@@ -174,12 +174,16 @@ class Pilot(models.Model):
         (CATLIN, CATLIN),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    insurance_company = models.CharField(max_length=64)
-    insurance_number = models.CharField(max_length=64)
-    licence_number = models.CharField(max_length=64)
+    insurance_company = models.CharField(max_length=64,
+                                         verbose_name=_('str_Insurance_company'))
+    insurance_number = models.CharField(max_length=64,
+                                        verbose_name=_('str_Insurance_number'))
+    licence_number = models.CharField(max_length=64,
+                                      verbose_name=_('str_Licence_number'))
     phone_number = PhoneNumberField(help_text=_('str_helptext_phonenumber'),
                                     null=True)  # TODO: remove null=True in production
-    street_name = models.CharField(max_length=128, help_text='str_street_name')
+    street_name = models.CharField(max_length=128,
+                                   help_text='str_street_name')
     mail_complement = models.CharField(max_length=128,
                                        help_text='str_mail_complement')
     city = models.CharField(max_length=64)
