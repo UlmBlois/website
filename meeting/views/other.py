@@ -2,8 +2,9 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
+from django.utils import timezone as tz
 
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 from itertools import zip_longest
 import logging
 # owned
@@ -37,10 +38,11 @@ class TimeSlotAviableView(TemplateView):
         delta = timedelta(days=1)
         slots_by_days = []
         for d in days:
+            start_d = tz.make_aware(datetime.combine(d, datetime.min.time()))
             slots_by_days.append(
                 list(meeting.timeslot_set.filter(
-                        start_date__gte=d,
-                        start_date__lt=d+delta).order_by('start_date')))
+                        start_date__gte=start_d,
+                        start_date__lt=start_d+delta).order_by('start_date')))
         context['ts_table'] = [days] + list(zip_longest(*slots_by_days))
         context['ts_aviables'] = TimeSlot.objects.aviables()
         return context
