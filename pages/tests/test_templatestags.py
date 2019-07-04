@@ -1,5 +1,8 @@
 from django.test import TestCase
 from django.template import Context
+from django.conf import settings
+from django.test.client import RequestFactory
+
 from pages.models import Chunk, Page
 from pages.templatetags.chunks import get_chunk
 from pages.templatetags.render import render
@@ -31,8 +34,16 @@ class RenderTest(TestCase):
 
 class AbsoluteUrlTest(TestCase):
 
+    @classmethod
+    def setUpTestData(cls):
+        settings.DEFAULT_DOMAIN = 'http://testserver'
+        cls.factory = RequestFactory()
+
     def test_absolute_url(self):
         context = Context()
         url = absolute_url(context, 'index')
-        self.assertEqual(url, "http://127.0.0.1:8000/meeting/")
-        # TODO
+        self.assertEqual(url, settings.DEFAULT_DOMAIN+"/meeting/")
+        request = self.factory.get('/meeting/')
+        context['request'] = request
+        url = absolute_url(context, 'index')
+        self.assertEqual(url, settings.DEFAULT_DOMAIN+"/meeting/")
