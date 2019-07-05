@@ -48,10 +48,6 @@ class PilotChangePassword(FormView):
                              _('str_message_password_updated'))
         return super().form_valid(form)
 
-    def form_invalid(self, form):
-        messages.error(self.request, _('str_message_correct_error'))
-        return super().form_invalid()
-
 
 @method_decorator(login_required, name='dispatch')
 class DetailPilot(DetailView):
