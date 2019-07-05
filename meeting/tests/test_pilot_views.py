@@ -104,7 +104,32 @@ class PilotChangePasswordTest(LoggedViewTestCase, TestCase):
     url_name = 'change_password'
     template_name = 'base_logged_form.html'
 
-    # TODO: to finish
+    def get_success_url(self):
+        return reverse('pilot', kwargs={'pk': self.user.pilot.pk})
+
+    def test_form_valid(self):
+        form_data = {
+            'old_password': 'testtest',
+            'new_password1': 'testtest2',
+            'new_password2': 'testtest2',
+        }
+        self.client.force_login(self.user)
+        response = self.client.post(self.get_url(), form_data)
+        self.assertRedirects(response, self.get_success_url())
+        usr = User.objects.get(pk=self.user.pk)
+        self.assertTrue(usr.check_password(form_data['new_password1']))
+
+    def test_form_invalid(self):
+        form_data = {
+            'old_password': 'testtest',
+            'new_password1': 'testtest1',
+            'new_password2': 'testtest2',
+        }
+        self.client.force_login(self.user)
+        response = self.client.post(self.get_url(), form_data)
+        self.assertEqual(response.status_code, 200)
+        usr = User.objects.get(pk=self.user.pk)
+        self.assertFalse(usr.check_password(form_data['new_password1']))
 
 ###############################################################################
 # ULM related View
