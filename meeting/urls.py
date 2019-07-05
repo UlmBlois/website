@@ -1,13 +1,12 @@
 from django.urls import path
-from django.conf.urls import url
 from . import views
 from meeting.filters import ReservationFilter, ULMFilter, PilotFilter
 
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    url(r'^pilot/password/$', views.pilot_change_password,
-        name='change_password'),
+    path('pilot/password/', views.PilotChangePassword.as_view(),
+         name='change_password'),
     path('pilot/<int:pk>/detail/', views.DetailPilot.as_view(), name='pilot'),
     path('pilot/<int:pk>/edit/', views.UpdateUserPilotView.as_view(),
          name='edit_pilot'),

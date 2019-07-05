@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.forms.models import modelformset_factory
+from django.contrib.auth.forms import PasswordChangeForm
+
 # Python
 import logging
 
@@ -21,6 +23,17 @@ from meeting.fields import ListTextWidget
 from radio_call_sign_field.widgets import CallSingPrefixWidget
 
 logger = logging.getLogger(__name__)
+
+
+# TODO: move this Form to Core?
+class PilotPasswordChangeForm(PasswordChangeForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(
+            Submit('submit', _('str_Submit'), css_class='btn-primary'))
 
 
 class ReservationForm(forms.ModelForm):

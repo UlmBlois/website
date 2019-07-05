@@ -1,15 +1,15 @@
 # django
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import (UpdateView, DeleteView, CreateView,)
 from django.views.generic.list import ListView
+from django.views.generic.edit import FormView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 from django.utils.translation import gettext_lazy as _
 # python
 import uuid
@@ -20,28 +20,37 @@ from extra_views import ModelFormSetView
 # owned
 from meeting.models import Pilot, ULM, Reservation, Meeting
 from meeting.form import (ReservationForm, UserEditMultiForm,
-                          ULMForm, ULMFormSetHelper, BaseULMForm)
+                          ULMForm, ULMFormSetHelper, BaseULMForm,
+                          PilotPasswordChangeForm)
 from meeting.views.utils import PAGINATED_BY
 
 logger = logging.getLogger(__name__)
 
 
-@login_required
-def pilot_change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, _('str_message_password_updated'))
-            return redirect('change_password')
-        else:
-            messages.error(request, _('str_message_correct_error'))
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'base_form.html', {
-        'form': form
-    })
+# TODO: move this view to Core?
+@method_decorator(login_required, name='dispatch')
+class PilotChangePassword(FormView):
+    form_class = PilotPasswordChangeForm
+    template_name = 'base_logged_form.html'
+
+    def get_success_url(self):
+        return reverse('pilot', kwargs={'pk': self.request.user.pilot.pk})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        update_session_auth_hash(self.request, self.request.user)  # Important!
+        messages.add_message(self.request, messages.INFO,
+                             _('str_message_password_updated'))
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, _('str_message_correct_error'))
+        return super().form_invalid()
 
 
 @method_decorator(login_required, name='dispatch')

@@ -20,7 +20,6 @@ logger = logging.getLogger(__name__)
 ###############################################################################
 # Pilot related View
 ###############################################################################
-# TOFO change pass view test
 class DetailPilotTest(LoggedViewTestCase, TestCase):
     url = '/meeting/pilot/{}/detail/'
     url_name = 'pilot'
@@ -98,6 +97,14 @@ class UpdateUserPilotViewTest(LoggedViewTestCase, TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             Pilot.objects.get(pk=self.user.pilot.pk).licence_number, '')
+
+
+class PilotChangePasswordTest(LoggedViewTestCase, TestCase):
+    url = '/meeting/pilot/password/'
+    url_name = 'change_password'
+    template_name = 'base_logged_form.html'
+
+    # TODO: to finish
 
 ###############################################################################
 # ULM related View
