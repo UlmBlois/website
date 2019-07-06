@@ -302,18 +302,13 @@ class ReservationWizardStep2(ModelFormSetView):
         context['helper'] = helper
         return context
 
-    def get_initial(self):
-        # Get a list of initial values for the formset here
-        initial = [{'pilot': self.kwargs.get('pilot', None)}]
-        return initial
-
     def formset_valid(self, formset):
         """
         If the formset is valid redirect to the supplied URL
         """
         for form in formset:
-            ulm = form.save(commit=False)
-            if not ulm.radio_id == '':
+            if form.has_changed():
+                ulm = form.save(commit=False)
                 ulm.pilot = Pilot.objects.get(pk=self.pilot)
                 ulm.save()
         return HttpResponseRedirect(self.get_success_url())

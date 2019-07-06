@@ -452,9 +452,51 @@ class ReservationWizardStep2Test(LoggedViewTestCase, TestCase):
     template_name = 'base_logged_form.html'
     # TODO see if more test are needed
 
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.ulm = create_ulm(cls.user.pilot, 'F-JAZE')
+
     def get_url(self):
         return self.url.format(self.user.pilot.pk)
 
     def get_url_from_name(self, args=None, kwargs=None):
         kwargs = {'pilot': self.user.pilot.pk}
         return super().get_url_from_name(kwargs=kwargs)
+
+    def test_formset_valid(self):
+        formset_data = {
+            # management_form data
+            'form-INITIAL_FORMS': '1',
+            'form-TOTAL_FORMS': '1',
+
+            # form 0
+            'form-0-constructor': 'Dasault',
+            'form-0-model': 'Mirage III',
+            'form-0-type': 'MU',
+            'form-0-imatriculation_country': 'FR',
+            'form-0-imatriculation': 'Azerty',
+            'form-0-radio_id_0': 'F-',
+            'form-0-radio_id_1': 'JAZA',
+            'form-0-id': str(self.ulm.pk),
+        }
+        self.client.force_login(self.user)
+        response = self.client.post(self.get_url(), formset_data)
+        self.assertRedirects(response, reverse('pilot_create_reservation'))
+        self.assertEqual(
+            ULM.objects.filter(pilot=self.user.pilot.pk).count(), 1)
+        formset_data['form-TOTAL_FORMS'] = '2'
+        formset_data.update({
+            'form-1-constructor': '1',
+            'form-1-model': '1',
+            'form-1-type': 'MU',
+            'form-1-imatriculation_country': 'FR',
+            'form-1-imatriculation': '1',
+            'form-1-radio_id_0': 'F-',
+            'form-1-radio_id_1': 'JAER',
+            'form-1-id': '',
+        })
+        response = self.client.post(self.get_url(), formset_data)
+        self.assertRedirects(response, reverse('pilot_create_reservation'))
+        self.assertEqual(
+            ULM.objects.filter(pilot=self.user.pilot.pk).count(), 2)

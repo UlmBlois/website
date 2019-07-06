@@ -3,6 +3,9 @@ from django.forms.widgets import MultiWidget
 from django_countries.fields import Country
 from .data import COUNTRIES_PREFIX
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class CallSignPrefixSelect(Select):
     initial = None
@@ -42,4 +45,5 @@ class CallSingPrefixWidget(MultiWidget):
     def value_from_datadict(self, data, files, name):
         parts = [widget.value_from_datadict(data, files, name + '_%s' % i)
                  for i, widget in enumerate(self.widgets)]
+        parts = [x if x else '' for x in parts]
         return ''.join(parts)
