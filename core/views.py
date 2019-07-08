@@ -1,8 +1,9 @@
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse
 from core.form import SignUpForm
 from django.views.generic.edit import DeleteView
+from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
@@ -11,19 +12,20 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('logged_index')
-    else:
-        form = SignUpForm()
-    return render(request, 'register.html', {'form': form})
+class SignUpView(FormView):
+    form_class = SignUpForm
+    template_name = 'register.html'
+
+    def get_success_url(self):
+        return reverse('logged_index')
+
+    def form_valid(self, form):
+        form.save()
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=raw_password)
+        login(self.request, user)
+        return super().form_valid(form)
 
 
 @method_decorator(login_required, name='dispatch')

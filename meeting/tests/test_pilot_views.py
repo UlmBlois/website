@@ -195,6 +195,12 @@ class DeletePilotUlmTest(LoggedViewTestCase, TestCase):
         response = self.client.post(self.get_url())
         self.assertRedirects(response, reverse('pilot_ulm_list'))
 
+    def test_delete(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.get_url(), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(ULM.objects.filter(pk=self.ulm.pk).exists())
+
     def test_delete_messages_success(self):
         self.client.force_login(self.user)
         response = self.client.post(self.get_url(), follow=True)
