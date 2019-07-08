@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'extra_views',
+    'import_export',
 
     # Core
     'django.contrib.admin',

@@ -1,53 +1,12 @@
 from django.contrib import admin
-from django.http import HttpResponse
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from django.utils.translation import gettext_lazy as _
 
-import csv
-import operator
+from import_export import resources
+from import_export.admin import ExportMixin
 
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.fields import ListTextWidget
-
-
-class ExportCsvMixin:
-    export_fields = ()
-    _field_name = []
-
-    def get_header(self):
-        if len(self.export_fields) > 0:
-            return [x.replace('__', '_') for x in self.export_fields]
-        else:
-            meta = self.model._meta
-            return [field.verbose_name for field in
-                    meta.get_fields(include_hidden=True)]
-
-    def get_field_names(self):
-        if len(self.export_fields) > 0:
-            return [x.replace('__', '.') for x in self.export_fields]
-        else:
-            meta = self.model._meta
-            return [field.name for field in
-                    meta.get_fields(include_hidden=True)]
-
-    def get_row(self, obj):
-        return [operator.attrgetter(field)(obj) for field in
-                self.get_field_names()]
-
-    def export_as_csv(self, request, queryset):
-        meta = self.model._meta
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
-        writer = csv.writer(response)
-
-        writer.writerow(self.get_header())
-        for obj in queryset:
-            writer.writerow(self.get_row(obj))
-
-        return response
-
-    export_as_csv.short_description = _("str_Export_selected")
 
 
 @admin.register(Pilot)
@@ -55,27 +14,35 @@ class PilotAdmin(admin.ModelAdmin):
     readonly_fields = ['modification_date']
 
 
-@admin.register(Reservation)
-class ReservationAdmin(admin.ModelAdmin, ExportCsvMixin):
+class ReservationResources(resources.ModelResource):
+    class Meta:
+        model = Reservation
+        fields = ('reservation_number', 'meeting',
+                  "pilot__user__first_name",
+                  'pilot__user__last_name', 'pilot__user__email',
+                  "pilot__insurance_company", "pilot__insurance_number",
+                  "pilot__licence_number", 'pilot__phone_number',
+                  'pilot__street_name', 'pilot__mail_complement',
+                  'pilot__city', 'pilot__city_code', 'pilot__country',
+                  'ulm__constructor', 'ulm__model', 'ulm__type',
+                  'ulm__imatriculation_country', 'ulm__imatriculation',
+                  'ulm__radio_id',
+                  'time_slot', 'depart_time_slot', 'arrival',
+                  'fuel_reservation', 'fuel_served', 'flight_plan',
+                  'passanger', 'esthetic_cup', 'for_sale',
+                  'fuel_reservation_confirmed', 'creation_date',
+                  'modification_date', 'origin_city', 'origin_field',
+                  'confirmed', 'canceled')
+
+
+class ReservationAdmin(ExportMixin, admin.ModelAdmin):
+    list_filter = ['meeting']
     readonly_fields = ('creation_date', 'modification_date')
     list_display = ('reservation_number', "display_pilot", "time_slot", "ulm")
-    actions = ["export_as_csv"]
-    export_fields = ('reservation_number', 'meeting',
-                     "pilot__user__first_name",
-                     'pilot__user__last_name', 'pilot__user__email',
-                     "pilot__insurance_company", "pilot__insurance_number",
-                     "pilot__licence_number", 'pilot__phone_number',
-                     'pilot__street_name', 'pilot__mail_complement',
-                     'pilot__city', 'pilot__city_code', 'pilot__country',
-                     'ulm__constructor', 'ulm__model', 'ulm__type',
-                     'ulm__imatriculation_country', 'ulm__imatriculation',
-                     'ulm__radio_id',
-                     'time_slot', 'depart_time_slot', 'arrival',
-                     'fuel_reservation', 'fuel_served', 'flight_plan',
-                     'passanger', 'esthetic_cup', 'for_sale',
-                     'fuel_reservation_confirmed', 'creation_date',
-                     'modification_date', 'origin_city', 'origin_field',
-                     'confirmed', 'canceled')
+    resource_class = ReservationResources
+
+
+admin.site.register(Reservation, ReservationAdmin)
 
 
 class TimeSlotInline(admin.TabularInline):
