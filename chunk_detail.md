@@ -117,3 +117,19 @@ Template : emails/password_reset_email.html
 | email_password_reset    | render     | email, protocol, domain, uid, token|
 
 /!\ Ne pas modifier les variables
+
+# Importer et Exporter
+
+Il est possible d'importer et d'exporter la liste des pages et des bloc.
+
+## Précautions
+
+L'import de donné dans une base déjà remplis peu avoir des effet indésiré:
+* modification non voulu (clef privée différentes entre le fichier et la base)
+* duplication d'entrée (clef privée différentes entre le fichier et la base)
+
+Il est conseillé de faire un back up ou un export de la base avant tout import.
+Dans le cas ou l'import aurais causé des problème d'intégrité des données, supprimer
+toutes les entrées et repartez de vos backup ou du fichier a importer si il reprend toute la base.
+Sinon faites corrigez le fichier a importer afin qu'il corresponde a la base dans laquelle il sera intégré.
+ 

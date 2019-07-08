@@ -78,11 +78,9 @@ class CustomUserAdmin(UserAdmin):
     inlines = (PilotInline, )
 
     def get_inline_instances(self, request, obj=None):
-        if not obj:
+        if not obj or obj.is_staff:
             return list()
-        if obj.is_staff:
-            return list()
-        return super(CustomUserAdmin, self).get_inline_instances(request, obj)
+        return super().get_inline_instances(request, obj)
 
 
 admin.site.unregister(User)

@@ -2,6 +2,10 @@ from django.contrib import admin
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from translated_fields import TranslatedFieldAdmin, to_attribute
+
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin, ImportExportMixin
+
 import re
 from pages.models import Chunk, Page
 
@@ -23,17 +27,29 @@ def order_fieldset(fieldsets, base_fields):
                             ))
 
 
+class PageResources(resources.ModelResource):
+
+    class Meta:
+        model = Page
+
+
 @admin.register(Page)
-class PageAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}
+class PageAdmin(ImportExportModelAdmin):
+    resource_class = PageResources
+
+
+class ChunkResources(resources.ModelResource):
+
+    class Meta:
+        model = Chunk
 
 
 @admin.register(Chunk)
-class ChunkAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+class ChunkAdmin(ImportExportMixin, TranslatedFieldAdmin, admin.ModelAdmin):
     list_display = ('key', "description", 'page')
     list_filter = ['page']
     base_fields = ['description', 'content']
+    resource_class = ChunkResources
     fieldsets = [
         (_("str_Globals"), {"fields": ["key", "page"]}),
     ]
