@@ -5,6 +5,8 @@ import re
 
 from django.utils.translation import gettext_lazy as _
 
+from import_export import resources
+from import_export.admin import ImportExportMixin
 from translated_fields import TranslatedFieldAdmin
 
 from faq.models import Topic, Question
@@ -27,11 +29,17 @@ def order_fieldset(fieldsets, base_fields):
                             ))
 
 
-@admin.register(Topic)
-class TopicAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ('topic_name', 'number')
+class TopicResources(resources.ModelResource):
 
+    class Meta:
+        model = Topic
+
+
+@admin.register(Topic)
+class TopicAdmin(ImportExportMixin, TranslatedFieldAdmin, admin.ModelAdmin):
+    list_display = ('topic_name', 'number')
     base_fields = ['topic_name']
+    resource_class = TopicResources
     fieldsets = [
         (_("str_Globals"), {"fields": ["number"]}),
     ]
@@ -41,11 +49,18 @@ class TopicAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
         return ['number']
 
 
-@admin.register(Question)
-class QuestionAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ('question', 'topic', 'number')
+class QuestionResources(resources.ModelResource):
 
+    class Meta:
+        model = Question
+
+
+@admin.register(Question)
+class QuestionAdmin(ImportExportMixin, TranslatedFieldAdmin, admin.ModelAdmin):
+    list_display = ('question', 'topic', 'number')
+    list_filter = ['topic']
     base_fields = ['question', 'answer']
+    resource_class = QuestionResources
     fieldsets = [
         (_("str_Globals"), {"fields": ["number", "topic"]}),
     ]
