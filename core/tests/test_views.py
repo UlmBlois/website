@@ -1,14 +1,10 @@
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from django.contrib.auth.models import User
-from django.urls import reverse, path
+from django.urls import reverse
 from django.conf import settings
 from django.contrib.messages import constants as messages
-from django.core.exceptions import PermissionDenied
-from django.http import Http404, HttpResponseServerError, HttpResponseBadRequest
-from core import views
 
-from meeting.tests.utils import ViewTestCase, LoggedViewTestCase, create_user
-from salon_ulm_blois import urls
+from meeting.tests.utils import ViewTestCase, LoggedViewTestCase
 
 
 class SignUpViewTest(ViewTestCase, TestCase):
@@ -68,96 +64,3 @@ class DeleteUserTest(LoggedViewTestCase, TestCase):
         response = self.client.post(self.get_url(), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(User.objects.filter(pk=self.user.pk).exists())
-
-
-def permission_denied_view(request):
-    raise PermissionDenied
-
-
-def not_found_view(request):
-    raise Http404
-
-
-def server_error_view(request):
-    return HttpResponseServerError()
-
-
-def bad_request_view(request):
-    return HttpResponseBadRequest()
-
-
-urlpatterns = urls.urlpatterns + [
-    path('403/', permission_denied_view, name='403'),
-    path('404/', not_found_view, name='404'),
-    path('400/', bad_request_view, name='400'),
-    path('500/', server_error_view, name='500'),
-]
-
-handler403 = views.handler_403
-handler404 = views.handler_404
-handler400 = views.handler_400
-handler500 = views.handler_500
-
-# ROOT_URLCONF must specify the module that contains handler403 = ...
-@override_settings(ROOT_URLCONF=__name__, DEBUG=False)
-class CustomErrorHandlerTests(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        cls.user = create_user("user", "testtest")
-
-    def test_handler_403(self):
-        response = self.client.get(reverse('403'))
-        # Make assertions on the response here. For example:
-        self.assertEqual(response.status_code, 403)
-        self.assertTemplateUsed(response, '403.html')
-
-    def test_handler_403_logged(self):
-        self.client.force_login(self.user)
-        response = self.client.get(reverse('403'))
-        # Make assertions on the response here. For example:
-        self.assertEqual(response.status_code, 403)
-        self.assertTemplateUsed(response, 'logged_403.html')
-
-    def test_handler_404(self):
-        response = self.client.get(reverse('404'))
-        # Make assertions on the response here. For example:
-        self.assertEqual(response.status_code, 404)
-        self.assertTemplateUsed(response, '404.html')
-
-    def test_handler_404_logged(self):
-        self.client.force_login(self.user)
-        response = self.client.get(reverse('404'))
-        # Make assertions on the response here. For example:
-        self.assertEqual(response.status_code, 404)
-        self.assertTemplateUsed(response, 'logged_404.html')
-
-    # @override_settings(DEBUG=False)
-    # def test_handler_400(self):
-    #     response = self.client.get(reverse('400'))
-    #     # Make assertions on the response here. For example:
-    #     self.assertEqual(response.status_code, 400)
-    #     self.assertTemplateUsed(response, '400.html')
-    #
-    # @override_settings(DEBUG=False)
-    # def test_handler_400_logged(self):
-    #     self.client.force_login(self.user)
-    #     response = self.client.get(reverse('400'))
-    #     # Make assertions on the response here. For example:
-    #     self.assertEqual(response.status_code, 400)
-    #     self.assertTemplateUsed(response, 'logged_400.html')
-    #
-    # @override_settings(DEBUG=False)
-    # def test_handler_500(self):
-    #     response = self.client.get(reverse('500'))
-    #     # Make assertions on the response here. For example:
-    #     self.assertEqual(response.status_code, 500)
-    #     self.assertTemplateUsed(response, '500.html')
-    #
-    # @override_settings(DEBUG=False)
-    # def test_handler_500_logged(self):
-    #     self.client.force_login(self.user)
-    #     response = self.client.get(reverse('500'))
-    #     # Make assertions on the response here. For example:
-    #     self.assertEqual(response.status_code, 500)
-    #     self.assertTemplateUsed(response, 'logged_500.html')
