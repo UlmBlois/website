@@ -694,11 +694,11 @@ msgstr "Rentrer une immatriculation valide"
 msgid "str_Error_registration_number_does_not_match_pattern"
 msgstr "{val} n’accepte pas un des formats suivants : {patterns}"
 
-#: salon-ulm-blois/settings/base.py:123
+#: salon_ulm_blois/settings/base.py:123
 msgid "str_English"
 msgstr "Anglais"
 
-#: salon-ulm-blois/settings/base.py:124
+#: salon_ulm_blois/settings/base.py:124
 msgid "str_French"
 msgstr "Français"
 

@@ -1,6 +1,6 @@
 ulm_website/secret_settings.py
 ulm_website/settings/development.py
-salon-ulm-blois/settings/development.py
+salon_ulm_blois/settings/development.py
 bin/*
 staticfiles/*
 

@@ -10,7 +10,7 @@ env:
   - DJANGO=2.2.2
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=salon-ulm-blois.settings.travis
+  - export DJANGO_SETTINGS_MODULE=salon_ulm_blois.settings.travis
 
 install:
   - pip install django==$DJANGO --quiet
