@@ -1,14 +1,14 @@
 from django.test import TestCase, override_settings
 from django.contrib.auth.models import User
-from django.urls import reverse, path, include
+from django.urls import reverse, path
 from django.conf import settings
-from django.views.generic import RedirectView
 from django.contrib.messages import constants as messages
 from django.core.exceptions import PermissionDenied
 from django.http import Http404, HttpResponseServerError, HttpResponseBadRequest
 from core import views
 
 from meeting.tests.utils import ViewTestCase, LoggedViewTestCase, create_user
+from salon_ulm_blois import urls
 
 
 class SignUpViewTest(ViewTestCase, TestCase):
@@ -86,16 +86,11 @@ def bad_request_view(request):
     return HttpResponseBadRequest()
 
 
-urlpatterns = [
+urlpatterns = urls.urlpatterns + [
     path('403/', permission_denied_view, name='403'),
     path('404/', not_found_view, name='404'),
     path('400/', bad_request_view, name='400'),
     path('500/', server_error_view, name='500'),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('meeting/', include('meeting.urls')),
-    path('pages/', include('pages.urls')),
-    path('faq/', include('faq.urls')),
-    path('', RedirectView.as_view(url='/meeting/', permanent=True)),
 ]
 
 handler403 = views.handler_403
