@@ -8,7 +8,7 @@ from django.http import Http404, HttpResponseServerError, HttpResponseBadRequest
 from core import views
 
 from meeting.tests.utils import ViewTestCase, LoggedViewTestCase, create_user
-from salon_ulm_blois import urls
+# from salon_ulm_blois import urls
 
 
 class SignUpViewTest(ViewTestCase, TestCase):
