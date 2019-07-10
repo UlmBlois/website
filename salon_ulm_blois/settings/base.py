@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'extra_views',
     'import_export',
+    'aircraft_registration_field',
 
     # Core
     'django.contrib.admin',
@@ -39,7 +40,6 @@ INSTALLED_APPS = [
     'meeting.apps.MeetingConfig',
     'pages.apps.PagesConfig',
     'faq.apps.FaqConfig',
-    'radio_call_sign_field.apps.RadioCallSignFieldConfig'
 ]
 
 MIDDLEWARE = [

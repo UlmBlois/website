@@ -20,7 +20,7 @@ from crispy_forms.layout import (Layout, Submit, Row, Column,
 # Owned
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from meeting.fields import ListTextWidget
-from radio_call_sign_field.widgets import CallSingPrefixWidget
+from aircraft_registration_field.widgets import AircraftRegistrationPrefixWidget
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
         fields = [
-                 'ulm', 'time_slot', 'depart_time_slot', 'origin_city',
+                 'ulm', 'time_slot', 'depart_time_slot', 'origin_city_code',
                  'origin_field', 'fuel_reservation',
                  'flight_plan', 'passanger', 'esthetic_cup', 'for_sale'
                  ]
@@ -61,7 +61,7 @@ class ReservationForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Row(
-                Column('origin_city', css_class='from-group col-md-4 mb-0'),
+                Column('origin_city_code', css_class='from-group col-md-4 mb-0'),
                 Column('origin_field', css_class='from-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
@@ -210,7 +210,7 @@ class ULMFormSetHelper(FormHelper):
                         MultiWidgetField('radio_id', css_class='form-group',
                                          attrs=({'class': 'form-control'},
                                                 {'class': 'form-control'}),
-                                         template="radio_call_sign_crispy_field.html"),
+                                         template="aircraft_registration_crispy_field.html"),
                         css_class='form-row'
                     ),
                     css_class="card-body"
@@ -231,7 +231,7 @@ class BaseULMForm(forms.ModelForm):
                  'constructor', 'model', 'type', 'imatriculation_country',
                  'imatriculation', 'radio_id']
         widgets = {
-            'radio_id': CallSingPrefixWidget,
+            'radio_id': AircraftRegistrationPrefixWidget,
         }
 
     def __init__(self, *args, **kwargs):
@@ -244,8 +244,9 @@ class ULMForm(BaseULMForm):
         super().__init__(*args, **kwargs)
 
 
-UlmFormSet = modelformset_factory(ULM, BaseULMForm,
-                                  widgets={'radio_id': CallSingPrefixWidget})
+UlmFormSet = modelformset_factory(
+        ULM, BaseULMForm,
+        widgets={'radio_id': AircraftRegistrationPrefixWidget})
 
 
 class UserEditMultiForm(MultiModelForm):

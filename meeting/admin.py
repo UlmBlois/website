@@ -31,7 +31,7 @@ class ReservationResources(resources.ModelResource):
                   'fuel_reservation', 'fuel_served', 'flight_plan',
                   'passanger', 'esthetic_cup', 'for_sale',
                   'fuel_reservation_confirmed', 'creation_date',
-                  'modification_date', 'origin_city', 'origin_field',
+                  'modification_date', 'origin_city_code', 'origin_field',
                   'confirmed', 'canceled')
 
 

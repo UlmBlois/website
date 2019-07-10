@@ -17,7 +17,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Owned
 from meeting.managers import (MeetingManager, TimeSlotManager,
                               ReservationManager)
-from radio_call_sign_field.modelfields import RadioCallSignField
+from aircraft_registration_field.modelfield import AircraftRegistrationField
 
 logger = logging.getLogger(__name__)
 
@@ -182,8 +182,7 @@ class Pilot(models.Model):
     licence_number = models.CharField(max_length=64,
                                       verbose_name=_('str_Licence_number'))
     phone_number = PhoneNumberField(help_text=_('str_helptext_phonenumber'),
-                                    verbose_name=_('str_Phone_number'),
-                                    null=True)  # TODO: remove null=True in production
+                                    verbose_name=_('str_Phone_number'))
     street_name = models.CharField(
                     max_length=128,
                     verbose_name=_('str_street_nnumber_and_name'))
@@ -260,7 +259,7 @@ class ULM(models.Model):
                     verbose_name=_('str_Imatriculation_country'))
     imatriculation = models.CharField(max_length=6,
                                       verbose_name=_('str_Imatriculation'))
-    radio_id = RadioCallSignField(
+    radio_id = AircraftRegistrationField(
                 verbose_name=_('str_Aircraft_registration_number'))
 
     def __str__(self):
@@ -321,8 +320,9 @@ class Reservation(models.Model):
     fuel_advance = models.PositiveIntegerField(default=0)
     creation_date = models.DateTimeField(auto_now_add=True)
     modification_date = models.DateTimeField(auto_now=True)
-    origin_city = models.CharField(max_length=64, blank=True,
-                                   verbose_name=_('str_Origin_city'))  # TODO move into profile
+    origin_city_code = models.CharField(
+        max_length=64, blank=True,
+        verbose_name=_('str_Origin_city_code'))  # TODO move into profile
     origin_field = models.CharField(
             max_length=32,
             blank=True,
