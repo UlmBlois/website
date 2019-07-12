@@ -2,7 +2,7 @@ from django.views.generic import View
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 
-PAGINATED_BY = 2  # TODO: set appropriate value
+PAGINATED_BY = 20
 
 
 class PaginatedFilterViews(View):

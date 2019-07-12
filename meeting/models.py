@@ -68,7 +68,7 @@ class Meeting(models.Model):
     @property
     def registration_aviable(self):
         aviables = TimeSlot.objects.aviables()
-        return self.registration_open and len(aviables) > 2
+        return self.registration_open and len(aviables) > 1
 
     @property
     def confirmation_open(self):

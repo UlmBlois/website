@@ -10,6 +10,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.translation import gettext_lazy as _
 # python
 import uuid
@@ -215,10 +216,16 @@ class PilotReservationList(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class CreatePilotReservation(CreateView):
+class CreatePilotReservation(UserPassesTestMixin, CreateView):
     model = Reservation
     form_class = ReservationForm
     template_name = 'base_logged_form.html'
+
+    def test_func(self):
+        meeting = Meeting.objects.active()
+        if meeting:
+            return meeting.registration_aviable
+        return False
 
     def get_success_url(self):
         return reverse('pilot_reservation')

@@ -3,6 +3,8 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone as tz
 from datetime import date, datetime
 
+from freezegun import freeze_time
+
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.tests.utils import (create_meeting, create_time_slot, create_ulm,
                                  create_user, create_reservation)
@@ -15,14 +17,23 @@ class MeetingTest(TestCase):
         cls.meeting = create_meeting("1", date(2019, 8, 30), True)
         create_meeting("2", date(2018, 8, 30), False)
 
-    def test_registration_open_at(self):  # same test as registration_open
+    def test_registration_open_at(self):
         meeting = Meeting.objects.get(name="1")
         self.assertTrue(meeting.registration_open_at(
             date(2019, 7, 15)))
         self.assertFalse(meeting.registration_open_at(
             date(2019, 3, 1)))
         self.assertFalse(meeting.registration_open_at(
-            date(2019, 5, 1)))
+            date(2019, 9, 1)))
+
+    def test_registration_open(self):
+        meeting = Meeting.objects.get(name="1")
+        with freeze_time(date(2019, 7, 15)):
+            self.assertTrue(meeting.registration_open)
+        with freeze_time(date(2019, 3, 1)):
+            self.assertFalse(meeting.registration_open)
+        with freeze_time(date(2019, 9, 1)):
+            self.assertFalse(meeting.registration_open)
 
     def test_save(self):
         meeting2 = Meeting.objects.get(name="2")
@@ -35,6 +46,16 @@ class MeetingTest(TestCase):
     def test_open_days(self):
         days = [date(2019, 8, 30), date(2019, 8, 31), date(2019, 9, 1)]
         self.assertEqual(self.meeting.open_days(), days)
+
+    def test_registration_aviable(self):
+        create_time_slot(self.meeting, tz.make_aware(
+            datetime(2019, 8, 31, 10, 0)), 3)
+        with freeze_time(date(2019, 7, 15)):
+            self.assertFalse(self.meeting.registration_aviable)
+        create_time_slot(self.meeting, tz.make_aware(
+            datetime(2019, 8, 31, 11, 0)), 3)
+        with freeze_time(date(2019, 7, 15)):
+            self.assertTrue(self.meeting.registration_aviable)
 
 
 class TimeSlotTest(TestCase):

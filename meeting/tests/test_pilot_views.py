@@ -7,6 +7,8 @@ from django.contrib.messages import constants as messages
 from django.conf import settings
 from django.contrib.auth.models import User
 
+from freezegun import freeze_time
+
 from meeting.views.utils import PAGINATED_BY
 from meeting.tests.utils import (create_meeting, create_time_slot,
                                  create_ulm, create_reservation,
@@ -341,6 +343,7 @@ class PilotReservationListTest(LoggedViewTestCase, TestCase):
         self.assertEqual(len(response.context['reservation_list']), 1)
 
 
+@freeze_time("2019-08-10")
 class CreatePilotReservationTest(LoggedViewTestCase, TestCase):
     url = '/meeting/reservation/new'
     url_name = 'pilot_create_reservation'
@@ -358,7 +361,6 @@ class CreatePilotReservationTest(LoggedViewTestCase, TestCase):
                                    tz.make_aware(
                                         datetime(2019, 8, 31, 11)),
                                    3)
-
         cls.ulm = create_ulm(cls.user.pilot, 'F-XAAA')
 
     def test_form_valid(self):
@@ -383,6 +385,17 @@ class CreatePilotReservationTest(LoggedViewTestCase, TestCase):
         response = self.client.post(self.get_url(), form_data)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(Reservation.objects.filter(ulm=self.ulm.pk).exists())
+
+    def test_registration_open(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.get_url())
+        self.assertEqual(response.status_code, 200)
+
+    @freeze_time("2019-08-30")
+    def test_registration_close(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.get_url())
+        self.assertEqual(response.status_code, 403)
 
 
 class UpdatePilotReservationTest(LoggedViewTestCase, TestCase):
@@ -461,6 +474,15 @@ class ReservationWizardStep2Test(LoggedViewTestCase, TestCase):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
+        meeting1 = create_meeting("1", date(2019, 8, 30), True)
+        cls.ts1 = create_time_slot(meeting1,
+                                   tz.make_aware(
+                                        datetime(2019, 8, 31, 10)),
+                                   3)
+        cls.ts2 = create_time_slot(meeting1,
+                                   tz.make_aware(
+                                        datetime(2019, 8, 31, 11)),
+                                   3)
         cls.ulm = create_ulm(cls.user.pilot, 'F-JAZE')
 
     def get_url(self):
@@ -470,6 +492,7 @@ class ReservationWizardStep2Test(LoggedViewTestCase, TestCase):
         kwargs = {'pilot': self.user.pilot.pk}
         return super().get_url_from_name(kwargs=kwargs)
 
+    @freeze_time("2019-08-10")
     def test_formset_valid(self):
         formset_data = {
             # management_form data
