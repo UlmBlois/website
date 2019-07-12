@@ -219,7 +219,8 @@ class Pilot(models.Model):
     def as_active_reservation(self):
         meeting = Meeting.objects.active()
         if meeting:
-            return Reservation.objects.filter(pilot=self, meeting=meeting).exists()
+            return Reservation.objects.filter(pilot=self,
+                                              meeting=meeting).exists()
         else:
             return False
 
