@@ -209,18 +209,27 @@ class Pilot(models.Model):
     @property
     def as_unconfirmed_reservation(self):
         meeting = Meeting.objects.active()
-        return Reservation.objects.filter(
-                pilot=self, meeting=meeting, confirmed=False).exists()
+        if meeting:
+            return Reservation.objects.filter(
+                    pilot=self, meeting=meeting, confirmed=False).exists()
+        else:
+            return False
 
     @property
     def as_active_reservation(self):
         meeting = Meeting.objects.active()
-        return Reservation.objects.filter(pilot=self, meeting=meeting).exists()
+        if meeting:
+            return Reservation.objects.filter(pilot=self, meeting=meeting).exists()
+        else:
+            return False
 
     @property
     def can_make_reservation(self):
         meeting = Meeting.objects.active()
-        return not self.as_active_reservation and meeting.registration_aviable
+        if meeting:
+            return not self.as_active_reservation and meeting.registration_aviable
+        else:
+            return False
 
 ###############################################################################
 #       ULM
