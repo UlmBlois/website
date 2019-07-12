@@ -1,13 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: UlmBlois_website\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-12 19:13+0200\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
+"Project-Id-Version: UlmBlois_website\n"
+"Language: fr\n"
 
 #: core/form.py:41 meeting/templates/index.html:64
 msgid "str_Register"
@@ -22,9 +20,7 @@ msgstr "Envoyer"
 #. Translators: optional
 #: core/management/commands/send_reservation_confirmation_request.py:38
 msgid "str_Helptext_send_resevation_conifirmation_request"
-msgstr ""
-"Envoi d'un courriel demandant aux utilisateurs de confirmer leur réservation "
-"x jours avant la manifestation"
+msgstr "Envoi d'un courriel demandant aux utilisateurs de confirmer leur réservation x jours avant la manifestation"
 
 #: core/management/commands/send_reservation_confirmation_request.py:43
 msgid "str_Confirmation_Reminder_Email_Subject"
@@ -35,6 +31,7 @@ msgstr "Veuillez confirmer votre réservation"
 msgid "str_User_Successfully_Deleted_Message"
 msgstr "L'utilisateur %(user)s a été supprimé"
 
+#. Dans quel contexte ? en français  Global ou globaux
 #: faq/admin.py:44 faq/admin.py:65 pages/admin.py:54
 msgid "str_Globals"
 msgstr "Globaux"
@@ -77,9 +74,12 @@ msgstr "FAQ"
 msgid "str_Imatriculation"
 msgstr "Immatriculation"
 
-#: meeting/filters.py:13 meeting/filters.py:55 meeting/models.py:274
-msgid "str_Aircraft_registration_number"
-msgstr "Immatriculation de l'avion"
+#: meeting/templates/staff_fuel_reservation_list.html:25
+#: meeting/templates/staff_reservation_list.html:29
+#: meeting/templates/staff_reservation_validation.html:152
+#: meeting/templates/staff_ulm_list.html:53
+msgid "str_Radio_id"
+msgstr "Identifiant radio - LSA"
 
 #: meeting/filters.py:15 meeting/filters.py:74
 #: meeting/templates/includes/elements/pilot_info.html:8
@@ -112,12 +112,11 @@ msgid "str_Constructor"
 msgstr "Constructeur"
 
 #. Translators: aircraft model
-#: meeting/filters.py:54 meeting/models.py:262
-#: meeting/templates/staff_reservation_validation.html:136
-#: meeting/templates/staff_ulm_list.html:57
-msgid "str_Model"
+#: meeting/filters.py:52
+msgid "str_model"
 msgstr "Modèle"
 
+#. Pourquoi ce n'est pas traduit en français sur le site (au niveau du profil)
 #: meeting/filters.py:77 meeting/models.py:179
 #: meeting/templates/includes/elements/pilot_info.html:20
 #: meeting/templates/staff_pilot_list.html:51
@@ -133,31 +132,6 @@ msgstr "Les créneaux d'arrivée et de départ doivent être différents"
 msgid "str_Error_Depart_Timeslot_Anterior_To_Arrival"
 msgstr "Le créneau d'arrivée doit être postérieur au créneau de départ"
 
-#: meeting/form.py:136 meeting/models.py:185
-#: meeting/templates/includes/elements/pilot_info.html:28
-#: meeting/templates/staff_reservation_validation.html:67
-msgid "str_Phone_number"
-msgstr "Numéro de téléphone où l'on pourra vous joindre sur le salon"
-
-#: meeting/form.py:137 meeting/models.py:184
-msgid "str_helptext_phonenumber"
-msgstr "Numéro de téléphone où l'on pourra vous joindre sur le salon"
-
-#: meeting/form.py:167
-msgid "str_Contact_info"
-msgstr "Information contact"
-
-#: meeting/form.py:184 meeting/templates/pilot_reservation_list.html:41
-#: meeting/templates/pilot_ulm_list.html:8
-msgid "str_Add_new"
-msgstr "Nouvel ajout"
-
-#: meeting/form.py:185 meeting/models.py:297
-#: meeting/templates/pilot_summary.html:25
-#: meeting/templates/staff_reservation_validation.html:124
-msgid "str_ULM"
-msgstr "ULM"
-
 #: meeting/models.py:118
 msgid "str_Error_Timeslot_Start_Superior_End"
 msgstr "Le créneau de début est postérieur à la date de fin"
@@ -170,41 +144,13 @@ msgstr "Le créneau de début est en dehors de la période de la manifestation"
 msgid "str_Error_Timeslot_End_Out_Of_Meeting"
 msgstr "Le créneau de fin est en dehors de la période de la manifestation"
 
-#: meeting/models.py:181 meeting/templates/includes/elements/pilot_info.html:24
-#: meeting/templates/staff_pilot_list.html:52
-#: meeting/templates/staff_reservation_validation.html:63
-msgid "str_Insurance_number"
-msgstr "Numéro de police d'assurance"
-
-#: meeting/models.py:183 meeting/templates/includes/elements/pilot_info.html:16
-#: meeting/templates/staff_pilot_list.html:53
-#: meeting/templates/staff_reservation_validation.html:55
-msgid "str_Licence_number"
-msgstr "Numéro de Licence"
-
-#: meeting/models.py:188
-msgid "str_street_nnumber_and_name"
-msgstr ""
-
-#: meeting/models.py:190
-msgid "str_mail_complement"
-msgstr ""
-
-#: meeting/models.py:192
-msgid "str_City"
-msgstr ""
-
-#: meeting/models.py:194
-msgid "str_City_code"
-msgstr ""
-
-#: meeting/models.py:195
-msgid "str_Country"
-msgstr ""
-
 #: meeting/models.py:202
 msgid "str_Reservation_Validation_Permission"
 msgstr "Valider l'arrivée et la réservation de carburant"
+
+#: meeting/models.py:208
+msgid "str_Powered_Paraglider"
+msgstr "Paramoteurs"
 
 #: meeting/models.py:250
 msgid "str_Flex_Wing"
@@ -226,17 +172,50 @@ msgstr "Helicoptères"
 msgid "str_Balloons_and_Airships"
 msgstr "Ballon et aérostat"
 
-#: meeting/models.py:266 meeting/templates/pilot_ulm_list.html:25
-#: meeting/templates/staff_reservation_validation.html:140
-#: meeting/templates/staff_ulm_list.html:58
-msgid "str_Type"
-msgstr "Type"
+#: meeting/models.py:271
+msgid "str_Airfield_OACI_code"
+msgstr "Code du terrain (base)"
 
-#: meeting/models.py:270 meeting/templates/pilot_ulm_list.html:29
-#: meeting/templates/staff_reservation_validation.html:144
-#: meeting/templates/staff_ulm_list.html:55
-msgid "str_Imatriculation_country"
-msgstr "Pays d'immatriculation"
+#: meeting/models.py:354
+msgid "str_Error_Reservation_Allready_Exist"
+msgstr "Vous avez déjà une réservation pour cette manifestation, veuillez l'éditer"
+
+#: meeting/models.py:404
+#: meeting/templates/includes/elements/reservation_detail.html:13
+#: meeting/templates/staff_fuel_reservation_list.html:23
+#: meeting/templates/staff_reservation_list.html:27
+#: meeting/templates/staff_reservation_validation.html:39
+#: meeting/templates/staff_ulm_list.html:59
+msgid "str_Pilot"
+msgstr "Pilote"
+
+#: meeting/templates/includes/elements/empty_modal.html:19
+msgid "str_Close"
+msgstr "Fermé"
+
+#. Pourquoi ce n'est pas traduit en français sur le site (au niveau du profil)
+#: meeting/models.py:183 meeting/templates/includes/elements/pilot_info.html:16
+#: meeting/templates/staff_pilot_list.html:53
+#: meeting/templates/staff_reservation_validation.html:55
+msgid "str_Licence_number"
+msgstr "Numéro de Licence"
+
+#. Pourquoi ce n'est pas traduit en français sur le site (au niveau du profil)
+#: meeting/models.py:181 meeting/templates/includes/elements/pilot_info.html:24
+#: meeting/templates/staff_pilot_list.html:52
+#: meeting/templates/staff_reservation_validation.html:63
+msgid "str_Insurance_number"
+msgstr "Numéro de police d'assurance"
+
+#: meeting/form.py:136 meeting/models.py:185
+#: meeting/templates/includes/elements/pilot_info.html:28
+#: meeting/templates/staff_reservation_validation.html:67
+msgid "str_Phone_number"
+msgstr "Numéro de téléphone où l'on pourra vous joindre sur le salon"
+
+#: meeting/templates/includes/elements/reservation_detail.html:7
+msgid "str_Meeting"
+msgstr "Manifestation"
 
 #: meeting/models.py:302
 #: meeting/templates/includes/elements/reservation_detail.html:9
@@ -245,33 +224,19 @@ msgstr "Pays d'immatriculation"
 msgid "str_Reservation_number"
 msgstr "Numéro de réservation"
 
+#: meeting/templates/includes/elements/reservation_detail.html:15
+msgid "str_Ulm"
+msgstr "ULM"
+
 #: meeting/models.py:305
 #: meeting/templates/includes/elements/reservation_detail.html:19
 msgid "str_Arrival_slot"
 msgstr "Créneau d'arrivée"
 
-#: meeting/models.py:306
-msgid "str_helptext_arrival_slot"
-msgstr ""
-
 #: meeting/models.py:310
 #: meeting/templates/includes/elements/reservation_detail.html:21
 msgid "str_Departure_slot"
 msgstr "Créneau de départ"
-
-#: meeting/models.py:311
-msgid "str_helptext_departure_slot"
-msgstr ""
-
-#: meeting/models.py:316
-#: meeting/templates/includes/elements/reservation_detail.html:43
-#: meeting/templates/staff_fuel_reservation_list.html:26
-msgid "str_Fuel_reservation"
-msgstr "Réservation de carburant"
-
-#: meeting/models.py:317
-msgid "str_helptext_fuel_reservation"
-msgstr ""
 
 #: meeting/models.py:321
 #: meeting/templates/includes/elements/reservation_detail.html:25
@@ -298,53 +263,21 @@ msgstr "Coupe de l'esthétique"
 msgid "str_For_sale"
 msgstr "A vendre"
 
-#: meeting/models.py:336
+#: meeting/models.py:325
 #: meeting/templates/includes/elements/reservation_detail.html:37
-msgid "str_Origin_city_code"
-msgstr ""
+msgid "str_Origin_city"
+msgstr "Ville d'origine"
 
 #: meeting/models.py:340
 #: meeting/templates/includes/elements/reservation_detail.html:39
 msgid "str_Origin_field"
 msgstr "Terrain d'origine (où l’aéronef est basé)"
 
-#: meeting/models.py:341
-msgid "str_Airfield_ID"
-msgstr "Identifiant de l'aérodrome de départ"
-
-#: meeting/models.py:354
-msgid "str_Error_Reservation_Allready_Exist"
-msgstr ""
-"Vous avez déjà une réservation pour cette manifestation, veuillez l'éditer"
-
-#: meeting/models.py:404
-#: meeting/templates/includes/elements/reservation_detail.html:13
-#: meeting/templates/staff_fuel_reservation_list.html:23
-#: meeting/templates/staff_reservation_list.html:27
-#: meeting/templates/staff_reservation_validation.html:39
-#: meeting/templates/staff_ulm_list.html:59
-msgid "str_Pilot"
-msgstr "Pilote"
-
-#: meeting/templates/aviable_timeslot.html:5
-msgid "str_Timeslot_aviable"
-msgstr ""
-
-#: meeting/templates/includes/elements/empty_modal.html:19
-msgid "str_Close"
-msgstr "Fermé"
-
-#: meeting/templates/includes/elements/pilot_info.html:32
-msgid "str_Postal_address"
-msgstr "Adresse postale"
-
-#: meeting/templates/includes/elements/reservation_detail.html:7
-msgid "str_Meeting"
-msgstr "Manifestation"
-
-#: meeting/templates/includes/elements/reservation_detail.html:15
-msgid "str_Ulm"
-msgstr "ULM"
+#: meeting/models.py:316
+#: meeting/templates/includes/elements/reservation_detail.html:43
+#: meeting/templates/staff_fuel_reservation_list.html:26
+msgid "str_Fuel_reservation"
+msgstr "Réservation de carburant"
 
 #: meeting/templates/includes/elements/reservation_detail.html:45
 msgid "str_Fuel_reservation_confirmed"
@@ -380,7 +313,6 @@ msgstr "Détails de la réservation"
 
 #. Translators: contain the meeting start date as %(start)s and end date as %(end)s
 #: meeting/templates/index.html:9
-#, python-format
 msgid "From the %(start)s, to the %(end)s."
 msgstr "Du %(start)s, au %(end)s"
 
@@ -419,14 +351,6 @@ msgstr "Bienvenue"
 #: meeting/templates/logged_index.html:17
 msgid "str_Reserve_your_arrival_slot"
 msgstr "Réservez votre créneau d'arrivée"
-
-#: meeting/templates/logged_index.html:19
-msgid "str_Reservation_allready_exist"
-msgstr ""
-
-#: meeting/templates/logged_index.html:21
-msgid "str_Reservation_close"
-msgstr "Réservation closes"
 
 #: meeting/templates/pilot_profile.html:5
 #: meeting/templates/pilot_summary.html:13
@@ -470,6 +394,11 @@ msgstr "Aucun créneau disponible"
 msgid "str_Your_reservations"
 msgstr "Vos réservations"
 
+#: meeting/form.py:184 meeting/templates/pilot_reservation_list.html:41
+#: meeting/templates/pilot_ulm_list.html:8
+msgid "str_Add_new"
+msgstr "Nouvel ajout"
+
 #: meeting/templates/pilot_reservation_list.html:61
 #: meeting/templates/pilot_reservation_list.html:79
 msgid "str_Confirm"
@@ -504,6 +433,12 @@ msgstr "En attente de validation"
 msgid "str_Pilot_overview"
 msgstr "Résumé pilote"
 
+#: meeting/form.py:185 meeting/models.py:297
+#: meeting/templates/pilot_summary.html:25
+#: meeting/templates/staff_reservation_validation.html:124
+msgid "str_ULM"
+msgstr "ULM"
+
 #: meeting/templates/pilot_summary.html:41
 msgid "str_Reservations"
 msgstr "Réservations"
@@ -513,6 +448,18 @@ msgstr "Réservations"
 msgid "str_Your_ULMs"
 msgstr "Vos ULM"
 
+#: meeting/models.py:266 meeting/templates/pilot_ulm_list.html:25
+#: meeting/templates/staff_reservation_validation.html:140
+#: meeting/templates/staff_ulm_list.html:58
+msgid "str_Type"
+msgstr "Type"
+
+#: meeting/models.py:270 meeting/templates/pilot_ulm_list.html:29
+#: meeting/templates/staff_reservation_validation.html:144
+#: meeting/templates/staff_ulm_list.html:55
+msgid "str_Imatriculation_country"
+msgstr "Pays d'immatriculation"
+
 #: meeting/templates/pilot_ulm_list.html:33
 msgid "str_Delete"
 msgstr "Supprimez"
@@ -520,13 +467,6 @@ msgstr "Supprimez"
 #: meeting/templates/staff_fuel_reservation_list.html:11
 msgid "str_Pilots_fuel_reservations"
 msgstr "Réservation carburant pilote"
-
-#: meeting/templates/staff_fuel_reservation_list.html:25
-#: meeting/templates/staff_reservation_list.html:29
-#: meeting/templates/staff_reservation_validation.html:152
-#: meeting/templates/staff_ulm_list.html:53
-msgid "str_Radio_id"
-msgstr "Identifiant radio - LSA"
 
 #: meeting/templates/staff_fuel_reservation_list.html:28
 #: meeting/templates/staff_reservation_list.html:33
@@ -559,10 +499,6 @@ msgstr "Créneau"
 msgid "str_Fuel"
 msgstr "carburant"
 
-#: meeting/templates/staff_reservation_list.html:32
-msgid "str_Status"
-msgstr ""
-
 #: meeting/templates/staff_reservation_list.html:70
 #: meeting/templates/staff_reservation_validation.html:175
 msgid "str_Print"
@@ -581,6 +517,13 @@ msgstr "Réservation validée le"
 msgid "str_alert_Reservation_missing_information"
 msgstr "Des informations manquent pour la réservation"
 
+#. Translators: aircraft model
+#: meeting/filters.py:54 meeting/models.py:262
+#: meeting/templates/staff_reservation_validation.html:136
+#: meeting/templates/staff_ulm_list.html:57
+msgid "str_Model"
+msgstr "Modèle"
+
 #: meeting/templates/staff_reservation_validation.html:166
 msgid "str_Invalidate"
 msgstr "Dévalidé"
@@ -594,6 +537,10 @@ msgstr "Recherche par ULM"
 msgid "str_message_password_updated"
 msgstr "Votre mot de passe a été mis à jour"
 
+#: meeting/views/pilot.py:39
+msgid "str_message_correct_error"
+msgstr "Merci de corriger l'erreur ci-dessous"
+
 #. Translators: This contain the ulm name acces by %(ulm)s
 #: meeting/views/pilot.py:127
 msgid "str_message_ulm_deleted"
@@ -602,9 +549,19 @@ msgstr "L'ULM %(ulm)s a été supprimé"
 #. Translators: This contain the ulm name acces by %(ulm)s
 #: meeting/views/pilot.py:129
 msgid "str_message_delete_ulm_link_to_reservation"
-msgstr ""
-"L'ULM %(ulm)s que vous essayez d'effacer est lié à une réservation active et "
-"ne peut être effacé"
+msgstr "L'ULM %(ulm)s que vous essayez d'effacer est lié à une réservation active et ne peut être effacé"
+
+#: meeting/widgets.py:13
+msgid "str_Unknown"
+msgstr "Inconnu"
+
+#: meeting/widgets.py:14
+msgid "str_Yes"
+msgstr "Oui"
+
+#: meeting/widgets.py:15
+msgid "str_No"
+msgstr "Non"
 
 #: pages/models.py:26
 msgid "str_Page_name"
@@ -682,9 +639,10 @@ msgstr "Arrivée en vol des ULM"
 msgid "str_Microlight_departure"
 msgstr "Départ des ULM"
 
+#. Attention flex wings = pendulaire. ce n'est pas plutôt  procédure pour les paramoteurs ?
 #: pages/templates/pilot_informations.html:22
-msgid "str_Powered_paraglider_procedure"
-msgstr "Procédure paramoteurs"
+msgid "str_Flex_wings_procedure"
+msgstr "Pendulaire"
 
 #: pages/templates/pilot_informations.html:26
 msgid "str_Plane_procedure"
@@ -697,6 +655,19 @@ msgstr "Règle de confidentalité"
 #: pages/templates/terms.html:6 templates/includes/footer.html:34
 msgid "str_Legal_terms"
 msgstr "Termes et conditions d'utilisation"
+
+#: radio_call_sign_field/formfields.py:16
+msgid "str_invalide_aircraft_registration_number"
+msgstr "Rentrer une immatriculation valide"
+
+#: meeting/filters.py:13 meeting/filters.py:55 meeting/models.py:274
+msgid "str_Aircraft_registration_number"
+msgstr "Immatriculation de l'avion"
+
+#. Translators: contain variable: value as {val}, patterns as {patterns}
+#: radio_call_sign_field/validators.py:18
+msgid "str_Error_registration_number_does_not_match_pattern"
+msgstr "{val} n’accepte pas un des formats suivants : {patterns}"
 
 #: salon_ulm_blois/settings/base.py:123
 msgid "str_English"
@@ -820,14 +791,6 @@ msgstr "Légal"
 msgid "str_Management"
 msgstr "Direction"
 
-#: templates/includes/logged_sidebar.html:33
-msgid "str_Administration"
-msgstr "Administration"
-
-#: templates/includes/logged_sidebar.html:36
-msgid "str_Administration_zone"
-msgstr "Espace administration"
-
 #: templates/includes/logged_sidebar.html:40
 msgid "str_General"
 msgstr "Général"
@@ -941,50 +904,105 @@ msgstr "La réinitialisation de votre mot de passe a échoué"
 
 #: templates/registration/password_reset_confirm.html:32
 msgid "str_password_reset_link_invalid"
-msgstr ""
-"Le lien de réinitialisation de votre mot de passe est invalide\n"
-"Peut-être a t-il déjà été utilisé. Merci de faire une nouvelle demande de "
-"réinitialisation"
+msgstr "Le lien de réinitialisation de votre mot de passe est invalide\n"
+"Peut-être a t-il déjà été utilisé. Merci de faire une nouvelle demande de réinitialisation"
 
 #: templates/registration/password_reset_done.html:5
 msgid "str_password_reset_email_sent"
-msgstr ""
-"Nous vous avons envoyé les instructions pour réinitialiser votre mot de "
-"passe.\n"
-"Si elles ne sont pas arrivées d'ici quelques minutes, vérifier votre dossier "
-"des courriers indésirables (spam)"
+msgstr "Nous vous avons envoyé les instructions pour réinitialiser votre mot de passe.\n"
+"Si elles ne sont pas arrivées d'ici quelques minutes, vérifier votre dossier des courriers indésirables (spam)"
 
 #: templates/registration/password_reset_form.html:46
 #: templates/registration/register.html:46
 msgid "str_already_have_an_account"
 msgstr "Avez-vous déjà un compte ? Connecter vous !"
 
-#~ msgid "str_invalide_aircraft_registration_number"
-#~ msgstr "Rentrer une immatriculation valide"
+#: pages/templates/pilot_informations.html:22
+msgid "str_Powered_paraglider_procedure"
+msgstr "Procédure paramoteurs"
 
-#~ msgid "str_Error_registration_number_does_not_match_pattern"
-#~ msgstr "{val} n’accepte pas un des formats suivants : {patterns}"
+#: templates/includes/logged_sidebar.html:28
+msgid "str_administrator_zone"
+msgstr "Espace administrateur"
 
-#~ msgid "str_message_correct_error"
-#~ msgstr "Merci de corriger l'erreur ci-dessous"
+#: templates/includes/logged_sidebar.html:33
+msgid "str_Administration"
+msgstr "Administration"
 
-#~ msgid "str_Unknown"
-#~ msgstr "Inconnu"
+#: templates/includes/logged_sidebar.html:36
+msgid "str_Administration_zone"
+msgstr "Espace administration"
 
-#~ msgid "str_Yes"
-#~ msgstr "Oui"
+#: meeting/form.py:137 meeting/models.py:184
+msgid "str_helptext_phonenumber"
+msgstr "Numéro de téléphone où l'on pourra vous joindre sur le salon"
 
-#~ msgid "str_No"
-#~ msgstr "Non"
+#: meeting/form.py:167
+msgid "str_Contact_info"
+msgstr "Information contact"
 
-#~ msgid "str_Powered_Paraglider"
-#~ msgstr "Paramoteurs"
+#: meeting/models.py:341
+msgid "str_Airfield_ID"
+msgstr "Identifiant de l'aérodrome de départ"
 
-#~ msgid "str_Airfield_OACI_code"
-#~ msgstr "Code du terrain (base)"
+#: meeting/templates/includes/elements/pilot_info.html:32
+msgid "str_Postal_address"
+msgstr "Adresse postale"
 
-#~ msgid "str_Flex_wings_procedure"
-#~ msgstr "Pendulaire"
+#: meeting/templates/aviable_timeslot.html:5
+msgid "str_Timeslot_aviable"
+msgstr "Créneaux disponibles"
 
-#~ msgid "str_administrator_zone"
-#~ msgstr "Espace administrateur"
+#: meeting/models.py:188
+msgid "str_street_name"
+msgstr "Rue"
+
+#: meeting/models.py:190
+msgid "str_mail_complement"
+msgstr "Complément d'adresse"
+
+#: meeting/models.py:192
+msgid "str_City"
+msgstr "Ville"
+
+#: meeting/models.py:194
+msgid "str_City_code"
+msgstr "Code postal"
+
+#: meeting/models.py:195
+msgid "str_Country"
+msgstr "Pays"
+
+#: meeting/models.py:306
+msgid "str_helptext_arrival_slot"
+msgstr "Le respect du créneau d'arrivée est impératif"
+
+#: meeting/models.py:311
+msgid "str_helptext_departure_slot"
+msgstr "Le créneau de départ est donné à titre indicatif, en fonction du trafic et des aléas."
+
+#: meeting/models.py:317
+msgid "str_helptext_fuel_reservation"
+msgstr "Cette réservation est une commande de carburant. Max 30 litres."
+
+#: meeting/models.py:188
+msgid "str_street_nnumber_and_name"
+msgstr "Numéro et nom de rue"
+
+#: meeting/models.py:336
+#: meeting/templates/includes/elements/reservation_detail.html:37
+msgid "str_Origin_city_code"
+msgstr ""
+
+#: meeting/templates/logged_index.html:19
+msgid "str_Reservation_allready_exist"
+msgstr ""
+
+#: meeting/templates/logged_index.html:21
+msgid "str_Reservation_close"
+msgstr "Réservation closes"
+
+#: meeting/templates/staff_reservation_list.html:32
+msgid "str_Status"
+msgstr ""
+
