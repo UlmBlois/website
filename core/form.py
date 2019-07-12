@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
+from django.contrib.auth.forms import PasswordResetForm
 # Third party
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Field
@@ -39,20 +39,6 @@ class SignUpForm(UserCreationForm):
                 css_class='form-row'
             ),
             Submit('submit', _('str_Register')),
-        )
-
-
-# TODO refaire une tenative
-class LoginForm(AuthenticationForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = 'post'
-        self.helper.layout = Layout(
-            Field('username', css_class='form-group'),
-            Field('password', css_class='form-group'),
-            Submit('submit', _('str_Submit')),
         )
 
 
