@@ -108,24 +108,35 @@ class PilotTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        meeting1 = create_meeting("1", date(2019, 8, 30), True)
-        ts = create_time_slot(meeting1,
-                              tz.make_aware(
-                                  datetime(2019, 8, 31, 10)),
-                              3)
+        cls.meeting = create_meeting("1", date(2019, 8, 30), True)
+        cls.ts = create_time_slot(cls.meeting,
+                                  tz.make_aware(
+                                    datetime(2019, 8, 31, 10)),
+                                  3)
         cls.user = create_user('testuser', '12345')
 
-        ulm = create_ulm(cls.user.pilot, 'F-XAAA')
-        cls.res = create_reservation('FAE1F6', ulm, ts)
+        cls.ulm = create_ulm(cls.user.pilot, 'F-XAAA')
 
     def test_as_unconfirmed_reservation(self):
+        res = create_reservation('FAE1F6', self.ulm, self.ts)
+
         self.assertTrue(self.user.pilot.as_unconfirmed_reservation)
-        self.res.confirmed = True
-        self.res.save()
+        res.confirmed = True
+        res.save()
         self.assertFalse(self.user.pilot.as_unconfirmed_reservation)
 
     def test_as_active_reservation(self):
+        create_reservation('FAE1F6', self.ulm, self.ts)
         self.assertTrue(self.user.pilot.as_active_reservation)
+
+    @freeze_time("2019-08-5")
+    def test_can_make_reservation(self):
+        self.assertFalse(self.user.pilot.can_make_reservation)
+        create_time_slot(self.meeting,
+                         tz.make_aware(
+                           datetime(2019, 8, 31, 11)),
+                         3)
+        self.assertTrue(self.user.pilot.can_make_reservation)
 
 
 class ULMTest(TestCase):

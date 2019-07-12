@@ -219,7 +219,8 @@ class Pilot(models.Model):
 
     @property
     def can_make_reservation(self):
-        return not self.as_active_reservation
+        meeting = Meeting.objects.active()
+        return not self.as_active_reservation and meeting.registration_aviable
 
 ###############################################################################
 #       ULM
