@@ -13,7 +13,13 @@
 {% get_chunk 'registration_procedure_1' as registration_1 %}
 {{ registration_1.content | safe }}
 <div class="text-center">
+  {% if user.pilot.can_make_reservation %}
   <a href="{% url 'reservation_wizard_step1' pk=user.pilot.pk%}" class="btn btn-primary">{% trans "str_Reserve_your_arrival_slot"%}</a>
+  {% elif user.pilot.as_active_reservation%}
+  <a href="#" class="btn btn-secondary">{% trans "str_Reservation_allready_exist"%}</a>
+  {%else%}
+  <a href="#" class="btn btn-secondary">{% trans "str_Reservation_close"%}</a>
+  {% endif %}
 </div>
 
 {% get_chunk 'registration_procedure_2' as registration_2 %}

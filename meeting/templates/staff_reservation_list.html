@@ -29,7 +29,7 @@
     <th>{% trans "str_Radio_id" %}</th>
     <th>{% trans "str_Fuel" %}</th>
     <th>{% trans "str_Flight_plan" %}</th>
-    <th>{% trans "str_Esthetic_cup" %}</th>
+    <th>{% trans "str_Status" %}</th>
     <th class="center">{% trans "str_Actions" %}</th>
     </tr>
   </thead>
@@ -47,7 +47,15 @@
     <td>{{res.ulm.radio_id}}</td>
     <td>{{res.fuel_reservation}}</td>
     <td>{{res.flight_plan}}</td>
-    <td>{{res.esthetic_cup}}</td>
+    <td>
+      {% if res.canceled %}
+          <span class="badge badge-pill badge-danger">{% trans 'str_Canceled'%}</span>
+      {% elif res.confirmed %}
+          <span class="badge badge-pill badge-primary">{% trans 'str_Confirmed'%}</span>
+      {% else %}
+          <span class="badge badge-pill badge-secondary">{% trans 'str_Waiting_for_validation'%}</span>
+      {%endif%}
+    </td>
     <td class="center">
       {% if res.ulm is not None %}
         <a href="{% url 'staff_reservation_overview' res.pk %}" class="btn btn-primary">{% trans "str_Validate" %}</a>
