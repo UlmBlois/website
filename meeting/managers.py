@@ -32,4 +32,4 @@ class ReservationManager(models.Manager):
 
     def unconfirmed_actives(self):
         return self.filter(meeting__active=True,
-                           confirmed=False)
+                           confirmed=False, canceled=False)

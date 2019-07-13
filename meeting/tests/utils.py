@@ -42,7 +42,8 @@ def create_user(name, password):
     return User.objects.create_user(username=name, password=password)
 
 
-def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None):
+def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None,
+                       confirmed=False, canceled=False):
     return Reservation.objects.create(
                 ulm=ulm,
                 pilot=ulm.pilot,
@@ -50,11 +51,14 @@ def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None):
                 time_slot=ts1,
                 arrival=arrival,
                 depart_time_slot=ts2,
-                meeting=ts1.meeting)
+                meeting=ts1.meeting,
+                confirmed=confirmed,
+                canceled=canceled)
 
 
 def create_full_reservation(res_num=None, user=None, ulm=None, meeting=None,
-                            ts1=None, ts2=None):
+                            ts1=None, ts2=None, confirmed=False,
+                            canceled=False):
     if meeting is None:
         meeting = create_meeting("1", date(2019, 8, 30), True)
     if ts1 is None:
@@ -73,7 +77,8 @@ def create_full_reservation(res_num=None, user=None, ulm=None, meeting=None,
         ulm = create_ulm(user.pilot, 'F-JLOV')
     if res_num is None:
         res_num = 'FAE1F6'
-    return create_reservation(res_num, ulm, ts1, ts2)
+    return create_reservation(res_num, ulm, ts1, ts2,
+                              None, confirmed, canceled)
 
 
 class ViewTestCase(object):
