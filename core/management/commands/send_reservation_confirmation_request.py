@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from django.core.mail import get_connection, EmailMultiAlternatives
 from django.utils.html import strip_tags
-from django.conf import settings
 from datetime import date
 from meeting.models import Reservation, Meeting
 import logging
@@ -45,14 +44,15 @@ class Command(BaseCommand):
         context = {'meeting': meeting}
         message = render_to_string(self.email_template, context=context)
         email_pack = []
-        if True or meeting.confirmation_reminder_date == date.today():
+        if meeting.confirmation_reminder_date == date.today():
             unconfirmed_res = Reservation.objects.unconfirmed_actives()
             email_list = [x.pilot.user.email for x in unconfirmed_res
                           if x.ulm is not None and x.pilot is not None]
-            logger.debug("send confirmation reminder to: %i", len(email_list))
             for email in email_list:
                 email_pack.append((subject, strip_tags(message), message,
-                                   settings.DEFAULT_FROM_EMAIL, [email]))
+                                   None, [email]))
+
+            logger.debug("send confirmation reminder to: %i", len(email_list))
             send_mass_html_mail(email_pack, fail_silently=False)
         else:
             logger.debug("No reminder to send today next one on : %s",

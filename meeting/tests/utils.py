@@ -20,7 +20,8 @@ def create_meeting(name, start_date, active):
             start_date=start_date,
             end_date=end_date,
             registration_start=registration_start,
-            registration_end=registration_end)
+            registration_end=registration_end,
+            confirmation_reminder_date=registration_end)
 
 
 def create_time_slot(meeting, start_date, arrivals_slots, end_date=None):
