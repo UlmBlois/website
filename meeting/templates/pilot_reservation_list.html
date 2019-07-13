@@ -1,5 +1,6 @@
 {% extends "base_logged.html" %}
 {% load i18n %}
+{% load chunks %}
 
 {% block messages %}
   {% if meeting.confirmation_open and user.pilot.as_unconfirmed_reservation %}
@@ -52,7 +53,11 @@
 
     <h5 class="card-title">{{res.meeting}}</h5>
     {% if res.confirmed %}
-    <h6 class="card-subtitle mb-2 text-muted">{{res.reservation_number}}</h6>
+    <div class="card-subtitle mb-2">
+      <h4 class=""><b>{{res.reservation_number}}</b></h4>
+      <small>{% trans 'str_Note_reservation_number_reminder'%}</small><br>
+    </div>
+
     {% endif %}
     {% if res.is_active %}
     <a href="{% url 'pilot_update_reservation' res.pk %}" class="btn btn-warning"><span class="fas fa-pen"></span>{% trans "str_Edit" %}</a>
@@ -70,10 +75,11 @@
                 </button>
               </div>
               <div class="modal-body">
-                <!-- TODO put related chunk -->
+                {% get_chunk 'reservation_confirmation_modal' as confirmation_chunk %}
+                {{ confirmation_chunk.content | safe }}
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'str_Cancel'%}</button>
                 <form action="{% url 'ajax_confirm_reservation' pk=res.pk %}" method=POST>
                   {% csrf_token %}
                   <button class="btn btn-primary"><span class="fas fa-check"></span>{% trans 'str_Confirm'%}</button>
@@ -95,10 +101,11 @@
                 </button>
               </div>
               <div class="modal-body">
-                <!-- TODO put related chunk -->
+                {% get_chunk 'reservation_cancelation_modal' as cancelation_chunk %}
+                {{ cancelation_chunk.content | safe }}
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'str_Cancel'%}</button>
                 <form action="{% url 'ajax_cancel_reservation' pk=res.pk %}" method=POST>
                   {% csrf_token %}
                   <button class="btn btn-danger"><span class="fas fa-minus-circle"></span>{% trans 'str_Cancel_reservation'%}</button>
@@ -112,11 +119,11 @@
     </div> <!-- End Right -->
     <div class="">
     {% if res.canceled %}
-        <h5 class="badge badge-pill badge-danger">{% trans 'str_Canceled'%}</h5>
+        <h3><span class="badge badge-pill badge-danger">{% trans 'str_Canceled'%}</span></h3>
     {% elif res.confirmed %}
-        <h5 class="badge badge-pill badge-primary">{% trans 'str_Confirmed'%}</h5>
+        <h3><span class="badge badge-pill badge-primary">{% trans 'str_Confirmed'%}</span></h3>
     {% else %}
-        <h5 class="badge badge-pill badge-secondary">{% trans 'str_Waiting_for_validation'%}</h5>
+        <h3><span class="badge badge-pill badge-secondary">{% trans 'str_Waiting_for_validation'%}</span></h3>
     {%endif%}
     </div>
   </div>

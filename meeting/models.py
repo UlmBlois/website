@@ -383,7 +383,7 @@ class Reservation(models.Model):
 
     def is_on_time(self):
         """Check if the pilot is arrived during his timeslot"""
-        if self.arrival_delay().seconds/3600 < 4:
+        if self.arrival_delay().seconds/3600 < 1:
             return True
         else:
             return False

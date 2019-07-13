@@ -71,6 +71,16 @@ Template : meeting/logged_index.html
 | registration_procedure_3 | safe       |
 
 
+## Page Pilot reservation list
+
+Template : meeting/pilot_reservation_list.html
+
+| chunk                         | evaluation |
+|-------------------------------|------------|
+| reservation_confirmation_modal | safe       |
+| reservation_cancelation_modal | safe       |
+
+
 ## Page Terms and Conditions
 
 Template : pages/terms.html
@@ -132,4 +142,3 @@ Il est conseillé de faire un back up ou un export de la base avant tout import.
 Dans le cas ou l'import aurais causé des problème d'intégrité des données, supprimer
 toutes les entrées et repartez de vos backup ou du fichier a importer si il reprend toute la base.
 Sinon faites corrigez le fichier a importer afin qu'il corresponde a la base dans laquelle il sera intégré.
- 
