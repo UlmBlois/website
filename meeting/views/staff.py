@@ -18,7 +18,6 @@ from meeting.form import (ReservationForm, UserEditMultiForm, ULMForm)
 import logging
 
 logger = logging.getLogger(__name__)
-# TODO add permission to all view
 
 
 @method_decorator(login_required, name='dispatch')
