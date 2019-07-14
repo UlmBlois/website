@@ -3,6 +3,7 @@ ulm_website/settings/development.py
 salon_ulm_blois/settings/development.py
 bin/*
 staticfiles/*
+chunk_detail.pdf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -39,9 +39,7 @@ class TimeSlotManagerTest(TestCase):
                          tz.make_aware(
                             datetime(2018, 8, 31, 11)),
                          5)
-
         user = create_user('testuser', '12345')
-
         ulm = create_ulm(user.pilot, 'F-XAAA')
         create_reservation('FAE1F6', ulm, ts)
         create_reservation('FAD1F7', ulm, ts)

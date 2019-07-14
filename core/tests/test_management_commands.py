@@ -34,7 +34,8 @@ class SendReservationConfirmationRequestTest(TestCase):
     @freeze_time('2019-08-25')
     def test_command_D_day_batch(self):
         out = StringIO()
-        call_command('send_reservation_confirmation_request', batch=1, stdout=out)
+        call_command('send_reservation_confirmation_request',
+                     batch=1, stdout=out)
         self.assertEqual(len(mail.outbox), 2)
         self.assertIn('batch number: 2/2', out.getvalue())
 

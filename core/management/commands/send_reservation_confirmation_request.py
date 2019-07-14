@@ -78,7 +78,7 @@ class Command(BaseCommand):
             if options['batch'] > 0:
                 n = options['batch']
                 batch_email = [email_pack[i * n:(i + 1) * n] for i in
-                               range((len(email_pack) + n - 1) // n )]
+                               range((len(email_pack) + n - 1) // n)]
             for i, batch in enumerate(batch_email):
                 logger.debug('batch number: %s/%s, of size: %s',
                              i+1, len(batch_email), len(batch))
