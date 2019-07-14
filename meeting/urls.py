@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from meeting.filters import ReservationFilter, ULMFilter, PilotFilter
+from meeting import filters
 
 
 urlpatterns = [
@@ -51,19 +51,19 @@ urlpatterns += [
     path('staff/pilot/<int:pk>/overview/', views.PilotOverview.as_view(),
          name='pilot_overview'),
     path('staff/ulm/', views.FilteredULMList.as_view(
-        filterset_class=ULMFilter,
+        filterset_class=filters.ULMFilter,
         template_name='staff_ulm_list.html'),
         name='staff_ulm_list'),
     path('staff/pilot/', views.FilteredPilotList.as_view(
-        filterset_class=PilotFilter,
+        filterset_class=filters.PilotFilter,
         template_name='staff_pilot_list.html'),
         name='staff_pilot_list'),
     path('staff/fuel/', views.FilteredReservationList.as_view(
-         filterset_class=ReservationFilter,
+         filterset_class=filters.ReservationFilter,
          template_name='staff_fuel_reservation_list.html'),
          name="staff_fuel_res_list"),
     path('staff/reservation/', views.FilteredReservationList.as_view(
-        filterset_class=ReservationFilter,
+        filterset_class=filters.ReservationFilter,
         template_name='staff_reservation_list.html'),
         name='staff_reservation_list'),
     path('staff/reservation/validation/<int:pk>/overview/',

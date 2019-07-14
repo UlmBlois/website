@@ -34,6 +34,8 @@ class Meeting(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     confirmation_reminder_date = models.DateField(null=True, blank=True)
+    automatic_cancelation_date = models.DateField(null=True, blank=True)
+
     active = models.BooleanField(default=False)
     fuel_aviable = models.PositiveIntegerField(default=0)
 
@@ -46,7 +48,8 @@ class Meeting(models.Model):
     def save(self, *args, **kwargs):
         if self.confirmation_reminder_date is None:
             self.confirmation_reminder_date = self.start_date - timedelta(7)
-
+        if self.automatic_cancelation_date is None:
+            self.automatic_cancelation_date = self.start_date - timedelta(3)
         if self.active:
             # select all other active items
             qs = type(self).objects.filter(active=True)

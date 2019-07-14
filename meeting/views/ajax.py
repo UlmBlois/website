@@ -12,13 +12,13 @@ from meeting.models import Pilot
 
 
 def ajax_fuel_served(request, pk):
-        reservation = get_object_or_404(Reservation, pk=pk)
-        if request.method == 'POST':
-            form = AjaxFuelServedForm(request.POST, instance=reservation)
-        else:
-            form = AjaxFuelServedForm(instance=reservation)
-        return save_reservation_form(request, form,
-                                     'reservation_fuel_served_update.html')
+    reservation = get_object_or_404(Reservation, pk=pk)
+    if request.method == 'POST':
+        form = AjaxFuelServedForm(request.POST, instance=reservation)
+    else:
+        form = AjaxFuelServedForm(instance=reservation)
+    return save_reservation_form(request, form,
+                                 'reservation_fuel_served_update.html')
 
 
 def ajax_add_ulm(request, pk):
