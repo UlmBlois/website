@@ -98,11 +98,10 @@ urlpatterns += [
          name='ajax_confirm_reservation'),
 ]
 
-# TODO: test to remove
+# Public EMAIL
+# This mail should not contain any personal information
 urlpatterns += [
-    path('test/email/base/', views.BaseEmailView.as_view(),
-         name='base_email'),
-    path('test/email/res_confirmation/',
+    path('email/res_confirmation/',
          views.ReservationConfirmationEmail.as_view(),
-         name='res_conf_email')
+         name='reservation_confirmation_email')
 ]

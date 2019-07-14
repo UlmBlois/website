@@ -9,7 +9,6 @@
 {% blocktrans with start=meeting.start_date end=meeting.end_date%}From the {{start}}, to the {{end}}.{% endblocktrans  %}
 </p>
 <hr class="my-4">
-<!-- TODO Change Program file access-->
 <!-- TODO Add images -->
 {% endblock %}
 
@@ -88,12 +87,6 @@
 
 <!-- TODO remove this span -->
 <span>
-  exemple d'email present uniqument pour effectuer des testuser
-  <br>
-  <a href="{% url 'base_email'%}">base email</a>
-  <br>
-  <a href="{% url 'res_conf_email'%}"> reservation confirmation email</a>
-  <br>
   <a href="{% url 'slot_aviable'%}">slots</a>
 </span>
 

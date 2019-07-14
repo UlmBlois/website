@@ -59,33 +59,48 @@ class Command(BaseCommand):
             default=0,
             help='Interval in minutes between email batch (default: 0)',
         )
+        parser.add_argument(
+            '-n',
+            '--now',
+            action='store_true',
+            help='Send confirmation request email imediatly',
+        )
 
     def handle(self, *args, **options):
         meeting = Meeting.objects.active()
-        if meeting.confirmation_reminder_date == date.today():
+
+        if options['now'] or meeting.confirmation_reminder_date == date.today():
             subject = _("str_Confirmation_Reminder_Email_Subject")
-            context = {'meeting': meeting}
+            context = {
+                'meeting': meeting,
+                'browser_url': 'reservation_confirmation_email'}
             message = render_to_string(self.email_template, context=context)
             email_pack = []
             unconfirmed_res = Reservation.objects.unconfirmed_actives()
             email_list = [x.pilot.user.email for x in unconfirmed_res
                           if x.ulm is not None and x.pilot is not None]
+
             for email in email_list:
                 email_pack.append((subject, strip_tags(message), message,
                                    None, [email]))
+
             logger.debug("send confirmation reminder to: %i", len(email_list))
+
             batch_email = [email_pack]
             if options['batch'] > 0:
                 n = options['batch']
                 batch_email = [email_pack[i * n:(i + 1) * n] for i in
                                range((len(email_pack) + n - 1) // n)]
+
             for i, batch in enumerate(batch_email):
+                send_mass_html_mail(batch, fail_silently=False)
+
                 logger.debug('batch number: %s/%s, of size: %s',
                              i+1, len(batch_email), len(batch))
                 self.stdout.write(
                     'batch number: %s/%s' % (i+1, len(batch_email)))
                 self.stdout.write('batch size: %s' % len(batch))
-                send_mass_html_mail(batch, fail_silently=False)
+
                 if options['interval'] > 0:
                     time.sleep(60*options['interval'])
         else:

@@ -336,12 +336,12 @@ class Reservation(models.Model):
     modification_date = models.DateTimeField(auto_now=True)
     origin_city_code = models.CharField(
         max_length=64, blank=True,
-        verbose_name=_('str_Origin_city_code'))  # TODO move into profile
+        verbose_name=_('str_Origin_city_code'))
     origin_field = models.CharField(
             max_length=32,
             blank=True,
             verbose_name=_('str_Origin_field'),
-            help_text=_("str_Airfield_ID"))  # TODO move into profile
+            help_text=_("str_Airfield_ID"))
 
     objects = ReservationManager()
 

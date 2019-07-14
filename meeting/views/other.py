@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.utils import timezone as tz
+from django.urls import reverse
 
 from datetime import datetime, timedelta
 from itertools import zip_longest
@@ -48,11 +49,10 @@ class TimeSlotAviableView(TemplateView):
         return context
 
 
-# TODO: Test View to remove
-class BaseEmailView(TemplateView):  # pragma: no cover
-    template_name = 'emails/base_email.html'
-
-
-# TODO: Test View to remove
-class ReservationConfirmationEmail(TemplateView):  # pragma: no cover
+class ReservationConfirmationEmail(TemplateView):
     template_name = 'emails/reservation_confirmation_request.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['browser_url'] = 'reservation_confirmation_email'
+        return context
