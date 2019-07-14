@@ -78,8 +78,6 @@ class CustomUserAdmin(UserAdmin):
     inlines = (PilotInline, )
 
     def get_inline_instances(self, request, obj=None):
-        if not obj or obj.is_staff:
-            return list()
         return super().get_inline_instances(request, obj)
 
 
