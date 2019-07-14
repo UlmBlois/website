@@ -6,6 +6,7 @@ from django.utils.html import strip_tags
 from datetime import date
 from meeting.models import Reservation, Meeting
 import logging
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -38,22 +39,55 @@ class Command(BaseCommand):
     help = _('str_Helptext_send_resevation_conifirmation_request')
     email_template = 'reservation_confirmation_request.html'
 
-    def handle(self, *args, **kwargs):
+    def add_arguments(self, parser):
+        # Named (optional) arguments
+        parser.add_argument(
+            '-b',
+            '--batch',
+            action='store',
+            nargs='?',
+            type=int,
+            default=0,
+            help='Number of email send per batch (default: 0=all)',
+        )
+        parser.add_argument(
+            '-i',
+            '--interval',
+            action='store',
+            nargs='?',
+            type=int,
+            default=0,
+            help='Interval in minutes between email batch (default: 0)',
+        )
+
+    def handle(self, *args, **options):
         meeting = Meeting.objects.active()
-        subject = _("str_Confirmation_Reminder_Email_Subject")
-        context = {'meeting': meeting}
-        message = render_to_string(self.email_template, context=context)
-        email_pack = []
         if meeting.confirmation_reminder_date == date.today():
+            subject = _("str_Confirmation_Reminder_Email_Subject")
+            context = {'meeting': meeting}
+            message = render_to_string(self.email_template, context=context)
+            email_pack = []
             unconfirmed_res = Reservation.objects.unconfirmed_actives()
             email_list = [x.pilot.user.email for x in unconfirmed_res
                           if x.ulm is not None and x.pilot is not None]
             for email in email_list:
                 email_pack.append((subject, strip_tags(message), message,
                                    None, [email]))
-
             logger.debug("send confirmation reminder to: %i", len(email_list))
-            send_mass_html_mail(email_pack, fail_silently=False)
+            batch_email = [email_pack]
+            if options['batch'] > 0:
+                n = options['batch']
+                batch_email = [email_pack[i * n:(i + 1) * n] for i in
+                               range((len(email_pack) + n - 1) // n )]
+            for i, batch in enumerate(batch_email):
+                logger.debug('batch number: %s/%s, of size: %s',
+                             i+1, len(batch_email), len(batch))
+                self.stdout.write(
+                    'batch number: %s/%s' % (i+1, len(batch_email)))
+                self.stdout.write('batch size: %s' % len(batch))
+                send_mass_html_mail(batch, fail_silently=False)
+                if options['interval'] > 0:
+                    time.sleep(60*options['interval'])
         else:
             logger.debug("No reminder to send today next one on : %s",
                          str(meeting.confirmation_reminder_date))

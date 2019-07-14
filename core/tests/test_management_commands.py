@@ -1,8 +1,9 @@
 from django.test import TestCase
 from django.core import mail
 from django.core.management import call_command
-
+from django.utils.six import StringIO
 from datetime import date
+from unittest.mock import patch
 
 from freezegun import freeze_time
 
@@ -26,9 +27,27 @@ class SendReservationConfirmationRequestTest(TestCase):
                                 meeting=meeting, confirmed=True)
 
     @freeze_time('2019-08-25')
-    def test_command_D_day(self):
+    def test_command_D_day_no_batch(self):
         call_command('send_reservation_confirmation_request')
         self.assertEqual(len(mail.outbox), 2)
+
+    @freeze_time('2019-08-25')
+    def test_command_D_day_batch(self):
+        out = StringIO()
+        call_command('send_reservation_confirmation_request', batch=1, stdout=out)
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertIn('batch number: 2/2', out.getvalue())
+
+    @freeze_time('2019-08-25')
+    def test_command_D_day_batch_interval(self):
+        out = StringIO()
+        with patch('time.sleep', return_value=None):
+            call_command('send_reservation_confirmation_request',
+                         batch=1,
+                         interval=30,
+                         stdout=out)
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertIn('batch number: 2/2', out.getvalue())
 
     @freeze_time('2019-07-30')
     def test_command_wrong_day(self):
