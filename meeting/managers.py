@@ -1,6 +1,6 @@
 from django.db import models
 
-import meeting.models as Mod
+from meeting import models as Mod
 
 
 class MeetingManager(models.Manager):
