@@ -3,6 +3,14 @@ import os
 import logging.config
 from django.utils.log import DEFAULT_LOGGING
 
+from dotenv import load_dotenv
+from pathlib import Path  # python3 only
+
+
+# OR, explicitly providing path to '.env'
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
+
 
 DEBUG = os.environ.get('DEBUG', False)
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'amf$+%4%7-vr-dfrq#x$(#ge_491e=4uoered%ujytoq@o3og0')
