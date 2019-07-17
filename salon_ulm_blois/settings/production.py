@@ -1,22 +1,35 @@
 from .base import *
+import os
 import logging.config
 from django.utils.log import DEFAULT_LOGGING
-import dj_database_url
-import django_heroku
-import os
+
 
 DEBUG = os.environ.get('DEBUG', False)
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'amf$+%4%7-vr-dfrq#x$(#ge_491e=4uoered%ujytoq@o3og0')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['ulm-blois.fr']
 
-DEFAULT_DOMAIN = 'https://salon-ulm-blois.herokuapp.com'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('ULM_DB_NAME', ''),
+        'USER': os.environ.get('ULM_DB_USER', ''),
+        'PASSWORD': os.environ.get('ULM_DB_PASSWORD', ''),
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
-DATABASES['default'].update(
-    dj_database_url.config(conn_max_age=500, ssl_require=True))
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('ULM_EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('ULM_EMAIL_PORT', 0)
+EMAIL_HOST_USER = os.environ.get('ULM_EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('ULM_EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = 'no-reply@ulm-blois.fr'
+EMAIL_USE_TLS = True
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ADMINS = ['admin@ulm-blois.fr']
+MANAGERS = ['manager@ulm-blois.fr']
 
 
 # Disable Django's logging setup
@@ -40,6 +53,15 @@ logging.config.dictConfig({
             'class': 'logging.StreamHandler',
             'formatter': 'default',
         },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.environ.get('ULM_LOG_PATH', "~/website/log"),
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
         # Add Handler for Sentry for `warning` and above
         # 'sentry': {
         #     'level': 'WARNING',
@@ -48,9 +70,14 @@ logging.config.dictConfig({
         'django.server': DEFAULT_LOGGING['handlers']['django.server'],
     },
     'loggers': {
+        'django': {
+            'level': LOGLEVEL,
+            'handlers': ['file', 'mail_admins'],
+            'propagate': True,
+        },
         # default for all undefined Python modules
         '': {
-            'level': 'WARNING',
+            'level': LOGLEVEL,
             'handlers': ['console', ],  # 'sentry'],
         },
         # Our application code
@@ -88,6 +115,3 @@ logging.config.dictConfig({
         'django.server': DEFAULT_LOGGING['loggers']['django.server'],
     },
 })
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
