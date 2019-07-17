@@ -64,7 +64,7 @@ logging.config.dictConfig({
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.environ.get('ULM_LOG_PATH', "~/website/log"),
+            'filename': os.environ.get('ULM_LOG_PATH', "/home/genos/website/log"),
         },
         'mail_admins': {
             'level': 'ERROR',
