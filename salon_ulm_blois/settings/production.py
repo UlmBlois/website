@@ -8,11 +8,22 @@ from pathlib import Path  # python3 only
 
 
 # OR, explicitly providing path to '.env'
-env_path = Path('.') / '.env'
+env_path = Path('/home/genos/website/salon_ulm_blois/settings/.env')
 load_dotenv(dotenv_path=env_path)
 
 
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = False
+
+SECURE_SSL_REDIRECT = True
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
+
+SECURE_BROWSER_XSS_FILTER = True
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'amf$+%4%7-vr-dfrq#x$(#ge_491e=4uoered%ujytoq@o3og0')
 
 ALLOWED_HOSTS = ['ulm-blois.fr']
@@ -40,6 +51,7 @@ ADMINS = ['admin@ulm-blois.fr']
 MANAGERS = ['manager@ulm-blois.fr']
 
 
+X_FRAME_OPTIONS = 'DENY'
 # Disable Django's logging setup
 LOGGING_CONFIG = None
 
@@ -64,7 +76,7 @@ logging.config.dictConfig({
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.environ.get('ULM_LOG_PATH', "/home/genos/website/log/salon_ulm_blois.log"),
+            'filename': os.environ.get('ULM_LOG_PATH', "/var/log/ulm-blois.fr/website.log"),
         },
         'mail_admins': {
             'level': 'ERROR',
@@ -86,37 +98,37 @@ logging.config.dictConfig({
         # default for all undefined Python modules
         '': {
             'level': LOGLEVEL,
-            'handlers': ['console', ],  # 'sentry'],
+            'handlers': ['console', 'file'],  # 'sentry'],
         },
         # Our application code
         'meeting': {
             'level': LOGLEVEL,
-            'handlers': ['console', ],  # 'sentry'],
+            'handlers': ['console', 'file'],  # 'sentry'],
             # Avoid double logging because of root logger
             'propagate': False,
         },
         'radio_call_sign_field': {
             'level': LOGLEVEL,
-            'handlers': ['console', ],  # 'sentry'],
+            'handlers': ['console', 'file'],  # 'sentry'],
             # Avoid double logging because of root logger
             'propagate': False,
         },
         'core': {
             'level': LOGLEVEL,
-            'handlers': ['console', ],  # 'sentry'],
+            'handlers': ['console', 'file'],  # 'sentry'],
             # Avoid double logging because of root logger
             'propagate': False,
         },
         'pages': {
             'level': LOGLEVEL,
-            'handlers': ['console', ],  # 'sentry'],
+            'handlers': ['console', 'file'],  # 'sentry'],
             # Avoid double logging because of root logger
             'propagate': False,
         },
         # Prevent noisy modules from logging to Sentry
         'noisy_module': {
             'level': 'ERROR',
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'propagate': False,
         },
         # Default runserver request logging

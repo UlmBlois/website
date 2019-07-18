@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'extra_views',
     'import_export',
     'aircraft_registration_field',
+    'gunicorn',
 
     # Core
     'django.contrib.admin',
