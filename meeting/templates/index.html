@@ -20,7 +20,7 @@
 <div class="row text-center">
 <div class="col-lg-3">
   <div class="card h-100">
-    <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+    <img class="card-img-top" src="{% static 'img/pendular_2.JPG'%}" alt="">
     <div class="card-body">
       <h4 class="card-title">{% trans "str_Microlight_pilot"%}</h4>
       {% get_chunk 'ulm_pilot_short' as ulm_pilot %}
@@ -35,7 +35,7 @@
 
 <div class="col-lg-3">
   <div class="card h-100">
-    <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+    <img class="card-img-top" src="{% static 'img/flex_wing_4.JPG'%}" alt="">
     <div class="card-body">
       <h4 class="card-title">{% trans "str_Paramotor_pilot"%}</h4>
       {% get_chunk 'paramotor_pilot_short' as paramotor_pilot %}
@@ -67,7 +67,7 @@
 
 <div class="col-lg-3">
   <div class="card h-100">
-    <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+    <img class="card-img-top" src="{% static 'img/ground_1.JPG'%}" alt="">
     <div class="card-body">
       <h4 class="card-title">{% trans "str_Exhibitor"%}</h4>
       {% get_chunk 'exhibitor_short' as exhibitor %}
@@ -84,10 +84,5 @@
 <br>
 {% get_chunk 'presentation_short_2' as presentation_2 %}
 {{presentation_2.content | safe}}
-
-<!-- TODO remove this span -->
-<span>
-  <a href="{% url 'slot_aviable'%}">slots</a>
-</span>
 
 {% endblock%}
