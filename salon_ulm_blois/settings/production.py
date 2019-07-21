@@ -8,7 +8,8 @@ from pathlib import Path  # python3 only
 
 
 # OR, explicitly providing path to '.env'
-env_path = Path('/home/genos/website/salon_ulm_blois/settings/.env')
+
+env_path = os.path.join(os.path.dirname(__file__), '/.env')
 load_dotenv(dotenv_path=env_path)
 
 
