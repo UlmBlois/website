@@ -29,7 +29,8 @@
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
-          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-5 d-none d-lg-block" style="background:url({% static 'img/multiaxes_25_resized.jpg'%});background-position:center;background-size:cover;">
+          </div>
           <div class="col-lg-7">
             <a href="{% url 'index' %}"><i class="fas fa-chevron-circle-left"></i>{%trans 'str_Back'%}</a>
             <div class="p-5">

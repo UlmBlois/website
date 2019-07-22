@@ -4,7 +4,9 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.utils import timezone as tz
 from django.urls import reverse
+from django.conf import settings
 
+import os
 from datetime import datetime, timedelta
 from itertools import zip_longest
 import logging
@@ -20,6 +22,7 @@ class IndexView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['meeting'] = Meeting.objects.active()
+        context['images'] = os.listdir(os.path.join(settings.STATIC_ROOT, "img"))
         return context
 
 
