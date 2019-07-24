@@ -48,8 +48,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('ULM_EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL = 'no-reply@ulm-blois.fr'
 EMAIL_USE_TLS = True
 
-ADMINS = ['admin@ulm-blois.fr']
-MANAGERS = ['manager@ulm-blois.fr']
+ADMINS = [('admin', 'admin@ulm-blois.fr')]
+MANAGERS = [('manager', 'manager@ulm-blois.fr')]
 
 
 X_FRAME_OPTIONS = 'DENY'
