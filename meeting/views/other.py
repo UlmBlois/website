@@ -38,17 +38,20 @@ class TimeSlotAviableView(TemplateView):
         context = super().get_context_data(*args, **kwargs)
         meeting = Meeting.objects.active()
         context['meeting'] = meeting
-        days = meeting.open_days()
-        delta = timedelta(days=1)
-        slots_by_days = []
-        for d in days:
-            start_d = tz.make_aware(datetime.combine(d, datetime.min.time()))
-            slots_by_days.append(
-                list(meeting.timeslot_set.filter(
-                        start_date__gte=start_d,
-                        start_date__lt=start_d+delta).order_by('start_date')))
-        context['ts_table'] = [days] + list(zip_longest(*slots_by_days))
-        context['ts_aviables'] = TimeSlot.objects.aviables()
+        if(meeting):
+            days = meeting.open_days()
+            delta = timedelta(days=1)
+            slots_by_days = []
+            for d in days:
+                start_d = tz.make_aware(
+                    datetime.combine(d, datetime.min.time()))
+                slots_by_days.append(
+                    list(meeting.timeslot_set.filter(
+                            start_date__gte=start_d,
+                            start_date__lt=start_d+delta
+                            ).order_by('start_date')))
+            context['ts_table'] = [days] + list(zip_longest(*slots_by_days))
+            context['ts_aviables'] = TimeSlot.objects.aviables()
         return context
 
 

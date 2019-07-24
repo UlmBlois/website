@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+{% if meeting %}
   <table class='table'>
     {% for ts in ts_table %}
       {% if forloop.first%}
@@ -31,4 +32,7 @@
       {% endif %}
     {% endfor %}
   </table>
+{% else %}
+  {% trans 'str_no_meeting' %}
+{% endif%}
 {% endblock %}
