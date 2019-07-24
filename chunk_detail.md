@@ -4,9 +4,11 @@
 
 Template : includes/alert_messages.html
 
-|chunk                |evaluation|
-|---------------------|----------|
-|global_info_messsage |   safe   |
+|chunk                   |evaluation|
+|------------------------|----------|
+|global_info_messsage    |   safe   |
+|global_warning_messsage |   safe   |
+|global_danger_messsage  |   safe   |
 
 ## Page index
 

@@ -2,13 +2,35 @@
 <div class="pt-2">
 
 <!-- info messages -->
-{% get_chunk 'global_info_messsage' as message %}
-{% if message %}
+{% get_chunk 'global_info_messsage' as info %}
+{% if info %}
 <div class="alert alert-info alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
-  {{ message.content|safe}}
+  {{ info.content|safe}}
+</div>
+{% endif %}
+
+<!-- danger messages -->
+{% get_chunk 'global_danger_messsage' as danger %}
+{% if danger %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{ danger.content|safe}}
+</div>
+{% endif %}
+
+<!-- warning messages -->
+{% get_chunk 'global_warning_messsage' as warning %}
+{% if warning %}
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{ warning.content|safe}}
 </div>
 {% endif %}
 
