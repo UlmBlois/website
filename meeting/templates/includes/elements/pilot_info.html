@@ -5,12 +5,20 @@
   <table class="table">
     <tbody>
       <tr role="row">
+        <th scope="row">{% trans 'str_Username'%}</th>
+        <td>{{pilot.user.username}}</td>
+      </tr>
+      <tr role="row">
         <th scope="row">{% trans 'str_First_name'%}</th>
         <td>{{pilot.user.first_name}}</td>
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Last_name'%}</th>
         <td>{{pilot.user.last_name}}</td>
+      </tr>
+      <tr role="row">
+        <th scope="row">{% trans 'str_Email'%}</th>
+        <td>{{pilot.user.email}}</td>
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Licence_number'%}</th>

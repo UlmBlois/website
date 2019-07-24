@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 
 from pages.managers import ChunkManager
 
+# TODO add a display boolean to chunk
+
 
 def fallback_to_default(name):
     def getter(self):
