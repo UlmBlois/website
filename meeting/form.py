@@ -189,7 +189,7 @@ class ULMFormSetHelper(FormHelper):
         self.form_method = 'post'
         self.layout = Layout(
             Div(
-                Div(  # TODO add str_Add_new_ulm to po files
+                Div(
                     HTML(self.card_header % self.card_data),
                     css_class="card-header",
                     ),
