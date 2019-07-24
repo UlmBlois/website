@@ -1018,7 +1018,5 @@ msgid "str_no_meeting"
 msgstr "Pas de manifestation"
 
 #: meeting/templates/includes/elements/pilot_info.html:20
-#, fuzzy
 msgid "str_Email"
 msgstr "Adresse électronique"
-
