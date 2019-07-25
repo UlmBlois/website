@@ -47,7 +47,7 @@ Template : pages/pilot_informations.html
 | chunk                | evaluation   | Variables |
 |----------------------|--------------|-----------|
 | pilot_info_general   |    safe      |           |
-| pilot_info_arrival   |    render    | static    |
+| pilot_info_arrival   |    safe      |           |
 | pilot_info_departure |    safe      |           |
 | pilot_info_paramotor |    safe      |           |
 | pilot_info_plane     |    safe      |           |
