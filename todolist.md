@@ -4,3 +4,5 @@
 * TODO serve images over https
 * TODO clear requirements file
 * TODO change images in chunk
+* TODO corriger traduction
+  * aircraft_registration_number
