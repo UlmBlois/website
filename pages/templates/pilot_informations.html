@@ -1,6 +1,8 @@
 {% extends 'base_generic.html' %}
 {% load chunks %}
 {% load i18n %}
+{% load render %}
+
 
 {% block header %}
   <h1>{% trans "str_Pilots_information" %}</h1>
@@ -12,7 +14,8 @@
 {{ general_info.content | safe }}
 
 <h1>{% trans "str_Microlight_in_flight_arrival" %}</h1>
-{% get_chunk 'pilot_info_arrival' as arrival %}
+{% get_chunk 'pilot_info_arrival' as arrival_chunk %}
+{% render arrival_chunk.content as arrival%}
 {{arrival.content | safe }}
 
 <h1>{% trans "str_Microlight_departure" %}</h1>
