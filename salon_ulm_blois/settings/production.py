@@ -27,7 +27,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 SECRET_KEY = os.environ.get('ULM_SECRET_KEY', 'amf$+%4%7-vr-dfrq#x$(#ge_491e=4uoered%ujytoq@o3og0')
 
-ALLOWED_HOSTS = ['ulm-blois.fr']
+ALLOWED_HOSTS = ['ulm-blois.fr', 'www.ulm-blois.fr']
 
 DATABASES = {
     'default': {
