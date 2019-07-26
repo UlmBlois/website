@@ -56,14 +56,14 @@ class Chunk(models.Model):
             help_text=_('str_chunk_display_help_text'))
     content = TranslatedField(
                         HTMLField(_('str_Content'), blank=True),
-                        {settings.LANGUAGES[0][0]: {"blank": False}},
+                        {settings.LANGUAGES[0][0]: {"blank": True}},
                         attrgetter=fallback_to_default,)
     description = TranslatedField(
                         models.CharField(_('str_Description'),
                                          blank=True,
                                          max_length=64,
                                          help_text=_("str_Short_description")),
-                        {settings.LANGUAGES[0][0]: {"blank": False}},
+                        {settings.LANGUAGES[0][0]: {"blank": True}},
                         attrgetter=fallback_to_default,)
 
     objects = ChunkManager()
