@@ -15,11 +15,16 @@ class GetChunkTest(TestCase):
     def setUpTestData(cls):
         pg = Page.objects.create(slug='page_1')
         cls.chunk = Chunk.objects.create(page=pg,
-                                         key='chunk1')
+                                         key='chunk1',
+                                         display=True)
+        cls.chunk2 = Chunk.objects.create(page=pg,
+                                          key='chunk2',
+                                          display=False)
 
     def test_get_chunk(self):
         self.assertEqual(get_chunk('chunk1'), self.chunk)
         self.assertIsNone(get_chunk(''))
+        self.assertIsNone(get_chunk('chunk2'), self.chunk2)
 
 
 class RenderTest(TestCase):

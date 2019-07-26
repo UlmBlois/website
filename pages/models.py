@@ -7,8 +7,6 @@ from django.utils.translation import gettext_lazy as _
 
 from pages.managers import ChunkManager
 
-# TODO add a display boolean to chunk
-
 
 def fallback_to_default(name):
     def getter(self):
@@ -52,6 +50,10 @@ class Chunk(models.Model):
                            blank=False,
                            max_length=255,
                            unique=True)
+    display = models.BooleanField(
+            default=True,
+            verbose_name=_('str_Display'),
+            help_text=_('str_chunk_display_help_text'))
     content = TranslatedField(
                         HTMLField(_('str_Content'), blank=True),
                         {settings.LANGUAGES[0][0]: {"blank": False}},

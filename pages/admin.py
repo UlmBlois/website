@@ -46,12 +46,12 @@ class ChunkResources(resources.ModelResource):
 
 @admin.register(Chunk)
 class ChunkAdmin(ImportExportMixin, TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ('key', "description", 'page')
-    list_filter = ['page']
+    list_display = ('key', "description", 'page', 'display')
+    list_filter = ['page', 'display']
     base_fields = ['description', 'content']
     resource_class = ChunkResources
     fieldsets = [
-        (_("str_Globals"), {"fields": ["key", "page"]}),
+        (_("str_Globals"), {"fields": ["key", "page", "display"]}),
     ]
     order_fieldset(fieldsets, base_fields)
 
