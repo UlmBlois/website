@@ -12,19 +12,19 @@
 <h1>{% trans "str_General_organisation" %}</h1>
 {% get_chunk 'pilot_info_general' as general_info %}
 {{ general_info.content | safe }}
-
+<br>
 <h1>{% trans "str_Microlight_in_flight_arrival" %}</h1>
 {% get_chunk 'pilot_info_arrival' as arrival %}
 {{arrival.content | safe }}
-
+<br>
 <h1>{% trans "str_Microlight_departure" %}</h1>
 {% get_chunk 'pilot_info_departure' as departure %}
 {{ departure.content | safe}}
-
+<br>
 <h1>{% trans "str_Powered_paraglider_procedure" %}</h1>
 {% get_chunk 'pilot_info_paramotor' as paramotor %}
 {{ paramotor.content | safe}}
-
+<br>
 <h1>{% trans "str_Plane_procedure" %}</h1>
 {% get_chunk 'pilot_info_plane' as plane %}
 {{ plane.content | safe}}

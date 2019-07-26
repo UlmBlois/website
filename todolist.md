@@ -1,7 +1,7 @@
-* TODO update copyright notice in email et public pages
+* ~~update copyright notice in email et public pages~~
 * ~~finish chunk import~~
 * finish chunk
-* TODO serve images over https
+* ~~serve images over https~~
 * TODO clear requirements file
 * TODO change images in chunk
 * TODO corriger traduction
