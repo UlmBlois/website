@@ -68,6 +68,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         meeting = Meeting.objects.active()
+        logger.debug("Start Send_reservation_confirmation_request command.")
 
         if options['now'] or meeting.confirmation_reminder_date == date.today():
             subject = _("str_Confirmation_Reminder_Email_Subject")
@@ -106,3 +107,5 @@ class Command(BaseCommand):
         else:
             logger.debug("No reminder to send today next one on : %s",
                          str(meeting.confirmation_reminder_date))
+
+        logger.debug("End Send_reservation_confirmation_request command.")

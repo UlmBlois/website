@@ -20,6 +20,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        logger.debug("Start Cancel_unconfirmed_reservation command.")
         meeting = Meeting.objects.active()
         cancel_date = meeting.start_date - timedelta(days=3)
         if options['now'] or cancel_date == date.today():
@@ -33,3 +34,4 @@ class Command(BaseCommand):
                          nb_unconfirmed)
         else:
             logger.debug('Cancelation planified on %s', str(cancel_date))
+        logger.debug("End Cancel_unconfirmed_reservation command.")
