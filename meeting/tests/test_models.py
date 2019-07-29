@@ -101,7 +101,7 @@ class TimeSlotTest(TestCase):
         with self.assertRaises(ValidationError):
             ts.clean()
 
-# TODO test create_or_update_user_profile
+# NICETODO test create_or_update_user_profile
 
 
 class PilotTest(TestCase):
@@ -150,7 +150,7 @@ class ULMTest(TestCase):
         self.assertEqual(ULM.objects.get(pilot=self.user.pilot).radio_id,
                          'F-JAER')
 
-# TODO test normalize_reservation
+# NICETODO test normalize_reservation
 
 
 class ReservationTest(TestCase):
@@ -173,7 +173,7 @@ class ReservationTest(TestCase):
         create_reservation('FAE1F6', ulm, ts1, ts2,
                            tz.make_aware(datetime(2019, 8, 31, 11)))
 
-#  TODO test validate_unique
+#  NICETODO test validate_unique
     def test_is_active(self):
         res = Reservation.objects.get(reservation_number='FAE1F6')
         self.assertTrue(res.is_active())

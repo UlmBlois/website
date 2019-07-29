@@ -1,14 +1,13 @@
 # django
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.http import JsonResponse, HttpResponseRedirect
-from django.template.loader import render_to_string
+from django.http import HttpResponseRedirect
+
 # owned
 from meeting.models import Reservation
 from .utils import save_reservation_form
 
-from meeting.form import AjaxFuelServedForm, ULMForm
-from meeting.models import Pilot
+from meeting.form import AjaxFuelServedForm
 
 
 def ajax_fuel_served(request, pk):
@@ -19,26 +18,6 @@ def ajax_fuel_served(request, pk):
         form = AjaxFuelServedForm(instance=reservation)
     return save_reservation_form(request, form,
                                  'reservation_fuel_served_update.html')
-
-
-def ajax_add_ulm(request, pk):
-    data = {}
-    if request.method == 'POST':
-        form = ULMForm(request.POST)
-        if form.is_valid():
-            ulm = form.save(commit=False)
-            ulm.pilot = get_object_or_404(Pilot, pk=pk)
-            ulm.save()
-            data['form_is_valid'] = True
-        else:
-            data['form_is_valid'] = False
-    else:
-        form = ULMForm()
-    context = {'form': form}
-    context.update({'pilot': pk})
-    data['html_form'] = render_to_string('add_pilot_ulm.html',
-                                         context, request=request)
-    return JsonResponse(data)
 
 
 # TODO call with ajax and make the appropriate change to the view and the template

@@ -91,7 +91,6 @@ urlpatterns += [
 urlpatterns += [
     path('ajax/reservation/fuelserved/<int:pk>/', views.ajax_fuel_served,
          name="ajax_fuel_served"),
-    path('ajax/add_ulm/<int:pk>/', views.ajax_add_ulm, name="ajax_add_ulm"),
     path('ajax/reservation/cancel/<int:pk>', views.ajax_cancel_reservation,
          name='ajax_cancel_reservation'),
     path('ajax/reservation/confirm/<int:pk>', views.ajax_confirm_reservation,

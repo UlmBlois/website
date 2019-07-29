@@ -1,7 +1,10 @@
+{% load i18n %}
+
+
 <form method="post" action="{% url 'ajax_fuel_served' form.instance.pk %}" class="js-fuel-served-update-form">
   {% csrf_token %}
   <div class="modal-header">
-    <h4 class="modal-title">Fuel Served</h4>
+    <h4 class="modal-title">{% trans 'str_Fuel_served'%}</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -20,7 +23,7 @@
     {% endfor %}
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Update fuel served</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'str_Cancel' %}</button>
+    <button type="submit" class="btn btn-primary">{% trans 'str_Update_fuel_served' %}</button>
   </div>
 </form>

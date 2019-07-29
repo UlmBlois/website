@@ -469,7 +469,7 @@ class ReservationWizardStep2Test(LoggedViewTestCase, TestCase):
     url = '/meeting/reservation/wizard/{}/ulm'
     url_name = 'reservation_wizard_step2'
     template_name = 'base_logged_form.html'
-    # TODO see if more test are needed
+    # NICETODO see if more test are needed
 
     @classmethod
     def setUpTestData(cls):
