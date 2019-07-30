@@ -25,7 +25,8 @@ from pages.sitemaps import StaticViewSitemap
 from core.sitemaps import CoreViewSitemap
 from faq.sitemaps import FaqViewSitemap
 from meeting.sitemaps import MeetingViewSitemap
-# TODO: DEBUG ONLY
+
+# NOTE: DEBUG ONLY
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -56,7 +57,12 @@ urlpatterns = [
     path('pages/', include('pages.urls')),
     path('faq/', include('faq.urls')),
     path('', RedirectView.as_view(url='/meeting/', permanent=True)),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += [
+        static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    ]
 
 urlpatterns += [
     url(r'^tinymce/', include('tinymce.urls')),
