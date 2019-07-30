@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin
+
+Host: https://ulm-blois.fr
+Sitemap: https://ulm-blois.fr/sitemap.xml
