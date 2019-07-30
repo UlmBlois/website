@@ -18,7 +18,13 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
+from django.contrib.sitemaps.views import sitemap
+
 from core.form import PasswordResetForm
+from pages.sitemaps import StaticViewSitemap
+from core.sitemaps import CoreViewSitemap
+from faq.sitemaps import FaqViewSitemap
+from meeting.sitemaps import MeetingViewSitemap
 # TODO: DEBUG ONLY
 from django.conf.urls.static import static
 from django.conf import settings
@@ -28,7 +34,16 @@ handler500 = 'core.views.handler_500'
 handler403 = 'core.views.handler_403'
 handler400 = 'core.views.handler_400'
 
+sitemaps = {
+    'static': StaticViewSitemap,
+    'core': CoreViewSitemap,
+    'faq': FaqViewSitemap,
+    'meeting': MeetingViewSitemap,
+}
+
 urlpatterns = [
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
     path('accounts/password_reset/',
          auth_views.PasswordResetView.as_view(
             form_class=PasswordResetForm,

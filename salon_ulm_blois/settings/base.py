@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     # Project Apps
     'core.apps.CoreConfig',
@@ -51,6 +53,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
 ]
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'salon_ulm_blois.urls'
 
