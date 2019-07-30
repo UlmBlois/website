@@ -9,6 +9,6 @@
 * TODO corriger traduction
   * aircraft_registration_number
   * pilot_information
-* TODO: setup cron
-  * reservation reminder
-  * automatique cancelation
+* ~~setup cron~~
+  * ~~reservation reminder~~
+  * ~~automatique cancelation~~

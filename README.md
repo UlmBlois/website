@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/UlmBlois/website.svg?branch=master)](https://travis-ci.org/UlmBlois/website)
 [![Coverage Status](https://coveralls.io/repos/github/UlmBlois/website/badge.svg?branch=master)](https://coveralls.io/github/UlmBlois/website?branch=master)
-[![Heroku](https://heroku-badge.herokuapp.com/?app=salon-ulm-blois&style=flat&svg=1)](https://salon-ulm-blois.herokuapp.com/meeting/)
 # website
 Website for the ULM meeting of Blois
 
