@@ -5,9 +5,9 @@
   * aircraft_registration_number
   * pilot_information
   * fields verbose name
-* TODO add link to side bar
-  * legal Pages
-  * slots aviables
+* ~~add link to side bar~~
+  * ~~legal Pages~~
+  * ~~slots aviables~~
 * ~~create sitemap.xml~~
 * ~~create robot.txt~~
 * ~~setup cron~~

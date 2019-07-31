@@ -123,7 +123,12 @@
       <i class="fas fa-fw fa-question-circle"></i>
       <span>{% trans "str_FAQ"%}</span></a>
   </li>
-  <!-- TODO add legal pages -->
+
+  <li class="nav-item {% if url_name == 'slot_aviable' %}active{% endif %}">
+    <a class="nav-link" href="{% url 'slot_aviable'%}">
+      <i class="fas fa-fw fa-calendar-alt"></i>
+      <span>{% trans "str_Timeslot_aviable"%}</span></a>
+  </li>
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

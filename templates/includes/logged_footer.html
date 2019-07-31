@@ -1,9 +1,9 @@
 {% load i18n %}
 
 <footer class="sticky-footer bg-white">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright &copy; Salon ULM de Blois 2019</span>
-    </div>
+  <div class="container my-auto text-center">
+    <a class="text-secondary pr-4" href="{% url 'privacy' %}">{% trans "str_Privacy_policies" %}</a>
+    <a class="text-secondary" href="{% url 'copyright' %}">{% trans "str_Copyright_notices" %}</a>
+    <a class="text-secondary pl-4" href="{% url 'terms' %}">{% trans "str_Legal_terms" %}</a>
   </div>
 </footer>
