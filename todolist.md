@@ -1,11 +1,15 @@
-* TODO create sitemap.xml
-* TODO create robot.txt
 * TODO clear requirements file
 * TODO change images in chunk
   * warning/ stop icon in pilot_info_departure
 * TODO corriger traduction
   * aircraft_registration_number
   * pilot_information
+  * fields verbose name
+* TODO add link to side bar
+  * legal Pages
+  * slots aviables
+* ~~create sitemap.xml~~
+* ~~create robot.txt~~
 * ~~setup cron~~
   * ~~reservation reminder~~
   * ~~automatique cancelation~~
@@ -13,4 +17,5 @@
 * ~~finish chunk import~~
 * ~~finish chunk~~
 * ~~serve images over https~~
-* TODO change image size (thumbnail size: 640× quality: 60%)
+* ~~change image size (thumbnail size: 640× quality: 60%)~~
+  * multiple images size

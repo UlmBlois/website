@@ -1,0 +1,31 @@
+{% load i18n %}
+
+{% if meeting %}
+  <table class='table'>
+    {% for ts in ts_table %}
+      {% if forloop.first%}
+      <thead class=thead-dark>
+        <tr>
+          {% for d in ts%}
+            <th>{{d}}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      {% else %}
+        <tr>
+        {% for t in ts%}
+          <th class="table-{% if t in ts_aviables%}success{% elif t %}danger{% else %}secondary{%endif%}">
+            {% if t %}
+            {{t.str_range}}
+            {% else %}
+            -
+            {% endif %}
+          </th>
+        {% endfor %}
+        <tr>
+      {% endif %}
+    {% endfor %}
+  </table>
+{% else %}
+  {% trans 'str_no_meeting' %}
+{% endif%}

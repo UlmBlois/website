@@ -4,7 +4,8 @@ from django.utils import timezone as tz
 from datetime import date, datetime
 
 from meeting.tests.utils import (create_meeting, create_time_slot,
-                                 ViewTestCase, LoggedViewTestCase)
+                                 ViewTestCase, LoggedViewTestCase,
+                                 create_user)
 
 
 class IndexViewTest(ViewTestCase, TestCase):
@@ -33,6 +34,7 @@ class TimeSlotAviableViewTest(ViewTestCase, TestCase):
     url = '/meeting/slot/aviable'
     url_name = 'slot_aviable'
     template_name = 'aviable_timeslot.html'
+    logged_template_name = 'aviable_timeslot_logged.html'
 
     @classmethod
     def setUpTestData(cls):
@@ -56,3 +58,13 @@ class TimeSlotAviableViewTest(ViewTestCase, TestCase):
         ts_t = [[date(2019, 8, 30), date(2019, 8, 31), date(2019, 9, 1)],
                 (self.ts3, self.ts1, None), (self.ts2, None, None)]
         self.assertEqual(response.context['ts_table'], ts_t)
+
+    def test_logged_template(self):
+        user = create_user("user", "testtest")
+        self.client.force_login(user)
+        if self.logged_template_name != '':
+            response = self.client.get(self.get_url())
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, self.logged_template_name)
+
+            #

@@ -33,6 +33,12 @@ class LoggedIndexView(TemplateView):
 
 class TimeSlotAviableView(TemplateView):
     template_name = 'aviable_timeslot.html'
+    logged_template_name = 'aviable_timeslot_logged.html'
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.user.is_authenticated:
+            self.template_name = self.logged_template_name
+        return super().render_to_response(context, **response_kwargs)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
