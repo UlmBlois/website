@@ -58,7 +58,7 @@ X_FRAME_OPTIONS = 'DENY'
 # Disable Django's logging setup
 LOGGING_CONFIG = None
 
-LOGLEVEL = os.environ.get('LOGLEVEL', 'info').upper()
+LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 
 logging.config.dictConfig({
     'version': 1,
@@ -79,10 +79,12 @@ logging.config.dictConfig({
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
+            'formatter': 'default',
             'filename': os.environ.get('ULM_LOG_PATH', "/var/log/ulm-blois.fr/website.log"),
         },
         'mail_admins': {
             'level': 'ERROR',
+            'formatter': 'default',
             'class': 'django.utils.log.AdminEmailHandler',
         },
         # Add Handler for Sentry for `warning` and above
