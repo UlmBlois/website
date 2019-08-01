@@ -77,7 +77,7 @@ logging.config.dictConfig({
             'formatter': 'default',
         },
         'file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'default',
             'filename': os.environ.get('ULM_LOG_PATH', "/var/log/ulm-blois.fr/website.log"),
