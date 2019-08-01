@@ -86,6 +86,7 @@ logging.config.dictConfig({
             'level': 'ERROR',
             'formatter': 'default',
             'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
         },
         # Add Handler for Sentry for `warning` and above
         # 'sentry': {
@@ -112,15 +113,9 @@ logging.config.dictConfig({
             # Avoid double logging because of root logger
             'propagate': False,
         },
-        'radio_call_sign_field': {
-            'level': LOGLEVEL,
-            'handlers': ['file'],  # 'sentry'],
-            # Avoid double logging because of root logger
-            'propagate': False,
-        },
         'core': {
             'level': LOGLEVEL,
-            'handlers': ['file'],  # 'sentry'],
+            'handlers': ['console', 'file'],  # 'sentry'],
             # Avoid double logging because of root logger
             'propagate': False,
         },
