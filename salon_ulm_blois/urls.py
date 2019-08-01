@@ -56,6 +56,7 @@ urlpatterns = [
     path('meeting/', include('meeting.urls')),
     path('pages/', include('pages.urls')),
     path('faq/', include('faq.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
     path('', RedirectView.as_view(url='/meeting/', permanent=True)),
 ]
 
