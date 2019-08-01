@@ -8,7 +8,7 @@ from meeting.models import Reservation, Meeting
 import logging
 import time
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('command')
 
 
 def send_mass_html_mail(datatuple, fail_silently=False, user=None, password=None,

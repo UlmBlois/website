@@ -115,7 +115,7 @@ logging.config.dictConfig({
         },
         'core': {
             'level': LOGLEVEL,
-            'handlers': ['console', 'file'],  # 'sentry'],
+            'handlers': ['file'],  # 'sentry'],
             # Avoid double logging because of root logger
             'propagate': False,
         },
@@ -124,6 +124,12 @@ logging.config.dictConfig({
             'handlers': ['file'],  # 'sentry'],
             # Avoid double logging because of root logger
             'propagate': False,
+        },
+        'command': {
+            'level': LOGLEVEL,
+            'handlers': ['console', 'file'],  # 'sentry'],
+            # Avoid double logging because of root logger
+            # 'propagate': False,
         },
         # Prevent noisy modules from logging to Sentry
         'noisy_module': {

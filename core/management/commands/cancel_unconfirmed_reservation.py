@@ -3,7 +3,7 @@ from meeting.models import Reservation, Meeting
 from datetime import timedelta, date
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('command')
 
 
 class Command(BaseCommand):
