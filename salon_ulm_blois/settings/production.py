@@ -58,7 +58,7 @@ X_FRAME_OPTIONS = 'DENY'
 # Disable Django's logging setup
 LOGGING_CONFIG = None
 
-LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
+LOGLEVEL = os.environ.get('LOGLEVEL', 'DEBUG').upper()
 
 logging.config.dictConfig({
     'version': 1,
