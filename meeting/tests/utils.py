@@ -44,7 +44,7 @@ def create_user(name, password):
 
 
 def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None,
-                       confirmed=False, canceled=False):
+                       confirmed=False, canceled=False, fuel_reservation=0):
     return Reservation.objects.create(
                 ulm=ulm,
                 pilot=ulm.pilot,
@@ -54,7 +54,8 @@ def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None,
                 depart_time_slot=ts2,
                 meeting=ts1.meeting,
                 confirmed=confirmed,
-                canceled=canceled)
+                canceled=canceled,
+                fuel_reservation=fuel_reservation)
 
 
 def create_full_reservation(res_num=None, user=None, ulm=None, meeting=None,
