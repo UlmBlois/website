@@ -7,9 +7,9 @@
 <form method="post">
     {% csrf_token %}
     {# Translators: contain variable %(object)s #}
-    <p>{% blocktrans %}str_confirm_deletion{% endblocktrans%}</p>
+    <p>{% blocktrans with object=object%}str_confirm_deletion_{{object}}{% endblocktrans %}</p>
     <p>{% trans 'str_Action_can_not_be_canceled' %}</p>
-    <input type="submit" value="Confirm" class="btn btn-danger">
+    <input type="submit" value="{% trans 'str_Confirm'%}" class="btn btn-danger">
     <a class="btn btn-primary" href="{{cancel_url}}">{%trans 'str_Cancel'%}</a>
 </form>
 </div>

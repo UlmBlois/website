@@ -25,7 +25,7 @@ SECURE_BROWSER_XSS_FILTER = True
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-SECURE_HSTS_SECONDS = 60
+SECURE_HSTS_SECONDS = 31536000
 
 SECRET_KEY = os.environ.get('ULM_SECRET_KEY', 'amf$+%4%7-vr-dfrq#x$(#ge_491e=4uoered%ujytoq@o3og0')
 
