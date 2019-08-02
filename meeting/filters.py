@@ -25,9 +25,10 @@ class ReservationFilter(FilterSet):
     def filter_numeric_is_set(self, queryset, name, value):
         logger.debug('value: %s', str(value))
         if value:
-            return queryset.filter(fuel_served__gt=0)
+            lookup = '__'.join([name, 'gt'])
+            return queryset.filter(**{lookup: 0})
         else:
-            return queryset.filter(fuel_served=0)
+            return queryset.filter(**{name: 0})
 
     class Meta:
         model = Reservation
