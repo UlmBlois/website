@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
-from django.utils import timezone
+from django.utils import timezone, formats
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator
 # Third party
@@ -106,9 +106,12 @@ class TimeSlot(models.Model):
 
     def __str__(self):
         """String representing an arrivals time slot."""
-        return "{}-{}".format(
-            timezone.localtime(self.start_date).strftime("%A %H:%M"),
-            timezone.localtime(self.end_date).strftime("%H:%M"))
+        start = timezone.localtime(self.start_date)
+        end = timezone.localtime(self.end_date)
+        return _("{start}-{end}").format(
+            start=formats.date_format(start, format="l H:i"),
+            end=formats.date_format(end, format="H:i")
+            ).capitalize()
 
     def str_range(self):  # pragma: no cover
         return "{}-{}".format(
