@@ -16,7 +16,8 @@ class ReservationFilter(FilterSet):
                                          lookup_expr='icontains')
     pilot__user__last_name = CharFilter(label=_('str_Last_name'),
                                         lookup_expr='icontains')
-    time_slot = ModelChoiceFilter(queryset=models.TimeSlot.objects.actives())
+    time_slot = ModelChoiceFilter(
+        queryset=lambda req: models.TimeSlot.objects.actives())
     fuel_served = BooleanFilter(label=_('str_Fuel_served'),
                                 method='filter_numeric_is_set')
     fuel_reservation = BooleanFilter(label=_('str_Fuel_reserved'),
