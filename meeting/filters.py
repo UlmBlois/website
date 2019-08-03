@@ -1,6 +1,6 @@
 from django_filters import FilterSet, CharFilter, ModelChoiceFilter, BooleanFilter
 from django.utils.translation import gettext_lazy as _
-from meeting.models import Reservation, TimeSlot, ULM, Pilot
+from meeting import models
 from meeting.fields import ListTextWidget
 import logging
 
@@ -16,7 +16,7 @@ class ReservationFilter(FilterSet):
                                          lookup_expr='icontains')
     pilot__user__last_name = CharFilter(label=_('str_Last_name'),
                                         lookup_expr='icontains')
-    time_slot = ModelChoiceFilter(queryset=TimeSlot.objects.actives())
+    time_slot = ModelChoiceFilter(queryset=models.TimeSlot.objects.actives())
     fuel_served = BooleanFilter(label=_('str_Fuel_served'),
                                 method='filter_numeric_is_set')
     fuel_reservation = BooleanFilter(label=_('str_Fuel_reserved'),
@@ -31,7 +31,7 @@ class ReservationFilter(FilterSet):
             return queryset.filter(**{name: 0})
 
     class Meta:
-        model = Reservation
+        model = models.Reservation
         fields = [
                  'reservation_number',
                  'time_slot',
@@ -59,7 +59,7 @@ class ULMFilter(FilterSet):
                                 lookup_expr='icontains')
 
     class Meta:
-        model = ULM
+        model = models.ULM
         fields = [
                 'constructor',
                 'model',
@@ -75,15 +75,15 @@ class PilotFilter(FilterSet):
         label=_('str_First_name'), lookup_expr='icontains')
     user__last_name = CharFilter(label=_('str_Last_name'),
                                  lookup_expr='icontains')
-    insurance_company = CharFilter(label=_('str_Insurance_company'),
-                                   lookup_expr='icontains',
-                                   widget=ListTextWidget(
-                                   data_list=
-                                   [x[1] for x in Pilot.INSURANCE_CHOICES],
-                                   name='insurance_company'))
+    insurance_company = CharFilter(
+        label=_('str_Insurance_company'),
+        lookup_expr='icontains',
+        widget=ListTextWidget(
+            data_list=[x[1] for x in models.Pilot.INSURANCE_CHOICES],
+            name='insurance_company'))
 
     class Meta:
-        model = Pilot
+        model = models.Pilot
         fields = [
                 'user__first_name',
                 'user__last_name',
