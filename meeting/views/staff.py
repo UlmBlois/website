@@ -8,11 +8,12 @@ from django.views.generic import View
 from django.views.generic.edit import UpdateView
 from django.views.generic.detail import DetailView
 from django.utils import timezone
+from django.db.models import Avg, Max, Min, Sum
 # third party
 from django_filters.views import FilterView
 # owned
 from .utils import PaginatedFilterViews, PAGINATED_BY
-from meeting.models import Pilot, ULM, Reservation
+from meeting.models import Pilot, ULM, Reservation, Meeting
 from meeting.form import (ReservationForm, UserEditMultiForm, ULMForm)
 
 import logging
@@ -134,6 +135,20 @@ class FilteredReservationList(PermissionRequiredMixin, PaginatedFilterViews,
         queryset = super().get_queryset()
         return queryset.filter(meeting__active=True).order_by(
             '-reservation_number')
+
+
+@method_decorator(login_required, name='dispatch')
+class FilteredFuelReservationList(FilteredReservationList):
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        qs = Reservation.objects.actives().filter(canceled=False)
+        aggr = qs.aggregate(Sum('fuel_reservation'), Sum('fuel_served'))
+        context['total_available_fuel'] = Meeting.objects.active().fuel_aviable
+        context['total_reserved'] = aggr['fuel_reservation__sum']
+        context['total_served'] = aggr['fuel_served__sum']
+        context['served_persent'] = aggr['fuel_served__sum'] / context['total_available_fuel'] * 100
+        return context
 
 
 @method_decorator(login_required, name='dispatch')

@@ -58,7 +58,7 @@ urlpatterns += [
         filterset_class=filters.PilotFilter,
         template_name='staff_pilot_list.html'),
         name='staff_pilot_list'),
-    path('staff/fuel/', views.FilteredReservationList.as_view(
+    path('staff/fuel/', views.FilteredFuelReservationList.as_view(
          filterset_class=filters.ReservationFilter,
          template_name='staff_fuel_reservation_list.html'),
          name="staff_fuel_res_list"),
