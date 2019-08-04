@@ -38,7 +38,9 @@ class ReservationResources(resources.ModelResource):
 class ReservationAdmin(ExportMixin, admin.ModelAdmin):
     list_filter = ['meeting']
     readonly_fields = ('creation_date', 'modification_date')
-    list_display = ('reservation_number', "display_pilot", "time_slot", "ulm")
+    list_filter = ['meeting', 'confirmed', 'canceled']
+    list_display = ('reservation_number', "display_pilot", "time_slot", "ulm",
+                    'confirmed', 'canceled')
     resource_class = ReservationResources
 
 
