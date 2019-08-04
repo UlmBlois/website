@@ -68,11 +68,11 @@
             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{% trans 'str_Fuel_served_percent' %}</div>
               <div class="row no-gutters align-items-center">
                 <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{served_persent}}%</div>
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{served_persent|floatformat}}%</div>
                 </div>
                 <div class="col">
                   <div class="progress progress-sm mr-2">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: {{served_persent|floatformat}}%" aria-valuenow="{{served_persent}}" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-info" role="progressbar" style="width: {{served_persent|floatformat:'0'}}%" aria-valuenow="{{served_persent}}" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </div>
               </div>
