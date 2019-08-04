@@ -4,6 +4,8 @@ from django.utils.log import DEFAULT_LOGGING
 import os
 
 DEBUG = True
+TEMPLATE_DEBUG = True
+
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'amf$+%4%7-vr-dfrq#x$(#ge_491e=4uoered%ujytoq@o3og0')
 
 DATABASES = {
