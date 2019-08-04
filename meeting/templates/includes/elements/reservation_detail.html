@@ -75,9 +75,7 @@
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Arrival'%}</th>
-        {% with arrival=res.arrival|default_if_none:"No" %}
         <td>{% trans arrival %}</td>
-        {% endwith %}
         <th role="row"></th>
         <td></td>
       </tr>
