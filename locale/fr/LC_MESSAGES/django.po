@@ -25,7 +25,7 @@ msgstr "Envoi d'un courriel demandant aux utilisateurs de confirmer leur réserv
 
 #: core/management/commands/send_reservation_confirmation_request.py:74
 msgid "str_Confirmation_Reminder_Email_Subject"
-msgstr "Veuillez confirmer votre réservation"
+msgstr "Veuillez confirmer votre demande d'autorisation"
 
 #. Translators: This contain the user name access by %(user)s
 #: core/views.py:36
@@ -106,7 +106,7 @@ msgstr "Carburant servi"
 
 #: meeting/filters.py:23
 msgid "str_Fuel_reserved"
-msgstr "Carburant réservé"
+msgstr "Carburant commandé"
 
 #: meeting/filters.py:53 meeting/models.py:266
 #: meeting/templates/staff_reservation_validation.html:140
@@ -125,7 +125,7 @@ msgstr "Modèle"
 #: meeting/templates/staff_pilot_list.html:51
 #: meeting/templates/staff_reservation_validation.html:59
 msgid "str_Insurance_company"
-msgstr "Compagnie d'assurance"
+msgstr "Compagnie d'assurance RC"
 
 #: meeting/form.py:85
 msgid "str_Error_Arrival_Depart_Timeslot_Equals"
@@ -149,7 +149,7 @@ msgstr "Le créneau de fin est en dehors de la période de la manifestation"
 
 #: meeting/models.py:208
 msgid "str_Reservation_Validation_Permission"
-msgstr "Valider l'arrivée et la réservation de carburant"
+msgstr "Valider l'arrivée et la commande de carburant"
 
 #: meeting/models.py:208
 msgid "str_Powered_Paraglider"
@@ -208,7 +208,7 @@ msgstr "Numéro de Licence"
 #: meeting/templates/staff_pilot_list.html:52
 #: meeting/templates/staff_reservation_validation.html:63
 msgid "str_Insurance_number"
-msgstr "Numéro de police d'assurance"
+msgstr "Numéro de police d'assurance RC"
 
 #: meeting/form.py:136 meeting/models.py:191
 #: meeting/templates/includes/elements/pilot_info.html:36
@@ -281,11 +281,11 @@ msgstr "Terrain d'origine (où l’aéronef est basé)"
 #: meeting/templates/staff_fuel_reservation_list.html:20
 #: meeting/templates/staff_fuel_reservation_list.html:99
 msgid "str_Fuel_reservation"
-msgstr "Réservation de carburant"
+msgstr "Commande de carburant"
 
 #: meeting/templates/includes/elements/reservation_detail.html:53
 msgid "str_Fuel_reservation_confirmed"
-msgstr "Réservation de carburant confirmée"
+msgstr "Commande de carburant confirmée"
 
 #: meeting/templates/includes/elements/reservation_detail.html:59
 msgid "str_Fuel_advance"
@@ -396,12 +396,12 @@ msgstr "Aucun créneau disponible"
 #: meeting/templates/pilot_reservation_list.html:39
 #: templates/includes/logged_sidebar.html:86
 msgid "str_Your_reservations"
-msgstr "Vos réservations"
+msgstr "Vos demandes"
 
 #: meeting/form.py:184 meeting/templates/pilot_reservation_list.html:42
 #: meeting/templates/pilot_ulm_list.html:8
 msgid "str_Add_new"
-msgstr "Nouvel ajout"
+msgstr "Nouvel ajout d'ULM"
 
 #: meeting/templates/pilot_reservation_list.html:66
 #: meeting/templates/pilot_reservation_list.html:85
@@ -471,7 +471,7 @@ msgstr "Supprimez"
 
 #: meeting/templates/staff_fuel_reservation_list.html:10
 msgid "str_Pilots_fuel_reservations"
-msgstr "Réservation carburant pilote"
+msgstr "Commande carburant pilote"
 
 #: meeting/templates/staff_fuel_reservation_list.html:101
 #: meeting/templates/staff_reservation_list.html:33
@@ -772,7 +772,7 @@ msgstr "Erreur interne..."
 
 #: templates/includes/footer.html:8
 msgid "str_Get_started"
-msgstr "Demmarer"
+msgstr "Demarrer"
 
 #: templates/includes/footer.html:10 templates/includes/logged_sidebar.html:21
 msgid "str_Home"
@@ -1010,11 +1010,11 @@ msgstr "Code postal de votre ville d'origine"
 
 #: meeting/templates/logged_index.html:19
 msgid "str_Reservation_allready_exist"
-msgstr "Une réservation existe déjà"
+msgstr "Une demande d'autorisation existe déjà"
 
 #: meeting/templates/logged_index.html:21
 msgid "str_Reservation_close"
-msgstr "Réservation closes"
+msgstr "Demandes d'autorisation closes"
 
 #: meeting/templates/staff_reservation_list.html:32
 msgid "str_Status"
