@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="row">
   <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
@@ -98,6 +99,7 @@
     <th>{% trans "str_Radio_id" %}</th>
     <th>{% trans "str_Fuel_reservation" %}</th>
     <th>{% trans "str_Fuel_served" %}</th>
+    <th>{% trans "str_Status" %}</th>
     <th class="center">{% trans "str_Actions" %}</th>
   </tr>
   </thead>
@@ -114,13 +116,24 @@
     <td>{{res.ulm.radio_id}}</td>
     <td>{{res.fuel_reservation}}</td>
     <td>{{res.fuel_served}}</td>
+    <td>
+      {% if res.canceled %}
+          <span class="badge badge-pill badge-danger">{% trans 'str_Canceled'%}</span>
+      {% elif res.confirmed %}
+          <span class="badge badge-pill badge-primary">{% trans 'str_Confirmed'%}</span>
+      {% else %}
+          <span class="badge badge-pill badge-secondary">{% trans 'str_Waiting_for_validation'%}</span>
+      {%endif%}
+    </td>
     <td class="center">
+      {% if not res.canceled %}
       <button type="button"
               class="btn btn-warning btn-sm js-update-fuel-served"
               data-url="{% url 'ajax_fuel_served' res.id %}"
               data-contener-id="modal-update-fuel">
         <span class="fas fa-pen"></span> {% trans "str_Validate" %}
       </button>
+      {% endif%}
     </td>
   </tr>
   {% endfor %}

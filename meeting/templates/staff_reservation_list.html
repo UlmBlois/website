@@ -59,7 +59,7 @@
       {%endif%}
     </td>
     <td class="center">
-      {% if res.ulm is not None %}
+      {% if res.ulm is not None and not res.canceled%}
         <a href="{% url 'staff_reservation_overview' res.pk %}" class="btn btn-primary">{% trans "str_Validate" %}</a>
         {% with label="label"|add:res.reservation_number%}
           <div style="display:none" >
