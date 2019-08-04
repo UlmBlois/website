@@ -97,19 +97,27 @@
               </tr>
               <tr>
                 <th scope="row">{% trans 'str_Flight_plan'%}</th>
-                <td>{{reservation.flight_plan}}</td>
+                {% with flight_plan=reservation.flight_plan|yesno:"Yes,No" %}
+                <td>{% trans flight_plan %}</td>
+                {% endwith %}
               </tr>
               <tr>
                 <th scope="row">{% trans 'str_Passanger'%}</th>
-                <td>{{reservation.passanger}}</td>
+                {% with passanger=reservation.passanger|yesno:"Yes,No" %}
+                <td>{% trans passanger %}</td>
+                {% endwith %}
               </tr>
               <tr>
                 <th scope="row">{% trans 'str_Esthetic_cup'%}</th>
-                <td>{{reservation.esthetic_cup}}</td>
+                {% with esthetic_cup=reservation.esthetic_cup|yesno:"Yes,No" %}
+                <td>{% trans esthetic_cup %}</td>
+                {% endwith %}
               </tr>
               <tr>
                 <th scope="row">{% trans 'str_For_sale' %}</th>
-                <td>{{reservation.for_sale}}</td>
+                {% with for_sale=reservation.for_sale|yesno:"Yes,No" %}
+                <td>{% trans for_sale %}</td>
+                {% endwith %}
               </tr>
             </tbody>
           </table>

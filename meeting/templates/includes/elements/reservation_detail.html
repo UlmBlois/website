@@ -23,15 +23,23 @@
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Flight_plan'%}</th>
-        <td>{{res.flight_plan}}</td>
+        {% with flight_plan=res.flight_plan|yesno:"Yes,No" %}
+        <td>{% trans flight_plan %}</td>
+        {% endwith %}
         <th scope="row">{% trans 'str_Passanger'%}</th>
-        <td>{{res.passanger}}</td>
+        {% with passanger=res.passanger|yesno:"Yes,No" %}
+        <td>{% trans passanger %}</td>
+        {% endwith %}
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Esthetic_cup'%}</th>
-        <td>{{res.esthetic_cup}}</td>
+        {% with esthetic_cup=res.esthetic_cup|yesno:"Yes,No" %}
+        <td>{% trans esthetic_cup %}</td>
+        {% endwith %}
         <th scope="row">{% trans 'str_For_sale'%}</th>
-        <td>{{res.for_sale}}</td>
+        {% with for_sale=res.for_sale|yesno:"Yes,No" %}
+        <td>{% trans for_sale %}</td>
+        {% endwith %}
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Origin_city_code'%}</th>
@@ -43,23 +51,33 @@
         <th scope="row">{% trans 'str_Fuel_reservation'%}</th>
         <td>{{res.fuel_reservation}}</td>
         <th scope="row">{% trans 'str_Fuel_reservation_confirmed'%}</th>
-        <td>{{res.fuel_reservation_confirmed}}</td>
+        {% with fuel_reservation_confirmed=res.fuel_reservation_confirmed|yesno:"Yes,No" %}
+        <td>{% trans fuel_reservation_confirmed %}</td>
+        {% endwith %}
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Fuel_advance'%}</th>
         <td>{{res.fuel_advance}}</td>
         <th scope="row">{% trans 'str_Fuel_served'%}</th>
-        <td>{{res.fuel_served}}</td>
+        {% with fuel_served=res.fuel_served|yesno:"Yes,No" %}
+        <td>{% trans fuel_served %}</td>
+        {% endwith %}
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Reservation_confirmed'%}</th>
-        <td>{{res.confirmed}}</td>
+        {% with confirmed=res.confirmed|yesno:"Yes,No" %}
+        <td>{% trans confirmed %}</td>
+        {% endwith %}
         <th scope="row">{% trans 'str_Reservation_canceled'%}</th>
-        <td>{{res.canceled}}</td>
+        {% with canceled=res.canceled|yesno:"Yes,No" %}
+        <td>{% trans canceled %}</td>
+        {% endwith %}
       </tr>
       <tr role="row">
         <th scope="row">{% trans 'str_Arrival'%}</th>
-        <td>{{res.arrival}}</td>
+        {% with arrival=res.arrival|default_if_none:"No" %}
+        <td>{% trans arrival %}</td>
+        {% endwith %}
         <th role="row"></th>
         <td></td>
       </tr>

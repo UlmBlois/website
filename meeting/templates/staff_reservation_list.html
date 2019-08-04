@@ -46,7 +46,9 @@
     <td>{{res.ulm.imatriculation}}</td>
     <td>{{res.ulm.radio_id}}</td>
     <td>{{res.fuel_reservation}}</td>
-    <td>{{res.flight_plan}}</td>
+    {% with flight_plan=res.flight_plan|yesno:"Yes,No" %}
+    <td>{% trans flight_plan %}</td>
+    {% endwith %}
     <td>
       {% if res.canceled %}
           <span class="badge badge-pill badge-danger">{% trans 'str_Canceled'%}</span>
@@ -69,6 +71,8 @@
           </div>
           <button type="button" onclick="printJS('{{label}}', 'html')" class="btn btn-warning">{% trans "str_Print" %}</button>
         {% endwith %}
+      {% else %}
+      <!-- TODO canceled reservation and no ulm -->
       {% endif %}
     </td>
   </tr>
