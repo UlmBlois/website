@@ -15,7 +15,7 @@ def absolute_url(context, view_name, *args, **kwargs):
         url = request.build_absolute_uri(
                 reverse(view_name, args=args, kwargs=kwargs))
     else:
-        url = "https://{domain}{reverse}".format(
+        url = "{domain}{reverse}".format(
             domain=settings.DEFAULT_DOMAIN,
             reverse=reverse(view_name, args=args, kwargs=kwargs))
     return url
