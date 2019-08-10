@@ -1067,3 +1067,4 @@ msgstr "Percent of fuel served"
 #: meeting/templates/staff_reservation_list.html:54
 msgid "str_Arrived"
 msgstr "Arrived"
+
