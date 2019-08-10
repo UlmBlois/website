@@ -108,9 +108,9 @@ class TimeSlot(models.Model):
         """String representing an arrivals time slot."""
         start = timezone.localtime(self.start_date)
         end = timezone.localtime(self.end_date)
-        return _("{start}-{end}").format(
-            start=formats.date_format(start, format="l H:i"),
-            end=formats.date_format(end, format="H:i")
+        return _("{}-{}").format(
+            formats.date_format(start, format="l H:i"),
+            formats.date_format(end, format="H:i")
             ).capitalize()
 
     def str_range(self):  # pragma: no cover

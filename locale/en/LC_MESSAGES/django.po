@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UlmBlois_website\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 18:13+0200\n"
+"POT-Creation-Date: 2019-08-10 09:45+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -167,8 +167,8 @@ msgid "str_ULM"
 msgstr "Microlight"
 
 #: meeting/models.py:111
-msgid "{start}-{end}"
-msgstr "{start}-{end}"
+msgid "{}-{}"
+msgstr "{}-{}"
 
 #: meeting/models.py:124
 msgid "str_Error_Timeslot_Start_Superior_End"
@@ -1013,6 +1013,9 @@ msgstr ""
 #: templates/registration/register.html:46
 msgid "str_already_have_an_account"
 msgstr "Already have an account? Login!"
+
+#~ msgid "{start}-{end}"
+#~ msgstr "{start}-{end}"
 
 #~ msgid "str_model"
 #~ msgstr "Model"
