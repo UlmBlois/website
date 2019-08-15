@@ -4,15 +4,24 @@ from django.contrib.auth.models import User
 
 from import_export import resources
 from import_export.admin import ExportMixin
+from import_export.fields import Field
 
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.fields import ListTextWidget
 
 
+###############################################################################
+# PILOT
+###############################################################################
+
 @admin.register(Pilot)
 class PilotAdmin(admin.ModelAdmin):
     readonly_fields = ['modification_date']
 
+
+###############################################################################
+# RESERVATION
+###############################################################################
 
 class ReservationResources(resources.ModelResource):
     class Meta:
@@ -34,9 +43,14 @@ class ReservationResources(resources.ModelResource):
                   'modification_date', 'origin_city_code', 'origin_field',
                   'confirmed', 'canceled')
 
+    def dehydrate_time_slot(self, res):
+        return str(res.time_slot)
+
+    def dehydrate_depart_time_slot(self, res):
+        return str(res.depart_time_slot)
+
 
 class ReservationAdmin(ExportMixin, admin.ModelAdmin):
-    list_filter = ['meeting']
     readonly_fields = ('creation_date', 'modification_date')
     list_filter = ['meeting', 'confirmed', 'canceled']
     list_display = ('reservation_number', "display_pilot", "time_slot", "ulm",
@@ -46,10 +60,9 @@ class ReservationAdmin(ExportMixin, admin.ModelAdmin):
 
 admin.site.register(Reservation, ReservationAdmin)
 
-
-class TimeSlotInline(admin.TabularInline):
-    extra = 0
-    model = TimeSlot
+###############################################################################
+# ULM
+###############################################################################
 
 
 @admin.register(ULM)
@@ -57,11 +70,25 @@ class ULMAdmin(admin.ModelAdmin):
     list_display = (
         'radio_id', 'pilot', 'imatriculation', 'constructor', 'model')
 
+###############################################################################
+# MEETING
+###############################################################################
+
+
+class TimeSlotInline(admin.TabularInline):
+    extra = 0
+    model = TimeSlot
+
 
 @admin.register(Meeting)
 class MeetingAdmin(admin.ModelAdmin):
     list_display = ('name', 'active', 'start_date', 'end_date')
     inlines = [TimeSlotInline]
+
+
+###############################################################################
+# USER
+###############################################################################
 
 
 class PilotInline(admin.StackedInline):
