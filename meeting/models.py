@@ -137,6 +137,9 @@ class TimeSlot(models.Model):
             canceled=False, ulm__isnull=False).count()
         return self.arrivals_slots - (arrival_count + depart_count)
 
+    def arrivals_slots_used(self):
+        return self.arrivals_slots - self.arrivals_slots_left()
+
 
 ###############################################################################
 #       PILOT

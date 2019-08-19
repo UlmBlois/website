@@ -113,6 +113,11 @@ class TimeSlotTest(TestCase):
         create_reservation('FAE1F7', self.ulm, self.ts)
         self.assertEqual(self.ts.arrivals_slots_left(), 1)
 
+    def test_arrivals_slots_used(self):
+        self.assertEqual(self.ts.arrivals_slots_used(), 1)
+        create_reservation('FAE1F7', self.ulm, self.ts)
+        self.assertEqual(self.ts.arrivals_slots_used(), 2)
+
 # NICETODO test create_or_update_user_profile
 
 

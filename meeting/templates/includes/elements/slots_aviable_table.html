@@ -16,7 +16,7 @@
         {% for t in ts%}
           <th class="table-{% if t in ts_aviables%}success{% elif t %}danger{% else %}secondary{%endif%}">
             {% if t %}
-            {{t.str_range}}
+            {{t.str_range}} {% if perms.meeting.reservation_validation %}- {{t.arrivals_slots_used}}/{{t.arrivals_slots}}{% endif %}
             {% else %}
             -
             {% endif %}
