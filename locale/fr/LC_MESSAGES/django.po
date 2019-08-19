@@ -201,7 +201,7 @@ msgstr "Fermé"
 #: meeting/templates/staff_pilot_list.html:53
 #: meeting/templates/staff_reservation_validation.html:55
 msgid "str_Licence_number"
-msgstr "Numéro de Licence"
+msgstr "Numéro de Brevet et Licence de Pilote d'ULM"
 
 #. Pourquoi ce n'est pas traduit en français sur le site (au niveau du profil)
 #: meeting/models.py:187 meeting/templates/includes/elements/pilot_info.html:32
@@ -326,7 +326,7 @@ msgstr "Pilote ULM"
 
 #: meeting/templates/index.html:31
 msgid "str_Sign_In"
-msgstr "Se connecter "
+msgstr "Se connecter"
 
 #: meeting/templates/index.html:40
 msgid "str_Paramotor_pilot"
