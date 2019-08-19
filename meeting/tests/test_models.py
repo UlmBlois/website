@@ -62,7 +62,14 @@ class TimeSlotTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        create_meeting("1", date(2019, 8, 30), True)
+        meeting1 = create_meeting("1", date(2019, 8, 30), True)
+        cls.ts = create_time_slot(meeting1,
+                                  tz.make_aware(
+                                    datetime(2019, 8, 31, 10)),
+                                  3)
+        user = create_user('testuser', '12345')
+        cls.ulm = create_ulm(user.pilot, 'F-XAAA')
+        create_reservation('FAE1F6', cls.ulm, cls.ts)
 
     def test_clean(self):
         ts = TimeSlot()
@@ -100,6 +107,11 @@ class TimeSlotTest(TestCase):
             datetime(2019, 8, 31, 11, 0))
         with self.assertRaises(ValidationError):
             ts.clean()
+
+    def test_arrivals_slots_left(self):
+        self.assertEqual(self.ts.arrivals_slots_left(), 2)
+        create_reservation('FAE1F7', self.ulm, self.ts)
+        self.assertEqual(self.ts.arrivals_slots_left(), 1)
 
 # NICETODO test create_or_update_user_profile
 

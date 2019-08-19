@@ -130,6 +130,13 @@ class TimeSlot(models.Model):
             raise ValidationError(_('str_Error_Timeslot_End_Out_Of_Meeting'))
         super(TimeSlot, self).clean(*args, **kwargs)
 
+    def arrivals_slots_left(self):
+        arrival_count = self.arrivals.filter(
+            canceled=False, ulm__isnull=False).count()
+        depart_count = self.departures.filter(
+            canceled=False, ulm__isnull=False).count()
+        return self.arrivals_slots - (arrival_count + depart_count)
+
 
 ###############################################################################
 #       PILOT
