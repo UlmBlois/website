@@ -369,6 +369,16 @@ class Reservation(models.Model):
                 raise ValidationError(
                     _('str_Error_Reservation_Allready_Exist'))
 
+    def cancel(self):
+        self.canceled = True
+        self.time_slot = None
+        self.depart_time_slot = None
+        self.confirmed = False
+
+    def confirm(self):
+        if not self.canceled:
+            self.confirmed = True
+
     def is_active(self):
         return self.meeting.active
 

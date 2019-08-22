@@ -226,3 +226,19 @@ class ReservationTest(TestCase):
             res.full_clean()
         except ValidationError:
             self.fail('Raise an unexpected ValidationError')
+
+    def test_cancel(self):
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+        res.cancel()
+        self.assertFalse(res.confirmed)
+        self.assertIsNone(res.time_slot)
+        self.assertIsNone(res.depart_time_slot)
+        self.assertTrue(res.canceled)
+
+    def test_confirm(self):
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+        res.confirm()
+        self.assertTrue(res.confirmed)
+        res.cancel()
+        res.confirm()
+        self.assertFalse(res.confirmed)
