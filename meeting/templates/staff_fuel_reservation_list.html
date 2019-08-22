@@ -117,15 +117,7 @@
     <td>{{res.fuel_reservation}}</td>
     <td>{{res.fuel_served}}</td>
     <td>
-      {% if res.arrival %}
-          <span class="badge badge-pill badge-success">{% trans 'str_Arrived'%}</span>
-      {% elif res.canceled %}
-          <span class="badge badge-pill badge-danger">{% trans 'str_Canceled'%}</span>
-      {% elif res.confirmed %}
-          <span class="badge badge-pill badge-primary">{% trans 'str_Confirmed'%}</span>
-      {% else %}
-          <span class="badge badge-pill badge-secondary">{% trans 'str_Waiting_for_validation'%}</span>
-      {%endif%}
+      {% include 'includes/elements/reservation_status_badge.html' with res=res %}
     </td>
     <td class="center">
       {% if not res.canceled %}

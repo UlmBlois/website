@@ -79,6 +79,9 @@
         <div class="d-flex w-100 justify-content-between">
         {% trans 'str_Reservation'%}
         <div class="">
+          {% include 'includes/elements/reservation_status_badge.html' with res=reservation %}
+        </div>
+        <div class="">
           <a href="#{{modalid}}"  data-toggle="modal" data-target="#{{modalid}}" ><i class="fas fa-search"></i></a>
           <a href="{% url 'staff_reservation_edit' reservation.pk%}" ><i class="fas fa-pen"></i></a>
         </div>
@@ -170,18 +173,25 @@
 
 <div class="row mt-3">
 <div class="col">
-  <a href="{% url 'staff_reservation_validate' reservation.pk %}" class="btn btn-success">{% trans 'str_Validate'%}</a>
-  <a href="{% url 'staff_reservation_invalidate' reservation.pk %}" class="btn btn-danger">{% trans 'str_Invalidate'%}</a>
-  {% with label="label"|add:reservation.reservation_number%}
-    <div style="display:none" >
-      <div class="" id="{{label}}" style="text-align:center;padding-top:10%">
-          {{reservation.pilot}}
-          <br>
-          {{reservation.ulm}}
+  {% if reservation.arrival is None %}
+    <a href="{% url 'staff_reservation_validate' reservation.pk %}" class="btn btn-success">{% trans 'str_Validate'%}</a>
+  {% else %}
+    <a href="{% url 'staff_reservation_invalidate' reservation.pk %}" class="btn btn-danger">{% trans 'str_Invalidate'%}</a>
+    {% with label="label"|add:reservation.reservation_number%}
+      <div style="display:none" >
+        <div class="" id="{{label}}" style="text-align:center;padding-top:10%">
+            {{reservation.pilot}}
+            <br>
+            {{reservation.ulm}}
+        </div>
       </div>
-    </div>
-    <button type="button" onclick="printJS('{{label}}', 'html')" class="btn btn-warning">{% trans "str_Print" %}</button>
-  {% endwith %}
+    {% endwith %}
+  {% endif %}
+  <button type="button" onclick="printJS('{{label}}', 'html')" class="btn btn-warning">{% trans "str_Print" %}</button>
+    <br>
+    <hr>
+    <a href="{% url 'ajax_staff_cancel_reservation' reservation.pk %}" class="btn btn-danger">{% trans 'str_Cancel'%}</a>
+    <a href="{% url 'ajax_staff_confirm_reservation' reservation.pk %}" class="btn btn-primary">{% trans 'str_Confirm_reservation'%}</a>
 </div>
 </div>
 

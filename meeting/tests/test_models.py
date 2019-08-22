@@ -242,3 +242,11 @@ class ReservationTest(TestCase):
         res.cancel()
         res.confirm()
         self.assertFalse(res.confirmed)
+
+    def test_is_confirmed(self):
+        res = Reservation.objects.get(reservation_number='FAE1F6')
+        res.confirm()
+        self.assertTrue(res.is_confirmed())
+        res.cancel()
+        res.confirm()
+        self.assertFalse(res.is_confirmed())

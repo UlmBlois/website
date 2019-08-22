@@ -118,13 +118,8 @@
     {% endif %}
     </div> <!-- End Right -->
     <div class="">
-    {% if res.canceled %}
-        <h3><span class="badge badge-pill badge-danger">{% trans 'str_Canceled'%}</span></h3>
-    {% elif res.confirmed %}
-        <h3><span class="badge badge-pill badge-primary">{% trans 'str_Confirmed'%}</span></h3>
-    {% else %}
-        <h3><span class="badge badge-pill badge-secondary">{% trans 'str_Waiting_for_validation'%}</span></h3>
-    {%endif%}
+      {% include 'includes/elements/reservation_status_badge.html' with res=res big=True%}
+
     </div>
   </div>
 </div>

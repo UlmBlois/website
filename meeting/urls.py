@@ -91,10 +91,14 @@ urlpatterns += [
 urlpatterns += [
     path('ajax/reservation/fuelserved/<int:pk>/', views.ajax_fuel_served,
          name="ajax_fuel_served"),
-    path('ajax/reservation/cancel/<int:pk>', views.ajax_cancel_reservation,
+    path('ajax/reservation/cancel/<int:pk>', views.ajax_pilot_cancel_reservation,
          name='ajax_cancel_reservation'),
-    path('ajax/reservation/confirm/<int:pk>', views.ajax_confirm_reservation,
+    path('ajax/reservation/confirm/<int:pk>', views.ajax_pilot_confirm_reservation,
          name='ajax_confirm_reservation'),
+    path('ajax/staff/reservation/cancel/<int:pk>', views.ajax_staff_cancel_reservation,
+         name='ajax_staff_cancel_reservation'),
+    path('ajax/staff/reservation/confirm/<int:pk>', views.ajax_staff_confirm_reservation,
+         name='ajax_staff_confirm_reservation'),
 ]
 
 # Public EMAIL

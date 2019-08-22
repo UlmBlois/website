@@ -50,18 +50,10 @@
     <td>{% trans flight_plan %}</td>
     {% endwith %}
     <td>
-      {% if res.arrival %}
-          <span class="badge badge-pill badge-success">{% trans 'str_Arrived'%}</span>
-      {% elif res.canceled %}
-          <span class="badge badge-pill badge-danger">{% trans 'str_Canceled'%}</span>
-      {% elif res.confirmed %}
-          <span class="badge badge-pill badge-primary">{% trans 'str_Confirmed'%}</span>
-      {% else %}
-          <span class="badge badge-pill badge-secondary">{% trans 'str_Waiting_for_validation'%}</span>
-      {%endif%}
+      {% include 'includes/elements/reservation_status_badge.html' with res=res %}
     </td>
     <td class="center">
-      {% if res.ulm is not None and not res.canceled%}
+      {% if res.ulm is not None%}
         <a href="{% url 'staff_reservation_overview' res.pk %}" class="btn btn-primary">{% trans "str_Validate" %}</a>
         {% with label="label"|add:res.reservation_number%}
           <div style="display:none" >

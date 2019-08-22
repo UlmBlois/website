@@ -8,7 +8,7 @@ from django.views.generic import View
 from django.views.generic.edit import UpdateView
 from django.views.generic.detail import DetailView
 from django.utils import timezone
-from django.db.models import Avg, Max, Min, Sum
+from django.db.models import Sum
 # third party
 from django_filters.views import FilterView
 # owned
@@ -185,6 +185,7 @@ class StaffReservationUpdate(PermissionRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         res = form.save(commit=False)
+        res.canceled = False
         res.save()
         return redirect(self.get_success_url())
 
