@@ -9,7 +9,7 @@
 
 {% include 'emails/includes/base/text_row_with_title.html' with text=body_1.content%}
 
-{% absolute_url 'index' as link_index%}
+{% absolute_url 'pilot_reservation' as link_index%}
 {% trans "str_Confirmation" as link_text%}
 {% include 'emails/includes/base/button_row.html' with link=link_index text=link_text%}
 
