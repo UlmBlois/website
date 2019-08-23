@@ -1,8 +1,7 @@
 from django.test import TestCase
-from django.contrib.auth.models import Permission
 
 from meeting.models import Reservation
-from meeting.tests.utils import (create_full_reservation,
+from meeting.tests.utils import (create_full_reservation, create_user,
                                  LoggedViewTestCase,
                                  PermissionRequiredTestCase)
 
@@ -15,7 +14,9 @@ class test_ajax_cancel_reservation(LoggedViewTestCase, TestCase):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
-        cls.res = create_full_reservation(user=cls.user)
+        cls.res = create_full_reservation('1', user=cls.user)
+        user = create_user('user2', 'ddddd')
+        cls.res2 = create_full_reservation('2', user=user)
 
     def get_url(self):
         return self.url.format(self.res.pk)
@@ -33,6 +34,11 @@ class test_ajax_cancel_reservation(LoggedViewTestCase, TestCase):
         res = Reservation.objects.get(pk=self.res.pk)
         self.assertTrue(res.canceled)
 
+    def test_try_cancel_non_owned_reservation(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.url.format(self.res2.pk))
+        self.assertEqual(response.status_code, 404)
+
 
 class test_ajax_confirm_reservation(LoggedViewTestCase, TestCase):
     url = '/meeting/ajax/reservation/confirm/{0}'
@@ -43,6 +49,8 @@ class test_ajax_confirm_reservation(LoggedViewTestCase, TestCase):
     def setUpTestData(cls):
         super().setUpTestData()
         cls.res = create_full_reservation(user=cls.user)
+        user = create_user('user2', 'ddddd')
+        cls.res2 = create_full_reservation('2', user=user)
 
     def get_url(self):
         return self.url.format(self.res.pk)
@@ -69,9 +77,14 @@ class test_ajax_confirm_reservation(LoggedViewTestCase, TestCase):
         res = Reservation.objects.get(pk=self.res.pk)
         self.assertFalse(res.is_confirmed())
 
+    def test_try_cancel_non_owned_reservation(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.url.format(self.res2.pk))
+        self.assertEqual(response.status_code, 404)
+
 
 # TODO upgrade to PermissionRequiredTestCase
-class test_ajax_staff_cancel_reservation(LoggedViewTestCase, TestCase):
+class test_ajax_staff_cancel_reservation(PermissionRequiredTestCase, TestCase):
     url = '/meeting/ajax/staff/reservation/cancel/{0}'
     url_name = 'ajax_staff_cancel_reservation'
     redirect_url_name = 'staff_reservation_overview'
@@ -80,10 +93,6 @@ class test_ajax_staff_cancel_reservation(LoggedViewTestCase, TestCase):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
-        permissions = Permission.objects.get(
-            codename__in=cls.permission_required)
-        cls.user.user_permissions.add(permissions)
-        cls.user.save()
         cls.res = create_full_reservation(user=cls.user)
 
     def get_url(self):
@@ -107,7 +116,7 @@ class test_ajax_staff_cancel_reservation(LoggedViewTestCase, TestCase):
 
 
 # TODO upgrade to PermissionRequiredTestCase
-class test_ajax_staff_confirm_reservation(LoggedViewTestCase, TestCase):
+class test_ajax_staff_confirm_reservation(PermissionRequiredTestCase, TestCase):
     url = '/meeting/ajax/staff/reservation/confirm/{0}'
     url_name = 'ajax_staff_confirm_reservation'
     redirect_url_name = 'staff_reservation_overview'
@@ -116,10 +125,6 @@ class test_ajax_staff_confirm_reservation(LoggedViewTestCase, TestCase):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
-        permissions = Permission.objects.get(
-            codename__in=cls.permission_required)
-        cls.user.user_permissions.add(permissions)
-        cls.user.save()
         cls.res = create_full_reservation(user=cls.user)
 
     def get_url(self):
