@@ -9,8 +9,9 @@ from .utils import save_reservation_form
 
 from meeting.form import AjaxFuelServedForm
 
-# TODO add permissions
+
 @login_required
+@permission_required('meeting.reservation_validation', raise_exception=True)
 def ajax_fuel_served(request, pk):
     reservation = get_object_or_404(Reservation, pk=pk)
     if request.method == 'POST':

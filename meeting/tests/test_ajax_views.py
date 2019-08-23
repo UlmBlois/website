@@ -83,7 +83,6 @@ class test_ajax_confirm_reservation(LoggedViewTestCase, TestCase):
         self.assertEqual(response.status_code, 404)
 
 
-# TODO upgrade to PermissionRequiredTestCase
 class test_ajax_staff_cancel_reservation(PermissionRequiredTestCase, TestCase):
     url = '/meeting/ajax/staff/reservation/cancel/{0}'
     url_name = 'ajax_staff_cancel_reservation'
@@ -115,7 +114,6 @@ class test_ajax_staff_cancel_reservation(PermissionRequiredTestCase, TestCase):
         self.assertTrue(res.canceled)
 
 
-# TODO upgrade to PermissionRequiredTestCase
 class test_ajax_staff_confirm_reservation(PermissionRequiredTestCase, TestCase):
     url = '/meeting/ajax/staff/reservation/confirm/{0}'
     url_name = 'ajax_staff_confirm_reservation'
