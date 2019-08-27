@@ -17,6 +17,9 @@ from meeting.fields import ListTextWidget
 @admin.register(Pilot)
 class PilotAdmin(admin.ModelAdmin):
     readonly_fields = ['modification_date']
+    search_fields = ('user__username', 'user__email', 'user__first_name',
+                     'user__last_name', 'insurance_company',
+                     'insurance_number', 'licence_number', 'phone_number')
 
 
 ###############################################################################
@@ -51,6 +54,9 @@ class ReservationResources(resources.ModelResource):
 
 
 class ReservationAdmin(ExportMixin, admin.ModelAdmin):
+    search_fields = ('reservation_number', "ulm__radio_id",
+                     'pilot__user__email', 'pilot__user__last_name',
+                     'pilot__user__first_name', 'pilot__user__username')
     readonly_fields = ('creation_date', 'modification_date')
     list_filter = ['meeting', 'confirmed', 'canceled']
     list_display = ('reservation_number', "display_pilot", "time_slot", "ulm",
@@ -67,8 +73,9 @@ admin.site.register(Reservation, ReservationAdmin)
 
 @admin.register(ULM)
 class ULMAdmin(admin.ModelAdmin):
+    list_filter = ('type',)
     list_display = (
-        'radio_id', 'pilot', 'imatriculation', 'constructor', 'model')
+        'radio_id', 'pilot', 'imatriculation', 'type', 'constructor', 'model')
 
 ###############################################################################
 # MEETING
