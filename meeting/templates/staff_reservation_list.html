@@ -56,13 +56,7 @@
       {% if res.ulm is not None%}
         <a href="{% url 'staff_reservation_overview' res.pk %}" class="btn btn-primary">{% trans "str_Validate" %}</a>
         {% with label="label"|add:res.reservation_number%}
-          <div style="display:none" >
-            <div class="" id="{{label}}" style="text-align:center;padding-top:10%">
-                {{res.pilot}}
-                <br>
-                {{res.ulm}}
-            </div>
-          </div>
+          {% include 'includes/elements/label.html' with label=label res=res%}
           <button type="button" onclick="printJS('{{label}}', 'html')" class="btn btn-warning">{% trans "str_Print" %}</button>
         {% endwith %}
       {% else %}
