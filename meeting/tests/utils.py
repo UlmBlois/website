@@ -10,7 +10,7 @@ from meeting.models import Meeting, TimeSlot, Reservation, ULM
 logger = logging.getLogger(__name__)
 
 
-def create_meeting(name, start_date, active):
+def create_meeting(name, start_date, active=True):
     end_date = start_date + timedelta(days=2)
     registration_start = start_date - timedelta(days=60)
     registration_end = start_date - timedelta(days=5)
@@ -60,7 +60,7 @@ def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None,
 
 def create_full_reservation(res_num=None, user=None, ulm=None, meeting=None,
                             ts1=None, ts2=None, confirmed=False,
-                            canceled=False):
+                            canceled=False, arrival=None):
     if meeting is None:
         meeting = create_meeting("1", date(2019, 8, 30), True)
     if ts1 is None:
@@ -80,7 +80,7 @@ def create_full_reservation(res_num=None, user=None, ulm=None, meeting=None,
     if res_num is None:
         res_num = 'FAE1F6'
     return create_reservation(res_num, ulm, ts1, ts2,
-                              None, confirmed, canceled)
+                              arrival, confirmed, canceled)
 
 
 class ViewTestCase(object):

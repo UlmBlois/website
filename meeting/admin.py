@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
+from django.db.models import Q
+from django.utils.translation import gettext_lazy as _
 
 from import_export import resources
 from import_export.admin import ExportMixin
@@ -11,8 +13,33 @@ from meeting.fields import ListTextWidget
 
 
 ###############################################################################
+# CustomFilter
+###############################################################################
+
+class ArrivalFilter(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = _('str_arrived')
+
+    parameter_name = 'is_arrived'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('str_Yes')),
+            ('no', _('str_No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.filter(arrival__isnull=False)
+        if self.value() == 'no':
+            return queryset.exclude(arrival__isnull=False)
+        return queryset
+
+###############################################################################
 # PILOT
 ###############################################################################
+
 
 @admin.register(Pilot)
 class PilotAdmin(admin.ModelAdmin):
@@ -58,7 +85,7 @@ class ReservationAdmin(ExportMixin, admin.ModelAdmin):
                      'pilot__user__email', 'pilot__user__last_name',
                      'pilot__user__first_name', 'pilot__user__username')
     readonly_fields = ('creation_date', 'modification_date')
-    list_filter = ['meeting', 'confirmed', 'canceled']
+    list_filter = ['meeting', 'confirmed', 'canceled', ArrivalFilter,]
     list_display = ('reservation_number', "display_pilot", "time_slot", "ulm",
                     'confirmed', 'canceled')
     resource_class = ReservationResources
