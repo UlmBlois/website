@@ -24,7 +24,6 @@ class ReservationFilter(FilterSet):
                                      method='filter_numeric_is_set')
 
     def filter_numeric_is_set(self, queryset, name, value):
-        logger.debug('value: %s', str(value))
         if value:
             lookup = '__'.join([name, 'gt'])
             return queryset.filter(**{lookup: 0})

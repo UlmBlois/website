@@ -409,12 +409,13 @@ class Reservation(models.Model):
 
     def is_on_time(self):
         """Check if the pilot is arrived during his timeslot"""
-        if self.arrival_delay().seconds/3600 < 1:
+        if self.arrival_delay()/3600 < 1:
             return True
         else:
             return False
 
     def arrival_delay(self):
+        """Arrival delay in second"""
         if self.arrival is not None:
             if timezone.is_naive(self.arrival):
                 arrival = timezone.make_aware(self.arrival)
@@ -424,7 +425,7 @@ class Reservation(models.Model):
             arrival = timezone.now()
         delta1 = arrival - timezone.localtime(self.time_slot.start_date)
         delta2 = arrival - timezone.localtime(self.time_slot.end_date)
-        delay = min(delta1, delta2)
+        delay = min(abs(delta1.total_seconds()), abs(delta2.total_seconds()))
         return delay
 
     display_pilot.short_description = _('str_Pilot')
