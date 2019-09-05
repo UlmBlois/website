@@ -1,0 +1,51 @@
+{% extends "base_logged.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title%}
+  {% trans "str_Meeting_stats" %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+<div class="col-6">
+  <div class="card">
+    <div class="card-header">
+      {% trans 'str_Arrival_by_day'%}
+    </div>
+    <div class="card-body">
+      <canvas id="test" width="600" height="400"></canvas>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock%}
+
+{% block javascript%}
+<script src="{% static 'vendor/chart.js/Chart.js'%}" type="text/javascript"></script>
+
+<script>
+  var ctx = document.getElementById('test').getContext('2d');
+  var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
+
+      // The data for our dataset
+      data: {
+          labels: [{%for l in arrival_by_days%} '{{l.0}}', {%endfor%}],
+          datasets: [{
+              label: '{% trans "str_Arrivals"%}',
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: [{%for d in arrival_by_days%} {{d.1}}, {%endfor%}]
+          }]
+      },
+
+      // Configuration options go here
+      options: {}
+  });
+</script>
+{% endblock %}

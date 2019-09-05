@@ -112,3 +112,11 @@ urlpatterns += [
          views.ReservationConfirmationEmail.as_view(),
          name='reservation_confirmation_email')
 ]
+
+
+# TEST url
+urlpatterns += [
+    path('chart/meeting',
+         views.MeetingStatsView.as_view(),
+         name='meeting_stat')
+]
