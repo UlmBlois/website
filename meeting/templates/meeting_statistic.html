@@ -16,6 +16,16 @@
       {% trans 'str_Arrival_by_day'%}
     </div>
     <div class="card-body">
+      <canvas id="arrval_count_bar_chart" width="600" height="400"></canvas>
+    </div>
+  </div>
+</div>
+<div class="col-6">
+  <div class="card">
+    <div class="card-header">
+      {% trans 'str_Arrival_by_slot'%}
+    </div>
+    <div class="card-body">
       <canvas id="test" width="600" height="400"></canvas>
     </div>
   </div>
@@ -25,10 +35,11 @@
 {% endblock%}
 
 {% block javascript%}
+<script src="{% static 'vendor/moment.js/moment.js'%}" type="text/javascript"></script>
 <script src="{% static 'vendor/chart.js/Chart.js'%}" type="text/javascript"></script>
 
 <script>
-  var ctx = document.getElementById('test').getContext('2d');
+  var ctx = document.getElementById('arrval_count_bar_chart').getContext('2d');
   var chart = new Chart(ctx, {
       // The type of chart we want to create
       type: 'bar',
@@ -46,6 +57,76 @@
 
       // Configuration options go here
       options: {}
+  });
+</script>
+
+<script>
+  var ctx = document.getElementById('test').getContext('2d');
+  var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
+
+      // The data for our dataset
+      data: {
+          datasets: [{
+              label: 'Line Dataset',
+              // backgroundColor: 'rgb(134, 99, 132)',
+              borderColor: 'rgb(150, 99, 132)',
+              data: [{
+                           x: "05/01/2014 10:00", y: 0
+                       },{
+                           x: "05/01/2014 12:30", y: 5
+                       },{
+                           x: "05/01/2014 14:00", y: 3
+                       },{
+                           x: "05/01/2014 16:00", y: 7
+                       },{
+                                    x: "05/02/2014 10:00", y: 0
+                                },{
+                                    x: "05/02/2014 12:30", y: 5
+                                },{
+                                    x: "05/02/2014 14:00", y: 3
+                                },{
+                                    x: "05/02/2014 16:00", y: 7
+                                }],
+
+              // Changes this dataset to become a line
+              fill:  false,
+              type: 'line'
+          },{
+            label: '{% trans "str_Arrivals"%}',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [{x: "05/01/2014 13:00", y: 10},
+                   // {x: "05/01/2014 13:45", y: 0},
+                   {x: "05/01/2014 15:00", y: 15},
+                   // {x: "05/01/2014 15:45", y: 15},
+                   {x: "05/01/2014 16:00", y: 5},
+                   // {x: "05/01/2014 16:45", y: 0},
+                   {x: "05/02/2014 13:00", y: 10},
+                   // {x: "05/01/2014 13:45", y: 0},
+                  {x: "05/02/2014 15:00", y: 15},
+                  // {x: "05/01/2014 15:45", y: 15},
+                  {x: "05/02/2014 16:00", y: 5},
+                  // {x: "05/01/2014 16:45", y: 0},
+                  ]
+       }],
+      },
+
+
+      // Configuration options go here
+      options: {
+
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    ticks:{source:'labels'},
+                    unit: 'hour'
+                }
+            }]
+        }
+    }
   });
 </script>
 {% endblock %}
