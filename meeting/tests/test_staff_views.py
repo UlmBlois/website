@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone as tz
-from django.contrib.auth.models import User
-
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from datetime import date, datetime
 from unittest.mock import patch
 
@@ -73,7 +73,7 @@ class StaffUpdatePilotTest(PermissionRequiredTestCase, TestCase):
         self.client.force_login(self.user)
         response = self.client.post(self.get_url(), form_data)
         self.assertRedirects(response, self.get_success_url())
-        self.assertEqual(User.objects.get(pk=self.user.pk).first_name,
+        self.assertEqual(get_user_model().objects.get(pk=self.user.pk).first_name,
                          form_data['user_form-first_name'])
         self.assertEqual(
             Pilot.objects.get(pk=self.user.pilot.pk).insurance_number,

@@ -1,11 +1,14 @@
 from django.urls import reverse
 # from django.core.exceptions import PermissionDenied
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import Permission
+from django.contrib.auth import get_user_model
 from django.utils import timezone as tz
 
 from datetime import timedelta, date, datetime
 import logging
+
 from meeting.models import Meeting, TimeSlot, Reservation, ULM
+
 
 logger = logging.getLogger(__name__)
 
@@ -39,8 +42,11 @@ def create_ulm(pilot, radio_id):
                               )
 
 
-def create_user(name, password):
-    return User.objects.create_user(username=name, password=password)
+def create_user(name, password, email=""):
+    if email == "":
+        email = name + "@test.fr"
+    return get_user_model().objects.create_user(
+        username=name, password=password, email=email)
 
 
 def create_reservation(res_num, ulm, ts1, ts2=None, arrival=None,

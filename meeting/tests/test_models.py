@@ -212,13 +212,11 @@ class ReservationTest(TestCase):
         res.arrival = tz.make_aware(datetime(2019, 8, 31, 15))
         self.assertFalse(res.is_on_time())
 
-
     def test_arrival_delay(self):
         res = Reservation.objects.get(reservation_number='FAE1F6')
         self.assertEqual(res.arrival_delay()/60, 30)
         res.arrival = tz.make_aware(datetime(2019, 8, 30, 10))
         self.assertEqual(res.arrival_delay()/3600, 24)
-
 
     def test_fuel_reservation_max(self):
         res = Reservation.objects.get(reservation_number='FAE1F6')

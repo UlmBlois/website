@@ -4,13 +4,13 @@ import logging
 
 # Django
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 from django.utils import timezone, formats
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator
+from django.conf import settings
 # Third party
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
@@ -145,7 +145,7 @@ class TimeSlot(models.Model):
 #       PILOT
 ###############################################################################
 
-@receiver(post_save, sender=User)
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         Pilot.objects.create(user=instance)
@@ -189,7 +189,8 @@ class Pilot(models.Model):
         (BHPA, BHPA),
         (CATLIN, CATLIN),
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
     insurance_company = models.CharField(
                             max_length=64,
                             verbose_name=_('str_Insurance_company'))

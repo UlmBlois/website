@@ -1,6 +1,5 @@
 # Django
 from django import forms
-from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.forms.models import modelformset_factory
 from django.contrib.auth.forms import PasswordChangeForm
@@ -18,6 +17,7 @@ from crispy_forms.layout import (Layout, Submit, Row, Column,
                                  Fieldset)
 
 # Owned
+from core.models import User
 from meeting.models import Reservation, TimeSlot, ULM, Pilot
 from meeting.fields import ListTextWidget
 from aircraft_registration_field.widgets import AircraftRegistrationPrefixWidget

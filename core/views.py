@@ -4,12 +4,14 @@ from django.urls import reverse
 from core.form import SignUpForm
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import FormView
-from django.contrib.auth.models import User
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
+
+# Owned
+from core.models import User
 
 
 class SignUpView(FormView):
@@ -19,7 +21,7 @@ class SignUpView(FormView):
     def get_success_url(self):
         return reverse('logged_index')
 
-    def form_valid(self, form):
+    def form_valid(self, form):  # TODO FIX
         form.save()
         username = form.cleaned_data.get('username')
         raw_password = form.cleaned_data.get('password1')
@@ -37,7 +39,8 @@ class DeleteUser(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['cancel_url'] = reverse('pilot',  kwargs={'pk': self.get_object().pk})
+        context['cancel_url'] = reverse('pilot',
+                                        kwargs={'pk': self.get_object().pk})
         return context
 
     def get_object(self, queryset=None):

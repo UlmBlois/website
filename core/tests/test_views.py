@@ -1,10 +1,11 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.messages import constants as messages
 
 from meeting.tests.utils import ViewTestCase, LoggedViewTestCase
+
+from core.models import User
 
 
 class SignUpViewTest(ViewTestCase, TestCase):

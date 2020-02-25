@@ -54,6 +54,8 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 ]
 
+AUTH_USER_MODEL = 'core.User'
+
 SITE_ID = 1
 
 ROOT_URLCONF = 'salon_ulm_blois.urls'

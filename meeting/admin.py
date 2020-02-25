@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from import_export import resources
@@ -10,6 +11,8 @@ from import_export.fields import Field
 
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.fields import ListTextWidget
+
+from core.models import User as CustomUser
 
 
 ###############################################################################
@@ -144,5 +147,5 @@ class CustomUserAdmin(UserAdmin):
         return super().get_inline_instances(request, obj)
 
 
-admin.site.unregister(User)
-admin.site.register(User, CustomUserAdmin)
+# admin.site.unregister(User)
+admin.site.register(CustomUser, CustomUserAdmin)

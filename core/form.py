@@ -3,11 +3,12 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth import get_user_model
 # Third party
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Field
 # Owned
-from django.contrib.auth.models import User
+# from core.models import User
 
 
 class SignUpForm(UserCreationForm):
@@ -20,7 +21,7 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(label=_('str_Email'), max_length=254)
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = (
             'username', 'first_name', 'last_name',
             'email', 'password1', 'password2', )
@@ -44,6 +45,24 @@ class SignUpForm(UserCreationForm):
             ),
             Submit('submit', _('str_Register')),
         )
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if (username and get_user_model().objects.filter(username__iexact=username).exists()):
+            raise forms.ValidationError(
+                _('str_Username_already_used'),
+                code='username_already_used',
+            )
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and get_user_model().objects.filter(username__iexact=email).exists():
+            raise forms.ValidationError(
+                _('str_Email_already_used'),
+                code='email_already_used',
+            )
+        return email
 
 
 class PasswordResetForm(PasswordResetForm):
