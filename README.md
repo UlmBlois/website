@@ -15,3 +15,12 @@ For Monarch 9416 (make the printer the default one):
     * scale: default
   * add parameters (after setting the printer):
     * --kiosk-printing
+
+# Migrate
+Migrate from a prior version to @tags:beta1 you will need to run:
+
+```
+echo "INSERT INTO django_migrations (app, name, applied) VALUES ('core', '0001_initial', CURRENT_TIMESTAMP);" | python manage.py dbshell
+
+echo "UPDATE django_content_type SET app_label = 'core' WHERE app_label = 'auth' and model = 'user';" | python manage.py dbshell
+```
