@@ -22,7 +22,7 @@ from core.models import User as CustomUser
 class ArrivalFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
-    title = _('str_arrived')
+    title = _('str_Arrived')
 
     parameter_name = 'is_arrived'
 
