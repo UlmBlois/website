@@ -1,7 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 from django.urls import reverse
-from core.form import SignUpForm
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import FormView
 from django.http import Http404
@@ -12,6 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 # Owned
 from core.models import User
+from core.form import SignUpForm
+from meeting.models import Meeting
 
 
 class SignUpView(FormView):
@@ -19,9 +20,14 @@ class SignUpView(FormView):
     template_name = 'register.html'
 
     def get_success_url(self):
-        return reverse('logged_index')
+        active = Meeting.objects.active()
+        if active is not None and active.registration_aviable:
+            return reverse('reservation_wizard_step1',
+                           kwargs={'pk': self.request.user.id})
+        else:
+            return reverse('logged_index')
 
-    def form_valid(self, form):  # TODO FIX
+    def form_valid(self, form):
         form.save()
         username = form.cleaned_data.get('username')
         raw_password = form.cleaned_data.get('password1')
