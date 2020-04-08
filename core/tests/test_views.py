@@ -54,7 +54,7 @@ class SignUpViewTest(utils.ViewTestCase, TestCase):
         self.assertTrue(
             User.objects.filter(username=form_data['username']).exists())
         userId = User.objects.get(username=form_data['username']).id
-        self.assertRedirects(response, reverse('reservation_wizard_step1',
+        self.assertRedirects(response, reverse('edit_pilot',
                                                kwargs={'pk': userId}))
 
 

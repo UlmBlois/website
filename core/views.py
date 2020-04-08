@@ -22,7 +22,7 @@ class SignUpView(FormView):
     def get_success_url(self):
         active = Meeting.objects.active()
         if active is not None and active.registration_aviable:
-            return reverse('reservation_wizard_step1',
+            return reverse('edit_pilot',
                            kwargs={'pk': self.request.user.id})
         else:
             return reverse('logged_index')
