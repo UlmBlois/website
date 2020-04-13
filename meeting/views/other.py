@@ -67,7 +67,7 @@ class TimeSlotAviableView(TemplateView):
                             start_date__lt=start_d+delta
                             ).order_by('start_date')))
             context['ts_table'] = [days] + list(zip_longest(*slots_by_days))
-            context['ts_aviables'] = TimeSlot.objects.aviables()
+            context['ts_aviables'] = TimeSlot.objects.arrivals_slots_left()
             departures = TimeSlot.objects.departures_slots_left()
             context['ts_departures_aviables'] = departures
         return context

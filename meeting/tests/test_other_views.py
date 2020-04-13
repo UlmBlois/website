@@ -55,6 +55,8 @@ class TimeSlotAviableViewTest(ViewTestCase, TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['meeting'], self.meeting)
         self.assertEqual(list(response.context['ts_aviables']), [self.ts1])
+        self.assertEqual(list(response.context['ts_departures_aviables']),
+                         [self.ts1])
         ts_t = [[date(2019, 8, 30), date(2019, 8, 31), date(2019, 9, 1)],
                 (self.ts3, self.ts1, None), (self.ts2, None, None)]
         self.assertEqual(response.context['ts_table'], ts_t)
@@ -66,5 +68,3 @@ class TimeSlotAviableViewTest(ViewTestCase, TestCase):
             response = self.client.get(self.get_url())
             self.assertEqual(response.status_code, 200)
             self.assertTemplateUsed(response, self.logged_template_name)
-
-            #

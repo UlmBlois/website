@@ -73,8 +73,8 @@ class Meeting(models.Model):
         arrival_left = TimeSlot.objects.arrivals_slots_left()
         departure_left = TimeSlot.objects.departures_slots_left()
         return (self.registration_open
-                and arrival_left > 1
-                and departure_left > 1)
+                and len(arrival_left) > 1
+                and len(departure_left) > 1)
 
     @property
     def confirmation_open(self):
