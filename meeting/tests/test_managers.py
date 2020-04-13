@@ -27,35 +27,51 @@ class TimeSlotManagerTest(TestCase):
     def setUpTestData(cls):
         meeting1 = create_meeting("1", date(2019, 8, 30), True)
         meeting2 = create_meeting("2", date(2018, 8, 30), False)
-        ts = create_time_slot(meeting1,
-                              tz.make_aware(
-                                  datetime(2019, 8, 31, 10)),
-                              3)
-        create_time_slot(meeting1,
-                         tz.make_aware(
-                            datetime(2019, 8, 31, 11)),
-                         0)
-        create_time_slot(meeting2,
-                         tz.make_aware(
-                            datetime(2018, 8, 31, 11)),
-                         5)
+        cls.ts = create_time_slot(meeting1,
+                                  tz.make_aware(
+                                    datetime(2019, 8, 31, 10)),
+                                  3)
+
+        cls.ts3 = create_time_slot(meeting1,
+                                   tz.make_aware(
+                                    datetime(2019, 8, 31, 11)),
+                                   2)
+        cls.ts2 = create_time_slot(meeting2,
+                                   tz.make_aware(
+                                    datetime(2018, 8, 31, 11)),
+                                   3)
         user = create_user('testuser', '12345')
         ulm = create_ulm(user.pilot, 'F-XAAA')
-        create_reservation('FAE1F6', ulm, ts)
-        create_reservation('FAD1F7', ulm, ts)
+        create_reservation('FAE1F6', ulm, cls.ts, cls.ts2)
+        create_reservation('FAD1F7', ulm, cls.ts, cls.ts2)
 
     def test_actives(self):
         ts = TimeSlot.objects.actives()
         self.assertEqual(ts.count(), 2)
 
-    # def test_aviables(self):
-    #     ts = TimeSlot.objects.aviables()
-    #     self.assertEqual(ts.count(), 1)
-    #     create_reservation('FAE1F8',
-    #                        ULM.objects.get(radio_id='F-XAAA'),
-    #                        ts.first())
-    #     ts = TimeSlot.objects.aviables()
-    #     self.assertEqual(ts.count(), 0)
+    def test_departures_slots_left(self):
+        departure = TimeSlot.objects.departures_slots_left()
+        self.assertEqual(departure.count(), 2)
+        create_reservation('FAE1F8',
+                           ULM.objects.get(radio_id='F-XAAA'),
+                           self.ts, self.ts2)
+        create_reservation('FAE1F9',
+                           ULM.objects.get(radio_id='F-XAAA'),
+                           self.ts2, self.ts3)
+        create_reservation('FAE1FA',
+                           ULM.objects.get(radio_id='F-XAAA'),
+                           self.ts2, self.ts3)
+        departure = TimeSlot.objects.departures_slots_left()
+        self.assertEqual(departure.count(), 1)
+
+    def test_arrivals_slots_left(self):
+        ts = TimeSlot.objects.arrivals_slots_left()
+        self.assertEqual(ts.count(), 2)
+        create_reservation('FAE1F8',
+                           ULM.objects.get(radio_id='F-XAAA'),
+                           ts.first())
+        ts = TimeSlot.objects.arrivals_slots_left()
+        self.assertEqual(ts.count(), 1)
 
 
 class ReservationManagerTest(TestCase):

@@ -108,11 +108,6 @@ class TimeSlotTest(TestCase):
         with self.assertRaises(ValidationError):
             ts.clean()
 
-    def test_arrivals_slots_left(self):
-        self.assertEqual(self.ts.arrivals_slots_left(), 2)
-        create_reservation('FAE1F7', self.ulm, self.ts)
-        self.assertEqual(self.ts.arrivals_slots_left(), 1)
-
 # NICETODO test create_or_update_user_profile
 
 
