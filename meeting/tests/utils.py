@@ -13,6 +13,16 @@ from meeting.models import Meeting, TimeSlot, Reservation, ULM
 logger = logging.getLogger(__name__)
 
 
+def fill_pilot(user):
+    user.pilot.insurance_company = "insurer"
+    user.pilot.insurance_number = "123A"
+    user.pilot.licence_number = "111"
+    user.pilot.phone_number = "+33678451289"
+    user.pilot.street_name = "street"
+    user.pilot.city = "city"
+    user.pilot.city_code = "12453"
+
+
 def create_meeting(name, start_date, active=True):
     end_date = start_date + timedelta(days=2)
     registration_start = start_date - timedelta(days=60)

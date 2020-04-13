@@ -245,9 +245,24 @@ class Pilot(models.Model):
     def can_make_reservation(self):
         meeting = Meeting.objects.active()
         if meeting:
-            return not self.as_active_reservation and meeting.registration_aviable
+            return (not self.as_active_reservation
+                    and meeting.registration_aviable
+                    and self.is_complete())
         else:
             return False
+
+    def is_complete(self):
+        if self.insurance_company == "" or self.insurance_number == "":
+            return False
+        elif self.licence_number == "":
+            return False
+        elif self.phone_number == "":
+            return False
+        elif self.street_name == "":
+            return False
+        elif self.city == "" or self.city_code == "":
+            return False
+        return True
 
 ###############################################################################
 #       ULM

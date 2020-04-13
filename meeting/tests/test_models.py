@@ -7,7 +7,7 @@ from freezegun import freeze_time
 
 from meeting.models import Meeting, TimeSlot, Reservation, Pilot, ULM
 from meeting.tests.utils import (create_meeting, create_time_slot, create_ulm,
-                                 create_user, create_reservation)
+                                 create_user, create_reservation, fill_pilot)
 
 
 class MeetingTest(TestCase):
@@ -134,6 +134,15 @@ class PilotTest(TestCase):
 
         cls.ulm = create_ulm(cls.user.pilot, 'F-XAAA')
 
+    def tearDown(self):
+        self.user.pilot.insurance_company = ""
+        self.user.pilot.insurance_number = ""
+        self.user.pilot.licence_number = ""
+        self.user.pilot.phone_number = ""
+        self.user.pilot.street_name = ""
+        self.user.pilot.city = ""
+        self.user.pilot.city_code = ""
+
     def test_as_unconfirmed_reservation(self):
         res = create_reservation('FAE1F6', self.ulm, self.ts)
 
@@ -148,12 +157,24 @@ class PilotTest(TestCase):
 
     @freeze_time("2019-08-5")
     def test_can_make_reservation(self):
+        # incomplete profile and missing timeslot
         self.assertFalse(self.user.pilot.can_make_reservation)
         create_time_slot(self.meeting,
                          tz.make_aware(
                            datetime(2019, 8, 31, 11)),
                          3)
+        # incomplete profile
+        self.assertFalse(self.user.pilot.can_make_reservation)
+        # complete profile
+        fill_pilot(self.user)
         self.assertTrue(self.user.pilot.can_make_reservation)
+
+    def test_is_complete(self):
+        # incomplete profile
+        self.assertFalse(self.user.pilot.is_complete())
+        # complete profile
+        fill_pilot(self.user)
+        self.assertTrue(self.user.pilot.is_complete())
 
 
 class ULMTest(TestCase):
