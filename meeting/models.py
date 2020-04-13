@@ -70,8 +70,11 @@ class Meeting(models.Model):
 
     @property
     def registration_aviable(self):
-        aviables = TimeSlot.objects.aviables()
-        return self.registration_open and len(aviables) > 1
+        arrival_left = TimeSlot.objects.arrivals_slots_left()
+        departure_left = TimeSlot.objects.departures_slots_left()
+        return (self.registration_open
+                and arrival_left > 1
+                and departure_left > 1)
 
     @property
     def confirmation_open(self):
@@ -131,14 +134,17 @@ class TimeSlot(models.Model):
         super(TimeSlot, self).clean(*args, **kwargs)
 
     def arrivals_slots_left(self):
-        arrival_count = self.arrivals.filter(
-            canceled=False, ulm__isnull=False).count()
-        depart_count = self.departures.filter(
-            canceled=False, ulm__isnull=False).count()
+        arrival_count = self.arrivals_count()
+        depart_count = self.departures_count()
         return self.arrivals_slots - (arrival_count + depart_count)
 
-    def arrivals_slots_used(self):
-        return self.arrivals_slots - self.arrivals_slots_left()
+    def arrivals_count(self):
+        return self.arrivals.filter(
+            canceled=False, ulm__isnull=False).count()
+
+    def departures_count(self):
+        return self.departures.filter(
+            canceled=False, ulm__isnull=False).count()
 
 
 ###############################################################################
@@ -412,11 +418,7 @@ class Reservation(models.Model):
         # TODO: a completer
         if self.ulm is None or self.pilot is None:
             return False
-        if self.pilot.licence_number == "":
-            return True
-        if self.pilot.insurance_number == "":
-            return True
-        if self.pilot.insurance_company == "":
+        if not self.pilot.is_complete():
             return True
         return False
 

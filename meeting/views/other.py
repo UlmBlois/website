@@ -40,7 +40,7 @@ class LoggedIndexView(TemplateView):
         return context
 
 
-class TimeSlotAviableView(TemplateView):  # TODO use get_template_names
+class TimeSlotAviableView(TemplateView):
     anonymous_template_name = 'aviable_timeslot.html'
     logged_template_name = 'aviable_timeslot_logged.html'
 
@@ -68,6 +68,8 @@ class TimeSlotAviableView(TemplateView):  # TODO use get_template_names
                             ).order_by('start_date')))
             context['ts_table'] = [days] + list(zip_longest(*slots_by_days))
             context['ts_aviables'] = TimeSlot.objects.aviables()
+            departures = TimeSlot.objects.departures_slots_left()
+            context['ts_departures_aviables'] = departures
         return context
 
 

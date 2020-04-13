@@ -1,6 +1,8 @@
 {% load i18n %}
 
 {% if meeting %}
+  <h2>{% trans 'str_Arrival_timeslot_aviable'%}</h2>
+
   <table class='table'>
     {% for ts in ts_table %}
       {% if forloop.first%}
@@ -16,7 +18,7 @@
         {% for t in ts%}
           <th class="table-{% if t in ts_aviables%}success{% elif t %}danger{% else %}secondary{%endif%}">
             {% if t %}
-            {{t.str_range}} {% if perms.meeting.reservation_validation %}- {{t.arrivals_slots_used}}/{{t.arrivals_slots}}{% endif %}
+            {{t.str_range}} {% if perms.meeting.reservation_validation %}- {{t.arrivals_count}}/{{t.arrivals_slots}}{% endif %}
             {% else %}
             -
             {% endif %}
@@ -26,6 +28,35 @@
       {% endif %}
     {% endfor %}
   </table>
+
+  <h2>{% trans 'str_Departure_timeslot_aviable'%}</h2>
+
+  <table class='table'>
+    {% for ts in ts_table %}
+      {% if forloop.first%}
+      <thead class=thead-dark>
+        <tr>
+          {% for d in ts%}
+            <th>{{d}}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      {% else %}
+        <tr>
+        {% for t in ts%}
+          <th class="table-{% if t in ts_departures_aviables%}success{% elif t %}danger{% else %}secondary{%endif%}">
+            {% if t %}
+            {{t.str_range}} {% if perms.meeting.reservation_validation %}- {{t.departures_count}}/{{t.arrivals_slots}}{% endif %}
+            {% else %}
+            -
+            {% endif %}
+          </th>
+        {% endfor %}
+        <tr>
+      {% endif %}
+    {% endfor %}
+  </table>
+
 {% else %}
   {% trans 'str_no_meeting' %}
 {% endif%}

@@ -113,11 +113,6 @@ class TimeSlotTest(TestCase):
         create_reservation('FAE1F7', self.ulm, self.ts)
         self.assertEqual(self.ts.arrivals_slots_left(), 1)
 
-    def test_arrivals_slots_used(self):
-        self.assertEqual(self.ts.arrivals_slots_used(), 1)
-        create_reservation('FAE1F7', self.ulm, self.ts)
-        self.assertEqual(self.ts.arrivals_slots_used(), 2)
-
 # NICETODO test create_or_update_user_profile
 
 
@@ -166,14 +161,14 @@ class PilotTest(TestCase):
         # incomplete profile
         self.assertFalse(self.user.pilot.can_make_reservation)
         # complete profile
-        fill_pilot(self.user)
+        fill_pilot(self.user.pilot)
         self.assertTrue(self.user.pilot.can_make_reservation)
 
     def test_is_complete(self):
         # incomplete profile
         self.assertFalse(self.user.pilot.is_complete())
         # complete profile
-        fill_pilot(self.user)
+        fill_pilot(self.user.pilot)
         self.assertTrue(self.user.pilot.is_complete())
 
 
@@ -224,7 +219,7 @@ class ReservationTest(TestCase):
     def test_is_missing_informations(self):  # TODO a completer
         res = Reservation.objects.get(reservation_number='FAE1F6')
         self.assertTrue(res.is_missing_informations())
-        res.pilot.insurance_company = 'AISCAIR'
+        fill_pilot(res.pilot)
         self.assertFalse(res.is_missing_informations())
 
     def test_is_on_time(self):

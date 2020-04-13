@@ -13,11 +13,19 @@ class TimeSlotManager(models.Manager):
         act_meeting = Mod.Meeting.objects.active()
         return self.filter(meeting=act_meeting)
 
-    def aviables(self):
+    def departures_slots_left(self):
         slots = Mod.TimeSlot.objects.actives()
         selected = []
         for s in slots:
-            if s.arrivals_slots_left() > 0:
+            if s.arrivals_slots - s.departures_count() > 0:
+                selected.append(s.pk)
+        return self.filter(pk__in=selected)
+
+    def arrivals_slots_left(self):
+        slots = Mod.TimeSlot.objects.actives()
+        selected = []
+        for s in slots:
+            if s.arrivals_slots - s.arrivals_count() > 0:
                 selected.append(s.pk)
         return self.filter(pk__in=selected)
 

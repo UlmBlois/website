@@ -48,14 +48,14 @@ class TimeSlotManagerTest(TestCase):
         ts = TimeSlot.objects.actives()
         self.assertEqual(ts.count(), 2)
 
-    def test_aviables(self):
-        ts = TimeSlot.objects.aviables()
-        self.assertEqual(ts.count(), 1)
-        create_reservation('FAE1F8',
-                           ULM.objects.get(radio_id='F-XAAA'),
-                           ts.first())
-        ts = TimeSlot.objects.aviables()
-        self.assertEqual(ts.count(), 0)
+    # def test_aviables(self):
+    #     ts = TimeSlot.objects.aviables()
+    #     self.assertEqual(ts.count(), 1)
+    #     create_reservation('FAE1F8',
+    #                        ULM.objects.get(radio_id='F-XAAA'),
+    #                        ts.first())
+    #     ts = TimeSlot.objects.aviables()
+    #     self.assertEqual(ts.count(), 0)
 
 
 class ReservationManagerTest(TestCase):
