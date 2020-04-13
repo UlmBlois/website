@@ -3,8 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.utils import timezone as tz
-from django.urls import reverse
 from django.conf import settings
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
 import os
 from datetime import datetime, timedelta
@@ -22,7 +23,8 @@ class IndexView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['meeting'] = Meeting.objects.active()
-        context['images'] = os.listdir(os.path.join(settings.STATIC_ROOT, "img"))
+        context['images'] = os.listdir(
+            os.path.join(settings.STATIC_ROOT, "img"))
         return context
 
 
@@ -30,15 +32,23 @@ class IndexView(TemplateView):
 class LoggedIndexView(TemplateView):
     template_name = 'logged_index.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        if not self.request.user.pilot.is_complete():
+            messages.add_message(self.request, messages.WARNING,
+                                 _('str_message_incomplete_profile'))
+        return context
 
-class TimeSlotAviableView(TemplateView):
-    template_name = 'aviable_timeslot.html'
+
+class TimeSlotAviableView(TemplateView):  # TODO use get_template_names
+    anonymous_template_name = 'aviable_timeslot.html'
     logged_template_name = 'aviable_timeslot_logged.html'
 
-    def render_to_response(self, context, **response_kwargs):
+    def get_template_names(self):
+        name = self.anonymous_template_name
         if self.request.user.is_authenticated:
-            self.template_name = self.logged_template_name
-        return super().render_to_response(context, **response_kwargs)
+            name = self.logged_template_name
+        return [name]
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
