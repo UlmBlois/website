@@ -30,16 +30,16 @@ class TimeSlotManagerTest(TestCase):
         cls.ts = create_time_slot(meeting1,
                                   tz.make_aware(
                                     datetime(2019, 8, 31, 10)),
-                                  3)
+                                  3, 1)
 
         cls.ts3 = create_time_slot(meeting1,
                                    tz.make_aware(
                                     datetime(2019, 8, 31, 11)),
-                                   2)
+                                   2, 2)
         cls.ts2 = create_time_slot(meeting2,
                                    tz.make_aware(
                                     datetime(2018, 8, 31, 11)),
-                                   3)
+                                   3, 2)
         user = create_user('testuser', '12345')
         ulm = create_ulm(user.pilot, 'F-XAAA')
         create_reservation('FAE1F6', ulm, cls.ts, cls.ts2)
@@ -52,9 +52,6 @@ class TimeSlotManagerTest(TestCase):
     def test_departures_slots_left(self):
         departure = TimeSlot.objects.departures_slots_left()
         self.assertEqual(departure.count(), 2)
-        create_reservation('FAE1F8',
-                           ULM.objects.get(radio_id='F-XAAA'),
-                           self.ts, self.ts2)
         create_reservation('FAE1F9',
                            ULM.objects.get(radio_id='F-XAAA'),
                            self.ts2, self.ts3)

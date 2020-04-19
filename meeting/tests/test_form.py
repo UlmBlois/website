@@ -15,15 +15,15 @@ class ReservationFormTest(TestCase):
         cls.ts1 = create_time_slot(meeting,
                                    tz.make_aware(
                                     datetime(2019, 8, 31, 10)),
-                                   3)
+                                   3, 3)
         cls.ts2 = create_time_slot(meeting,
                                    tz.make_aware(
                                     datetime(2019, 8, 31, 11)),
-                                   3)
+                                   3, 3)
         cls.ts3 = create_time_slot(meeting,
                                    tz.make_aware(
                                     datetime(2019, 8, 31, 12)),
-                                   0)
+                                   0, 0)
         cls.user = create_user("user", "testtest")
         user2 = create_user("user2", "testtest")
         cls.ulm = create_ulm(cls.user.pilot, 'F-JAZE')
@@ -35,9 +35,12 @@ class ReservationFormTest(TestCase):
         ts_queryset = form.fields['time_slot'].queryset
         self.assertEqual(ts_queryset.count(), 2)
         self.assertFalse(ts_queryset.filter(pk=self.ts3.pk).exists())
-        self.assertQuerysetEqual(form.fields['depart_time_slot'].queryset,
-                                 ts_queryset, ordered=False,
-                                 transform=lambda x: x)
+        ds_queryset = form.fields['depart_time_slot'].queryset
+        self.assertEqual(ds_queryset.count(), 2)
+        self.assertFalse(ds_queryset.filter(pk=self.ts3.pk).exists())
+        # self.assertQuerysetEqual(form.fields['depart_time_slot'].queryset,
+        #                          ts_queryset, ordered=False,
+        #                          transform=lambda x: x)
 
     def test_clean(self):
         form = ReservationForm(pilot=self.user.pilot)

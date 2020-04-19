@@ -101,6 +101,7 @@ class TimeSlot(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     arrivals_slots = models.PositiveIntegerField()
+    departures_slots = models.PositiveIntegerField()
 
     objects = TimeSlotManager()
 

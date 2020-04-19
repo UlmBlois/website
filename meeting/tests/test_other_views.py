@@ -42,13 +42,13 @@ class TimeSlotAviableViewTest(ViewTestCase, TestCase):
         cls.meeting = create_meeting("1", date(2019, 8, 30), True)
         cls.ts1 = create_time_slot(cls.meeting,
                                    tz.make_aware(datetime(2019, 8, 31, 10)),
-                                   5)
+                                   5, 1)
         cls.ts2 = create_time_slot(cls.meeting,
                                    tz.make_aware(datetime(2019, 8, 30, 11)),
-                                   0)
+                                   0, 0)
         cls.ts3 = create_time_slot(cls.meeting,
                                    tz.make_aware(datetime(2019, 8, 30, 9)),
-                                   0)
+                                   0, 0)
 
     def test_context_data(self):
         response = self.client.get(self.get_url())

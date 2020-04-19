@@ -37,13 +37,15 @@ def create_meeting(name, start_date, active=True):
             confirmation_reminder_date=registration_end)
 
 
-def create_time_slot(meeting, start_date, arrivals_slots, end_date=None):
+def create_time_slot(meeting, start_date, arrivals_slots, departures_slots=5,
+                     end_date=None):
     if end_date is None:
         end_date = start_date + timedelta(minutes=30)
     return TimeSlot.objects.create(meeting=meeting,
                                    start_date=start_date,
                                    end_date=end_date,
-                                   arrivals_slots=arrivals_slots)
+                                   arrivals_slots=arrivals_slots,
+                                   departures_slots=departures_slots)
 
 
 def create_ulm(pilot, radio_id):

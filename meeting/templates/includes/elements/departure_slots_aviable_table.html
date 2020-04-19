@@ -1,6 +1,7 @@
 {% load i18n %}
 
 {% if meeting %}
+
   <table class='table'>
     {% for ts in ts_table %}
       {% if forloop.first%}
@@ -14,9 +15,9 @@
       {% else %}
         <tr>
         {% for t in ts%}
-          <th class="table-{% if t in ts_aviables%}success{% elif t %}danger{% else %}secondary{%endif%}">
+          <th class="table-{% if t in ts_departures_aviables%}success{% elif t %}danger{% else %}secondary{%endif%}">
             {% if t %}
-            {{t.str_range}} {% if perms.meeting.reservation_validation %}- {{t.arrivals_count}}/{{t.arrivals_slots}}{% endif %}
+            {{t.str_range}} {% if perms.meeting.reservation_validation %}- {{t.departures_count}}/{{t.departures_slots}}{% endif %}
             {% else %}
             -
             {% endif %}
@@ -26,4 +27,5 @@
       {% endif %}
     {% endfor %}
   </table>
+
 {% endif%}
