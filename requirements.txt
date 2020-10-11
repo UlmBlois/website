@@ -23,5 +23,5 @@ sqlparse>=0.3.0
 whitenoise>=4.1.2
 django-import-export>=1.2.0
 freezegun>=0.3.14
-git+git://github.com/UlmBlois/Aircraft-Registration.git
-git+git://github.com/UlmBlois/django-aircraft-registration-field.git
+git+git://github.com/n-serrette/Aircraft-Registration.git
+git+git://github.com/n-serrette/django-aircraft-registration-field.git
